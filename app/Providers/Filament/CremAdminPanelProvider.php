@@ -18,6 +18,9 @@ use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Filament\SpatieLaravelTranslatablePlugin;
+use Joaopaulolndev\FilamentEditProfile\FilamentEditProfilePlugin;
+use Filament\Navigation\MenuItem;
+use Joaopaulolndev\FilamentEditProfile\Pages\EditProfilePage;
 
 class CremAdminPanelProvider extends PanelProvider
 {
@@ -41,8 +44,12 @@ class CremAdminPanelProvider extends PanelProvider
                 Widgets\AccountWidget::class,
                 Widgets\FilamentInfoWidget::class,
             ])
-            ->plugin(SpatieLaravelTranslatablePlugin::make()
-                ->defaultLocales(['fr', 'en']),
+            ->plugins([
+                SpatieLaravelTranslatablePlugin::make()
+                    ->defaultLocales(['fr', 'en']),
+                FilamentEditProfilePlugin::make()
+                    ->shouldRegisterNavigation(false)
+            ]
             )
             ->middleware([
                 EncryptCookies::class,
@@ -54,6 +61,16 @@ class CremAdminPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
+            ]) 
+            ->userMenuItems([
+                'profile' => MenuItem::make()
+                    ->label(fn() => auth()->user()->name)
+                    ->url(fn (): string => EditProfilePage::getUrl())
+                    ->icon('heroicon-m-user-circle'),
+                    //If you are using tenancy need to check with the visible method where ->company() is the relation between the user and tenancy model as you called
+                    /*->visible(function (): bool {
+                        return auth()->user()->company()->exists();
+                    }),*/
             ])
             ->authMiddleware([
                 Authenticate::class,

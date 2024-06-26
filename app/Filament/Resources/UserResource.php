@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\PlaylistResource\Pages;
-use App\Filament\Resources\PlaylistResource\RelationManagers;
-use App\Models\Playlist;
+use App\Filament\Resources\UserResource\Pages;
+use App\Filament\Resources\UserResource\RelationManagers;
+use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -12,14 +12,10 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Filament\Forms\Components\FileUpload;
-use Filament\Resources\Concerns\Translatable;
 
-class PlaylistResource extends Resource
+class UserResource extends Resource
 {
-    use Translatable;
-
-    protected static ?string $model = Playlist::class;
+    protected static ?string $model = User::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -30,18 +26,14 @@ class PlaylistResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\Select::make('type_id')
-                    ->default(1)
+                Forms\Components\TextInput::make('email')
+                    ->email()
                     ->required()
-                    ->relationship(name: 'type', titleAttribute: 'name'),
-                Forms\Components\RichEditor::make('description')
-                    ->required()
-                    ->columnSpanFull(),
-                Forms\Components\FileUpload::make('picture')
-                    ->disk('public')
-                    ->preserveFilenames()
-                    ->directory('playlists-pictures')
-                    ->required(),
+                    ->maxLength(255),
+                /*Forms\Components\DateTimePicker::make('email_verified_at'),*/
+                Forms\Components\TextInput::make('password')
+                    ->password()
+                    ->maxLength(255),
             ]);
     }
 
@@ -51,8 +43,11 @@ class PlaylistResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('picture')
+                Tables\Columns\TextColumn::make('email')
                     ->searchable(),
+                /*Tables\Columns\TextColumn::make('email_verified_at')
+                    ->dateTime()
+                    ->sortable(),*/
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -78,16 +73,16 @@ class PlaylistResource extends Resource
     public static function getRelations(): array
     {
         return [
-            RelationManagers\AudioItemPlaylistsRelationManager::class,
+            //
         ];
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListPlaylists::route('/'),
-            'create' => Pages\CreatePlaylist::route('/create'),
-            'edit' => Pages\EditPlaylist::route('/{record}/edit'),
+            'index' => Pages\ListUsers::route('/'),
+            'create' => Pages\CreateUser::route('/create'),
+            'edit' => Pages\EditUser::route('/{record}/edit'),
         ];
     }
 }

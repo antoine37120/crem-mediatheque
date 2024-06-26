@@ -47,7 +47,10 @@ class AudioItemResource extends Resource
                     ->required()
                     ->maxLength(255),
                 Forms\Components\FileUpload::make('picture')
-                    ->preserveFilenames(),
+                ->disk('public')
+                ->preserveFilenames()
+                ->directory('audio-item')
+                ->required(),
             ]);
     }
 
@@ -95,7 +98,7 @@ class AudioItemResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\PlaylistsRelationManager::class,
         ];
     }
 
