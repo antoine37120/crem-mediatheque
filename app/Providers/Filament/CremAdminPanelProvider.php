@@ -17,6 +17,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Filament\SpatieLaravelTranslatablePlugin;
 
 class CremAdminPanelProvider extends PanelProvider
 {
@@ -40,6 +41,9 @@ class CremAdminPanelProvider extends PanelProvider
                 Widgets\AccountWidget::class,
                 Widgets\FilamentInfoWidget::class,
             ])
+            ->plugin(SpatieLaravelTranslatablePlugin::make()
+                ->defaultLocales(['fr', 'en']),
+            )
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,

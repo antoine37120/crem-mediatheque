@@ -13,6 +13,10 @@ class ListAudioItems extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
+            \EightyNine\ExcelImport\ExcelImportAction::make()
+                ->slideOver()
+                ->color("primary")
+                ->use(\App\Imports\MyClientImport::class),
             Actions\CreateAction::make(),
         ];
     }

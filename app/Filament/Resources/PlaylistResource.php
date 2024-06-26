@@ -13,9 +13,12 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\FileUpload;
+use Filament\Resources\Concerns\Translatable;
 
 class PlaylistResource extends Resource
 {
+    use Translatable;
+
     protected static ?string $model = Playlist::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';

@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\GeographycalAreaResource\Pages;
-use App\Filament\Resources\GeographycalAreaResource\RelationManagers;
-use App\Models\GeographycalArea;
+use App\Filament\Resources\GeographicalAreaResource\Pages;
+use App\Filament\Resources\GeographicalAreaResource\RelationManagers;
+use App\Models\GeographicalArea;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -12,10 +12,13 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Resources\Concerns\Translatable;
 
-class GeographycalAreaResource extends Resource
+class GeographicalAreaResource extends Resource
 {
-    protected static ?string $model = GeographycalArea::class;
+    use Translatable;
+
+    protected static ?string $model = GeographicalArea::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -23,7 +26,9 @@ class GeographycalAreaResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('name')
+                    ->required()
+                    ->maxLength(255),
             ]);
     }
 
@@ -31,7 +36,13 @@ class GeographycalAreaResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('name')
+                    ->searchable(),
+                 
+                Tables\Columns\TextColumn::make('locales')
+                    ->state(function (GeographicalArea $record): array {
+                        return $record->locales();
+                    })
             ])
             ->filters([
                 //
@@ -56,9 +67,9 @@ class GeographycalAreaResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListGeographycalAreas::route('/'),
-            'create' => Pages\CreateGeographycalArea::route('/create'),
-            'edit' => Pages\EditGeographycalArea::route('/{record}/edit'),
+            'index' => Pages\ListGeographicalAreas::route('/'),
+            'create' => Pages\CreateGeographicalArea::route('/create'),
+            'edit' => Pages\EditGeographicalArea::route('/{record}/edit'),
         ];
     }
 }
