@@ -48,7 +48,8 @@ class CremAdminPanelProvider extends PanelProvider
                 SpatieLaravelTranslatablePlugin::make()
                     ->defaultLocales(['fr', 'en']),
                 FilamentEditProfilePlugin::make()
-                    ->shouldRegisterNavigation(false)
+                    ->shouldRegisterNavigation(false),
+                \TomatoPHP\FilamentTranslations\FilamentTranslationsPlugin::make()
             ]
             )
             ->middleware([

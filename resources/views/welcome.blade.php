@@ -55,6 +55,10 @@
                     </header>
 
                     <main class="mt-6">
+                        <h1><?php echo __('front.welcome'); ?><h1>
+                        <h1><?php echo __('front.welcome_g'); ?><h1>
+                        <h1><?php echo __('front.welcome_a'); ?><h1>
+                        <h1><?php echo __('front.welcome_b'); ?><h1>
                         <div class="grid gap-6 lg:grid-cols-2 lg:gap-8">
                             <a
                                 href="https://laravel.com/docs"
