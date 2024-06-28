@@ -7,6 +7,31 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+
+
+## Install
+Before install, need to create `.env` file and customize it with you local envionement configuration
+
+### Install dependencies
+```composer install```
+
+### Migrate database and data
+```php artisan migrate --seed```
+
+### Add admin user
+```php artisan make:filament-user```
+
+Open /crem-admin in your web browser and sign in to see admin panels
+
+## Dependencies documentation
+
+- eightynine/filament-excel-import : https://github.com/eighty9nine/filament-excel-import
+- filament/filament : https://github.com/filamentphp/filament
+- filament/spatie-laravel-translatable-plugin : ["^3.2",](https://github.com/filamentphp/spatie-laravel-translatable-plugin)
+- joaopaulolndev/filament-edit-profile : https://github.com/joaopaulolndev/filament-edit-profile
+- tomatophp/filament-translations : https://github.com/tomatophp/filament-translations
+- livewire/livewire : https://github.com/livewire/livewire
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
