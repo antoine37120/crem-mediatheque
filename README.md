@@ -12,6 +12,8 @@
 ## Install
 Before install, need to create `.env` file and customize it with you local envionement configuration
 
+Add encryption key : `php artisan key:generate`
+
 ### Install dependencies
 ```composer install```
 
