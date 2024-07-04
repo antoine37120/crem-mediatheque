@@ -13,6 +13,7 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Resources\Concerns\Translatable;
+use Filament\Tables\Filters\SelectFilter;
 
 class AudioItemResource extends Resource
 {
@@ -83,7 +84,8 @@ class AudioItemResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                SelectFilter::make('geographical_area_id')
+                ->relationship('geographicalArea', 'name'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
