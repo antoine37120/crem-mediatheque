@@ -21,8 +21,12 @@ class GeographicalAreaResource extends Resource
     use ResourceTranslatable;
 
     protected static ?string $model = GeographicalArea::class;
+    
+    protected static ?int $navigationSort = 3;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationLabel = 'Aires géographiques';
+
+    protected static ?string $navigationIcon = 'heroicon-o-globe-europe-africa';
 
     public static function form(Form $form): Form
     {

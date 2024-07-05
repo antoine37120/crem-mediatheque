@@ -23,7 +23,11 @@ class PlaylistResource extends Resource
 
     protected static ?string $model = Playlist::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationLabel = 'Playlists';
+    
+    protected static ?int $navigationSort = 2;
+
+    protected static ?string $navigationIcon = 'heroicon-m-list-bullet';
 
     public static function form(Form $form): Form
     {

@@ -25,7 +25,13 @@ class TranslationResource extends Resource
 
     protected static ?string $slug = 'translations';
 
+    protected static ?string $navigationLabel = 'Traductions';
+    
+    protected static ?int $navigationSort = 5;
+
     protected static ?string $recordTitleAttribute = 'key';
+
+    protected static ?string $navigationIcon = 'heroicon-m-language';
 
     public static function getNavigationLabel(): string
     {
@@ -37,9 +43,9 @@ class TranslationResource extends Resource
         return trans('filament-translations::translation.single');
     }
 
-    public static function getNavigationGroup(): ?string
+    /*public static function getNavigationGroup(): ?string
     {
-        return config('filament-translations.languages-switcher-menu.group', trans('filament-translations::translation.group').' fffff');
+        return config('filament-translations.languages-switcher-menu.group', trans('filament-translations::translation.group'));
     }
 
     public static function getNavigationIcon(): string
@@ -50,7 +56,7 @@ class TranslationResource extends Resource
     public static function shouldRegisterNavigation(): bool
     {
         return config('filament-translations.register_navigation', true);
-    }
+    }*/
 
     public function getTitle(): string
     {

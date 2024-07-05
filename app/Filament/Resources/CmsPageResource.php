@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\AudioItemResource\Pages;
-use App\Filament\Resources\AudioItemResource\RelationManagers;
-use App\Models\AudioItem;
+use App\Filament\Resources\CmsPageResource\Pages;
+use App\Filament\Resources\CmsPageResource\RelationManagers;
+use App\Models\CmsPage;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -15,28 +15,26 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use CactusGalaxy\FilamentAstrotomic\Resources\Concerns\ResourceTranslatable;
 use CactusGalaxy\FilamentAstrotomic\Forms\Components\TranslatableTabs;
 use CactusGalaxy\FilamentAstrotomic\TranslatableTab;
-use Filament\Tables\Filters\SelectFilter;
-use App\Models\GeographicalArea;
-use Illuminate\Contracts\Support\Htmlable;
 
-class AudioItemResource extends Resource
+class CmsPageResource extends Resource
 {
     use ResourceTranslatable;
 
-    protected static ?string $model = AudioItem::class;
+    protected static ?string $model = CmsPage::class;
 
-    protected static ?string $navigationLabel = 'Items audio';
+    protected static ?string $navigationLabel = 'Pages CMS';
     
-    protected static ?int $navigationSort = 1;
+    protected static ?int $navigationSort = 4;
 
-    protected static ?string $navigationIcon = 'heroicon-o-musical-note';
-
-    //protected static ?string $recordTitleAttribute = 'translation.name';
+    protected static ?string $navigationIcon = 'heroicon-s-bars-3-center-left';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
+                Forms\Components\TextInput::make('slug')
+                    ->required()
+                    ->maxLength(255),
                 TranslatableTabs::make()->columnSpan(2)
                 ->localeTabSchema(fn (TranslatableTab $tab) => [
                     Forms\Components\TextInput::make($tab->makeName('name'))
@@ -50,7 +48,7 @@ class AudioItemResource extends Resource
                                 $set('slug', Str::slug($state));
                             }
                         }),*/,
-                    Forms\Components\RichEditor::make($tab->makeName('description'))
+                    Forms\Components\RichEditor::make($tab->makeName('content'))
                     // required only for the main locale
                     ->columnSpanFull()
                     // generate slug for the item based on the main locale
@@ -61,31 +59,6 @@ class AudioItemResource extends Resource
                         }
                     }),*/
                 ]),
-                Forms\Components\TextInput::make('duration')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('year')
-                    ->required(),
-                Forms\Components\Select::make('geographical_area_id')
-                ->required()
-                ->native(false)
-                ->searchable()
-                ->options(
-                    GeographicalArea::listsTranslations('name')->get()->pluck('name', 'id')
-                ),
-                Forms\Components\FileUpload::make('file')
-                    ->required()
-                    ->preserveFilenames(),
-                Forms\Components\Textarea::make('interpreters')
-                    ->columnSpanFull(),
-                Forms\Components\TextInput::make('collector')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\FileUpload::make('picture')
-                ->disk('public')
-                ->preserveFilenames()
-                ->directory('audio-item')
-                ->required(),
             ]);
     }
 
@@ -96,18 +69,7 @@ class AudioItemResource extends Resource
                 Tables\Columns\TextColumn::make('translations.name')->toggleable(isToggledHiddenByDefault: true)
                 ->searchable(),
                 Tables\Columns\TextColumn::make('translation.name')->label('Name'),
-                Tables\Columns\TextColumn::make('duration')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('year'),
-                Tables\Columns\TextColumn::make('geographicalArea.name')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('file')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('collector')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('picture')
+                Tables\Columns\TextColumn::make('slug')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
@@ -119,11 +81,7 @@ class AudioItemResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                SelectFilter::make('geographical_area_id')
-                ->label('Zone géographique')
-                ->options(
-                    GeographicalArea::listsTranslations('name')->get()->pluck('name', 'id')
-                ),
+                //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -138,24 +96,24 @@ class AudioItemResource extends Resource
     public static function getRelations(): array
     {
         return [
-            RelationManagers\PlaylistsRelationManager::class,
+            //
         ];
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListAudioItems::route('/'),
-            'create' => Pages\CreateAudioItem::route('/create'),
-            'edit' => Pages\EditAudioItem::route('/{record}/edit'),
+            'index' => Pages\ListCmsPages::route('/'),
+            'create' => Pages\CreateCmsPage::route('/create'),
+            'edit' => Pages\EditCmsPage::route('/{record}/edit'),
         ];
     }
 
-    
+        
     
     public static function getGloballySearchableAttributes(): array
     {
-        return ['translations.name', 'translations.description'];
+        return ['translations.name', 'translations.content'];
     }
 
     public static function getGlobalSearchResultTitle(\Illuminate\Database\Eloquent\Model $record): \Illuminate\Contracts\Support\Htmlable | string
