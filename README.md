@@ -25,14 +25,21 @@ Add encryption key : `php artisan key:generate`
 
 Open /crem-admin in your web browser and sign in to see admin panels
 
-## Dependencies documentation
+## Install Node dependencies
+```npm install```
+```npm run build```
 
+## Dependencies documentation
+### with Laravel
 - eightynine/filament-excel-import : https://github.com/eighty9nine/filament-excel-import
 - filament/filament : https://github.com/filamentphp/filament
 - filament/spatie-laravel-translatable-plugin : ["^3.2",](https://github.com/filamentphp/spatie-laravel-translatable-plugin)
 - joaopaulolndev/filament-edit-profile : https://github.com/joaopaulolndev/filament-edit-profile
 - tomatophp/filament-translations : https://github.com/tomatophp/filament-translations
 - livewire/livewire : https://github.com/livewire/livewire
+
+### For assets
+- bootstrap 5 : https://getbootstrap.com/
 
 ## About Laravel
 
