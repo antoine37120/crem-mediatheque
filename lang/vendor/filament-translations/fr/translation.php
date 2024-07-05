@@ -2,13 +2,13 @@
 
 return [
     "title" => [
-        "home" => "Translations",
-        "list" => "Translations",
+        "home" => "Traductions",
+        "list" => "Traductions",
         "create" => "Create Translation",
         "edit" => "Edit Translation",
     ],
-    "label" => "Translations",
-    "single" => "Translation",
+    "label" => "Traductions",
+    "single" => "Traduction",
     "group" => "Translations fr",
     "gpt_scan" => "Use GPT",
     "gpt_scan_notifications_done" => "GPT Scan has been completed",
