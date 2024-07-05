@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Livewire\AppLayer;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', AppLayer::class);
