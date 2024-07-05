@@ -7,13 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
 
-class GeographicalArea extends Model
+class GeographicalAreaTranslation extends Model
 {
     use HasFactory;
-    use Translatable;
-
-    public $translatedAttributes = ['name'];
-
     public $timestamps = false;
         
     /**
@@ -22,6 +18,6 @@ class GeographicalArea extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        /*'name',*/
+        'name'
     ];
 }

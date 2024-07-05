@@ -12,33 +12,63 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Filament\Resources\Concerns\Translatable;
+use CactusGalaxy\FilamentAstrotomic\Resources\Concerns\ResourceTranslatable;
+use CactusGalaxy\FilamentAstrotomic\Forms\Components\TranslatableTabs;
+use CactusGalaxy\FilamentAstrotomic\TranslatableTab;
 use Filament\Tables\Filters\SelectFilter;
+use App\Models\GeographicalArea;
+use Illuminate\Contracts\Support\Htmlable;
 
 class AudioItemResource extends Resource
 {
-    use Translatable;
+    use ResourceTranslatable;
 
     protected static ?string $model = AudioItem::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    //protected static ?string $recordTitleAttribute = 'translation.name';
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->required()
-                    ->maxLength(255),
+                TranslatableTabs::make()->columnSpan(2)
+                ->localeTabSchema(fn (TranslatableTab $tab) => [
+                    Forms\Components\TextInput::make($tab->makeName('name'))
+                        // required only for the main locale
+                        ->required($tab->isMainLocale())
+                        ->maxLength(255)
+                        // generate slug for the item based on the main locale
+                        /*->live(onBlur: true)
+                        ->afterStateUpdated(function (Forms\Set $set, Forms\Get $get, $state) use ($tab) {
+                            if ($tab->isMainLocale()) {
+                                $set('slug', Str::slug($state));
+                            }
+                        }),*/,
+                    Forms\Components\RichEditor::make($tab->makeName('description'))
+                    // required only for the main locale
+                    ->columnSpanFull()
+                    // generate slug for the item based on the main locale
+                    /*->live(onBlur: true)
+                    ->afterStateUpdated(function (Forms\Set $set, Forms\Get $get, $state) use ($tab) {
+                        if ($tab->isMainLocale()) {
+                            $set('slug', Str::slug($state));
+                        }
+                    }),*/
+                ]),
                 Forms\Components\TextInput::make('duration')
                     ->required()
                     ->numeric(),
                 Forms\Components\TextInput::make('year')
                     ->required(),
                 Forms\Components\Select::make('geographical_area_id')
-                    ->relationship('geographicalArea', 'name'),
-                Forms\Components\RichEditor::make('description')
-                    ->columnSpanFull(),
+                ->required()
+                ->native(false)
+                ->searchable()
+                ->options(
+                    GeographicalArea::listsTranslations('name')->get()->pluck('name', 'id')
+                ),
                 Forms\Components\FileUpload::make('file')
                     ->required()
                     ->preserveFilenames(),
@@ -59,8 +89,9 @@ class AudioItemResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')
-                    ->searchable(),
+                Tables\Columns\TextColumn::make('translations.name')->toggleable(isToggledHiddenByDefault: true)
+                ->searchable(),
+                Tables\Columns\TextColumn::make('translation.name')->label('Name'),
                 Tables\Columns\TextColumn::make('duration')
                     ->numeric()
                     ->sortable(),
@@ -85,7 +116,10 @@ class AudioItemResource extends Resource
             ])
             ->filters([
                 SelectFilter::make('geographical_area_id')
-                ->relationship('geographicalArea', 'name'),
+                ->label('Zone géographique')
+                ->options(
+                    GeographicalArea::listsTranslations('name')->get()->pluck('name', 'id')
+                ),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -111,5 +145,17 @@ class AudioItemResource extends Resource
             'create' => Pages\CreateAudioItem::route('/create'),
             'edit' => Pages\EditAudioItem::route('/{record}/edit'),
         ];
+    }
+
+    
+    
+    public static function getGloballySearchableAttributes(): array
+    {
+        return ['translations.name', 'translations.description'];
+    }
+
+    public static function getGlobalSearchResultTitle(\Illuminate\Database\Eloquent\Model $record): \Illuminate\Contracts\Support\Htmlable | string
+    {
+        return $record->name;
     }
 }

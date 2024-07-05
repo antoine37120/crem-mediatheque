@@ -5,10 +5,11 @@ namespace App\Filament\Resources\GeographicalAreaResource\Pages;
 use App\Filament\Resources\GeographicalAreaResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
+use CactusGalaxy\FilamentAstrotomic\Resources\Pages\Record\EditTranslatable;
 
 class EditGeographicalArea extends EditRecord
 {
-    use EditRecord\Concerns\Translatable;
+    use EditTranslatable;
  
     protected static string $resource = GeographicalAreaResource::class;
 
@@ -16,7 +17,6 @@ class EditGeographicalArea extends EditRecord
     {
         return [
             Actions\DeleteAction::make(),
-            Actions\LocaleSwitcher::make(),
         ];
     }
 }

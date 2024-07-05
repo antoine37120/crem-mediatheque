@@ -4,17 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
 
-class GeographicalArea extends Model
+class PlaylistTranslation extends Model
 {
     use HasFactory;
-    use Translatable;
-
-    public $translatedAttributes = ['name'];
-
     public $timestamps = false;
+
         
     /**
      * The attributes that are mass assignable.
@@ -22,6 +21,7 @@ class GeographicalArea extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        /*'name',*/
+        'name',
+        'description'
     ];
 }

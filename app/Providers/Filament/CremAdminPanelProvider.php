@@ -21,6 +21,7 @@ use Filament\SpatieLaravelTranslatablePlugin;
 use Joaopaulolndev\FilamentEditProfile\FilamentEditProfilePlugin;
 use Filament\Navigation\MenuItem;
 use Joaopaulolndev\FilamentEditProfile\Pages\EditProfilePage;
+use CactusGalaxy\FilamentAstrotomic\FilamentAstrotomicTranslatablePlugin;
 
 class CremAdminPanelProvider extends PanelProvider
 {
@@ -45,8 +46,7 @@ class CremAdminPanelProvider extends PanelProvider
                 Widgets\FilamentInfoWidget::class,
             ])
             ->plugins([
-                SpatieLaravelTranslatablePlugin::make()
-                    ->defaultLocales(['fr', 'en']),
+                FilamentAstrotomicTranslatablePlugin::make(),
                 FilamentEditProfilePlugin::make()
                     ->shouldRegisterNavigation(false),
                 \TomatoPHP\FilamentTranslations\FilamentTranslationsPlugin::make()

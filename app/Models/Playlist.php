@@ -6,16 +6,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Spatie\Translatable\HasTranslations;
+use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
+use Astrotomic\Translatable\Translatable;
 
 class Playlist extends Model
 {
     use HasFactory;
-    use HasTranslations;
-    public $translatable = [
-        'name',
-        'description'
-    ];
+    use Translatable;
+
+    public $translatedAttributes = ['name', 'description'];
 
         
     /**
@@ -24,8 +23,8 @@ class Playlist extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'description',
+        /*'name',
+        'description',*/
         'picture',
     ];
 

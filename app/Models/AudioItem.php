@@ -6,16 +6,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Spatie\Translatable\HasTranslations;
+use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
+use Astrotomic\Translatable\Translatable;
 
 class AudioItem extends Model
 {
     use HasFactory;
-    use HasTranslations;
-    public $translatable = [
-        'name',
-        'description'
-    ];
+    use Translatable;
+
+    public $translatedAttributes = ['name', 'description'];
     
     /**
      * The attributes that are mass assignable.
@@ -23,11 +22,11 @@ class AudioItem extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        /*'name',*/
         'duration',
         'year',
         'geographical_area_id',
-        'description',
+        /*'description',*/
         'file',
         'interpreters',
         'collector',

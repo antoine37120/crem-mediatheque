@@ -6,9 +6,9 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "cactus-galaxy/filament-astrotomic": "^0.3.0",
         "eightynine/filament-excel-import": "^3.0",
         "filament/filament": "^3.2",
-        "filament/spatie-laravel-translatable-plugin": "^3.2",
         "joaopaulolndev/filament-edit-profile": "^1.0",
         "laravel/framework": "^11.9",
         "laravel/tinker": "^2.9",
@@ -18,6 +18,7 @@
         "fakerphp/faker": "^1.23",
         "laravel/pint": "^1.13",
         "laravel/sail": "^1.26",
+        "laravel/telescope": "^5.1",
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.0",
         "phpunit/phpunit": "^11.0.1"
@@ -54,7 +55,9 @@
     },
     "extra": {
         "laravel": {
-            "dont-discover": []
+            "dont-discover": [
+                "laravel/telescope"
+            ]
         }
     },
     "config": {

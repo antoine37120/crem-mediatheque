@@ -8,7 +8,7 @@ use Filament\Resources\Pages\ListRecords;
 
 class ListGeographicalAreas extends ListRecords
 {
-    use ListRecords\Concerns\Translatable;
+    
 
     protected static string $resource = GeographicalAreaResource::class;
 
@@ -16,7 +16,6 @@ class ListGeographicalAreas extends ListRecords
     {
         return [
             Actions\CreateAction::make(),
-            Actions\LocaleSwitcher::make(),
         ];
     }
 }
