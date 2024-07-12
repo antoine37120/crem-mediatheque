@@ -10,6 +10,7 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\Select;
+use App\Models\Playlist;
 
 class PlaylistsRelationManager extends RelationManager
 {
@@ -20,7 +21,9 @@ class PlaylistsRelationManager extends RelationManager
         return $form
             ->schema([
                 Select::make('playlist_id')
-                    ->relationship(name: 'playlist', titleAttribute: 'name')
+                    ->options(
+                        Playlist::listsTranslations('name')->get()->pluck('name', 'id')
+                    )
                     ->searchable(['name'])
                     ->preload()
             ]);

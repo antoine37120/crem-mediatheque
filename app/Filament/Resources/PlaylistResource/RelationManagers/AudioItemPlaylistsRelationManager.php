@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\Select;
 use Illuminate\Support\Facades\Log;
+use App\Models\AudioItem;
 
 class AudioItemPlaylistsRelationManager extends RelationManager
 {
@@ -21,7 +22,9 @@ class AudioItemPlaylistsRelationManager extends RelationManager
         return $form
             ->schema([
                 Select::make('audio_item_id')
-                    ->relationship(name: 'audio_item', titleAttribute: 'name')
+                    ->options(
+                        AudioItem::listsTranslations('name')->get()->pluck('name', 'id')
+                    )
                     ->searchable(['name'])
                     ->preload()
             ]);
