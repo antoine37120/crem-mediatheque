@@ -22,5 +22,7 @@ class AudioItemTranslation extends Model
     protected $fillable = [
         'name',
         'description',
+        'locale',
+        'audio_item_id',
     ];
 }

@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
 
-class AudioItem extends Model
+class AudioItem extends Model implements TranslatableContract
 {
     use HasFactory;
     use Translatable;

@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
 
-class Playlist extends Model
+class Playlist extends Model implements TranslatableContract
 {
     use HasFactory;
     use Translatable;
