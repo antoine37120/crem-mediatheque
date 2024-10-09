@@ -22,6 +22,6 @@ class GeographicalArea extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        /*'name',*/
+        'region_code',
     ];
 }
