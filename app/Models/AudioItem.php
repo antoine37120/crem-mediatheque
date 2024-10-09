@@ -31,6 +31,7 @@ class AudioItem extends Model
         'interpreters',
         'collector',
         'picture',
+        'cote',
     ];
 
     /**

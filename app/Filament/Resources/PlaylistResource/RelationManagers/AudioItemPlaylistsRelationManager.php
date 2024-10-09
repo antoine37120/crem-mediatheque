@@ -36,6 +36,8 @@ class AudioItemPlaylistsRelationManager extends RelationManager
             ->recordTitleAttribute('name')
             ->reorderable('sort')
             ->columns([
+                Tables\Columns\TextColumn::make('audio_item.cote')->label('Cote')
+                ->sortable(),
                 Tables\Columns\TextColumn::make('audio_item.name')
                 ->sortable(),
                 Tables\Columns\TextColumn::make('sort')

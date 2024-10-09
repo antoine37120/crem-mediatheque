@@ -61,6 +61,8 @@ class AudioItemResource extends Resource
                         }
                     }),*/
                 ]),
+                Forms\Components\TextInput::make('cote')
+                    ->required(),
                 Forms\Components\TextInput::make('duration')
                     ->required()
                     ->numeric(),
@@ -93,6 +95,9 @@ class AudioItemResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('cote')
+                ->sortable()
+                ->searchable(),
                 Tables\Columns\TextColumn::make('translations.name')->toggleable(isToggledHiddenByDefault: true)
                 ->searchable(),
                 Tables\Columns\TextColumn::make('translation.name')->label('Name'),
