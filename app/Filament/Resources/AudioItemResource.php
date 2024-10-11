@@ -10,6 +10,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Filament\Tables\Columns\ImageColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use CactusGalaxy\FilamentAstrotomic\Resources\Concerns\ResourceTranslatable;
@@ -69,7 +70,7 @@ class AudioItemResource extends Resource
                     ->required()
                     ->numeric(),
                 Forms\Components\TextInput::make('year')
-                    ->required(),
+                    ->numeric(),
                 Forms\Components\Select::make('geographical_area_id')
                 ->required()
                 ->native(false)
@@ -97,25 +98,34 @@ class AudioItemResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\ImageColumn::make('picture')->label('Un label')
+                //->disk('public')
+                ->extraImgAttributes(['style' => 'background:black;'])
+                /*->width(50)*/,
                 Tables\Columns\TextColumn::make('cote')
                 ->sortable()
                 ->searchable(),
-                Tables\Columns\TextColumn::make('translations.name')->toggleable(isToggledHiddenByDefault: true)
+                Tables\Columns\TextColumn::make('translations.name')
+                ->toggleable(isToggledHiddenByDefault: true)
                 ->searchable(),
                 Tables\Columns\TextColumn::make('original_name')->label('Original Name'),
                 Tables\Columns\TextColumn::make('duration')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('year'),
+                Tables\Columns\TextColumn::make('year')
+                ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('geographicalArea.name')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('file')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 Tables\Columns\TextColumn::make('collector')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
-                Tables\Columns\TextColumn::make('picture')
-                    ->searchable(),
+                /*Tables\Columns\TextColumn::make('picture')
+                    ->searchable(),*/
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

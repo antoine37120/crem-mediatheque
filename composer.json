@@ -12,6 +12,7 @@
         "joaopaulolndev/filament-edit-profile": "^1.0",
         "laravel/framework": "^11.9",
         "laravel/tinker": "^2.9",
+        "spatie/browsershot": "^4.3",
         "tomatophp/filament-translations": "^1.0",
         "wapmorgan/mp3info": "^0.1.0"
     },

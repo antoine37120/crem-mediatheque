@@ -11,5 +11,9 @@
         "laravel-vite-plugin": "^1.0",
         "sass": "^1.77.6",
         "vite": "^5.0"
+    },
+    "dependencies": {
+        "puppeteer": "^23.5.2",
+        "wavesurfer.js": "^7.8.6"
     }
 }

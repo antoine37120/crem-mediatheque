@@ -9,6 +9,10 @@ use Filament\Actions\Imports\ImportColumn;
 use Filament\Actions\Imports\Importer;
 use Filament\Actions\Imports\Models\Import;
 use wapmorgan\Mp3Info\Mp3Info;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\BrowsershotController;
+use Spatie\Browsershot\Browsershot;
 
 class AudioItemImporter extends Importer
 {
@@ -52,8 +56,7 @@ class AudioItemImporter extends Importer
             ImportColumn::make('year')
                 ->guess(['year','ANNÉE D\'ENREGISTREMENT'])
                 ->example(1953)
-                ->requiredMapping()
-                ->rules(['required']),
+                ->requiredMapping(),
             ImportColumn::make('geographicalArea')
                 ->guess(['geographicalArea','AIRE GEO'])
                 ->example('af_occidentale')
@@ -102,15 +105,29 @@ class AudioItemImporter extends Importer
         echo 'Audio duration: '.floor($audio->duration / 60).' min '.floor($audio->duration % 60).' sec'.PHP_EOL;
         $this->record->duration = $audio->duration
         */
-        $this->record->file = 'filePath------' ;
-        $this->record->cote = 'CNRSMH_I_1970_019_067_02' ;
-        $this->record->duration = 100 ;
+        $link_eploded = explode('/', rtrim($this->record->link, "/")) ;
+        //Log::info(print_r($link_eploded, true));
+        $size = sizeof($link_eploded) ;
+        $cote = $link_eploded[$size - 1]  ;
+        $fileName = $cote.'.mp3' ;
+        Storage::move('import/'.$fileName, 'audio-item-sound/'.$fileName);
+        $path = 'audio-item-sound/'.$fileName;
+        $sys_path = Storage::path('audio-item-sound/'.$fileName);
+
+        //Log::info(print_r($path, true));
+        $this->record->file = $path ;
+        $this->record->cote = $link_eploded[$size - 1] ;
+
+        $audio = new Mp3Info($sys_path);
+        $this->record->duration = $audio->duration ;
+        //Log::info(print_r($this->record->toArray(), true));
         // Runs before the CSV data for a row is validated.
     }
 
     protected function afterSave(): void
     {
         
+        //Log::info(print_r($this->record->toArray(), true));
         /*$this->record->setTranslation('name', 'fr', $this->data['name']);
         $this->record->setTranslation('name', 'fr', 'hhhhhhhhhhhhhh');
         $this->record->setTranslation('name', 'en', $this->data['name_en']);
@@ -148,6 +165,35 @@ class AudioItemImporter extends Importer
                 'playlist_id' => $this->options['playlistId'],
         ]);
         $AudioItemPlaylist->save() ;
+
+        //app(BrowsershotController::class)->show($this->record->id, $this->record->cote.'.mp3');
+
+        /*Log::info(print_r($this->record->cote.' _____ Launche img genaration _____', true));
+        Log::info(print_r($this->record->cote.'.mp3', true));
+        $dataImage = Browsershot::url(url('wave-picture', [$this->record->id, $this->record->cote.'.mp3']))
+                ->noSandbox()
+                ->setNodeBinary(env('CUSTOM_NodeBinaryPath', false))
+                ->setNpmBinary(env('CUSTOM_NpmBinaryPath', false))
+                ->setOption('landscape', true)
+                ->windowSize(600, 600)
+                ->waitUntilNetworkIdle()
+                //->save(storage_path() . '/laravel_screenshot_browsershot.png');
+                //->bodyHtml() ;
+                ->evaluate("window.pngData");
+        
+        //Log::info(print_r($dataImage, true));
+        //Log::info(print_r(url('wave-picture', [$this->record->id, $this->record->file]), true));
+        //Log::info(print_r(env('CUSTOM_NpmBinaryPath', false), true));
+        $data = str_replace(' ','+',$dataImage);
+        list($type, $data) = explode(';', $data);
+        list(, $data)      = explode(',', $data);
+        $decodedData = base64_decode($data);
+        $pathFile = 'audio-item/'.$this->record->cote.'.png' ;
+        Storage::put($pathFile, $decodedData);
+        $this->record->picture = $pathFile;
+        $this->record->save() ;*/
+        $this->record->generatePicture() ;
+
     }
 
     public static function getCompletedNotificationBody(Import $import): string
