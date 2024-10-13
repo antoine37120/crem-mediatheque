@@ -51,7 +51,6 @@ class AudioItem extends Model implements TranslatableContract
     }
 
     public function generatePicture() {
-        //storage/app/public/audio-item-sound/*.mp3 width=600 height=600 wave_color=#ffffff back_color=transparent wavedir=storage/app/public/audio-item-image/
         $pathMP3 = Storage::path('audio-item-sound/'.$this->cote.'.mp3');
         $pathMP3 = str_replace('\\', '/', $pathMP3);
         $pathIMG = Storage::path('audio-item-image/');
@@ -68,40 +67,9 @@ class AudioItem extends Model implements TranslatableContract
         $log = $justwave->create($pathMP3);
 
         $pathFile = 'audio-item-image/'.$this->cote.'.png' ;
-
         Storage::move('audio-item-image/'.$log->key.'.png', $pathFile );
         Storage::delete('audio-item-image/'.$log->key.'_bg.png');
         
-        //Log::info(print_r($log->dataUrlWave, true));
-        /*$data = str_replace(' ','+',$log->dataUrlWave);
-        list($type, $data) = explode(';', $data);
-        list(, $data)      = explode(',', $data);
-        $decodedData = base64_decode($data);
-
-        Storage::put($pathFile, $decodedData);*/
-
-        //Log::info(print_r($log, true));
-
-        /*$dataImage = Browsershot::url(url('wave-picture', [$this->id, $this->cote.'.mp3']))
-                ->noSandbox()
-                ->setNodeBinary(env('CUSTOM_NodeBinaryPath', false))
-                ->setNpmBinary(env('CUSTOM_NpmBinaryPath', false))
-                ->setOption('landscape', true)
-                ->windowSize(600, 600)
-                ->waitUntilNetworkIdle()
-                //->save(storage_path() . '/laravel_screenshot_browsershot.png');
-                //->bodyHtml() ;
-                ->evaluate("window.pngData");
-        
-        Log::info(print_r($dataImage, true));
-        //Log::info(print_r(url('wave-picture', [$this->record->id, $this->record->file]), true));
-        //Log::info(print_r(env('CUSTOM_NpmBinaryPath', false), true));
-        $data = str_replace(' ','+',$dataImage);
-        list($type, $data) = explode(';', $data);
-        list(, $data)      = explode(',', $data);
-        $decodedData = base64_decode($data);*/
-        //$pathFile = 'audio-item-image/'.$this->cote.'.png' ;
-        //Storage::put($pathFile, $decodedData);
         $this->picture = $pathFile;
         $this->save() ;
     }

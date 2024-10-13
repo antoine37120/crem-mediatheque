@@ -13,8 +13,17 @@
   </div>
 
   <div class="row">
-    <div class="col-2 vh-100 bg-secondary">.col-9</div>
-    <div class="col-10">.col-4<br>Since 9 + 4 = 13 &gt; 12, this 4-column-wide div gets wrapped onto a new line as one contiguous unit.</div>
+    <div class="col-2 vh-100 bg-secondary">.col-9
+
+      <livewire:menu.side-menu />
+
+
+    </div>
+    <div class="col-10">.col-4<br>Since 9 + 4 = 13 &gt; 12, this 4-column-wide div gets wrapped onto a new line as one contiguous unit.
+  
+        <livewire:tracks.list-home />
+  
+    </div>
   </div>
     
 </div>

@@ -16,17 +16,7 @@ window.genrateWave = function(url, height, barGap, barWidth) {
 
     /** When the audio is both decoded and can play */
     wavesurfer.on('ready', (duration) => {
-        console.log('Ready', duration + 's')
-        const container = document.querySelector("#body-wave");
-        var divs = container.querySelectorAll('div');
-        var shadowroot = divs[0].shadowRoot
-        var nodes = shadowroot.querySelectorAll('canvas');
-        //var imgs = container.querySelectorAll('img');
-        const canvas = nodes[0];
-        const img    = canvas.toDataURL('image/png') ;
-        //imgs[0].setAttribute('src', img) ;
-        //container.innerText = img ;
-        window.pngData = img;
+        
     })
 
 
