@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "55283d93c6f0d646c3b71426fd7d6a61",
+    "content-hash": "4a155ee247b59ea001c83094586ed951",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -71,6 +71,21 @@
                 "source": "https://github.com/AnourValar/eloquent-serialize/tree/1.2.22"
             },
             "time": "2024-03-22T12:56:46+00:00"
+        },
+        {
+            "name": "antoine37120/justwave",
+            "version": "1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/antoine37120/justwave.git",
+                "reference": "origin/master"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "JustWave.class.php"
+                ]
+            }
         },
         {
             "name": "astrotomic/laravel-translatable",

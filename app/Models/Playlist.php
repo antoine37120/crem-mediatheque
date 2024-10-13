@@ -25,6 +25,7 @@ class Playlist extends Model implements TranslatableContract
     protected $fillable = [
         /*'name',
         'description',*/
+        'type_id',
         'picture',
     ];
 

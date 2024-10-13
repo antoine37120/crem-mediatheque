@@ -62,6 +62,7 @@ class AudioItemPlaylistsRelationManager extends RelationManager
                 }),
                 ImportAction::make()
                 ->importer(AudioItemImporter::class)
+				->chunkSize(5)
                 ->options(['playlistId' => $this->getOwnerRecord()->getKey()])
             ])
             ->actions([
