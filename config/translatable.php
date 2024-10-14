@@ -1,7 +1,7 @@
 <?php
 
 return [
-
+    'translations_wrapper' => 'translations',
     /*
     |--------------------------------------------------------------------------
     | Application Locales

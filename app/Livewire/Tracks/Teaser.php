@@ -14,7 +14,7 @@ class Teaser extends Component
         $this->track = $track;
  
         $this->fill( 
-            $track->only('name', 'description'), 
+            $track->only('name', 'description', 'picture'), 
         ); 
     }
 
