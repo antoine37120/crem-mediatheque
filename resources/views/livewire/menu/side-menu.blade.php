@@ -12,5 +12,8 @@
             <li>About</li>
         </ul>
     </div>
+    {{-- Success is as dangerous as failure. --}}
+
+    <livewire:menu.logos-partners />
 </div>
 

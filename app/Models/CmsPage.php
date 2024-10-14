@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
 
-class CmsPage extends Model
+class CmsPage extends Model implements TranslatableContract
 {
     use HasFactory;
     use Translatable;

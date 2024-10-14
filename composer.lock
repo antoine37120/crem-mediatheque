@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5d05d75fcb563c2210d85dc51766847c",
+    "content-hash": "b62ba37e9b2620192d01ff629ce8a16d",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -71,6 +71,21 @@
                 "source": "https://github.com/AnourValar/eloquent-serialize/tree/1.2.22"
             },
             "time": "2024-03-22T12:56:46+00:00"
+        },
+        {
+            "name": "antoine37120/justwave",
+            "version": "1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/antoine37120/justwave.git",
+                "reference": "origin/master"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "JustWave.class.php"
+                ]
+            }
         },
         {
             "name": "astrotomic/laravel-translatable",
@@ -8943,6 +8958,52 @@
                 }
             ],
             "time": "2022-03-08T17:03:00+00:00"
+        },
+        {
+            "name": "wapmorgan/mp3info",
+            "version": "0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wapmorgan/Mp3Info.git",
+                "reference": "f4e3b0d606732f667729c116e1baa4f845a65f9d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wapmorgan/Mp3Info/zipball/f4e3b0d606732f667729c116e1baa4f845a65f9d",
+                "reference": "f4e3b0d606732f667729c116e1baa4f845a65f9d",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": ">=5.4.0"
+            },
+            "bin": [
+                "bin/mp3scan"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "wapmorgan\\Mp3Info\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0"
+            ],
+            "description": "The fastest php library to extract mp3 tags & meta information.",
+            "keywords": [
+                "audio",
+                "id3",
+                "id3v1",
+                "id3v2",
+                "mp3",
+                "mpeg"
+            ],
+            "support": {
+                "issues": "https://github.com/wapmorgan/Mp3Info/issues",
+                "source": "https://github.com/wapmorgan/Mp3Info/tree/0.1.0"
+            },
+            "time": "2023-05-28T18:37:15+00:00"
         },
         {
             "name": "webmozart/assert",

@@ -15,6 +15,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use CactusGalaxy\FilamentAstrotomic\Resources\Concerns\ResourceTranslatable;
 use CactusGalaxy\FilamentAstrotomic\Forms\Components\TranslatableTabs;
 use CactusGalaxy\FilamentAstrotomic\TranslatableTab;
+use App\Filament\Imports\GeographicalAreaImporter;
+use Filament\Tables\Actions\ImportAction;
 
 class GeographicalAreaResource extends Resource
 {
@@ -32,9 +34,9 @@ class GeographicalAreaResource extends Resource
     {
         return $form
             ->schema([
-                /*Forms\Components\TextInput::make('name')
+                Forms\Components\TextInput::make('region_code')
                     ->required()
-                    ->maxLength(255),*/
+                    ->maxLength(255),
                 
 
                 TranslatableTabs::make()->columnSpan(2)
@@ -51,13 +53,19 @@ class GeographicalAreaResource extends Resource
                                 }
                             }),*/,
                     ]),
+                
             ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
+            ->headerActions([
+                ImportAction::make()
+                    ->importer(GeographicalAreaImporter::class)
+            ])
             ->columns([
+                Tables\Columns\TextColumn::make('region_code'),
                 Tables\Columns\TextColumn::make('translations.name')->toggleable(isToggledHiddenByDefault: true)
                 ->searchable(),
                 Tables\Columns\TextColumn::make('translation.name')->label('Name'),

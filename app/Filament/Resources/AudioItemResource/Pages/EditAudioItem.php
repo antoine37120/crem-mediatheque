@@ -15,7 +15,22 @@ class EditAudioItem extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\DeleteAction::make(),
+            Actions\Action::make('make_picture')->label('Generate picture')
+            //->requiresConfirmation()
+            //->action(fn () => $this->record->generatePicture())
+            ->action(function ($record) {
+                $this->record->generatePicture() ;
+                $this->fillForm();
+            }),
+            Actions\Action::make('calc_duration')->label('Define duration') 
+            //->requiresConfirmation()
+            //->action(fn () => $this->record->generatePicture())
+            ->action(function ($record) {
+                $this->record->calculateDuration() ;
+                $this->fillForm();
+            }),
+            Actions\DeleteAction::make()
+            ->requiresConfirmation(),
         ];
     }
 }

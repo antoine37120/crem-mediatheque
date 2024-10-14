@@ -12,6 +12,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\Select;
 use Illuminate\Support\Facades\Log;
 use App\Models\AudioItem;
+use App\Filament\Imports\AudioItemImporter;
+use Filament\Tables\Actions\ImportAction;
 
 class AudioItemPlaylistsRelationManager extends RelationManager
 {
@@ -33,10 +35,15 @@ class AudioItemPlaylistsRelationManager extends RelationManager
     public function table(Table $table): Table
     {
         return $table
+            ->poll('5s')
             ->recordTitleAttribute('name')
             ->reorderable('sort')
             ->columns([
-                Tables\Columns\TextColumn::make('audio_item.name')
+                Tables\Columns\TextColumn::make('audio_item.cote')->label('Cote')
+                ->sortable(),
+                Tables\Columns\TextColumn::make('audio_item.original_name')->label('Original name')
+                ->sortable(),
+                Tables\Columns\TextColumn::make('audio_item.name')->label('Name')
                 ->sortable(),
                 Tables\Columns\TextColumn::make('sort')
                 ->sortable(),
@@ -53,6 +60,10 @@ class AudioItemPlaylistsRelationManager extends RelationManager
              
                     return $data;
                 }),
+                ImportAction::make()
+                ->importer(AudioItemImporter::class)
+				->chunkSize(5)
+                ->options(['playlistId' => $this->getOwnerRecord()->getKey()])
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

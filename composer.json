@@ -6,13 +6,15 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "antoine37120/justwave": "^1.0",
         "cactus-galaxy/filament-astrotomic": "^0.3.0",
         "eightynine/filament-excel-import": "^3.0",
         "filament/filament": "^3.2",
         "joaopaulolndev/filament-edit-profile": "^1.0",
         "laravel/framework": "^11.9",
         "laravel/tinker": "^2.9",
-        "tomatophp/filament-translations": "^1.0"
+        "tomatophp/filament-translations": "^1.0",
+        "wapmorgan/mp3info": "^0.1.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
@@ -68,6 +70,24 @@
             "pestphp/pest-plugin": true,
             "php-http/discovery": true
         }
+    },
+    "repositories": {
+        "justwave": { 
+            "type": "package",
+            "package": {
+                "name": "antoine37120/justwave",
+                "version": "1.0",
+                "source": {
+                    "url": "https://github.com/antoine37120/justwave.git",
+                    "type": "git",
+                    "reference": "origin/master"
+                },
+                "autoload": {
+                    "files": ["JustWave.class.php"]
+                }
+            }
+        }
+
     },
     "minimum-stability": "stable",
     "prefer-stable": true

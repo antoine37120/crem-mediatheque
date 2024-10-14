@@ -8,8 +8,14 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
+use Spatie\Browsershot\Browsershot;
+use wapmorgan\Mp3Info\Mp3Info;
+use Illuminate\Support\Number;
+use JustWave;
 
-class AudioItem extends Model
+class AudioItem extends Model implements TranslatableContract
 {
     use HasFactory;
     use Translatable;
@@ -31,7 +37,42 @@ class AudioItem extends Model
         'interpreters',
         'collector',
         'picture',
+        'cote',
+        'link',
+        'original_name'
     ];
+
+    public function calculateDuration() {
+        
+        $sys_path = Storage::path('audio-item-sound/'.$this->cote.'.mp3');
+        $audio = new Mp3Info($sys_path);
+        $this->duration = round($audio->duration, 0) ;
+        $this->save() ;
+    }
+
+    public function generatePicture() {
+        $pathMP3 = Storage::path('audio-item-sound/'.$this->cote.'.mp3');
+        $pathMP3 = str_replace('\\', '/', $pathMP3);
+        $pathIMG = Storage::path('audio-item-image/');
+        $args = [
+            'width=600',
+            'height=600', 
+            'wave_color=#ffffff', 
+            'back_color=transparent',
+            'wavedir='.$pathIMG,
+            'nocache=true',
+            'mode=file'
+        ];
+        $justwave = new JustWave('ARGV', $args);
+        $log = $justwave->create($pathMP3);
+
+        $pathFile = 'audio-item-image/'.$this->cote.'.png' ;
+        Storage::move('audio-item-image/'.$log->key.'.png', $pathFile );
+        Storage::delete('audio-item-image/'.$log->key.'_bg.png');
+        
+        $this->picture = $pathFile;
+        $this->save() ;
+    }
 
     /**
      * Get the audio item's geographical area.

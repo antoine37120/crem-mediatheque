@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
 
-class GeographicalArea extends Model
+class GeographicalArea extends Model implements TranslatableContract
 {
     use HasFactory;
     use Translatable;
@@ -22,6 +22,6 @@ class GeographicalArea extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        /*'name',*/
+        'region_code',
     ];
 }
