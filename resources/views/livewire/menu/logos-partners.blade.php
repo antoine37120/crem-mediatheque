@@ -1,14 +1,9 @@
 <div>
-    <div class="p-2">
-        <ul class="li"><img src="{{ url('storage/app/public/logos/LESC-CREM_Long.png') }}"></img></ul>
-
-        <ul class="li"><img src="/storage/app/public/logos/LESC-CREM_Long.png"></img></ul>
-
-        <ul class="li"><img src="{{ url('storage/app/public/logos/LESC-CREM_Long.png') }}"></img></ul>
-
-        <ul class="li"><img src="/storage/app/public/logos/logo-cnrs.png"></img></ul>
-        <ul class="li"><img src="/storage/app/public/logos/Logo-ministere-de-la-culture.png"></img></ul>
-        <ul class="li"><img src="/storage/app/public/logos/logo-univ-paris-nanterre.png"></img></ul>
-
+    <div class="col-100 d-grid h-auto gap-3">
+        <div style="height: 150px"><img src="/storage/logos/LESC-CREM_Long.png" alt="" class="py-3 mw-100"></img></div>
+        <div style="height: 150px"><img src="/storage/logos/MSH-Mondes_logo_coul_1-300x104.png" alt="" class="py-3 mw-100"></img></div>
+        <div style="height: 150px"><img src="/storage/logos/logo-cnrs.png" alt="" class="py-3 mh-100"></img></div>
+        <div style="height: 150px"><img src="/storage/logos/logo-univ-paris-nanterre.png" alt="" class="py-3 mw-100"></img></div>
+        <div style="height: 150px"><img src="/storage/logos/Logo-ministere-de-la-culture.png" alt="" class="py-3 mw-100 mh-100"></img></div>
     </div>
 </div>
