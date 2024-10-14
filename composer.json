@@ -7,7 +7,9 @@
     "require": {
         "php": "^8.2",
         "antoine37120/justwave": "^1.0",
+        "astrotomic/laravel-translatable": "^11.15",
         "cactus-galaxy/filament-astrotomic": "^0.3.0",
+        "codezero/laravel-localized-routes": "^4.0",
         "eightynine/filament-excel-import": "^3.0",
         "filament/filament": "^3.2",
         "joaopaulolndev/filament-edit-profile": "^1.0",
@@ -68,7 +70,8 @@
         "sort-packages": true,
         "allow-plugins": {
             "pestphp/pest-plugin": true,
-            "php-http/discovery": true
+            "php-http/discovery": true,
+            "codezero/composer-preload-files": true
         }
     },
     "repositories": {

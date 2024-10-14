@@ -61,6 +61,7 @@
             <div class="col-10">
                 {{-- .col-4<br>Since 9 + 4 = 13 &gt; 12, this 4-column-wide div gets wrapped onto a new line as one contiguous unit. --}}
                 {{-- <livewire:audio-item.listing /> --}}
+                <livewire:tracks.list-home />
             </div>
         </div> <!--row main-->
         <div class="row player">

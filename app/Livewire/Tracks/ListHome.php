@@ -13,7 +13,7 @@ class ListHome extends Component
  
     public function mount()
     {
-        $this->tracks = AudioItem::all()->take(4); 
+        $this->tracks = AudioItem::select('*')->inRandomOrder()->take(4)->get(); 
     }
     public function render()
     {
