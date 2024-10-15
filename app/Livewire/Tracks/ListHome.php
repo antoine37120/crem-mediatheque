@@ -8,12 +8,12 @@ use App\Models\AudioItem;
 class ListHome extends Component
 {
     public $tracks = [];
- 
+
     public $track = '';
- 
+
     public function mount()
     {
-        $this->tracks = AudioItem::select('*')->inRandomOrder()->take(4)->get(); 
+        $this->tracks = AudioItem::select('*')->inRandomOrder()->take(4)->get();
     }
     public function render()
     {

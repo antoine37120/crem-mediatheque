@@ -29,6 +29,9 @@ Open /crem-admin in your web browser and sign in to see admin panels
 ```npm install```
 ```npm run build```
 
+## Run scheduler
+```php artisan queue:work database```
+
 ## Run cheduler with CPanel (needed for audio item import)
 
 https://stackoverflow.com/questions/68718174/creating-cron-job-on-cpanel-for-task-scheduling-in-laravel

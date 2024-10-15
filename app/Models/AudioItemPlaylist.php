@@ -10,7 +10,7 @@ class AudioItemPlaylist extends Model
 {
     use HasFactory;
     public $timestamps = false;
-            
+
     /**
      * The attributes that are mass assignable.
      *
@@ -22,7 +22,7 @@ class AudioItemPlaylist extends Model
         'playlist_id',
     ];
 
-    
+
     /**
      * Get the audio item associated with the audio item playlists row.
      */
@@ -31,7 +31,7 @@ class AudioItemPlaylist extends Model
         return $this->belongsTo(\App\Models\AudioItem::class);
     }
 
-    
+
     /**
      * Get the phone associated with the user.
      */
@@ -40,5 +40,5 @@ class AudioItemPlaylist extends Model
         return $this->belongsTo(\App\Models\Playlist::class);
     }
 
-    
+
 }

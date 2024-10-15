@@ -1,9 +1,9 @@
 <div>
     {{-- In work, do what you enjoy. --}}
     <div class="row align-items-start">
-    @foreach ($tracks as $track)
+    @foreach ($playlists as $playlist)
         <div class="col-3">
-            <livewire:tracks.teaser :track="$track" />
+            <livewire:playlists.teaser :playlist="$playlist" />
         </div>
     @endforeach
     </div>
