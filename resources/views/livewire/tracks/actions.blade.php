@@ -1,3 +1,28 @@
 <div>
-    {{-- Success is as dangerous as failure. --}}
+    Add to list action
+ 
+    <div x-data="trackinfos_{{ $track->id }}">
+        <button x-on:click="addtolist">+</button>
+    </div>
 </div>
+ 
+@script
+<script>
+    Alpine.data('trackinfos_{{ $track->id }}', () => {
+        return {
+            track: {
+                title: "{{ $track->translate(App::getLocale())->name }}",
+                fileUrl: "{{ url('storage/'.$track->file) }}",
+                zone: "{{ $track->geographicalArea->translate(App::getLocale())->name }}",
+                year: "{{ $track->year }}",
+                time: "{{ $track->duration }}"
+            },
+            addtolist() {
+                
+                window.addTrackToList(this.track) ;
+            },
+        }
+    });
+</script>
+@endscript
+
