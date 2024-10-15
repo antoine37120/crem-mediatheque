@@ -27,9 +27,10 @@
             </div>
             <div class="row vh-20 position-relative">
                 <div class="col-12">
-
+                @persist('player')
                 <livewire:player.commands />
 
+                @endpersist
                 </div>
 
 

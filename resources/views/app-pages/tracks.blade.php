@@ -3,7 +3,7 @@
         Tracks
     </x-slot>
 
-    <livewire:tracks.list-home />
+    <livewire:tracks.list-self />
 
 
 </x-layouts.app>
