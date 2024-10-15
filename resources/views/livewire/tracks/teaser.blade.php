@@ -8,6 +8,7 @@
             <p class="card-text">{{ $track->translate(App::getLocale())->description }}</p>
             <a href="#" class="btn btn-primary">Go somewhere</a>
         </div>
+        <livewire:tracks.actions :track="$track"  wire:key="actions-{{ $track->id }}"/>
     </div>
 
 </div>

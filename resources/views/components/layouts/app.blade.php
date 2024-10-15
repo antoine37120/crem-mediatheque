@@ -12,18 +12,27 @@
     </head>
     <body>
         <div class="container-fluid">
-            <div class="row">
-                <div class="col-2 vh-100 bg-secondary">.col-9
+            <div class="row vh-80">
+                <div class="col-2 bg-secondary">
 
                 <livewire:menu.side-menu />
 
 
                 </div>
-                <div class="col-10">.col-4<br>Since 9 + 4 = 13 &gt; 12, this 4-column-wide div gets wrapped onto a new line as one contiguous unit.
+                <div class="col-10 ox-auto h-100">.col-4<br>Since 9 + 4 = 13 &gt; 12, this 4-column-wide div gets wrapped onto a new line as one contiguous unit.
                     <h1>{{ $title ?? 'Page Title' }}</h1>
                     {{ $slot }} 
             
                 </div>
+            </div>
+            <div class="row vh-20 position-relative">
+                <div class="col-12">
+
+                <livewire:player.commands />
+
+                </div>
+                   
+
             </div>
         </div>
     </body>
