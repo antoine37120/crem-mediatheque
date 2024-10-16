@@ -5,7 +5,7 @@ namespace App\Livewire\Playlists;
 use Livewire\Component;
 use App\Models\Playlist;
 
-class ListHome extends Component
+class ListSelf extends Component
 {
     public $playlists = [];
 
@@ -13,12 +13,12 @@ class ListHome extends Component
 
     public function mount()
     {
-        $this->playlists = Playlist::select('*')->where('type_id', 1)->inRandomOrder()->take(4)->get();
+        $this->playlists = Playlist::all()->where('type_id', 1);
     }
+
 
     public function render()
     {
-        return view('livewire.playlists.list-home');
+        return view('livewire.playlists.list-self');
     }
 }
-

@@ -14,6 +14,8 @@ use Spatie\Browsershot\Browsershot;
 use wapmorgan\Mp3Info\Mp3Info;
 use Illuminate\Support\Number;
 use JustWave;
+use Illuminate\Support\Arr;
+use App\Models\AudioItemPlaylist;
 
 class AudioItem extends Model implements TranslatableContract
 {
@@ -41,6 +43,19 @@ class AudioItem extends Model implements TranslatableContract
         'link',
         'original_name'
     ];
+    
+    /**
+     * Get random color for entity.
+     */
+    public function randomColor() {
+        $conf_colors = config('custom.items_colors');
+        return Arr::random($conf_colors) ;
+
+    }
+
+    public function durationFormated() {
+        return ltrim(gmdate("i:s", $this->duration), '0') ;
+    }
 
     public function calculateDuration() {
         
@@ -80,6 +95,47 @@ class AudioItem extends Model implements TranslatableContract
     public function geographicalArea(): BelongsTo
     {
         return $this->belongsTo(\App\Models\GeographicalArea::class)->withDefault();
+    }
+
+    /**
+     * Return the item before the current item in the first playlist.
+     *
+     * @return \App\Models\AudioItemPlaylist|null
+     */
+    public function itemBefore() {
+        $itemplaylist = $this->playlists()->first() ;
+        
+        //Log::debug($itemplaylist) ;
+        $prev = AudioItemPlaylist::where('playlist_id', $itemplaylist->playlist_id)
+        ->where('sort', '<=', $itemplaylist->sort)
+        ->where('audio_item_id', '!=', $itemplaylist->audio_item_id)
+        ->orderBy('sort', 'desc')
+        ->orderBy('audio_item_id', 'desc')
+        ->first() ;
+       
+        //Log::debug($prev) ;
+        //return $playlist ;
+        return $prev ;
+    }
+    
+    /**
+     * Return the item after the current item in the first playlist.
+     *
+     * @return \App\Models\AudioItemPlaylist|null
+     */
+    public function itemAfter() {
+        $itemplaylist = $this->playlists()->first() ;
+        $next = AudioItemPlaylist::where('playlist_id', $itemplaylist->playlist_id)
+        ->where('sort', '>=', $itemplaylist->sort)
+        ->where('audio_item_id', '!=', $itemplaylist->audio_item_id)
+        ->orderBy('sort', 'asc')
+        ->orderBy('audio_item_id', 'asc')
+        ->first() ;
+        //Log::debug($itemplaylist) ;
+        //Log::debug('$next') ;
+        //Log::debug($next) ;
+        return $next ;
+        //return $playlist->audio_item_playlists()->where('position', '>', $this->position)->orderBy('position', 'desc')->first();
     }
     /**
      * The playlists that belong to the audio item.

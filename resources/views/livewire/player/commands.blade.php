@@ -1,6 +1,6 @@
 <div>
     <div class="row position-absolute bottom-100 w-100">
-        <div class="col-10 offset-md-2">
+        <div class="col-10 offset-md-2 px-0">
             <livewire:player.tracklist />
         </div>
     </div>

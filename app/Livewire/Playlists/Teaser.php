@@ -3,7 +3,7 @@
 namespace App\Livewire\Playlists;
 
 use Livewire\Component;
-use App\Models\Playlist;
+use app\Models\Playlist;
 
 class Teaser extends Component
 {

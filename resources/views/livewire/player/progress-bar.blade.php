@@ -3,9 +3,9 @@
 
     <script>
         
-        window.onload = function() {
+        document.addEventListener('livewire:initialized', () => {
             window.initPlayer();
-        };
+        });
     </script>
     <div class="row align-items-center gx-1">
         <div id="player-progress-time-update" class="col-1 text-end"></div>   

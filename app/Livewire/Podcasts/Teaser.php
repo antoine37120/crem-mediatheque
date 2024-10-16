@@ -3,20 +3,21 @@
 namespace App\Livewire\Podcasts;
 
 use Livewire\Component;
-use App\Models\Playlist;
+use app\Models\Playlist;
 
 class Teaser extends Component
 {
     public $podcast;
 
-    public function mount(Playlist $playlist)
+    public function mount(Playlist $podcast)
     {
-        $this->podcast = $playlist;
+        $this->podcast = $podcast;
 
         $this->fill(
-            $playlist->only('name', 'description', 'picture'),
+            $podcast->only('name', 'description', 'picture'),
         );
     }
+
     public function render()
     {
         return view('livewire.podcasts.teaser');

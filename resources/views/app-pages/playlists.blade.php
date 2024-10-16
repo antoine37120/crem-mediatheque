@@ -3,6 +3,6 @@
         Playlists
     </x-slot>
 
-    <livewire:playlists.list-home />
+    <livewire:playlists.list-self />
 
 </x-layouts.app>

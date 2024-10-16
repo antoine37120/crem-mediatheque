@@ -7,6 +7,6 @@
 
     <livewire:playlists.list-home />
 
-    <livewire:podcasts.list-home />
+     <livewire:podcasts.list-home />
 
 </x-layouts.app>
