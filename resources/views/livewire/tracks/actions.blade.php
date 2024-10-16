@@ -18,8 +18,8 @@
                 time: "{{ $track->duration }}"
             },
             addtolist() {
-                
-                window.addTrackToList(this.track) ;
+                $wire.dispatch('add-track-to-playlist',  { id: {{ $track->id }} });
+                //window.addTrackToList(this.track) ;
             },
         }
     });
