@@ -1,8 +1,6 @@
 <div>
-    Add to list action
- 
     <div x-data="trackinfos_{{ $track->id }}">
-        <button x-on:click="addtolist">+</button>
+        <button x-on:click="addtolist" type="button" class="btn btn-light rounded-circle">+</button>
     </div>
 </div>
  

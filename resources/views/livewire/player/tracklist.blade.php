@@ -7,12 +7,12 @@
         <table class="table table-sm mb-0" x-show="expanded">
             <thead>
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Titre</th>
-                    <th scope="col">Zone géographique</th>
-                    <th scope="col">Année</th>
-                    <th scope="col">Durée</th>
-                    <th scope="col"></th>
+                    <th scope="col" class="bg-light">#</th>
+                    <th scope="col" class="bg-light">Titre</th>
+                    <th scope="col" class="bg-light">Zone géographique</th>
+                    <th scope="col" class="bg-light">Année</th>
+                    <th scope="col" class="bg-light">Durée</th>
+                    <th scope="col" class="bg-light"></th>
                 </tr>
             </thead>
             <tbody id="playlist">
@@ -25,7 +25,7 @@
                     <td class="title">{{ $track->translate(App::getLocale())->name }}</td>
                     <td class="zone">{{ $track->geographicalArea->translate(App::getLocale())->name }}</td>
                     <td class="year">{{ $track->year }}</td>
-                    <td class="time">{{ $track->duration }}</td>
+                    <td class="time">{{ $track->durationFormated() }}</td>
                     <td class="actions">
                         <button wire:click.stop="$dispatch('delete-to-playlist', { id: {{ $track->id }} })">
                             Delete

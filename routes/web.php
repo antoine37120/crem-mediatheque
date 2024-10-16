@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Livewire\AppLayer;
+use App\Http\Controllers\TrackController;
 
 
 Route::localized(function () {
@@ -13,6 +14,9 @@ Route::localized(function () {
     Route::get('/tracks', function () {
         return view('app-pages.tracks', []);
     })->name('tracks');
+
+    Route::get('track/{audioItem:id}', [TrackController::class, 'show'])->name('track');
+    
     Route::get('/playlists', function () {
         return view('app-pages.playlists', []);
     })->name('playlists');
