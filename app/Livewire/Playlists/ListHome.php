@@ -13,7 +13,7 @@ class ListHome extends Component
 
     public function mount()
     {
-        $this->playlists = ListHome::select('*')->inRandomOrder()->take(4)->get();
+        $this->playlists = Playlist::select('*')->inRandomOrder()->take(4)->get();
     }
 
     public function render()

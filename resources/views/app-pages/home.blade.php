@@ -5,8 +5,8 @@
 
     <livewire:tracks.list-home />
 
-    {{-- <livewire:playlists.list-home /> --}}
+    <livewire:playlists.list-home />
 
-    {{-- <livewire:podcasts.list-home /> --}}
+    <livewire:podcasts.list-home />
 
 </x-layouts.app>
