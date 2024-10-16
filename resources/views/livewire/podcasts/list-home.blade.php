@@ -1,10 +1,8 @@
 <div>
     {{-- In work, do what you enjoy. --}}
-    <div class="row align-items-start">
+    <div class="row align-items-start g-5 pb-5">
     @foreach ($podcasts as $podcast)
-    {{-- where playlist has type_id=2 --}}
-
-        <div class="col-3">
+        <div class="col-sm-3 px-5">
             <livewire:podcasts.teaser :podcast="$podcast" />
         </div>
     @endforeach

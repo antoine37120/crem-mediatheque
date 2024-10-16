@@ -16,13 +16,19 @@ Route::localized(function () {
     })->name('tracks');
 
     Route::get('track/{audioItem:id}', [TrackController::class, 'show'])->name('track');
-    
+
     Route::get('/playlists', function () {
         return view('app-pages.playlists', []);
     })->name('playlists');
+
+    Route::get('playlist/{playlist:id}', [PlaylistController::class, 'show'])->name('playlist');
+
     Route::get('/podcasts', function () {
         return view('app-pages.podcasts', []);
     })->name('podcasts');
+
+    Route::get('podcast/{podcast:id}', [PodcastController::class, 'show'])->name('podcast');
+
     Route::get('/about', function () {
         return view('app-pages.about', []);
     })->name('about');

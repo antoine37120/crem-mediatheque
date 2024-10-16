@@ -1,15 +1,3 @@
-{{-- <div>
-    <div class="card" style="width: 18rem;">
-        <img src="{{ url('storage/'.$playlist->picture) }}" class="card-img-top" alt="..." style="background: #000;"/>
-        <div class="card-body">
-            <h5 class="card-title">{{ $playlist->translate(App::getLocale())->name }}</h5>
-            <p class="card-text">{{ $playlist->translate(App::getLocale())->description }}</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-    </div>
-
-</div> --}}
-
 <div>
     {{-- Knowing others is intelligence; knowing yourself is true wisdom. --}}
 
@@ -30,7 +18,9 @@
         <div class="py-2">
 
             <h5 class="playlist-title"><a  href="{{route('playlist', ['playlist' => $playlist->id])}}" class="text-black text-decoration-none fw-bold" wire:navigate>{{ Illuminate\Support\Str::limit($playlist->translate(App::getLocale())->name, 45, '...') }}</a></h5>
-            {{-- <p class="fs-5">{{ $track->geographicalArea->translate(App::getLocale())->name }}</p> --}}
+            <p class="fs-5">
+                {{-- {{ $track->geographicalArea->translate(App::getLocale())->name }} --}}
+            </p>
 
         </div>
     </div>
