@@ -7,8 +7,8 @@
         <ul class="list-unstyled fs-2 d-grid gap-3">
             <li><a href="{{route('home')}}" wire:navigate>Accueil</a></li>
             <li><a href="{{route('tracks')}}" wire:navigate>Tracks</a></li>
-            <li>Playlists</li>
-            <li>Podcasts</li>
+            <li><a href="{{route('playlists')}}" wire:navigate>Playlists</a></li>
+            <li><a href="{{route('podcasts')}}" wire:navigate>Podcasts</a></li>
             <li>About</li>
         </ul>
     </div>

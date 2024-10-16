@@ -14,6 +14,7 @@ use Spatie\Browsershot\Browsershot;
 use wapmorgan\Mp3Info\Mp3Info;
 use Illuminate\Support\Number;
 use JustWave;
+use Illuminate\Support\Arr;
 
 class AudioItem extends Model implements TranslatableContract
 {
@@ -41,6 +42,15 @@ class AudioItem extends Model implements TranslatableContract
         'link',
         'original_name'
     ];
+    
+    /**
+     * Get random color for entity.
+     */
+    public function randomColor() {
+        $conf_colors = config('custom.items_colors');
+        return Arr::random($conf_colors) ;
+
+    }
 
     public function calculateDuration() {
         

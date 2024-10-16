@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
+use Illuminate\Support\Arr;
 
 class Playlist extends Model implements TranslatableContract
 {
@@ -30,6 +31,14 @@ class Playlist extends Model implements TranslatableContract
     ];
 
     
+    /**
+     * Get random color for entity.
+     */
+    public function randomColor() {
+        $conf_colors = config('custom.items_colors');
+        return Arr::random($conf_colors) ;
+
+    }
 
     /**
      * Get the audio item's geographical area.

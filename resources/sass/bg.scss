@@ -1,0 +1,27 @@
+body {
+    &.home {
+        .primary-section {
+            background: rgb(57,40,124);
+            background: linear-gradient(180deg, rgba(57,40,124,1) 0%, rgba(255,255,255,1) 25%);
+        }
+    }
+    &.tracks {
+        .primary-section {
+            background: rgb(104,20,22);
+            background: linear-gradient(180deg, rgba(104,20,22,1) 0%, rgba(255,255,255,1) 25%);
+        }
+    }
+    &.playlists {
+        .primary-section {
+            background: rgb(84,109,148);
+            background: linear-gradient(180deg, rgba(84,109,148,1) 0%, rgba(255,255,255,1) 25%);
+        }
+    }
+    &.podcasts {
+        .primary-section {
+            background: rgb(3,106,49);
+            background: linear-gradient(180deg, rgba(3,106,49,1) 0%, rgba(255,255,255,1) 25%);
+        }
+    }
+}
+
