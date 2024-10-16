@@ -3,6 +3,6 @@
         Podcasts
     </x-slot>
 
-    <livewire:Podcasts.list-self />
+    <livewire:podcasts.list-self />
 
 </x-layouts.app>

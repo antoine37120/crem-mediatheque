@@ -16,6 +16,7 @@ class ListHome extends Component
     {
         $this->podcasts = Playlist::select('*')->where('type_id', 2)->inRandomOrder()->take(4)->get();
     }
+
     public function render()
     {
         return view('livewire.podcasts.list-home');
