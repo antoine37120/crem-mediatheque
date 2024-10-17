@@ -16,6 +16,7 @@ use Illuminate\Support\Number;
 use JustWave;
 use Illuminate\Support\Arr;
 use App\Models\AudioItemPlaylist;
+use Filament\Notifications\Notification;
 
 class AudioItem extends Model implements TranslatableContract
 {
@@ -58,15 +59,31 @@ class AudioItem extends Model implements TranslatableContract
     }
 
     public function calculateDuration() {
+        if($this->file == null) {
+            Notification::make()
+            ->title('No audio file found')
+            ->warning()
+            ->send();
+
+            return ;
+        }
         
-        $sys_path = Storage::path('audio-item-sound/'.$this->cote.'.mp3');
+        $sys_path = Storage::path('audio-item-sound/'.$this->file);
         $audio = new Mp3Info($sys_path);
         $this->duration = round($audio->duration, 0) ;
         $this->save() ;
     }
 
     public function generatePicture() {
-        $pathMP3 = Storage::path('audio-item-sound/'.$this->cote.'.mp3');
+        if($this->file == null) {
+            Notification::make()
+            ->title('No audio file found')
+            ->warning()
+            ->send();
+
+            return ;
+        }
+        $pathMP3 = Storage::path($this->file);
         $pathMP3 = str_replace('\\', '/', $pathMP3);
         $pathIMG = Storage::path('audio-item-image/');
         $args = [
@@ -87,6 +104,14 @@ class AudioItem extends Model implements TranslatableContract
         
         $this->picture = $pathFile;
         $this->save() ;
+
+        
+        Notification::make()
+        ->title('Picture generated')
+        ->success()
+        ->send();
+
+        return ;
     }
 
     /**
