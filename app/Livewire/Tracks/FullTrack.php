@@ -4,6 +4,7 @@ namespace App\Livewire\Tracks;
 
 use Livewire\Component;
 use App\Models\AudioItem;
+use Illuminate\Support\Facades\Log;
 
 class FullTrack extends Component
 {

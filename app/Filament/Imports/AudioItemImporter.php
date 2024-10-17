@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\BrowsershotController;
 use Spatie\Browsershot\Browsershot;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
+
+$storagePath = storage_path("app/public/session");
 
 class AudioItemImporter extends Importer
 {
@@ -110,16 +114,32 @@ class AudioItemImporter extends Importer
         $size = sizeof($link_eploded) ;
         $cote = $link_eploded[$size - 1]  ;
         $fileName = $cote.'.mp3' ;
-        Storage::move('import/'.$fileName, 'audio-item-sound/'.$fileName);
-        $path = 'audio-item-sound/'.$fileName;
-        $sys_path = Storage::path('audio-item-sound/'.$fileName);
 
-        //Log::info(print_r($path, true));
-        $this->record->file = $path ;
+        $storagePath = storage_path("app/public/import");
+        // Find files that end with ".tmp"
+        $files = File::glob("$storagePath/*".$cote."*.mp3");
+        Log::info($files) ;
+
+        if(sizeof($files) == 1) {
+            $fileName = basename($files[0]);  
+            
+            $newFileName = Str::ascii($fileName) ;
+
+            Storage::move('import/'.$fileName, 'audio-item-sound/'.$newFileName);
+            $path = 'audio-item-sound/'.$newFileName;
+            $sys_path = Storage::path('audio-item-sound/'.$newFileName);
+            $this->record->file = $path ;
+            //duration
+            $audio = new Mp3Info($sys_path);
+            $this->record->duration = $audio->duration ;
+        } else {
+            $this->record->file = null ;
+            $this->record->duration = 0 ;
+        }
+
         $this->record->cote = $link_eploded[$size - 1] ;
 
-        $audio = new Mp3Info($sys_path);
-        $this->record->duration = $audio->duration ;
+        //Log::info(print_r($path, true));
         //Log::info(print_r($this->record->toArray(), true));
         // Runs before the CSV data for a row is validated.
     }

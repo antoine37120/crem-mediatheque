@@ -79,7 +79,6 @@ class AudioItemResource extends Resource
                     GeographicalArea::listsTranslations('name')->get()->pluck('name', 'id')
                 ),
                 Forms\Components\FileUpload::make('file')
-                    ->required()
                     ->preserveFilenames(),
                 Forms\Components\Textarea::make('interpreters')
                     ->columnSpanFull(),
@@ -89,7 +88,7 @@ class AudioItemResource extends Resource
                 Forms\Components\FileUpload::make('picture')
                 ->disk('public')
                 ->preserveFilenames()
-                ->directory('audio-item')
+                ->directory('audio-item-image')
                 ->required(),
             ]);
     }
