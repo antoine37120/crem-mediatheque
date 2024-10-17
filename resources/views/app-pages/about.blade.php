@@ -1,6 +1,6 @@
 {{-- <x-layouts.app>
     <x-slot:title>
-        About
+        <h1 class="pb-5">About</h1>
     </x-slot>
 
     {{-- <livewire:tracks.list-home /> --}}

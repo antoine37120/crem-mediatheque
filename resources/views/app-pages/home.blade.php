@@ -1,6 +1,6 @@
 <x-layouts.app>
     <x-slot:title>
-        Home
+        <h1 class="pb-5" >Home</h1>
     </x-slot>
 
     <livewire:tracks.list-home />

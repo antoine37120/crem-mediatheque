@@ -1,6 +1,6 @@
 <x-layouts.app>
     <x-slot:title>
-        Podcasts
+        <h1 class="pb-5">Podcasts</h1>
     </x-slot>
 
     <livewire:podcasts.list-self />
