@@ -44,6 +44,7 @@ class CremAdminPanelProvider extends PanelProvider
             ->widgets([
                 Widgets\AccountWidget::class,
                 Widgets\FilamentInfoWidget::class,
+                \App\Filament\Resources\JobResource\Widgets\JobsOverview::class,
             ])
             ->plugins([
                 FilamentAstrotomicTranslatablePlugin::make(),
