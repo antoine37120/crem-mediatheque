@@ -3,7 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Livewire\AppLayer;
 use App\Http\Controllers\TrackController;
-
+use App\Http\Controllers\PlaylistController;
+use App\Http\Controllers\PodcastController;
 
 Route::localized(function () {
     //Route::get('/', AppLayer::class);
