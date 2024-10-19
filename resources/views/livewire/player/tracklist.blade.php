@@ -38,6 +38,12 @@
                     </td>
                 </tr>
 
+                @script
+<script>
+    console.log('start_play_id') ;
+    console.log('{{ $start_play_id}}') ;
+</script>
+@endscript
 
                 @php 
                     $i++ ;
@@ -47,6 +53,7 @@
         </table>
     </div>
 </div>
+
 
 @script
 <script>

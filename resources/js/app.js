@@ -3,11 +3,22 @@ import 'bootstrap';
 import '@popperjs/core';
 import WaveSurfer from 'wavesurfer.js'
 
+
+let isFirstItem = true ;
+ window.sleeping = async function (ms) {
+    return await new Promise(resolve => setTimeout(resolve, ms));
+}
+
 // listening if changes in playlist on add or remove itiem
 window.Livewire.on('playlist-items-list-refresh', () => {
     
     console.log('playlist-items-list-refresh') ;
-    window.loadLinksList() ;
+    links = document.querySelectorAll('tbody#playlist tr');
+    console.log(links) ;
+    window.sleeping(100).then(() => {
+        window.loadLinksList() ;
+    });
+    
 });
 // listening if curent track played is deleted
 window.Livewire.on('playlist-plaiyed-item-deleted', () => {
@@ -17,7 +28,8 @@ window.Livewire.on('playlist-plaiyed-item-deleted', () => {
 window.loadLinksList = function() {
     
     console.log('loadLinksList') ;
-    links = document.querySelectorAll('#playlist tr');
+    links = document.querySelectorAll('tbody#playlist tr');
+    console.log(links) ;
     Array.prototype.forEach.call(links, function(link, index) {
         link.removeEventListener('click', null);
         link.addEventListener('click', function(e) {
@@ -28,10 +40,24 @@ window.loadLinksList = function() {
             window.setCurrentSong(trackId, true); //  launch play
         });
     });
+    if(links.length == 0) {
+        isFirstItem = true ;// init for next new item added
+    }
+    if(links.length == 1) {
+        let trackId = links[0].getAttribute('data-track-id');
+        if(isFirstItem) {
+            isFirstItem = false ;
+            window.setCurrentSong(trackId, true);
+        } else {
+            window.setCurrentSong(trackId, false);
+        }
+        
+    }
     //window.refreshLinks();  
 }
 // Inti playlist and player with track
 window.initWithTrack = function(id) {
+    isFirstItem = false ;
     console.log('initWithTrack') ;
     links = document.querySelectorAll('#playlist tr');
     Array.prototype.forEach.call(links, function(link, index) {
@@ -50,7 +76,7 @@ window.initPlayer = function() {
     window.wavesurfer = WaveSurfer.create(
         {
             "container": "#player-progress-bar",
-            "height": 128,
+            "height": 70,
             "width": "100%",
             "splitChannels": false,
             "normalize": false,

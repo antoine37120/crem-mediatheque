@@ -14,7 +14,7 @@
     <body class="{{ str_replace('.', ' ', request()->route()->getName()) }}">
         <div class="container-fluid">
             <div class="row vh-80">
-                <div class="col-2 bg-white border-dark border-end">
+                <div class="col-2 ox-auto h-100 bg-white border-dark border-end">
 
                 <livewire:menu.side-menu />
 
@@ -27,7 +27,7 @@
                 </div>
             </div>
             <div class="row vh-20 position-relative">
-                <div class="col-12">
+                <div class="col-12 p-0">
                 @persist('player')
                 <livewire:player.commands />
 

@@ -108,6 +108,11 @@ class Tracklist extends Component
             }
 
         }
+        if(sizeof($this->playlist_items) == 1) {
+            $this->item_play = $this->playlist_items[0]->id ;
+            $this->start_play_id = $this->playlist_items[0]->id ;
+        }
+        //$this->render() ;
         if ($dispatchRefresh) {
             $this->dispatch('playlist-items-list-refresh');
         }
