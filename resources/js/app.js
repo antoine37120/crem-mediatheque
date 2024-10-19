@@ -1,6 +1,9 @@
 import './bootstrap';
 import 'bootstrap';
 import '@popperjs/core';
+import sort from '@alpinejs/sort'
+ 
+window.Alpine.plugin(sort)
 import WaveSurfer from 'wavesurfer.js'
 
 
@@ -21,6 +24,21 @@ window.Livewire.hook('morph.removed', ({ el, component }) => {
         }
     }
 });
+
+window.catchOrdering = function() {
+    console.log('catchOrdering') ;
+    links = document.querySelectorAll('tbody#playlist tr');
+    let news_ids = [] ;
+    let i = 1 ;
+    Array.prototype.forEach.call(links, function(link, index) {
+
+        let trackId = link.getAttribute('data-track-id');
+        link.querySelector(".num").textContent = index + 1;
+        news_ids.push(trackId) ;
+    });
+    window.Livewire.dispatch('reordering-playlist',  { ids: news_ids });
+    window.loadLinksList() ;
+}
 
 
 let isFirstItem = true ;

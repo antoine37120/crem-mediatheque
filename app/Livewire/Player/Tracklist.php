@@ -23,6 +23,15 @@ class Tracklist extends Component
     public $start_play_id = 0 ;
     
 
+    #[On('reordering-playlist')] 
+    public function reorderTrackList($ids)
+    {
+        Log::debug('Trigger play') ;
+        Log::debug($ids) ;
+        $this->items_ids = $ids;
+        $this->playlist_items() ;
+
+    }
     /**
      * Triggered when a track is played from the playlist.
      *

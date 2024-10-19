@@ -15,7 +15,7 @@
                     <th scope="col" class="bg-light"></th>
                 </tr>
             </thead>
-            <tbody id="playlist">
+            <tbody id="playlist" x-sort="window.catchOrdering()">
             @php 
                 $i = 1 ;
             @endphp
