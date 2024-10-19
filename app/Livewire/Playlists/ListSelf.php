@@ -15,8 +15,6 @@ class ListSelf extends Component
     {
         $this->playlists = Playlist::all()->where('type_id', 1);
     }
-
-
     public function render()
     {
         return view('livewire.playlists.list-self');

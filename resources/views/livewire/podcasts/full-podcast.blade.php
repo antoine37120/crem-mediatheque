@@ -1,5 +1,5 @@
 <div>
-    {{-- page d'une playlist avec ses morceaux --}}
+    {{-- page d'un podcast avec ses morceaux --}}
     <div class="col-1">
         <div>
             "< / >"
@@ -10,12 +10,12 @@
             {{-- teaser modifié de la playlist : img (réduite) + nom + description --}}
             <div class="row">
                 <div class="col-sm-2 px-5">
-                    {{-- <livewire:playlists.teaser :playlist="$playlist" /> --}}
-                    <img src="{{ url('storage/'.$playlist->picture) }}" class="card-img-top rounded border border-dark" alt="..."/>
+                    {{-- <livewire:podcasts.teaser :podcast="$podcast" /> --}}
+                    <img src="{{ url('storage/'.$podcast->picture) }}" class="card-img-top rounded border border-dark" alt="..."/>
                 </div>
                 <div class="col-sm-10">
-                    <h5>nom playlist</h5>
-                    <p>Description playlist: Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cumque quidem corporis repudiandae nostrum maiores repellat, sapiente dolor atque maxime excepturi iure ratione perspiciatis deleniti pariatur mollitia tenetur illo laboriosam voluptate!</p>
+                    <h5>nom du podcast</h5>
+                    <p>Description podcast: Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cumque quidem corporis repudiandae nostrum maiores repellat, sapiente dolor atque maxime excepturi iure ratione perspiciatis deleniti pariatur mollitia tenetur illo laboriosam voluptate!</p>
                 </div>
             </div>
         </div>
@@ -26,7 +26,7 @@
         <div class="row align-items-start my-2 g-5">
             <div class="col-2 px-5">
                 {{-- à remplacer par img de track --}}
-                <img src="{{ url('storage/'.$playlist->picture) }}" class="card-img-top rounded border border-dark" alt="..."/>
+                <img src="{{ url('storage/'.$podcast->picture) }}" class="card-img-top rounded border border-dark" alt="..."/>
             </div>
             <div class="col-10">
                 <h5>Titre du morceau</h5>
@@ -39,7 +39,7 @@
         <div class="row align-items-start my-2 g-5">
             <div class="col-2 px-5">
                 {{-- à remplacer par img de track --}}
-                <img src="{{ url('storage/'.$playlist->picture) }}" class="card-img-top rounded border border-dark" alt="..."/>
+                <img src="{{ url('storage/'.$podcast->picture) }}" class="card-img-top rounded border border-dark" alt="..."/>
             </div>
             <div class="col-10">
                 <h5>Titre du morceau</h5>

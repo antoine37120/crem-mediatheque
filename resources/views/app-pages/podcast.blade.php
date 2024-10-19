@@ -1,8 +1,8 @@
 <x-layouts.app>
     <x-slot:title>
-        <livewire:podcast.section-title :podcast="$podcast"  wire:key="title-{{ $podcast->id }}"/>
+        <livewire:podcasts.section-title :podcast="$podcast"  wire:key="title-{{ $podcast->id }}"/>
     </x-slot>
 
-    <livewire:playlist.full-playlist :playlist="$playlist"/>
+    <livewire:podcasts.full-podcast :podcast="$podcast"/>
 
 </x-layouts.app>
