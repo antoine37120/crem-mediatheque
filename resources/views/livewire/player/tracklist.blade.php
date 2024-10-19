@@ -21,8 +21,8 @@
             @endphp
             @foreach($playlist_items as $track)
                 
-                {{-- <livewire:player.track-list-item :track="$track" :it="$i" :selected="$item_play" key="player-track-list-item-{{ $track->id }}" /> --}}
-                <tr data-track-url="{{ url('storage/'.$track->file) }}" data-track-id="{{ $track->id }}"  x-on:click="$wire.item_play='{{ $track->id }}'" class="{{ $item_play == $track->id ? "table-active" : "$item_play" }}">
+                 <livewire:player.track-list-item :track="$track" :it="$i" :selected="$item_play" key="player-track-list-item-{{ $track->id }}" />
+                {{--<tr data-track-url="{{ url('storage/'.$track->file) }}" data-track-id="{{ $track->id }}"  x-on:click="$wire.item_play='{{ $track->id }}'" class="{{ $item_play == $track->id ? "table-active" : "$item_play" }}">
                     <td class="num">{{ $i }}</td>
                     <td class="title">{{ $track->translate(App::getLocale())->name }}</td>
                     <td class="zone">{{ $track->geographicalArea->translate(App::getLocale())->name }}</td>
@@ -36,7 +36,7 @@
                             </svg>
                         </button>
                     </td>
-                </tr>
+                </tr> --}}
 
                 @script
 <script>

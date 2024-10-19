@@ -4,26 +4,41 @@ import '@popperjs/core';
 import WaveSurfer from 'wavesurfer.js'
 
 
+window.Livewire.hook('morph.added',  ({ el }) => {
+    if (el.hasAttribute('data-track-id') ) {
+        window.loadLinksList() ;
+    }
+}) 
+window.Livewire.hook('morph.removed', ({ el, component }) => {
+    
+    if (el.hasAttribute('data-track-id') ) {
+        
+        isFirstItem = false ;
+        if (window.getCurrentTrackIndex() == null) {
+            console.log(window.getCurrentTrackIndex()) ;
+            console.log('Stop playing') ;
+            window.wavesurfer.stop();
+        }
+    }
+});
+
+
 let isFirstItem = true ;
+/*
  window.sleeping = async function (ms) {
     return await new Promise(resolve => setTimeout(resolve, ms));
-}
+}*/
 
 // listening if changes in playlist on add or remove itiem
-window.Livewire.on('playlist-items-list-refresh', () => {
+/*window.Livewire.on('playlist-items-list-refresh', () => {
     
-    console.log('playlist-items-list-refresh') ;
-    links = document.querySelectorAll('tbody#playlist tr');
-    console.log(links) ;
-    window.sleeping(100).then(() => {
-        window.loadLinksList() ;
-    });
+    
     
 });
 // listening if curent track played is deleted
 window.Livewire.on('playlist-plaiyed-item-deleted', () => {
     window.wavesurfer.stop();
-});
+});*/
 // add event on links of playlist and curent track. Called after all playlist changes.
 window.loadLinksList = function() {
     
@@ -178,6 +193,16 @@ window.setCurrentSong = function(trackId, play = false) {
     console.log(currentTrack) ;
     console.log(links) ;
     if(currentTrack != null) {
+        // just play if the same title loded an curently selected
+        if (Number(links[currentTrack].getAttribute('data-track-id')) == trackId) {
+            if ((play == true) && (window.wavesurfer.isPlaying())) {
+                return ;
+            }
+            if ((play == true) && (!window.wavesurfer.isPlaying())) {
+                window.wavesurfer.play();
+                return ;
+            }
+        }
         links[currentTrack].classList.remove('table-active');
     }
     currentTrack = window.getTrackIndex(trackId) ;

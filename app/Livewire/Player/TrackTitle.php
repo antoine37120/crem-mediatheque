@@ -32,9 +32,11 @@ class TrackTitle extends Component
    #[On('play-track-to-playlist')] 
    public function updateTrackPlay($id)
    {
-
-    $this->track = AudioItem::findOrFail($id);
-
+    
+    if ($id !=  $this->track->id) {
+        $this->track = AudioItem::findOrFail($id);
+    }
+    
    }
     public function render()
     {
