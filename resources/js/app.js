@@ -1,26 +1,102 @@
 import './bootstrap';
 import 'bootstrap';
 import '@popperjs/core';
+import sort from '@alpinejs/sort'
+ 
+window.Alpine.plugin(sort)
 import WaveSurfer from 'wavesurfer.js'
 
 
-// Load the track on click
-window.loadLinkList = function(links) {
+window.Livewire.hook('morph.added',  ({ el }) => {
+    if (el.hasAttribute('data-track-id') ) {
+        window.loadLinksList() ;
+    }
+}) 
+window.Livewire.hook('morph.removed', ({ el, component }) => {
+    
+    if (el.hasAttribute('data-track-id') ) {
+        
+        isFirstItem = false ;
+        if (window.getCurrentTrackIndex() == null) {
+            console.log(window.getCurrentTrackIndex()) ;
+            console.log('Stop playing') ;
+            window.wavesurfer.stop();
+        }
+    }
+});
+
+window.catchOrdering = function() {
+    console.log('catchOrdering') ;
+    links = document.querySelectorAll('tbody#playlist tr');
+    let news_ids = [] ;
+    let i = 1 ;
+    Array.prototype.forEach.call(links, function(link, index) {
+
+        let trackId = link.getAttribute('data-track-id');
+        link.querySelector(".num").textContent = index + 1;
+        news_ids.push(trackId) ;
+    });
+    window.Livewire.dispatch('reordering-playlist',  { ids: news_ids });
+    window.loadLinksList() ;
+}
+
+
+let isFirstItem = true ;
+/*
+ window.sleeping = async function (ms) {
+    return await new Promise(resolve => setTimeout(resolve, ms));
+}*/
+
+// listening if changes in playlist on add or remove itiem
+/*window.Livewire.on('playlist-items-list-refresh', () => {
+    
+    
+    
+});
+// listening if curent track played is deleted
+window.Livewire.on('playlist-plaiyed-item-deleted', () => {
+    window.wavesurfer.stop();
+});*/
+// add event on links of playlist and curent track. Called after all playlist changes.
+window.loadLinksList = function() {
+    
+    console.log('loadLinksList') ;
+    links = document.querySelectorAll('tbody#playlist tr');
+    console.log(links) ;
     Array.prototype.forEach.call(links, function(link, index) {
         link.removeEventListener('click', null);
         link.addEventListener('click', function(e) {
+            console.log('Launched click on link') ;
             e.preventDefault();
-            window.setCurrentSong(index);
+            let trackId = link.getAttribute('data-track-id');
+            console.log(trackId) ;  
+            window.setCurrentSong(trackId, true); //  launch play
         });
     });
-    window.refreshLinks();  
+    if(links.length == 0) {
+        isFirstItem = true ;// init for next new item added
+    }
+    if(links.length == 1) {
+        let trackId = links[0].getAttribute('data-track-id');
+        if(isFirstItem) {
+            isFirstItem = false ;
+            window.setCurrentSong(trackId, true);
+        } else {
+            window.setCurrentSong(trackId, false);
+        }
+        
+    }
+    //window.refreshLinks();  
 }
-// Load the track on click
-window.playLinkToList = function(id) {
+// Inti playlist and player with track
+window.initWithTrack = function(id) {
+    isFirstItem = false ;
+    console.log('initWithTrack') ;
+    links = document.querySelectorAll('#playlist tr');
     Array.prototype.forEach.call(links, function(link, index) {
         let trackId = links[index].getAttribute('data-track-id');
         if (trackId == id) {
-            window.setCurrentSong(index);
+            window.setCurrentSong(trackId);
         }   
     });
 }
@@ -29,10 +105,11 @@ let links = null ;
 let currentTrack = 0;
 console.log(window) ;
 window.initPlayer = function() {
+    console.log('initPlayer') ;
     window.wavesurfer = WaveSurfer.create(
         {
             "container": "#player-progress-bar",
-            "height": 128,
+            "height": 70,
             "width": "100%",
             "splitChannels": false,
             "normalize": false,
@@ -64,9 +141,11 @@ window.initPlayer = function() {
     window.wavesurfer.on('ready', (duration) => {
 
     })
-   //window.onload = function() {
+
+    
     let playPause = document.querySelector('#playPause');
     playPause.addEventListener('click', function() {
+        console.log('click play/pause') ;
         window.wavesurfer.playPause();
     });
 
@@ -76,10 +155,12 @@ window.initPlayer = function() {
         document.querySelector('#pause').style.display = '';
     });
     window.wavesurfer.on('pause', function() {
+        console.log('pause') ;
         document.querySelector('#play').style.display = '';
         document.querySelector('#pause').style.display = 'none';
     });
     window.wavesurfer.on('ready', function() {
+        console.log('ready') ;
         //window.wavesurfer.play();
     });
     
@@ -92,31 +173,82 @@ window.initPlayer = function() {
     });
     // Go to the next track on finish
     window.wavesurfer.on('finish', function() {
-        window.setCurrentSong((currentTrack + 1) % links.length);
+        currentTrack = window.getCurrentTrackIndex() ;
+        links = document.querySelectorAll('#playlist tr');
+        let current =window.getCurrentTrackIndex() ;
+        if(current + 1 < links.length) {
+            let next = current + 1 ;
+            window.setCurrentSong(links[next].getAttribute('data-track-id'), true);
+        } else {
+            //load the firs track from playlist
+            window.setCurrentSong(links[0].getAttribute('data-track-id'), false);
+        }
+        
     });
-    // The playlist links
-    currentTrack = 0;
-    links = document.querySelectorAll('#playlist tr');
-    window.loadLinkList(links) ;
+    window.loadLinksList() ;
 }
-window.refreshLinks = function() {
+/*window.refreshLinks = function() {
     links = document.querySelectorAll('#playlist tr');
+}*/
+
+window.getCurrentTrackIndex = function() {
+    const currentTrackNode = document.querySelector('#playlist tr.table-active');
+    return currentTrackNode ? Array.from(currentTrackNode.parentNode.children).indexOf(currentTrackNode) : null;
+}
+
+window.getTrackIndex = function(trackId) {
+    const currentTrackNode = document.querySelector('#playlist tr[data-track-id="' + trackId + '"]');
+    return currentTrackNode ? Array.from(currentTrackNode.parentNode.children).indexOf(currentTrackNode) : null;
 }
 
 
 // Load a track by index and highlight the corresponding link
-window.setCurrentSong = function(index) {
-    console.log(links);
-    console.log(index); 
-    links[currentTrack].classList.remove('table-active');
-    currentTrack = index;
+window.setCurrentSong = function(trackId, play = false) {
+    trackId = Number(trackId) ;
+    links = document.querySelectorAll('#playlist tr');
+    currentTrack = window.getCurrentTrackIndex() ;
+    console.log('currentTrack') ;
+    console.log(currentTrack) ;
+    console.log(links) ;
+    if(currentTrack != null) {
+        // just play if the same title loded an curently selected
+        if (Number(links[currentTrack].getAttribute('data-track-id')) == trackId) {
+            if ((play == true) && (window.wavesurfer.isPlaying())) {
+                return ;
+            }
+            if ((play == true) && (!window.wavesurfer.isPlaying())) {
+                window.wavesurfer.play();
+                return ;
+            }
+        }
+        links[currentTrack].classList.remove('table-active');
+    }
+    currentTrack = window.getTrackIndex(trackId) ;
+    console.log(currentTrack) ;
     links[currentTrack].classList.add('table-active');
     let trackUrl = links[currentTrack].getAttribute('data-track-url');
-    let trackId = links[currentTrack].getAttribute('data-track-id');
-    window.wavesurfer.load(trackUrl);
+    //let trackId = links[currentTrack].getAttribute('data-track-id');
+    if (play) {
+        console.log('play') ;
+        
+        window.wavesurfer.load(trackUrl).finally(() => {
+            console.log('track loading completed launch play');
+            window.wavesurfer.play();
+          });
+        
+    } else {
+        window.wavesurfer.load(trackUrl).finally(() => {
+            console.log('track loading completed launch play');
+            window.wavesurfer.stop();
+          });
+    }
     let duration  = links[currentTrack].querySelector(".time").textContent; 
-    document.getElementById("player-progress-duration").innerText = window.formatTime(duration);
-    //window.Livewire.dispatch('play-track-to-playlist',  { id: trackId });
+    console.log(duration) ;
+    if (duration !='') {
+        document.getElementById("player-progress-duration").innerText = duration;
+    }
+    
+    window.Livewire.dispatch('play-track-to-playlist',  { id: trackId });
 };
 
 

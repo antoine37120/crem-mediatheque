@@ -22,7 +22,7 @@ class JobsOverview extends BaseWidget
                 Tables\Columns\TextColumn::make('id'),
                 Tables\Columns\TextColumn::make('queue'),
                 Tables\Columns\TextColumn::make('attempts'),
-                Tables\Columns\TextColumn::make('created_at	'),
+                Tables\Columns\TextColumn::make('created_at'),
             ])
             ->actions([
                 Action::make('delete')

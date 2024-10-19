@@ -4,7 +4,7 @@
     <script>
         
         document.addEventListener('livewire:initialized', () => {
-            window.initPlayer();
+            //window.initPlayer();
         });
     </script>
     <div class="row align-items-center gx-1">
