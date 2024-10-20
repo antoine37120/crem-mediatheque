@@ -21,6 +21,13 @@ window.Livewire.hook('morph.removed', ({ el, component }) => {
             console.log(window.getCurrentTrackIndex()) ;
             console.log('Stop playing') ;
             window.wavesurfer.stop();
+            window.wavesurfer.empty();
+            window.wavesurfer.destroy();
+            window.initPlayer() ;   
+            /*window.wavesurfer.load('')
+            .catch((err) => {
+              console.log('force init player');
+            })*/
         }
     }
 });
@@ -136,6 +143,9 @@ window.initPlayer = function() {
             "sampleRate": 8000
           }
     );
+    window.wavesurfer.on('load', function() {
+        document.getElementById("player-progress-time-update").innerText = '';
+    });
 
     /** When the audio is both decoded and can play */
     window.wavesurfer.on('ready', (duration) => {
@@ -153,6 +163,14 @@ window.initPlayer = function() {
     window.wavesurfer.on('play', function() {
         document.querySelector('#play').style.display = 'none';
         document.querySelector('#pause').style.display = '';
+    });
+
+    window.wavesurfer.on('stop', function() {
+        document.querySelector('#play').style.display = '';
+        document.querySelector('#pause').style.display = 'none';
+        
+        document.getElementById("player-progress-time-update").innerText = '';
+        document.getElementById("player-progress-duration").innerText = '';
     });
     window.wavesurfer.on('pause', function() {
         console.log('pause') ;
@@ -184,6 +202,13 @@ window.initPlayer = function() {
             window.setCurrentSong(links[0].getAttribute('data-track-id'), false);
         }
         
+    });
+    window.wavesurfer.on('destroy', function() {
+        document.querySelector('#play').style.display = '';
+        document.querySelector('#pause').style.display = 'none';
+        
+        document.getElementById("player-progress-time-update").innerText = '';
+        document.getElementById("player-progress-duration").innerText = '';
     });
     window.loadLinksList() ;
 }
@@ -238,8 +263,9 @@ window.setCurrentSong = function(trackId, play = false) {
         
     } else {
         window.wavesurfer.load(trackUrl).finally(() => {
-            console.log('track loading completed launch play');
+            console.log('track loading completed but not play');
             window.wavesurfer.stop();
+            document.getElementById("player-progress-time-update").innerText = '00:00';
           });
     }
     let duration  = links[currentTrack].querySelector(".time").textContent; 

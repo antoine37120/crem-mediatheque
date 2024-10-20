@@ -20,7 +20,11 @@ class TrackTitle extends Component
  
 
     }
-    
+    #[On('playlist-plaiyed-item-deleted')] 
+    public function deletedToTrackList()
+    {
+        $this->track = 'none';
+    }
     
     /**
     * Triggered when a track is played from the playlist.
@@ -33,7 +37,7 @@ class TrackTitle extends Component
    public function updateTrackPlay($id)
    {
     
-    if ($id !=  $this->track->id) {
+    if (($this->track == 'none' ) || ($id !=  $this->track->id)) {
         $this->track = AudioItem::findOrFail($id);
     }
     
