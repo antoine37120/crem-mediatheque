@@ -1,9 +1,5 @@
-{{-- desktop --}}
 <div>
     <div class="p-2">
-        {{-- <ul>
-            <li> "{{ $menuItem }}" </li>
-        </ul> --}}
         <h1 class="text-center my-4">Logo</h1>
         <hr class="border-top border-dark my-3"/>
         <div id="global-search-form" class="">
@@ -18,7 +14,7 @@
                         <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
                     </svg>
                 </button>
-        </div>
+            </div>
             </form>
         </div>
         <ul class="list-unstyled fs-5 d-grid gap-3 my-4 ms-3">
