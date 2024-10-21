@@ -9,6 +9,9 @@
         <div id="global-search-form" class="">
             <form  wire:submit="searchLauch">
             <div class="input-group border border-dark rounded-pill mt-4 mb-4">
+                <input type="hidden" name="year" wire:model.live="query_year">
+                <input type="hidden" name="geoArea" wire:model.live="query_geoArea">
+                <input type="hidden" name="duration" wire:model.live="query_duration">
                 <input type="text" class="form-control border-end-0" placeholder="" aria-label="Search" aria-describedby="basic-addon2" wire:model="search">
                 <button type="submit" class="btn bg-white" id="basic-addon2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">

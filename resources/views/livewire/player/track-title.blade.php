@@ -7,7 +7,7 @@
                 <img src="{{ url('storage/'.$track->picture) }}" class="card-img-top border rounded w-100" alt="..." style="background: {{ $track->randomColor() }};"/>
             </div>
             <div class="col-8">
-                <h5 class="fw-bold fs-6 mb-0">{{ $track->translate(App::getLocale())->name }}</h5>
+                <h5 class="fw-bold fs-6 mb-0">{{ $track->translate(App::getLocale(), true)->name }}</h5>
                 <h5 class="fs-6 mb-0">{{ $track->interpreters }}</h5>
             </div>
     </div>

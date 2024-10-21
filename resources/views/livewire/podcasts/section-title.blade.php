@@ -6,7 +6,7 @@
         {{-- @if ($podcast->itemAfter() != null) --}}
         {{-- <a href="{{route('podcast', ['podcast' => $podcast->itemAfter()?->podcast_id])}}" wire:navigate class="d-inline-block text-white align-top p-1"> next ></a> --}}
         {{-- @endif --}}
-        {{-- <h2 class="d-inline-block w-75 align-top pt-1">{{ $podcast->translate(App::getLocale())->name }}</h2> --}}
+        {{-- <h2 class="d-inline-block w-75 align-top pt-1">{{ $podcast->translate(App::getLocale(), true)->name }}</h2> --}}
         <h2>title podcast </h2>
     </div>
 </div>

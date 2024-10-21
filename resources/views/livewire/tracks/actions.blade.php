@@ -13,9 +13,9 @@
     Alpine.data('trackinfos_{{ $track->id }}', () => {
         return {
             track: {
-                title: "{{ $track->translate(App::getLocale())->name }}",
+                title: "{{ $track->translate(App::getLocale(), true)->name }}",
                 fileUrl: "{{ url('storage/'.$track->file) }}",
-                zone: "{{ $track->geographicalArea->translate(App::getLocale())->name }}",
+                zone: "{{ $track->geographicalArea->translate(App::getLocale(), true)->name }}",
                 year: "{{ $track->year }}",
                 time: "{{ $track->duration }}"
             },

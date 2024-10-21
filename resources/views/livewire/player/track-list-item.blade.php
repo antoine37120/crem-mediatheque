@@ -1,7 +1,7 @@
 <tr  x-sort:item data-track-url="{{ url('storage/'.$track->file) }}" data-track-id="{{ $track->id }}"  x-on:click="$wire.selected='{{ $track->id }}'" class="{{ $selected == $track->id ? "table-active-old" : "$selected" }}">
                     <td class="num">{{ $it }}</td>
-                    <td class="title">{{ $track->translate(App::getLocale())->name }}</td>
-                    <td class="zone">{{ $track->geographicalArea->translate(App::getLocale())->name }}</td>
+                    <td class="title">{{ $track->translate(App::getLocale(), true)->name }}</td>
+                    <td class="zone">{{ $track->geographicalArea->translate(App::getLocale(), true)->name }}</td>
                     <td class="year">{{ $track->year }}</td>
                     <td class="time">{{ $track->durationFormated() }}</td>
                     <td class="actions" align="right">
