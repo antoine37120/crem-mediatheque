@@ -30,5 +30,11 @@ body {
             background: linear-gradient(180deg, rgba(235,93,11,1) 0%, rgba(255,255,255,1) 25%);
         }
     }
+    &.cmsPage {
+        .primary-section {
+            background: rgb(150,181,34);
+            background: linear-gradient(180deg, rgba(150,181,34,1) 0%, rgba(255,255,255,1) 25%);
+        }
+    }
 }
 
