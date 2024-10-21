@@ -24,5 +24,11 @@ body {
             background: linear-gradient(180deg, rgba(3,106,49,1) 0%, rgba(255,255,255,1) 35%);
         }
     }
+    &.search {
+        .primary-section {
+            background: rgb(235,93,11);
+            background: linear-gradient(180deg, rgba(235,93,11,1) 0%, rgba(255,255,255,1) 25%);
+        }
+    }
 }
 

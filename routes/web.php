@@ -16,6 +16,10 @@ Route::localized(function () {
         return view('app-pages.tracks', []);
     })->name('tracks');
 
+    Route::get('/search', function () {
+        return view('app-pages.search-tracks', ['search' => '']);
+    })->name('search');
+
     Route::get('track/{audioItem:id}', [TrackController::class, 'show'])->name('track');
 
     Route::get('/playlists', function () {

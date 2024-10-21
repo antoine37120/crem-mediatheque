@@ -24,10 +24,10 @@ img.rounded {
     border-radius: 20px!important;
 }
 #global-search-form {
-    &>input {
+    input {
         border-radius: 20px 0 0 20px;
     }
-    &>span.input-group-text {
+    button {
         border-radius: 0 20px 20px 0;
         border-left: none;
     }
