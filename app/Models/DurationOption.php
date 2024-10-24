@@ -14,6 +14,7 @@ class DurationOption extends Model implements TranslatableContract
     use HasFactory;
     use Translatable;
 
+    public $useTranslationFallback = true;
     public $translatedAttributes = ['name'];
     
     /**

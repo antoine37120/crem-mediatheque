@@ -5,6 +5,7 @@ use App\Livewire\AppLayer;
 use App\Http\Controllers\TrackController;
 use App\Http\Controllers\PlaylistController;
 use App\Http\Controllers\PodcastController;
+use App\Http\Controllers\AppPageController;
 
 Route::localized(function () {
     //Route::get('/', AppLayer::class);
@@ -34,9 +35,7 @@ Route::localized(function () {
 
     Route::get('podcast/{podcast:id}', [PodcastController::class, 'show'])->name('podcast');
 
-    Route::get('/about', function () {
-        return view('app-pages.about', []);
-    })->name('about');
+    Route::get('page/{cmsPage:slug}', [AppPageController::class, 'show'])->name('cmsPage');
 });
 
 

@@ -38,7 +38,7 @@ class DurationOptionResource extends Resource
                 ]),
                 Forms\Components\TextInput::make('from')->requiredWithout('to')
                     ->numeric(),
-                Forms\Components\TextInput::make('to')->gte('from')->requiredWithout('from')
+                Forms\Components\TextInput::make('to')->requiredWithout('from')
                     ->numeric(),
             ]);
     }
@@ -47,6 +47,7 @@ class DurationOptionResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('translation.name'),
                 Tables\Columns\TextColumn::make('from')
                     ->numeric()
                     ->sortable(),

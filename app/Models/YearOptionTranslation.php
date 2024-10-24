@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class YearOptionTranslation extends Model
 {
     use HasFactory;
+    //public $useTranslationFallback = true;
 
+    public $useTranslationFallback = true;
     public $timestamps = false;
     protected $fillable = ['name',
     'locale',

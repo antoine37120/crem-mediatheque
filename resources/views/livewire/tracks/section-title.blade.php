@@ -7,7 +7,7 @@
     @if ($track->itemAfter() != null)
     <a href="{{route('track', ['audioItem' => $track->itemAfter()?->audio_item_id])}}" wire:navigate class="d-inline-block text-white align-top p-1"> next ></a>
     @endif
-    <h2 class="d-inline-block w-75 align-top pt-1">{{ $track->translate(App::getLocale())->name }}</h2>
+    <h2 class="d-inline-block w-75 align-top pt-1">{{ $track->translate(App::getLocale(), true)->name }}</h2>
     </div>
 
 </div>
