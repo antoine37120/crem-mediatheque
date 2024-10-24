@@ -4,7 +4,7 @@ namespace App\Livewire\Playlists;
 
 use Livewire\Component;
 use App\Models\Playlist;
-
+use App\Models\AudioItemPlaylist;
 
 class FullPlaylist extends Component
 {

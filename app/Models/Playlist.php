@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
 use Illuminate\Support\Arr;
+use App\Models\AudioItemPlaylist;
 
 class Playlist extends Model implements TranslatableContract
 {
@@ -17,7 +18,7 @@ class Playlist extends Model implements TranslatableContract
 
     public $translatedAttributes = ['name', 'description'];
 
-        
+
     /**
      * The attributes that are mass assignable.
      *
@@ -30,7 +31,7 @@ class Playlist extends Model implements TranslatableContract
         'picture',
     ];
 
-    
+
     /**
      * Get random color for entity.
      */
