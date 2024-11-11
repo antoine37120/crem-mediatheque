@@ -1,8 +1,8 @@
 <div>
-    {{-- If you look to others for fulfillment, you will never truly be fulfilled. --}}
+
     <div class="">
-    @if ($track->itemBefore() != null)
-    <a href="{{route('track', ['audioItem' => $track->itemBefore()?->audio_item_id])}}" wire:navigate class="d-inline-block text-white align-top p-1"> < prev</a>
+    @if ($track->itemBefore($playlist_id) != null)
+    <a href="{{route('track', ['audioItem' => $track->itemBefore($playlist_id)?->audio_item_id, "playlist" => $playlist_id])}}" wire:navigate class="d-inline-block text-white align-top p-1"> < prev</a>
     @endif
     @if ($track->itemAfter() != null)
     <a href="{{route('track', ['audioItem' => $track->itemAfter()?->audio_item_id])}}" wire:navigate class="d-inline-block text-white align-top p-1"> next ></a>

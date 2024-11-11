@@ -4,7 +4,7 @@
     <div class="card-track bg-transparent position-relative" >
         <div class="position-relative w-75">
             <img src="{{ url('storage/'.$track->picture) }}" class="card-img-top rounded border border-dark" alt="..." style="background: {{ $track->randomColor() }};"/>
-        
+
             <div class="position-absolute top-0 start-0 p-2 text-white fs-5">
             {{ $track->year }}
             </div>
@@ -15,11 +15,11 @@
                 <livewire:tracks.actions :track="$track"  wire:key="actions-{{ $track->id }}"/>
             </div>
         </div>
-        <div class="py-2">
-            
+        <div class="py-2 w-75">
+
             <h5 class="card-title"><a  href="{{route('track', ['audioItem' => $track->id])}}" class="text-black text-decoration-none fw-bold" wire:navigate>{{ Illuminate\Support\Str::limit($track->translate(App::getLocale(), true)->name, 45, '...') }}</a></h5>
             <p class="fs-5">{{ $track->geographicalArea->translate(App::getLocale(), true)->name }}</p>
-            
+
         </div>
     </div>
 

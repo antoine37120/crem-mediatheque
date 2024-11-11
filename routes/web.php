@@ -21,7 +21,7 @@ Route::localized(function () {
         return view('app-pages.search-tracks', ['search' => '']);
     })->name('search');
 
-    Route::get('track/{audioItem:id}', [TrackController::class, 'show'])->name('track');
+    Route::get('track/{audioItem:id}/{playlist:id?}', [TrackController::class, 'show'])->name('track');
 
     Route::get('/playlists', function () {
         return view('app-pages.playlists', []);

@@ -12,13 +12,15 @@ body {
             background: linear-gradient(180deg, rgba(104,20,22,1) 0%, rgba(255,255,255,1) 35%);
         }
     }
-    &.playlists {
+    &.playlists,
+    &.playlist {
         .primary-section {
             background: rgb(84,109,148);
             background: linear-gradient(180deg, rgba(84,109,148,1) 0%, rgba(255,255,255,1) 35%);
         }
     }
-    &.podcasts {
+    &.podcasts,
+    &.podcast {
         .primary-section {
             background: rgb(3,106,49);
             background: linear-gradient(180deg, rgba(3,106,49,1) 0%, rgba(255,255,255,1) 35%);

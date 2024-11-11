@@ -9,7 +9,6 @@
         </div>
         <div class="col-10">
             <div class="row align-items-start">
-                {{-- <div class="row"> --}}
                     <div class="col-sm-1 px-5">
                         <img src="{{ url('storage/'.$playlist->picture) }}" class="card-img-top mr-5 rounded border border-dark" style="height: 80px; width: 80px" alt="..."/>
                     </div>
@@ -19,7 +18,6 @@
                         {{-- ajouter fonction de traduction --}}
                         <p>{{ $playlist->description }}</p>
                     </div>
-                {{-- </div> --}}
             </div>
 
             {{-- teaser de chaque morceau de la playlist, avec description complète --}}

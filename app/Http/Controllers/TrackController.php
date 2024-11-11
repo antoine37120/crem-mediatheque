@@ -8,10 +8,11 @@ use App\Models\AudioItem;
 
 class TrackController extends Controller
 {
-    public function show(string $id): View
+    public function show(string $id, string $playlist_id = null): View
     {
         return view('app-pages.track', [
-            'track' => AudioItem::findOrFail($id)
+            'track' => AudioItem::findOrFail($id),
+            'playlist_id' =>  $playlist_id
         ]);
     }
 }

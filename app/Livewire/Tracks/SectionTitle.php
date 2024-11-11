@@ -8,14 +8,16 @@ use App\Models\AudioItem;
 class SectionTitle extends Component
 {
     public $track;
+    public $playlist_id;
 
-    public function mount(AudioItem $track)
+    public function mount(AudioItem $track, $playlist_id)
     {
         $this->track = $track;
- 
-        $this->fill( 
-            $track->only('name', 'description', 'picture'), 
-        ); 
+        $this->playlist_id = $playlist_id;
+
+        $this->fill(
+            $track->only('name', 'description', 'picture'),
+        );
     }
     public function render()
     {

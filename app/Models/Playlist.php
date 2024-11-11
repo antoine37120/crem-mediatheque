@@ -10,6 +10,7 @@ use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
 use Illuminate\Support\Arr;
 use App\Models\AudioItemPlaylist;
+use Illuminate\Support\Facades\DB;
 
 class Playlist extends Model implements TranslatableContract
 {
@@ -55,5 +56,49 @@ class Playlist extends Model implements TranslatableContract
     public function audio_item_playlists(): HasMany
     {
         return $this->hasMany(\App\Models\AudioItemPlaylist::class, 'playlist_id', 'id');
+    }
+
+    /**
+     * Return the playlist before the current playlist in ID order
+     */
+    public function playlistBefore() {
+        $prev = Playlist::query()->where('id', '<', $this->id)
+        ->where('type_id', $this->type_id)
+        ->orderBy('id', 'desc')->get()
+        ->first() ;
+        return $prev ;
+    }
+
+    /**
+     * Return the playlist after the current playlist in ID order
+     */
+    public function playlistAfter() {
+        $next = Playlist::query()->where('id', '>', $this->id)
+        ->where('type_id', $this->type_id)
+        ->orderBy('id', 'asc')->get()
+        ->first() ;
+        return $next ;
+    }
+
+        /**
+     * Return the podcast before the current podcast in ID order
+     */
+    public function podcastBefore() {
+        $prev = Playlist::query()->where('id', '<', $this->id)
+        ->where('type_id', $this->type_id)
+        ->orderBy('id', 'desc')->get()
+        ->first() ;
+        return $prev ;
+    }
+
+    /**
+     * Return the podcast after the current podcast in ID order
+     */
+    public function podcastAfter() {
+        $next = Playlist::query()->where('id', '>', $this->id)
+        ->where('type_id', $this->type_id)
+        ->orderBy('id', 'asc')->get()
+        ->first() ;
+        return $next ;
     }
 }

@@ -24,7 +24,7 @@ class AudioItem extends Model implements TranslatableContract
     use Translatable;
 
     public $translatedAttributes = ['name', 'description'];
-    
+
     /**
      * The attributes that are mass assignable.
      *
@@ -44,7 +44,7 @@ class AudioItem extends Model implements TranslatableContract
         'link',
         'original_name'
     ];
-    
+
     /**
      * Get random color for entity.
      */
@@ -67,7 +67,7 @@ class AudioItem extends Model implements TranslatableContract
 
             return ;
         }
-        
+
         $sys_path = Storage::path('audio-item-sound/'.$this->file);
         $audio = new Mp3Info($sys_path);
         $this->duration = round($audio->duration, 0) ;
@@ -88,8 +88,8 @@ class AudioItem extends Model implements TranslatableContract
         $pathIMG = Storage::path('audio-item-image/');
         $args = [
             'width=600',
-            'height=600', 
-            'wave_color=#ffffff', 
+            'height=600',
+            'wave_color=#ffffff',
             'back_color=transparent',
             'wavedir='.$pathIMG,
             'nocache=true',
@@ -101,11 +101,11 @@ class AudioItem extends Model implements TranslatableContract
         $pathFile = 'audio-item-image/'.$this->cote.'.png' ;
         Storage::move('audio-item-image/'.$log->key.'.png', $pathFile );
         Storage::delete('audio-item-image/'.$log->key.'_bg.png');
-        
+
         $this->picture = $pathFile;
         $this->save() ;
 
-        
+
         Notification::make()
         ->title('Picture generated')
         ->success()
@@ -127,22 +127,25 @@ class AudioItem extends Model implements TranslatableContract
      *
      * @return \App\Models\AudioItemPlaylist|null
      */
-    public function itemBefore() {
-        $itemplaylist = $this->playlists()->first() ;
-        
+    public function itemBefore($playlist_id = null) {
+        // ajout ID playslist en paramètre, si difft de 0, supprimer ligne suivante
+        if ($playlist_id == null) {
+            $itemplaylist = $this->playlists()->first() ;
+            $playlist_id = $itemplaylist->playlist_id ;
+        }
         //Log::debug($itemplaylist) ;
-        $prev = AudioItemPlaylist::where('playlist_id', $itemplaylist->playlist_id)
+        $prev = AudioItemPlaylist::where('playlist_id', $playlist_id)
         ->where('sort', '<=', $itemplaylist->sort)
         ->where('audio_item_id', '!=', $itemplaylist->audio_item_id)
         ->orderBy('sort', 'desc')
         ->orderBy('audio_item_id', 'desc')
         ->first() ;
-       
+
         //Log::debug($prev) ;
         //return $playlist ;
         return $prev ;
     }
-    
+
     /**
      * Return the item after the current item in the first playlist.
      *
