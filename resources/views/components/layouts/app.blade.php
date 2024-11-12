@@ -14,13 +14,13 @@
     <body class="{{ str_replace('.', ' ', request()->route()->getName()) }}">
         <div class="container-fluid">
             <div class="row vh-80">
-                <div class="col-2 ox-auto h-100 bg-white border-dark border-end">
+                <div id="side-menu" class="d-none d-md-block col-md-3 col-xl-2 ox-auto h-100 bg-white border-dark border-end">
 
                 <livewire:menu.side-menu />
 
 
                 </div>
-                <div class="primary-section col-10 ox-auto h-100 pb-5">
+                <div class="primary-section col-12 col-md-9 col-xl-10 ox-auto h-100 pb-5">
                     <header class="py-4 px-1 text-white">{{ $title ?? 'Page Title' }}</header>
                     {{ $slot }}
 
