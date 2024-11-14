@@ -13,6 +13,11 @@
 
     <body class="{{ str_replace('.', ' ', request()->route()->getName()) }}">
         <div class="container-fluid">
+            {{-- div logo en mode mobile --}}
+            <div class="d-block d-md-none">
+                LOGO CREM MOBILE
+            </div>
+
             <div class="row vh-80">
                 <div id="side-menu" class="d-none d-md-block col-md-3 col-xl-2 ox-auto h-100 bg-white border-dark border-end">
 

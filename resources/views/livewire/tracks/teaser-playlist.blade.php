@@ -16,7 +16,7 @@
 
         <div class="col-10">
             <h5 class="card-title"><a  href="{{route('track', ['audioItem' => $track->id])}}" class="text-black text-decoration-none fw-bold" wire:navigate>{{ Illuminate\Support\Str::limit($track->translate(App::getLocale())->name, 45, '...') }}</a></h5>
-            <h5 class="fs-5">{{ $track->geographicalArea->translate(App::getLocale())->name }}</h5>
+            <h5 class="fs-6">{{ $track->geographicalArea->translate(App::getLocale())->name }}</h5>
             <h5>Interprête / Collecteur : {{ $track->interpreters }} / {{ $track->collector }}</h5>
             <p>{{ $track->description }}</p>
         </div>

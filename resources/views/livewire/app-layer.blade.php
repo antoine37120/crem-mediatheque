@@ -28,13 +28,15 @@
         {{-- <div class="bg-gradient" style="heignt: 300px"></div> --}}
 
         {{-- Top menu for mobile only --}}
-        <div class="main d-md-none" style="background-color: transparent ">
+        <div class="main d-block d-md-none" style="background-color: transparent ">
             <livewire:menu.top-menu/>
+            TOP MENU
         </div>
 
         {{-- Bottom menu for mobile --}}
-        <div class="row main d-md-none">
+        <div class="row main d-block d-md-none">
             <livewire:menu.bottom-menu/>
+            BOTTOM MENU
         </div>
 
 

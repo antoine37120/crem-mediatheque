@@ -20,9 +20,19 @@
     overflow-x: auto;
 }
 
-img.rounded {
-    border-radius: 20px!important;
+h5 {
+    font-size: 1rem;
 }
+
+
+img.rounded {
+    border-radius: 10px!important;
+}
+
+.card-img-top {
+    min-width: 100px;
+}
+
 #global-search-form {
     input {
         border-radius: 20px 0 0 20px;
