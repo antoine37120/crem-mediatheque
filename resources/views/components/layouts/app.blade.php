@@ -13,34 +13,40 @@
 
     <body class="{{ str_replace('.', ' ', request()->route()->getName()) }}">
         <div class="container-fluid">
-            {{-- div logo en mode mobile --}}
-            <div class="d-block d-md-none">
+
+            {{-- le logo en mode mobile -> Home ???? --}}
+            {{-- <div class="d-block d-md-none">
                 LOGO CREM MOBILE
+            </div> --}}
+
+            {{-- Top menu for mobile only --}}
+            <div class="main d-block d-lg-none" style="background-color: transparent ">
+                <livewire:menu.top-menu/>
             </div>
 
             <div class="row vh-80">
-                <div id="side-menu" class="d-none d-md-block col-md-3 col-xl-2 ox-auto h-100 bg-white border-dark border-end">
-
-                <livewire:menu.side-menu />
-
-
+                <div id="side-menu" class="d-none d-lg-block col-lg-3 col-xl-2 ox-auto h-100 bg-white border-dark border-end">
+                    <livewire:menu.side-menu />
                 </div>
-                <div class="primary-section col-12 col-md-9 col-xl-10 ox-auto h-100 pb-5">
+                <div class="primary-section col-12 col-lg-9 col-xl-10 ox-auto h-100 pb-5">
                     <header class="py-4 px-1 text-white">{{ $title ?? 'Page Title' }}</header>
                     {{ $slot }}
-
                 </div>
             </div>
+
             <div class="row vh-20 position-relative">
                 <div class="col-12 p-0">
                 @persist('player')
                 <livewire:player.commands />
-
                 @endpersist
                 </div>
-
-
             </div>
+
+            {{-- Bottom menu for mobile --}}
+            <div class="row main d-block d-md-none">
+                <livewire:menu.bottom-menu/>
+            </div>
+
         </div>
     </body>
 </html>

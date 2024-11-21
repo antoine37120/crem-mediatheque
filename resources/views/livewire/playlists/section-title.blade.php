@@ -1,5 +1,5 @@
 <div>
-    <div class="">
+    <div class="page-title">
         @if ($playlist->playlistBefore() != null)
         <a href="{{route('playlist', ['playlist' => $playlist->playlistBefore()?->id])}}" wire:navigate class="d-inline-block text-white align-top p-1"> < prev</a>
         @endif

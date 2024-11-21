@@ -41,8 +41,8 @@
 
 
         {{-- Global menu left column for desktop only --}}
-        <div class="row main d-none d-md-block">
-            <div class="col-2 p-2 bg-white">
+        <div class="row main">
+            <div class="d-none d-lg-block col-2 p-2 bg-white">
                 {{-- .col-9 --}}
                 {{-- <livewire:menu.menu /> --}}
                 <div class="p-2">

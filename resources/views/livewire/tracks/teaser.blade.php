@@ -1,18 +1,43 @@
 <div>
-    {{-- Knowing others is intelligence; knowing yourself is true wisdom. --}}
-
-    <div class="card-track bg-transparent position-relative" >
-        <div class="position-relative w-75">
-            <img src="{{ url('storage/'.$track->picture) }}" class="card-img-top rounded border border-dark" alt="..." style="background: {{ $track->randomColor() }};"/>
-
-            <div class="position-absolute top-0 start-0 p-2 text-white fs-5">
-            {{ $track->year }}
+    {{-- Mobile only --}}
+    <div class="d-block d-lg-none card-track bg-transparent position-relative" >
+        <div class="w-75">
+            <div class="position-relative" style="width: fit-content">
+                <img src="{{ url('storage/'.$track->picture) }}" class="card-img-top rounded border border-dark" alt="..." style="background: {{ $track->randomColor() }};"/>
+                <div class="position-absolute top-0 start-0 p-2 text-white fs-5">
+                {{ $track->year }}
+                </div>
+                <div class="position-absolute bottom-0 end-0 p-2 text-white fs-5">
+                {{ $track->durationFormated() }}
+                </div>
+                <div class="card-track-actions position-absolute top-0 end-0 p-3">
+                    <livewire:tracks.actions :track="$track"  wire:key="actions-{{ $track->id }}"/>
+                </div>
             </div>
-            <div class="position-absolute bottom-0 end-0 p-2 text-white fs-5">
-            {{ $track->durationFormated() }}
-            </div>
-            <div class="card-track-actions position-absolute top-0 end-0 p-3">
-                <livewire:tracks.actions :track="$track"  wire:key="actions-{{ $track->id }}"/>
+        </div>
+
+        <div class="py-2 w-75">
+            <h5 class="card-title"><a  href="{{route('track', ['audioItem' => $track->id])}}" class="text-black text-decoration-none fw-bold" wire:navigate>{{ Illuminate\Support\Str::limit($track->translate(App::getLocale(), true)->name, 45, '...') }}</a></h5>
+            <p class="fs-6">{{ $track->geographicalArea->translate(App::getLocale(), true)->name }}</p>
+
+        </div>
+    </div>
+
+
+    {{-- Desktop only --}}
+    <div class="d-none d-lg-block card-track bg-transparent position-relative" >
+        <div class="w-75">
+            <div class="position-relative" style="width: fit-content">
+                <img src="{{ url('storage/'.$track->picture) }}" class="card-img-top rounded border border-dark" alt="..." style="background: {{ $track->randomColor() }};"/>
+                <div class="position-absolute top-0 start-0 p-2 text-white fs-5">
+                {{ $track->year }}
+                </div>
+                <div class="position-absolute bottom-0 end-0 p-2 text-white fs-5">
+                {{ $track->durationFormated() }}
+                </div>
+                <div class="card-track-actions position-absolute top-0 end-0 p-3">
+                    <livewire:tracks.actions :track="$track"  wire:key="actions-{{ $track->id }}"/>
+                </div>
             </div>
         </div>
         <div class="py-2 w-75">

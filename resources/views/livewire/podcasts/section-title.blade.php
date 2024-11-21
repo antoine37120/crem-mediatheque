@@ -1,5 +1,5 @@
 <div>
-    <div class="">
+    <div class="page-title">
         @if ($podcast->podcastBefore() != null)
         <a href="{{route('podcast', ['podcast' => $podcast->podcastBefore()?->id])}}" wire:navigate class="d-inline-block text-white align-top p-1"> < prev</a>
         @endif
