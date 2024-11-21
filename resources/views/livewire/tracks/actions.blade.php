@@ -7,7 +7,7 @@
         </button>
     </div>
 </div>
- 
+
 @script
 <script>
     Alpine.data('trackinfos_{{ $track->id }}', () => {

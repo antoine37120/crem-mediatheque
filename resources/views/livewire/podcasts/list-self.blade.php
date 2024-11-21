@@ -12,7 +12,7 @@
             <div class="col-12 col-md-9">
                 {{-- <h5>Titre du podcast 1</h5> --}}
                 <h5 class="card-title"><a  href="{{route('podcast', ['podcast' => $podcast->id])}}" class="text-black text-decoration-none fw-bold" wire:navigate>{{ Illuminate\Support\Str::limit($podcast->translate(App::getLocale(), true)->name, 45, '...') }}</a></h5>
-                <p>{{ $podcast->description }}</p>
+                <p>{!! $podcast->translate(App::getLocale(), true)->description !!}</p>
             </div>
         </div>
     </div>

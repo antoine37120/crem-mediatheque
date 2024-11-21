@@ -6,7 +6,7 @@
         <div class="py-2 w-75">
             <h5 class="playlist-title"><a  href="{{route('playlist', ['playlist' => $playlist->id])}}" class="text-black text-decoration-none fw-bold" wire:navigate>{{ Illuminate\Support\Str::limit($playlist->translate(App::getLocale(), true)->name, 45, '...') }}</a></h5>
             <p class="fs-6 overflow-hidden text-truncate text-nowrap">
-                {{ $playlist->description }}
+                {!! $playlist->translate(App::getLocale(), true)->description !!}
             </p>
         </div>
     </div>

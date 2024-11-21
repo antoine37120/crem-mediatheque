@@ -10,7 +10,7 @@
                 </div>
                 <div class="col-12 col-md-9">
                     <h5 class="card-title"><a  href="{{route('playlist', ['playlist' => $playlist->id])}}" class="text-black text-decoration-none fw-bold" wire:navigate>{{ Illuminate\Support\Str::limit($playlist->translate(App::getLocale(), true)->name, 45, '...') }}</a></h5>
-                <p>{{ $playlist->description }}</p>
+                <p>{!! $playlist->translate(App::getLocale(), true)->description !!}</p>
                 </div>
             </div>
         </div>
