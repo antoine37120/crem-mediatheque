@@ -13,7 +13,7 @@
                     </div>
                     <div class="col-sm-10">
                         {{-- ajouter fonction de traduction --}}
-                        <p>{{ $playlist->description }}</p>
+                        <p>{!! $playlist->translate(App::getLocale(), true)->description !!}</p>
                     </div>
             </div>
 

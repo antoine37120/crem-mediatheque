@@ -4,13 +4,13 @@
         <div class="w-75">
             <div class="position-relative" style="width: fit-content">
                 <img src="{{ url('storage/'.$track->picture) }}" class="card-img-top rounded border border-dark" alt="..." style="background: {{ $track->randomColor() }};"/>
-                <div class="position-absolute top-0 start-0 p-2 text-white fs-5">
+                <div class="position-absolute top-0 start-0 text-white pe-1">
                 {{ $track->year }}
                 </div>
-                <div class="position-absolute bottom-0 end-0 p-2 text-white fs-5">
+                <div class="position-absolute bottom-0 end-0 text-white pe-1">
                 {{ $track->durationFormated() }}
                 </div>
-                <div class="card-track-actions position-absolute top-0 end-0 p-3">
+                <div class="card-track-actions position-absolute top-0 end-0 p-1">
                     <livewire:tracks.actions :track="$track"  wire:key="actions-{{ $track->id }}"/>
                 </div>
             </div>
@@ -29,13 +29,13 @@
         <div class="w-75">
             <div class="position-relative" style="width: fit-content">
                 <img src="{{ url('storage/'.$track->picture) }}" class="card-img-top rounded border border-dark" alt="..." style="background: {{ $track->randomColor() }};"/>
-                <div class="position-absolute top-0 start-0 p-2 text-white fs-5">
+                <div class="position-absolute top-0 start-0 text-white ps-1">
                 {{ $track->year }}
                 </div>
-                <div class="position-absolute bottom-0 end-0 p-2 text-white fs-5">
+                <div class="position-absolute bottom-0 end-0 text-white pe-1">
                 {{ $track->durationFormated() }}
                 </div>
-                <div class="card-track-actions position-absolute top-0 end-0 p-3">
+                <div class="card-track-actions position-absolute top-0 end-0 p-1">
                     <livewire:tracks.actions :track="$track"  wire:key="actions-{{ $track->id }}"/>
                 </div>
             </div>
