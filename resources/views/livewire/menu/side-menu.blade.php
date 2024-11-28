@@ -22,7 +22,7 @@
             <li><a href="{{route('tracks')}}" class="text-black text-decoration-none" wire:navigate>Tracks</a></li>
             <li><a href="{{route('playlists')}}" class="text-black text-decoration-none" wire:navigate>Playlists</a></li>
             <li><a href="{{route('podcasts')}}" class="text-black text-decoration-none" wire:navigate>Podcasts</a></li>
-            <li><a href="{{route('cmsPage', ['cmsPage' => 'abaout']) }}" class="text-black text-decoration-none" wire:navigate>Abaout</a></li>
+            <li><a href="{{route('cmsPage', ['cmsPage' => 'abaout']) }}" class="text-black text-decoration-none" wire:navigate>A propos</a></li>
         </ul>
     </div>
     {{-- Success is as dangerous as failure. --}}

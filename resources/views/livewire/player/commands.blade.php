@@ -16,14 +16,17 @@
             <div class="row">progress bar</div>
             <div class="row">timelapse</div>
         </div>
+
         {{-- desktop --}}
-        
-        <div class="row position-reltive player-descktop d-xs-none d-sm-flex bg-white p-0 m-0">
+        <div class="row position-relative player-descktop d-xs-none d-sm-flex bg-white p-0 m-0">
             <div class="col-4 position-absolute top-0 start-0">
                 <livewire:player.track-title :id="$item_play" />
             </div>
             <div class="col-md-10 offset-md-2 p-0 me-0">
-                <div class="row justify-content-center m-0">
+            {{-- <div class="col-md-10 offset-md-2 p-0 me-0"> --}}
+                    <div class="row justify-content-center m-0">
+
+
                     <div class="col-6">
                         <div class="row align-items-center justify-content-center">
                             {{-- player commands --}}
