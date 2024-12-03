@@ -35,7 +35,8 @@
             </div>
 
             <div class="row vh-20 position-relative">
-                <div class="col-12 p-0">
+                {{-- <div class="col-0 col-lg-2 bg-transparent"></div> --}}
+                <div class="col-12 col-lg-10 align-self-end p-0">
                 @persist('player')
                 <livewire:player.commands />
                 @endpersist

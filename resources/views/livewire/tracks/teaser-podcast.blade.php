@@ -3,7 +3,7 @@
         <div class="card-track-col col-sm-2 ps-0">
             <div class="card-track bg-transparent position-relative" >
                 <div class="position-relative">
-                    <img src="{{ url('storage/'.$track->picture) }}" class="card-img-top rounded border border-dark" alt="..." style="height: 100px; width: 100px; background: {{ $track->randomColor() }};"/>
+                    <img src="{{ url('storage/'.$track->picture) }}" class="card-img-top rounded border border-dark border-2" alt="..." style="height: 100px; width: 100px; background: {{ $track->randomColor() }};"/>
                 </div>
                 <div class="position-absolute top-0 start-0 text-white ps-1">
                     {{-- p-1 p-md-2 fs-5 --}}
