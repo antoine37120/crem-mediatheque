@@ -23,9 +23,9 @@ class PlaylistType extends Model
 
     
     /**
-     * Get the phone associated with the user.
+     * Playlists belong to this model
      */
-    public function playlist(): BelongsTo
+    public function playlists(): BelongsTo
     {
         return $this->belongsTo(\App\Models\Playlist::class);
     }
