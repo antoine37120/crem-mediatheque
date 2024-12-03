@@ -18,7 +18,7 @@
             </form>
         </div>
         <ul class="list-unstyled fs-5 d-grid gap-3 my-4 ms-3">
-            <li><a href="{{route('home')}}" class="text-black text-decoration-none" wire:navigate>Accueil</a></li>
+            <li><a href="{{route('home')}}" class="text-black text-decoration-none" wire:navigate>{{ __('menu.home') }}</a></li>
             <li><a href="{{route('tracks')}}" class="text-black text-decoration-none" wire:navigate>Tracks</a></li>
             <li><a href="{{route('playlists')}}" class="text-black text-decoration-none" wire:navigate>Playlists</a></li>
             <li><a href="{{route('podcasts')}}" class="text-black text-decoration-none" wire:navigate>Podcasts</a></li>
