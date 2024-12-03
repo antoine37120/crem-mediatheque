@@ -124,7 +124,7 @@ window.initPlayer = function() {
             "progressColor": "#ff4e00",
             "cursorColor": "#ddd5e9",
             "cursorWidth": 2,
-            "barWidth": 12,
+            "barWidth": 1,
             "barGap": null,
             "barRadius": null,
             "barHeight": null,
