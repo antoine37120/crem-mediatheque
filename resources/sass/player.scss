@@ -10,14 +10,27 @@
 }
 
 .tracklist {
-    position: absolute;
+    padding: 0 10px;
     bottom: 284px;
+    @media (max-width: 992px) {
+        position: absolute;
+        bottom: 215px;
+    }
 }
 
 .player-mobile {
     position: absolute;
-    bottom: 120px;
+    bottom: 51.5px;
+    div {
+        padding: 0 10px;
+    }
 }
+
+.img-track-player {
+    width: 100px;
+    height: 100px;
+}
+
 // titre et area player:
 // .player-mobile h5 {
 //      overflow: hidden;

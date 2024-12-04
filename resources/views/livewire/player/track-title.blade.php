@@ -2,9 +2,10 @@
     @if ($track == 'none')
 
     @else
-    <div class="row w-100 py-2 align-items-center" style="width: 18rem;">
-            <div class="col-3">
-                <img src="{{ url('storage/'.$track->picture) }}" class="card-img-top border rounded w-100" alt="..." style="background: {{ $track->randomColor() }};"/>
+    <div class="row py-2 align-items-center mh-100" style="width: 18rem;">
+        {{-- w-100 --}}
+            <div class="col-3 me-auto img-track-player">
+                <img src="{{ url('storage/'.$track->picture) }}" class="card-img-top border rounded mw-100 mh-100" alt="..." style="background: {{ $track->randomColor() }};"/>
             </div>
             {{-- <div class="col-3"></div> --}}
             <div class="col-6">

@@ -1,13 +1,16 @@
 <div>
-    <div class="tracklist row w-100 m-0">
+    <div class="tracklist m-lg-auto row w-100">
+        {{-- m-0 --}}
         {{-- position-absolute bottom-100 --}}
-        <div class="col-12 col-lg-10 offset-md-2 px-0">
+        <div class="col-12 px-0">
             <livewire:player.tracklist />
         </div>
     </div>
-    <div class="player row m-0 bg-light">
+    <div class="player m-lg-auto row bg-light">
+        {{-- m-0 --}}
         {{-- mobile --}}
-        <div class="player-mobile container container-fluid d-lg-none">
+        <div class="player-mobile d-lg-none">
+            {{-- container container-fluid --}}
             {{-- d-block  --}}
             {{-- d-sm-none --}}
             <div class="row align-items-center bg-light">
