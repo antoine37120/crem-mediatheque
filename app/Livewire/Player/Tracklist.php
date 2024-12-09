@@ -5,6 +5,7 @@ namespace App\Livewire\Player;
 use Livewire\Component;
 use Livewire\Attributes\Session;
 use App\Models\AudioItem;
+use App\Models\AudioItemPlaylist;
 use Livewire\Attributes\On; 
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Arr;
@@ -48,6 +49,41 @@ class Tracklist extends Component
 
     }
 
+    /**
+     * Triggered when a track is added to the playlist.
+     *
+     * @param int $id The id of the track to add.
+     *
+     * The added track is added to the playlist items and the event 'playlist-items-list-refresh' is dispatched.
+     * The 'playlist_items' property is then refreshed.
+     */
+    #[On('add-playlist-to-playlist')] 
+    public function updateTrackListWithPlaylist($id)
+    {
+        Log::debug($id) ;
+        $audioItems = AudioItemPlaylist::where('playlist_id', $id)->get();
+        foreach($audioItems as $item){
+            $this->updateTrackList($item->audio_item->id) ;
+        } 
+    }
+    /**
+     * Triggered when a playlist is added to the playlist in random mode.
+     *
+     * @param int $id The id of the track to add.
+     *
+     * The added track is added to the playlist items and the event 'playlist-items-list-refresh' is dispatched.
+     * The 'playlist_items' property is then refreshed.
+     */
+    #[On('add-playlist-to-playlist-random')] 
+    public function updateTrackListWithPlaylistRandom($id)
+    {
+        Log::debug($id) ;
+        $audioItems = AudioItemPlaylist::where('playlist_id', $id)->inRandomOrder()->get();
+        foreach($audioItems as $item){
+            $this->updateTrackList($item->audio_item->id) ;
+        } 
+        
+    }
     /**
      * Triggered when a track is added to the playlist.
      *
