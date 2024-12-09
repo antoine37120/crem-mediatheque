@@ -1,16 +1,21 @@
 <div>
-    <div class="tracklist row position-absolute bottom-100 w-100 m-0">
-        <div class="col-10 offset-md-2 px-0">
+    <div class="tracklist m-lg-auto row w-100">
+        {{-- m-0 --}}
+        {{-- position-absolute bottom-100 --}}
+        <div class="col-12 px-0">
             <livewire:player.tracklist />
         </div>
     </div>
-    <div class="player row m-0">
+    <div class="player m-lg-auto row bg-light">
+        {{-- m-0 --}}
         {{-- mobile --}}
-        <div class="player-mobile container container-fluid d-lg-none">
+        <div class="player-mobile d-lg-none">
+            {{-- container container-fluid --}}
             {{-- d-block  --}}
             {{-- d-sm-none --}}
-            <div class="row fit-content">
-                <div class="col-10 col-lg-6 position-absolute top-0 start-0">
+            <div class="row align-items-center bg-light">
+                <div class="col-10 col-lg-6 top-0 start-0">
+                    {{-- position-absolute  --}}
                     <livewire:player.track-title :id="$item_play" />
                 </div>
                 {{-- <div class="col-2"><img src="storage\app\public\audio-item\audioitem1-wave.png" alt=""> </div>
@@ -26,8 +31,15 @@
                       </svg>
                 </div>
             </div>
-            <div class="row">progress bar</div>
-            <div class="row">timelapse</div>
+            <div class="row bg-primary">
+                <div class="row progress-bar bg-white" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%
+                </div>
+            </div>
+            <div class="row w-100 bg-light">
+                <div class="col-1">01:15</div>
+                <div class="col-10"></div>
+                <div class="col-1">05:25</div>
+            </div>
         </div>
 
         {{-- desktop --}}

@@ -24,28 +24,34 @@
                 <livewire:menu.top-menu/>
             </div>
 
-            <div class="row vh-80">
+            <div class="row vh-100">
                 <div id="side-menu" class="d-none d-lg-block col-lg-3 col-xl-2 ox-auto h-100 bg-white border-dark border-end">
                     <livewire:menu.side-menu />
                 </div>
-                <div class="primary-section col-12 col-lg-9 col-xl-10 ox-auto h-100 pb-5">
+                <div class="primary-section col-12 col-lg-9 col-xl-10 ox-auto h-100 pb-1">
                     <header class="py-4 px-1 text-white">{{ $title ?? 'Page Title' }}</header>
-                    {{ $slot }}
+                    <div>{{ $slot }}</div>
+                    <div>
+                        <div class="player-section">
+                        @persist('player')
+                        <livewire:player.commands />
+                        @endpersist
+                        </div>
+                        {{-- Bottom menu for mobile --}}
+                        <div class="row main d-block d-lg-none">
+                            <livewire:menu.bottom-menu/>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
-            <div class="row vh-20 position-relative">
+            {{-- <div class="row vh-20 position-relative">
                 <div class="col-12 p-0">
-                @persist('player')
-                <livewire:player.commands />
-                @endpersist
                 </div>
-            </div>
+            </div> --}}
 
-            {{-- Bottom menu for mobile --}}
-            <div class="row main d-block d-md-none">
-                <livewire:menu.bottom-menu/>
-            </div>
+
 
         </div>
     </body>
