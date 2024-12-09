@@ -15,7 +15,7 @@
                         {{-- ajouter fonction de traduction --}}
                         <p>{!! $playlist->translate(App::getLocale(), true)->description !!}</p>
 
-                        <livewire:playlists.full-actions :playlist="$playlist" wire:key="playlist-full-actions-{{ $playlist->ID }}" />
+                        <livewire:playlists.full-actions :playlist="$playlist" wire:key="playlist-full-actions-{{ $playlist->id }}" />
                     </div>
             </div>
 
