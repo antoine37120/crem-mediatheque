@@ -134,6 +134,10 @@ class AudioItem extends Model implements TranslatableContract
             $playlist_id = $itemplaylist->playlist_id ;
         }
         //Log::debug($itemplaylist) ;
+        if ($itemplaylist->sort==null)
+        {
+            $itemplaylist->sort=0;
+        }
         $prev = AudioItemPlaylist::where('playlist_id', $playlist_id)
         ->where('sort', '<=', $itemplaylist->sort)
         ->where('audio_item_id', '!=', $itemplaylist->audio_item_id)
@@ -153,6 +157,10 @@ class AudioItem extends Model implements TranslatableContract
      */
     public function itemAfter() {
         $itemplaylist = $this->playlists()->first() ;
+        if ($itemplaylist->sort==null)
+        {
+            $itemplaylist->sort=0;
+        }
         $next = AudioItemPlaylist::where('playlist_id', $itemplaylist->playlist_id)
         ->where('sort', '>=', $itemplaylist->sort)
         ->where('audio_item_id', '!=', $itemplaylist->audio_item_id)
