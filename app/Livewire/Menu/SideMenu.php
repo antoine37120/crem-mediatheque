@@ -36,7 +36,7 @@ class SideMenu extends Component
     public function searchLauch() {
 
         $get_params = '&year='.$this->query_year.'&geoArea='.$this->query_geoArea.'&duration='.$this->query_duration;
-        return $this->redirect(route('search').'?q='.$this->search.$get_params, navigate: true);
+        return $this->redirect(route('tracks').'?q='.$this->search.$get_params, navigate: true);
     }
 
     public function render()

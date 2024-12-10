@@ -13,13 +13,13 @@ Route::localized(function () {
     Route::get('/', function () {
         return view('app-pages.home', []);
     })->name('home');
-    Route::get('/tracks', function () {
+    /*Route::get('/tracks', function () {
         return view('app-pages.tracks', []);
-    })->name('tracks');
+    })->name('tracks');*/
 
-    Route::get('/search', function () {
+    Route::get('/tracks', function () {
         return view('app-pages.search-tracks', ['search' => '']);
-    })->name('search');
+    })->name('tracks');
 
     Route::get('track/{audioItem:id}/{playlist:id?}', [TrackController::class, 'show'])->name('track');
 
