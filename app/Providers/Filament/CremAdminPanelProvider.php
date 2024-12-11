@@ -76,6 +76,7 @@ class CremAdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ]);
+            ])
+            ->viteTheme('resources/css/filament/crem-admin/theme.css');
     }
 }
