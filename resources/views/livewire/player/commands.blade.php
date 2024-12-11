@@ -43,18 +43,20 @@
         </div>
 
         {{-- desktop --}}
-        <div class="player-desktop row position-relative d-none d-lg-flex bg-white p-0 m-0">
+        <div class="player-desktop row position-relative d-none d-lg-flex align-items-center bg-white p-0 m-0">
             {{-- d-sm-flex --}}
-            <div class="col-2 position-absolute top-0 start-0">
+            <div class="col-4 top-0 start-0">
+                {{-- position-absolute --}}
                 <livewire:player.track-title :id="$item_play" />
             </div>
-            <div class="col-10 offset-2 p-0 me-0">
+            <div class="col-8 p-0 me-0">
+                {{-- offset-2 --}}
             {{-- <div class="col-md-10 offset-md-2 p-0 me-0"> --}}
                     <div class="row justify-content-center m-0">
 
 
-                    <div class="col-6">
-                        <div class="row align-items-center justify-content-center">
+                    <div class="col-auto col-xl-auto">
+                        <div class="row align-items-center justify-content-center flex-nowrap">
                             {{-- player commands --}}
                             <div class="col-auto">
                                 <button class="btn rounded-circle" id="player-btnrandom">
