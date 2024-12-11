@@ -13,6 +13,9 @@ use App\Models\YearOption;
 use \Astrotomic\Translatable\Locales;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
+use Livewire\Attributes\Session;
+
+
 class Search extends Component
 {
     public $tracks = [];
@@ -33,6 +36,13 @@ class Search extends Component
     public $years = [];
     public $durations = [];
 
+    
+    #[Session(key: 'track_nav_mode')] 
+    public $track_nav_mode = '';
+    
+    #[Session(key: 'track_nav_data')] 
+    public $track_nav_data = [];
+
     public function loadSelectOtpions() {
 
         $this->geoAreas = GeographicalArea::orderBy('region_code')->get();
@@ -43,16 +53,21 @@ class Search extends Component
     public function playSearch()
     {
         $this->tracks = [] ;
-        Log::info('$this->query_year') ;
+        /*Log::info('$this->query_year') ;
         Log::info($this->query_year) ;
         Log::info('$this->query_geoArea') ;
         Log::info($this->query_geoArea) ;
         Log::info('$this->query_duration') ;
-        Log::info($this->query_duration) ;
+        Log::info($this->query_duration) ;*/
+        /*Log::info('$this->track_nav_mode') ;
+        Log::info($this->track_nav_mode) ;
+        Log::info('$this->track_nav_data') ;
+        Log::info($this->track_nav_data) ;*/
 
         $this->dispatch('search-facets-change', year:$this->query_year, geoArea: $this->query_geoArea, 
             duration:$this->query_duration
         );
+
         //$this->search = request()->search ;
         //if ($this->search != '') {
             
@@ -86,14 +101,29 @@ class Search extends Component
                     }
 
             })->get() ;
-            
 
-            foreach ( $trans_tracks as $track) {
-                $this->tracks[] = AudioItem::find($track->audio_item) ;
-            }
-        /*} else {
-            $this->tracks = AudioItem::all();
-        }*/
+
+        if(
+            ($this->search != '')
+            || ($this->query_year != '')
+            || ($this->query_duration != '')
+            || ($this->query_geoArea != '')
+        ) {
+            $this->track_nav_mode = "search" ;
+        } else {
+            $this->track_nav_mode = "tracks" ;
+        }
+
+        $this->track_nav_data = [] ;
+        
+        //set navagation mode to search
+        //$this->track_nav_mode = "search" ;
+        foreach ( $trans_tracks as $track) {
+            $this->tracks[] = AudioItem::find($track->audio_item) ;
+
+            $this->track_nav_data[] = $track->audio_item ;
+        }
+
     }
 
     public function updated($name, $value) 
