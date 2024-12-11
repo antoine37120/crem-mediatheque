@@ -9,8 +9,8 @@
             </div>
             {{-- <div class="col-3"></div> --}}
             <div class="col-6">
-                <h5 class="fw-bold fs-6 mb-0">{{ $track->translate(App::getLocale(), true)->name }}</h5>
-                <h5 class="fs-6 mb-0">{{ $track->interpreters }}</h5>
+                <h5 class="fw-bold fs-6 mb-0 text-truncate">{{ $track->translate(App::getLocale(), true)->name }}</h5>
+                <h5 class="fs-6 mb-0 text-truncate">{{ $track->interpreters }}</h5>
             </div>
     </div>
     @endif

@@ -1,5 +1,5 @@
 <div>
-    <div class="row align-items-start my-2 g-5">
+    <div class="row align-items-start flex-nowrap my-2 g-5">
         <div class="card-track-col col-sm-2 ps-0">
             <div class="card-track bg-transparent position-relative" >
                 <div class="position-relative">
