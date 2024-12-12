@@ -30,6 +30,8 @@ class GeographicalAreaResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-globe-europe-africa';
 
+    public static $view = 'tree-list';
+
     public static function form(Form $form): Form
     {
         return $form
@@ -99,7 +101,9 @@ class GeographicalAreaResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListGeographicalAreas::route('/'),
+            //'tree-list' => Pages\GeographicalAreaTree::route('/tree-list'),
+            //'index' => Pages\ListGeographicalAreas::route('/'),
+            'index' => Pages\GeographicalAreaTree::route('/'),
             'create' => Pages\CreateGeographicalArea::route('/create'),
             'edit' => Pages\EditGeographicalArea::route('/{record}/edit'),
         ];
