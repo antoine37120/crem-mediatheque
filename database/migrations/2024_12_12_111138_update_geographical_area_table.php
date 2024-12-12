@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        
         Schema::table('geographical_areas', function (Blueprint $table) {
-            $table->foreignId('geographical_area_continent_id')->index();
+            $table->integer('parent_id')->default(-1);
+            $table->integer('sort')->default(0)->index();
         });
     }
 

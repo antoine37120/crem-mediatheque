@@ -62,6 +62,17 @@ class Playlist extends Model implements TranslatableContract
         return $this->hasMany(\App\Models\AudioItemPlaylist::class, 'playlist_id', 'id');
     }
 
+    public function audio_items() {
+        return \App\Models\AudioItemPlaylist::query()
+        ->join('audio_items', 'audio_item_playlists.audio_item_id', 'audio_items.id')
+        ->where('audio_items.published', 1)
+        ->where('playlist_id', $this->id)
+        ->orderBy('sort', 'asc')
+        ->get();
+    }
+
+   
+
     /**
      * Return the playlist before the current playlist in ID order
      */

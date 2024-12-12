@@ -7,5 +7,6 @@ export default {
         './resources/views/filament/**/*.blade.php',
         './vendor/filament/**/*.blade.php',
         './vendor/awcodes/palette/resources/views/**/*.blade.php',
+        './vendor/solution-forest/filament-tree/resources/**/*.blade.php',
     ],
 }

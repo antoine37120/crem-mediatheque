@@ -14,7 +14,7 @@ class ListHome extends Component
 
     public function mount()
     {
-        $this->podcasts = Playlist::select('*')->where('type_id', 2)->inRandomOrder()->take(4)->get();
+        $this->podcasts = Playlist::select('*')->where('published', 1)->where('type_id', 2)->inRandomOrder()->take(4)->get();
     }
 
     public function render()

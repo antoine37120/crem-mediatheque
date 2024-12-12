@@ -8,10 +8,14 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
 
+use SolutionForest\FilamentTree\Concern\ModelTree;
+
 class GeographicalArea extends Model implements TranslatableContract
 {
     use HasFactory;
     use Translatable;
+    
+    use ModelTree;
 
     public $useTranslationFallback = true;
     public $translatedAttributes = ['name'];
@@ -25,16 +29,28 @@ class GeographicalArea extends Model implements TranslatableContract
      */
     protected $fillable = [
         'region_code',
-        'geographical_area_continent_id',
+        'parent_id',
+        'sort',
+    ];
+    protected $casts = [
+        'parent_id' => 'int'
     ];
 
 
-    
-    /**
-     * Get the audio item's geographical area.
-     */
-    public function geographical_area_continent(): BelongsTo
+    public function determineOrderColumnName(): string
     {
-        return $this->belongsTo(\App\Models\GeographicalAreaContinent::class)->withDefault();
+         return "sort";
     }
+ 
+    public function determineParentColumnName(): string
+    {
+         return "parent_id";
+    }
+ 
+    public function determineTitleColumnName(): string
+     {
+         return 'region_code';
+     }
+
+
 }

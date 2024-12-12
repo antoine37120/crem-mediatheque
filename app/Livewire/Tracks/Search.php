@@ -76,6 +76,7 @@ class Search extends Component
                 $query->join('audio_items', 'audio_item_translations.audio_item_id', 'audio_items.id')
                     ->select(['audio_item_translations.id', 'audio_items.id as audio_item',])
                     ->where('audio_items.year', '>=', 0)
+                    ->where('audio_items.published', 1)
                     ->orderBy('audio_item_translations.id', 'DESC');
                     if($this->query_year != '') {
                         $year_option = YearOption::find($this->query_year) ;
