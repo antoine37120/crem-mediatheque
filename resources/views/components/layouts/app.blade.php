@@ -28,17 +28,20 @@
                 <div id="side-menu" class="d-none d-lg-block col-lg-3 col-xl-2 ox-auto h-100 bg-white border-dark border-end">
                     <livewire:menu.side-menu />
                 </div>
-                <div class="primary-section col-12 col-lg-9 col-xl-10 ox-auto h-100 pb-1">
+                <div class="primary-section col-12 col-lg-9 col-xl-10 ox-auto pb-1">
                     <header class="py-4 px-1 text-white">{{ $title ?? 'Page Title' }}</header>
-                    <div>{{ $slot }}</div>
-                    <div>
-                        <div class="player-section">
+                    {{-- Main --}}
+                    <div class="main-of-page">{{ $slot }}</div>
+                    {{-- Player --}}
+                    <div class="footer-wrapper position-fixed bottom-0 col-lg-10">
+                        {{-- en dessous taille ecran lg, 96% de large, position à gauche 2% / voire supprim col-12 ? --}}
+                        <div class="player-section position-relative mx-2 mx-lg-0">
                         @persist('player')
                         <livewire:player.commands />
                         @endpersist
                         </div>
                         {{-- Bottom menu for mobile --}}
-                        <div class="row main d-block d-lg-none">
+                        <div class="main d-block d-lg-none position-relative mx-2 mx-lg-0">
                             <livewire:menu.bottom-menu/>
                         </div>
                     </div>

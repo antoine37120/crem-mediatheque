@@ -46,6 +46,12 @@ h5 {
     font-size: 1rem;
 }
 
+.main-of-page {
+    @media(max-width: 991px) {
+        padding-bottom: 50px;
+    }
+}
+
 
 img.rounded {
     border-radius: 10px!important;
@@ -86,4 +92,8 @@ img.rounded {
 .top-menu > div > button {
     background-color: #e5e1e0;
     border: 3px solid !important;
+}
+
+.primary-section {
+    height: calc(100vh - 140px);
 }

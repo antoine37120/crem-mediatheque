@@ -1,20 +1,22 @@
 <div>
-    <div class="tracklist m-lg-auto row w-100">
+    <div class="tracklist mb-lg-0 w-100">
+        {{-- m-lg-auto  --}}
         {{-- m-0 --}}
         {{-- position-absolute bottom-100 --}}
         <div class="col-12 px-0">
             <livewire:player.tracklist />
         </div>
     </div>
-    <div class="player m-lg-auto row bg-light">
+    <div class="player m-lg-0 bg-light">
         {{-- m-0 --}}
         {{-- mobile --}}
         <div class="player-mobile d-lg-none">
+            {{-- position-fixed --}}
             {{-- container container-fluid --}}
             {{-- d-block  --}}
             {{-- d-sm-none --}}
             <div class="row align-items-center bg-light">
-                <div class="col-10 col-lg-6 top-0 start-0">
+                <div class="col-10 top-0 start-0">
                     {{-- position-absolute  --}}
                     <livewire:player.track-title :id="$item_play" />
                 </div>
@@ -31,19 +33,21 @@
                       </svg>
                 </div>
             </div>
-            <div class="row bg-primary">
-                <div class="row progress-bar bg-white" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%
+            {{-- <div class="row bg-primary">
+                <div class="col-12 progress-bar bg-white" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%
                 </div>
-            </div>
-            <div class="row w-100 bg-light">
-                <div class="col-1">01:15</div>
+            </div> --}}
+            <div class="row">
+                <livewire:player.progress-bar />
+                {{-- <div class="col-1">01:15</div>
                 <div class="col-10"></div>
-                <div class="col-1">05:25</div>
+                <div class="col-1">05:25</div> --}}
             </div>
         </div>
 
         {{-- desktop --}}
-        <div class="player-desktop row position-relative d-none d-lg-flex align-items-center bg-white p-0 m-0">
+        <div class="player-desktop row d-none d-lg-flex align-items-center bg-white m-0">
+            {{--  position-fixed--}}
             {{-- d-sm-flex --}}
             <div class="col-4 top-0 start-0">
                 {{-- position-absolute --}}
@@ -52,8 +56,7 @@
             <div class="col-8 p-0 me-0">
                 {{-- offset-2 --}}
             {{-- <div class="col-md-10 offset-md-2 p-0 me-0"> --}}
-                    <div class="row justify-content-center m-0">
-
+                <div class="row justify-content-center m-0">
 
                     <div class="col-auto col-xl-auto">
                         <div class="row align-items-center justify-content-center flex-nowrap">
@@ -111,6 +114,7 @@
                             <livewire:player.progress-bar />
                         </div>
                     </div>
+
                 </div>
 
             </div>

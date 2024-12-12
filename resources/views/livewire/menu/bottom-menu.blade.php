@@ -1,6 +1,6 @@
 {{-- mobile --}}
 <div>
-    <div class="row fixed-bottom p-2 flex-nowrap bg-white">
+    <div class="row p-2 flex-nowrap bg-white">
         {{-- <div class="col-4">"{{ $menuItem }}" </div> --}}
         <div class="col-4 text-center d-flex flex-column">
             <a href="{{route('home')}}" class="text-black text-decoration-none" wire:navigate>
