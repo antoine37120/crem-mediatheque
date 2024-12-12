@@ -34,13 +34,15 @@ class SectionTitle extends Component
         
         if(!in_array($this->track->id, $this->track_nav_data)) {
 
-            $playlist = AudioItemPlaylist::where('audio_item_id ', $this->track->id)->first() ;
+            $playlist = AudioItemPlaylist::where('audio_item_id', $this->track->id)->first() ;
 
             
             $this->track_nav_data = DB::table('audio_item_playlists')
-                ->where('playlist_id', $playlist->id)
-                ->orderBy('sort', 'asc')
-                ->pluck('audio_item_id');
+                ->join('audio_items', 'audio_item_playlists.audio_item_id', 'audio_items.id')
+                ->where('audio_items.published', 1)
+                ->where('audio_item_playlists.playlist_id', $playlist->id)
+                ->orderBy('audio_item_playlists.sort', 'asc')
+                ->pluck('audio_item_id')->toArray();
         }
 
 

@@ -13,7 +13,7 @@ class ListSelf extends Component
 
     public function mount()
     {
-        $this->playlists = Playlist::all()->where('type_id', 1);
+        $this->playlists = Playlist::all()->where('type_id', 1)->where('published', 1);
     }
     public function render()
     {

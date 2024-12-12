@@ -20,7 +20,7 @@
             </div>
 
             {{-- teaser de chaque morceau de la playlist, avec description complète --}}
-            @foreach ($playlist->audio_item_playlists as $relation_playlist)
+            @foreach ($playlist->audio_items() as $relation_playlist)
                 <livewire:tracks.teaser-playlist :track="$relation_playlist->audio_item" wire:key="audio-{{ $relation_playlist->audio_item->id }}" />
             @endforeach
 

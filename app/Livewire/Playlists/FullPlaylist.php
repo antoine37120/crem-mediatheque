@@ -30,6 +30,8 @@ class FullPlaylist extends Component
         $this->track_nav_mode = 'playlist';
 
         $this->track_nav_data = DB::table('audio_item_playlists')
+                    ->join('audio_items', 'audio_item_playlists.audio_item_id', 'audio_items.id')
+                    ->where('audio_items.published', 1)
                     ->where('playlist_id', $this->playlist->id)
                     ->orderBy('sort', 'asc')
                     ->pluck('audio_item_id')->toArray();
