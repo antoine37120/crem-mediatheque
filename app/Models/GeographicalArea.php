@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
+use Illuminate\Support\Facades\DB;
 
 use SolutionForest\FilamentTree\Concern\ModelTree;
 
@@ -50,6 +51,19 @@ class GeographicalArea extends Model implements TranslatableContract
     public function determineTitleColumnName(): string
      {
          return 'region_code';
+     }
+
+     public function childs() {
+        return $this->hasMany(GeographicalArea::class, 'parent_id')->orderBy('sort', 'ASC');
+     }
+
+     public static function region_childs_ids($region_id) 
+     {
+        return DB::table('geographical_areas')
+        ->select('id')
+        ->where('parent_id', $region_id)
+        ->orderBy('sort', 'asc')
+        ->pluck('id')->toArray();
      }
 
 

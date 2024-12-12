@@ -45,7 +45,7 @@ class Search extends Component
 
     public function loadSelectOtpions() {
 
-        $this->geoAreas = GeographicalArea::orderBy('region_code')->get();
+        $this->geoAreas = GeographicalArea::where('parent_id', -1)->orderBy('sort', 'ASC')->get();
         $this->years = YearOption::orderBy('from', 'asc')->get();
         $this->durations = DurationOption::orderBy('from', 'asc')->get();   
     }
@@ -98,7 +98,11 @@ class Search extends Component
                     }
 
                     if($this->query_geoArea != '') {
-                        $query->where('audio_items.geographical_area_id', $this->query_geoArea);
+                        $ids_regions = GeographicalArea::region_childs_ids($this->query_geoArea) ;
+                        if (sizeof($ids_regions) == 0){
+                            $ids_regions = [$this->query_geoArea] ;
+                        }
+                        $query->whereIn('audio_items.geographical_area_id', $ids_regions);
                     }
 
             })->get() ;

@@ -44,3 +44,16 @@ body {
     background: #cd1420;
 }
 
+.form-select {
+    background-color: #FCE3D4;
+    border: 2px solid #000;
+    border-radius: 18px;
+    font-weight: bold;
+    padding-left: 18px;
+}
+.form-select *{
+    background-color: #FDF1E8;
+    
+    font-weight: normal;
+}
+

@@ -18,6 +18,10 @@
                             <option value="">Zone géographique</option>
                     @foreach($geoAreas as $geoArea)
                         <option value="{{ $geoArea->id }}" {{ old('geoArea') == $geoArea->id ? 'selected' : '' }}>{{ $geoArea->translate(App::getLocale(), true)->name }}</option>
+                        
+                        @foreach($geoArea->childs as $geoAreaChild)
+                            <option value="{{ $geoAreaChild->id }}" {{ old('geoArea') == $geoAreaChild->id ? 'selected' : '' }}>&nbsp;&nbsp;{{ $geoAreaChild->translate(App::getLocale(), true)->name }}</option>
+                        @endforeach
                     @endforeach
                 </select>
             </div>
