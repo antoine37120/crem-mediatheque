@@ -3,7 +3,7 @@
     <div class="d-block d-lg-none card-track bg-transparent position-relative" >
         <div class="w-75">
             <div class="position-relative" style="width: fit-content">
-                <img src="{{ url('storage/'.$track->picture) }}" class="card-img-top rounded border border-dark border-2" alt="..." style="background: {{ $track->randomColor() }};"/>
+                <img src="{{ url('storage/'.$track->picture) }}" class="card-img-top rounded border border-dark border-2" alt="..." style="background: {{ $track->getHexaColor() }};"/>
                 <div class="position-absolute top-0 start-0 text-white pe-1">
                 {{ $track->year }}
                 </div>
@@ -28,7 +28,7 @@
     <div class="d-none d-lg-block card-track bg-transparent position-relative" >
         <div class="w-75">
             <div class="position-relative" style="width: fit-content">
-                <img src="{{ url('storage/'.$track->picture) }}" class="card-img-top rounded border border-dark border-2" alt="..." style="background: {{ $track->randomColor() }};"/>
+                <img src="{{ url('storage/'.$track->picture) }}" class="card-img-top rounded border border-dark border-2" alt="..." style="background: {{ $track->getHexaColor() }};" width="150" height="150"/>
                 <div class="position-absolute top-0 start-0 text-white ps-1">
                 {{ $track->year }}
                 </div>

@@ -52,13 +52,28 @@ class AudioItem extends Model implements TranslatableContract
         "color"
     ];
 
+
+
+
     /**
      * Get random color for entity.
      */
-    public function randomColor() {
-        $conf_colors = config('custom.items_colors');
-        return Arr::random($conf_colors) ;
+    public function setRandomColor() {
+        if($this->color == null) {
+            $nb_colors = sizeof(config('custom.items_colors')) ;
+            $this->color = rand(0, $nb_colors-1);
+        }
+        //return Arr::random($conf_colors) ;
 
+    }
+
+    public function getHexaColor() {
+        $colors = config('custom.items_colors');
+        if($this->color == null) {
+            $this->setRandomColor() ;
+        }
+
+        return $colors[$this->color] ;
     }
 
     public function durationFormated() {
@@ -110,6 +125,7 @@ class AudioItem extends Model implements TranslatableContract
         Storage::delete('audio-item-image/'.$log->key.'_bg.png');
 
         $this->picture = $pathFile;
+        $this->setRandomColor() ;
         $this->save() ;
 
 

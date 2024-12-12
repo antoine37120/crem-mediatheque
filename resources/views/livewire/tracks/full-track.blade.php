@@ -6,7 +6,7 @@
             <div class="col-12 mb-4">
                 <div class="position-relative m-auto" style="width: fit-content">
                     {{--  --}}
-                    <img src="{{ url('storage/'.$track->picture) }}" class="card-img-top border rounded" alt="..." style="background: {{ $track->randomColor() }};"/>
+                    <img src="{{ url('storage/'.$track->picture) }}" class="card-img-top border rounded" alt="..." style="background: {{ $track->getHexaColor() }};"/>
                     <div class="position-absolute top-0 start-0 ps-1 pt-0 text-white">
                         {{ $track->year }}
                     </div>
@@ -36,7 +36,7 @@
             {{-- style="width: 18rem;" --}}
             {{-- row --}}
             <div class="col-2 position-relative px-3" style="height: fit-content; width: fit-content">
-                    <img src="{{ url('storage/'.$track->picture) }}" class="card-img-top rounded" alt="..." style="background: {{ $track->randomColor() }};" width="150" height="150"/>
+                    <img src="{{ url('storage/'.$track->picture) }}" class="card-img-top rounded" alt="..." style="background: {{ $track->getHexaColor() }};" width="150" height="150"/>
                     <div class="position-absolute top-0 start-0 ps-4 pt-0 text-white">
                         {{ $track->year }}
                     </div>
