@@ -18,7 +18,10 @@ class Playlist extends Model implements TranslatableContract
     use Translatable;
 
     public $translatedAttributes = ['name', 'description'];
-
+    
+    protected $casts = [
+        'published' => 'boolean',
+    ];
 
     /**
      * The attributes that are mass assignable.
@@ -30,6 +33,7 @@ class Playlist extends Model implements TranslatableContract
         'description',*/
         'type_id',
         'picture',
+        'published',
     ];
 
 

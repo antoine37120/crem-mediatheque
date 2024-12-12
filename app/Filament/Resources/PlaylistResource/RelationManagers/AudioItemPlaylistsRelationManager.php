@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Log;
 use App\Models\AudioItem;
 use App\Filament\Imports\AudioItemImporter;
 use Filament\Tables\Actions\ImportAction;
+use Illuminate\Support\Collection;
 
 class AudioItemPlaylistsRelationManager extends RelationManager
 {
@@ -44,9 +45,12 @@ class AudioItemPlaylistsRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make('audio_item.original_name')->label('Original name')
                 ->sortable(),
                 Tables\Columns\TextColumn::make('audio_item.name')->label('Name')
+                ->toggleable(isToggledHiddenByDefault: true)
                 ->sortable(),
                 Tables\Columns\TextColumn::make('sort')
                 ->sortable(),
+                
+                Tables\Columns\ToggleColumn::make('audio_item.published'),
             ])
             ->defaultSort('sort')
             ->defaultPaginationPageOption(25)
@@ -71,6 +75,22 @@ class AudioItemPlaylistsRelationManager extends RelationManager
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\BulkAction::make('publish')
+                    ->requiresConfirmation()
+                    ->action(function (Collection $records): void {
+                        foreach ($records as $record) {
+                            $record->audio_item->published = true;
+                            $record->audio_item->save();
+                        }
+                    }),
+                    Tables\Actions\BulkAction::make('unpublish')
+                    ->requiresConfirmation()
+                    ->action(function (Collection $records): void {
+                        foreach ($records as $record) {
+                            $record->audio_item->published = false;
+                            $record->audio_item->save();
+                        }
+                    }),
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);

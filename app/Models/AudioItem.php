@@ -25,6 +25,11 @@ class AudioItem extends Model implements TranslatableContract
 
     public $translatedAttributes = ['name', 'description'];
 
+    
+    protected $casts = [
+        'published' => 'boolean',
+    ];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -42,7 +47,9 @@ class AudioItem extends Model implements TranslatableContract
         'picture',
         'cote',
         'link',
-        'original_name'
+        'original_name',
+        "published",
+        "color"
     ];
 
     /**

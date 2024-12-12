@@ -4,12 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
 
-class GeographicalArea extends Model implements TranslatableContract
+class GeographicalAreaContinent extends Model implements TranslatableContract
 {
+    
     use HasFactory;
     use Translatable;
 
@@ -24,17 +25,12 @@ class GeographicalArea extends Model implements TranslatableContract
      * @var array<int, string>
      */
     protected $fillable = [
-        'region_code',
-        'geographical_area_continent_id',
+        'continent_code',
     ];
 
-
     
-    /**
-     * Get the audio item's geographical area.
-     */
-    public function geographical_area_continent(): BelongsTo
+    public function geographical_areas(): HasMany
     {
-        return $this->belongsTo(\App\Models\GeographicalAreaContinent::class)->withDefault();
+        return $this->hasMany(\App\Models\GeographicalArea::class, 'geographical_area_continent_id', 'id');
     }
 }

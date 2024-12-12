@@ -7,6 +7,7 @@ export default defineConfig({
             input: [
                 'resources/sass/app.scss', // Our new line you can change app.scss to whatever.scss
                 'resources/js/app.js',
+                `resources/css/filament/crem-admin/theme.css`,
             ],
             refresh: true,
         }),

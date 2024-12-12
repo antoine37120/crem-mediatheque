@@ -19,6 +19,11 @@ use CactusGalaxy\FilamentAstrotomic\TranslatableTab;
 use Filament\Tables\Filters\SelectFilter;
 use App\Models\GeographicalArea;
 use Illuminate\Contracts\Support\Htmlable;
+use Filament\Forms\Components\Toggle;
+use Filament\Tables\Columns\ToggleColumn;
+use Filament\Tables\Filters\Filter;
+use Illuminate\Support\Collection;
+use Awcodes\Palette\Forms\Components\ColorPicker;
 
 class AudioItemResource extends Resource
 {
@@ -36,6 +41,12 @@ class AudioItemResource extends Resource
 
     public static function form(Form $form): Form
     {
+        $conf_colors = config('custom.items_colors');
+        /*$options_colors = [];
+        foreach($conf_colors as $key => $color ) {
+            $options_colors[$color] = $color ;
+        }*/
+
         return $form
             ->schema([
                 TranslatableTabs::make()->columnSpan(2)
@@ -62,6 +73,8 @@ class AudioItemResource extends Resource
                         }
                     }),*/
                 ]),
+                Toggle::make('published')
+                ->inline(false),
                 Forms\Components\TextInput::make('cote')
                     ->required(),
                 Forms\Components\TextInput::make('original_name'),
@@ -80,8 +93,8 @@ class AudioItemResource extends Resource
                 ),
                 Forms\Components\FileUpload::make('file')
                     ->preserveFilenames(),
-                Forms\Components\Textarea::make('interpreters')
-                    ->columnSpanFull(),
+                Forms\Components\Textarea::make('interpreters'),
+                    //->columnSpanFull(),
                 Forms\Components\TextInput::make('collector')
                     ->required()
                     ->maxLength(255),
@@ -90,14 +103,34 @@ class AudioItemResource extends Resource
                 ->preserveFilenames()
                 ->directory('audio-item-image')
                 ->required(),
+                /*Forms\Components\Select::make('color')
+                ->options($options_colors)
+                ->native(false)
+                ->allowHtml(),*/
+
+                ColorPicker::make('color')
+                ->colors($conf_colors)
+                ->storeAsKey(),
             ]);
     }
 
     public static function table(Table $table): Table
     {
+        
+
         return $table
             ->columns([
-                Tables\Columns\ImageColumn::make('picture')->label('Un label')
+                Tables\Columns\ColorColumn::make('color') 
+                ->state(function (AudioItem $record): string {
+                    $conf_colors = config('custom.items_colors');
+                    if($record->color != null){
+                        return $conf_colors[$record->color] ;
+                    } else {
+                        return '#ddd' ;
+                    }
+                    
+                }),
+                Tables\Columns\ImageColumn::make('picture')->label('Wave')
                 //->disk('public')
                 ->extraImgAttributes(['style' => 'background:black;'])
                 /*->width(50)*/,
@@ -123,6 +156,7 @@ class AudioItemResource extends Resource
                 Tables\Columns\TextColumn::make('collector')
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
+                ToggleColumn::make('published'),
                 /*Tables\Columns\TextColumn::make('picture')
                     ->searchable(),*/
                 Tables\Columns\TextColumn::make('created_at')
@@ -140,12 +174,33 @@ class AudioItemResource extends Resource
                 ->options(
                     GeographicalArea::listsTranslations('name')->get()->pluck('name', 'id')
                 ),
+                SelectFilter::make('published')
+                ->options([
+                    '0' => 'Reviewing',
+                    '1' => 'Published',
+                ])
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\BulkAction::make('publish')
+                    ->requiresConfirmation()
+                    ->action(function (Collection $records): void {
+                        foreach ($records as $record) {
+                            $record->published = true;
+                            $record->save();
+                        }
+                    }),
+                    Tables\Actions\BulkAction::make('unpublish')
+                    ->requiresConfirmation()
+                    ->action(function (Collection $records): void {
+                        foreach ($records as $record) {
+                            $record->published = false;
+                            $record->save();
+                        }
+                    }),
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);

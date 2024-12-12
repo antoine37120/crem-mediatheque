@@ -16,6 +16,10 @@ use Filament\Forms\Components\FileUpload;
 use CactusGalaxy\FilamentAstrotomic\Resources\Concerns\ResourceTranslatable;
 use CactusGalaxy\FilamentAstrotomic\Forms\Components\TranslatableTabs;
 use CactusGalaxy\FilamentAstrotomic\TranslatableTab;
+use Filament\Forms\Components\Toggle;
+use Filament\Tables\Columns\ToggleColumn;
+use Filament\Tables\Filters\Filter;
+use Illuminate\Support\Collection;
 
 class PlaylistResource extends Resource
 {
@@ -57,6 +61,9 @@ class PlaylistResource extends Resource
                         }
                     }),*/
                 ]),
+                
+                Toggle::make('published')
+                ->inline(false),
                 Forms\Components\Select::make('type_id')
                     ->default(1)
                     ->required()
@@ -78,6 +85,7 @@ class PlaylistResource extends Resource
                 Tables\Columns\TextColumn::make('translation.name')->label('Name'),
                 Tables\Columns\TextColumn::make('picture')
                     ->searchable(),
+                ToggleColumn::make('published'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

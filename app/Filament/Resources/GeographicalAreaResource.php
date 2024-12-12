@@ -69,6 +69,7 @@ class GeographicalAreaResource extends Resource
                 Tables\Columns\TextColumn::make('translations.name')->toggleable(isToggledHiddenByDefault: true)
                 ->searchable(),
                 Tables\Columns\TextColumn::make('translation.name')->label('Name'),
+                Tables\Columns\TextColumn::make('geographical_area_continent.translation.name')->label('Continent'),
                  
                 /*Tables\Columns\TextColumn::make('locales')
                     ->state(function (GeographicalArea $record): array {
