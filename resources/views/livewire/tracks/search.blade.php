@@ -1,6 +1,7 @@
 <div>
     {{-- In work, do what you enjoy. --}}
-    <div class="row g-5 my-3 mx-0 mb-5">
+    <div class="row g-5 mx-0 mt-1 mb-5">
+        {{-- my-3 --}}
         <form wire:submit="playSearch">
             <input type="hidden" name="q" value="{{ $search }}">
         <div class="row g-5">
@@ -36,19 +37,19 @@
             <div class="">Searching</div>
         </div>
         <div wire:loading.remove>
-            
+
         @if(sizeof($tracks) == 0)
-            <div class="col px-1">                
-                <div class="alert alert-light border-0" role="alert">                
-                    <h4 class="alert-heading">Aucun resultat</h4>                
-                    <p>{{ $search }}</p>                         
+            <div class="col px-1">
+                <div class="alert alert-light border-0" role="alert">
+                    <h4 class="alert-heading">Aucun resultat</h4>
+                    <p>{{ $search }}</p>
                 </div>
             </div>
         @endif
 
         </div>
     </div>
-    
+
     <div class="row align-items-start g-5">
 
     @foreach ($tracks as $track)

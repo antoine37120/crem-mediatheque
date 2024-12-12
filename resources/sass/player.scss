@@ -1,4 +1,5 @@
 .player-desktop {
+    bottom: 0px;
     max-height: 200px;
 }
 
@@ -14,18 +15,14 @@
 }
 
 .tracklist {
-    padding: 0 10px;
-    bottom: 284px;
-    @media (max-width: 992px) {
-        position: absolute;
-        bottom: 215px;
-    }
+    padding: 0;
+    // padding: 0 10px;
+    position: absolute;
+    bottom: 100%;
 }
 
 .player-mobile {
-    position: absolute;
-    bottom: 51.5px;
-    div {
+    &>div {
         padding: 0 10px;
     }
 }
@@ -39,5 +36,11 @@
 // .player-mobile h5 {
 //      overflow: hidden;
 //      text-overflow: ellipsis " [..]";
-//     //  text-wrap: nowrap;
+//     //  text-wrap: nowraaxp;
 //  }
+@media (max-width: 991px) {
+    .footer-wrapper {
+      left: 2%;
+      width: 96%;
+    }
+  }
