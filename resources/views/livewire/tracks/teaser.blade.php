@@ -16,7 +16,7 @@
             </div>
         </div>
 
-        <div class="py-2 w-75">
+        <div class="py-2 w-100">
             <h5 class="card-title"><a  href="{{route('track', ['audioItem' => $track->id])}}" class="text-black text-decoration-none fw-bold" wire:navigate>{{ Illuminate\Support\Str::limit($track->translate(App::getLocale(), true)->name, 45, '...') }}</a></h5>
             <p class="fs-6">{{ $track->geographicalArea->translate(App::getLocale(), true)->name }}</p>
 
@@ -40,9 +40,9 @@
                 </div>
             </div>
         </div>
-        <div class="py-2 w-75">
+        <div class="py-2 w-100">
 
-            <h5 class="card-title"><a  href="{{route('track', ['audioItem' => $track->id])}}" class="text-black text-decoration-none fw-bold" wire:navigate>{{ Illuminate\Support\Str::limit($track->translate(App::getLocale(), true)->name, 45, '...') }}</a></h5>
+            <h5 class="card-title"><a  href="{{route('track', ['audioItem' => $track->id])}}" class="text-black text-decoration-none fw-bold" wire:navigate>{{ Illuminate\Support\Str::limit($track->translate(App::getLocale(), true)->name, 50, '...') }}</a></h5>
             <p class="fs-6">{{ $track->geographicalArea->translate(App::getLocale(), true)->name }}</p>
 
         </div>

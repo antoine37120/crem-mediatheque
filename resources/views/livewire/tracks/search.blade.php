@@ -63,7 +63,7 @@
     <div class="row align-items-start g-5 mx-0">
 
     @foreach ($tracks as $track)
-        <div class="col-sm-3 px-5" id="audio-{{ $track->id }}-searchrch-wrap">
+        <div class="col-sm-6 col-lg-4 col-xxl-3 px-5" id="audio-{{ $track->id }}-searchrch-wrap">
            <livewire:tracks.teaser :track="$track" wire:key="audio-search-{{ $track->id }}" />
         </div>
     @endforeach
