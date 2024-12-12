@@ -19,6 +19,9 @@ class Tracklist extends Component
     #[Session(key: 'playlist_play_id')] 
     public $item_play = 'none';
 
+    #[Session(key: 'track_nav_data')] 
+    public $track_nav_data = [];
+
     public $playlist_items = [] ;
 
     public $start_play_id = 0 ;
@@ -49,14 +52,26 @@ class Tracklist extends Component
 
     }
 
-    /**
-     * Triggered when a track is added to the playlist.
-     *
-     * @param int $id The id of the track to add.
-     *
-     * The added track is added to the playlist items and the event 'playlist-items-list-refresh' is dispatched.
-     * The 'playlist_items' property is then refreshed.
-     */
+    #[On('add-search-to-playlist')] 
+    public function updateTrackListWithSearch()
+    {
+        $audioItems = $this->track_nav_data ;
+        foreach($audioItems as $item){
+            $this->updateTrackList($item) ;
+        } 
+    }
+
+    #[On('add-search-to-playlist-random')] 
+    public function updateTrackListWithSearchRandom()
+    {
+        
+        $audioItems = Arr::shuffle($this->track_nav_data) ;
+        foreach($audioItems as $item){
+            $this->updateTrackList($item) ;
+        } 
+        
+    }
+
     #[On('add-playlist-to-playlist')] 
     public function updateTrackListWithPlaylist($id)
     {
@@ -66,14 +81,7 @@ class Tracklist extends Component
             $this->updateTrackList($item->audio_item->id) ;
         } 
     }
-    /**
-     * Triggered when a playlist is added to the playlist in random mode.
-     *
-     * @param int $id The id of the track to add.
-     *
-     * The added track is added to the playlist items and the event 'playlist-items-list-refresh' is dispatched.
-     * The 'playlist_items' property is then refreshed.
-     */
+
     #[On('add-playlist-to-playlist-random')] 
     public function updateTrackListWithPlaylistRandom($id)
     {
