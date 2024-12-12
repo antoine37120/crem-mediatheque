@@ -29,7 +29,6 @@ class GeographicalArea extends Model implements TranslatableContract
      */
     protected $fillable = [
         'region_code',
-        'geographical_area_continent_id',
         'parent_id',
         'sort',
     ];
@@ -53,12 +52,5 @@ class GeographicalArea extends Model implements TranslatableContract
          return 'region_code';
      }
 
-    
-    /**
-     * Get the audio item's geographical area.
-     */
-    public function geographical_area_continent(): BelongsTo
-    {
-        return $this->belongsTo(\App\Models\GeographicalAreaContinent::class)->withDefault();
-    }
+
 }
