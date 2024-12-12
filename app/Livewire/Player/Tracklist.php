@@ -157,7 +157,12 @@ class Tracklist extends Component
             $playlist_items = AudioItem::whereIn('id', $this->items_ids)->get();
             $collection = $playlist_items->keyBy('id');
             foreach ($this->items_ids as $key => $value) {
-                $this->playlist_items [] = $collection->get($value); 
+                if(AudioItem::find($value) != null) {
+                    $this->playlist_items [] = $collection->get($value);
+                } else {
+                    //need to delete old item from session
+                    unset($this->items_ids[$key]) ;
+                }
             }
 
         }
@@ -178,13 +183,16 @@ class Tracklist extends Component
         if($this->item_play == '') {
             $this->item_play = 'none' ;
         }
-        Log::debug($this->items_ids) ;
-        Log::debug($this->item_play) ;
+        if(AudioItem::find($this->item_play) == null) {
+            $this->item_play = 'none' ;
+        }
+        //Log::debug($this->items_ids) ;
+        //Log::debug($this->item_play) ;
         $this->playlist_items(false) ; // dont need refresh on init process
 
         $this->start_play_id = $this->item_play ;
         
-        Log::debug($this->playlist_items) ;
+        //Log::debug($this->playlist_items) ;
     }
 
 
