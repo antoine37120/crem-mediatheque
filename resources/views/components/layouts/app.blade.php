@@ -31,10 +31,9 @@
                 <div class="primary-section col-12 col-lg-9 col-xl-10 ox-auto pb-1">
                     <header class="py-4 px-1 text-white">{{ $title ?? 'Page Title' }}</header>
                     {{-- Main --}}
-                    <div class="main-of-page">{{ $slot }}</div>
+                    <div class="main-of-page pr-3">{{ $slot }}</div>
                     {{-- Player --}}
-                    <div class="footer-wrapper position-fixed bottom-0 col-lg-10">
-                        {{-- en dessous taille ecran lg, 96% de large, position à gauche 2% / voire supprim col-12 ? --}}
+                    <div class="footer-wrapper position-fixed col-lg-9 col-xl-10 bottom-0 pr-1">
                         <div class="player-section position-relative mx-2 mx-lg-0">
                         @persist('player')
                         <livewire:player.commands />
