@@ -138,6 +138,33 @@ class Tracklist extends Component
         $this->playlist_items() ;
     }
 
+    
+    /**
+     * Triggered when a track is added to the playlist.
+     *
+     * @param int $id The id of the track to add.
+     *
+     * The added track is added to the playlist items and the event 'playlist-items-list-refresh' is dispatched.
+     * The 'playlist_items' property is then refreshed.
+     */
+    #[On('reset-play-track-to-playlist')] 
+    public function resetPlayTrackList($id)
+    {
+        $this->items_ids = [];
+        
+        
+        $this->item_play = $id;
+        Log::debug($id) ;
+        if (!in_array($id, $this->items_ids)) {
+            $this->items_ids [] = $id ;
+            $this->playlist_items(true) ;
+        } 
+
+        $this->dispatch('playlist-plaiyed-item-deleted');
+        $this->dispatch('launch_play', trackToPlay: $id);
+        
+    }
+
     /**
      * Updates the playlist_items session variable by querying the database
      * with the current items_ids session variable.
