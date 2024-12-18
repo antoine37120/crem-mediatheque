@@ -19,16 +19,9 @@
     // padding: 0 10px;
     position: absolute;
     bottom: 100%;
-<<<<<<< HEAD
     width: 100%;
     @media (min-width: 992px) {
         width: 96%;
-=======
-   
-    .playlist-table-wrapper {
-        overflow-y: auto;
-        max-height: calc(100vh - 150px);
->>>>>>> be8c1917406bd634db102535208f4031940d1526
     }
 }
 
@@ -42,6 +35,7 @@
         width: 96%;
     }
 }
+
 .player-mobile {
     &>div {
         padding: 0 10px;
