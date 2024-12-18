@@ -124,9 +124,14 @@ class AudioItemResource extends Resource
                 ->state(function (AudioItem $record): string {
                     $conf_colors = config('custom.items_colors');
                     if($record->color != null){
+                        $record->getHexaColor();
+                        $record->save() ;
                         return $conf_colors[$record->color] ;
                     } else {
-                        return '#ddd' ;
+                        
+                        $record->getHexaColor();
+                        $record->save() ;
+                        return $conf_colors[$record->color] ;
                     }
                     
                 }),

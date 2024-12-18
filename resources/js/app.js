@@ -5,11 +5,14 @@ import sort from '@alpinejs/sort'
  
 window.Alpine.plugin(sort)
 import WaveSurfer from 'wavesurfer.js'
-
-
+window.track_to_play = false;
 window.Livewire.hook('morph.added',  ({ el }) => {
     if (el.hasAttribute('data-track-id') ) {
         window.loadLinksList() ;
+        if(window.track_to_play) {
+            window.initWithTrack(window.track_to_play, true) ;
+            window.track_to_play = frameElement;
+        }
     }
 }) 
 window.Livewire.hook('morph.removed', ({ el, component }) => {
@@ -47,6 +50,10 @@ window.catchOrdering = function() {
     window.loadLinksList() ;
 }
 
+window.Livewire.on('launch_play', (event) => {
+    // Set window value to current track to play.
+    window.track_to_play = event.trackToPlay ;
+});
 
 let isFirstItem = true ;
 /*
@@ -96,14 +103,14 @@ window.loadLinksList = function() {
     //window.refreshLinks();  
 }
 // Inti playlist and player with track
-window.initWithTrack = function(id) {
+window.initWithTrack = function(id, force_play = false) {
     isFirstItem = false ;
     console.log('initWithTrack') ;
     links = document.querySelectorAll('#playlist tr');
     Array.prototype.forEach.call(links, function(link, index) {
         let trackId = links[index].getAttribute('data-track-id');
         if (trackId == id) {
-            window.setCurrentSong(trackId);
+            window.setCurrentSong(trackId, force_play);
         }   
     });
 }

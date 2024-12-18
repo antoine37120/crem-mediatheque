@@ -19,6 +19,9 @@ class Tracklist extends Component
     #[Session(key: 'playlist_play_id')] 
     public $item_play = 'none';
 
+    #[Session(key: 'track_nav_data')] 
+    public $track_nav_data = [];
+
     public $playlist_items = [] ;
 
     public $start_play_id = 0 ;
@@ -49,14 +52,26 @@ class Tracklist extends Component
 
     }
 
-    /**
-     * Triggered when a track is added to the playlist.
-     *
-     * @param int $id The id of the track to add.
-     *
-     * The added track is added to the playlist items and the event 'playlist-items-list-refresh' is dispatched.
-     * The 'playlist_items' property is then refreshed.
-     */
+    #[On('add-search-to-playlist')] 
+    public function updateTrackListWithSearch()
+    {
+        $audioItems = $this->track_nav_data ;
+        foreach($audioItems as $item){
+            $this->updateTrackList($item) ;
+        } 
+    }
+
+    #[On('add-search-to-playlist-random')] 
+    public function updateTrackListWithSearchRandom()
+    {
+        
+        $audioItems = Arr::shuffle($this->track_nav_data) ;
+        foreach($audioItems as $item){
+            $this->updateTrackList($item) ;
+        } 
+        
+    }
+
     #[On('add-playlist-to-playlist')] 
     public function updateTrackListWithPlaylist($id)
     {
@@ -66,14 +81,7 @@ class Tracklist extends Component
             $this->updateTrackList($item->audio_item->id) ;
         } 
     }
-    /**
-     * Triggered when a playlist is added to the playlist in random mode.
-     *
-     * @param int $id The id of the track to add.
-     *
-     * The added track is added to the playlist items and the event 'playlist-items-list-refresh' is dispatched.
-     * The 'playlist_items' property is then refreshed.
-     */
+
     #[On('add-playlist-to-playlist-random')] 
     public function updateTrackListWithPlaylistRandom($id)
     {
@@ -130,6 +138,33 @@ class Tracklist extends Component
         $this->playlist_items() ;
     }
 
+    
+    /**
+     * Triggered when a track is added to the playlist.
+     *
+     * @param int $id The id of the track to add.
+     *
+     * The added track is added to the playlist items and the event 'playlist-items-list-refresh' is dispatched.
+     * The 'playlist_items' property is then refreshed.
+     */
+    #[On('reset-play-track-to-playlist')] 
+    public function resetPlayTrackList($id)
+    {
+        $this->items_ids = [];
+        
+        
+        $this->item_play = $id;
+        Log::debug($id) ;
+        if (!in_array($id, $this->items_ids)) {
+            $this->items_ids [] = $id ;
+            $this->playlist_items(true) ;
+        } 
+
+        $this->dispatch('playlist-plaiyed-item-deleted');
+        $this->dispatch('launch_play', trackToPlay: $id);
+        
+    }
+
     /**
      * Updates the playlist_items session variable by querying the database
      * with the current items_ids session variable.
@@ -149,7 +184,12 @@ class Tracklist extends Component
             $playlist_items = AudioItem::whereIn('id', $this->items_ids)->get();
             $collection = $playlist_items->keyBy('id');
             foreach ($this->items_ids as $key => $value) {
-                $this->playlist_items [] = $collection->get($value); 
+                if(AudioItem::find($value) != null) {
+                    $this->playlist_items [] = $collection->get($value);
+                } else {
+                    //need to delete old item from session
+                    unset($this->items_ids[$key]) ;
+                }
             }
 
         }
@@ -170,13 +210,16 @@ class Tracklist extends Component
         if($this->item_play == '') {
             $this->item_play = 'none' ;
         }
-        Log::debug($this->items_ids) ;
-        Log::debug($this->item_play) ;
+        if(AudioItem::find($this->item_play) == null) {
+            $this->item_play = 'none' ;
+        }
+        //Log::debug($this->items_ids) ;
+        //Log::debug($this->item_play) ;
         $this->playlist_items(false) ; // dont need refresh on init process
 
         $this->start_play_id = $this->item_play ;
         
-        Log::debug($this->playlist_items) ;
+        //Log::debug($this->playlist_items) ;
     }
 
 

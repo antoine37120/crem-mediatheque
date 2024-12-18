@@ -18,6 +18,10 @@
                             <option value="">Zone géographique</option>
                     @foreach($geoAreas as $geoArea)
                         <option value="{{ $geoArea->id }}" {{ old('geoArea') == $geoArea->id ? 'selected' : '' }}>{{ $geoArea->translate(App::getLocale(), true)->name }}</option>
+                        
+                        @foreach($geoArea->childs as $geoAreaChild)
+                            <option value="{{ $geoAreaChild->id }}" {{ old('geoArea') == $geoAreaChild->id ? 'selected' : '' }}>&nbsp;&nbsp;{{ $geoAreaChild->translate(App::getLocale(), true)->name }}</option>
+                        @endforeach
                     @endforeach
                 </select>
             </div>
@@ -32,28 +36,34 @@
         </div>
         </form>
     </div>
-    <div class="row align-items-start g-5">
-        <div wire:loading>
-            <div class="">Searching</div>
-        </div>
-        <div wire:loading.remove>
-
-        @if(sizeof($tracks) == 0)
-            <div class="col px-1">
-                <div class="alert alert-light border-0" role="alert">
-                    <h4 class="alert-heading">Aucun resultat</h4>
-                    <p>{{ $search }}</p>
-                </div>
+    <div class="row align-items-start g-5 mx-0">
+        <div class="col">
+            <div wire:loading>
+                <div class="">Searching</div>
             </div>
-        @endif
+            <div wire:loading.remove>
 
+            @if(sizeof($tracks) == 0)
+                <div class="px-1">
+                    <div class="alert alert-light border-0" role="alert">
+                        <h4 class="alert-heading">Aucun resultat</h4>
+                        <p>{{ $search }}</p>
+                    </div>
+                </div>
+            @else 
+            <div class="px-1 pe-4 mb-5">
+                <livewire:tracks.search-actions wire:key="audio-search-actions" />
+            </div>
+            @endif
+
+            </div>
         </div>
     </div>
 
-    <div class="row align-items-start g-5">
+    <div class="row align-items-start g-5 mx-0">
 
     @foreach ($tracks as $track)
-        <div class="col-sm-3 px-5" id="audio-{{ $track->id }}-searchrch-wrap">
+        <div class="col-sm-6 col-lg-4 col-xxl-3 px-5" id="audio-{{ $track->id }}-searchrch-wrap">
            <livewire:tracks.teaser :track="$track" wire:key="audio-search-{{ $track->id }}" />
         </div>
     @endforeach

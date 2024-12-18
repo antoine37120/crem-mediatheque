@@ -19,9 +19,16 @@
     // padding: 0 10px;
     position: absolute;
     bottom: 100%;
+<<<<<<< HEAD
     width: 100%;
     @media (min-width: 992px) {
         width: 96%;
+=======
+   
+    .playlist-table-wrapper {
+        overflow-y: auto;
+        max-height: calc(100vh - 150px);
+>>>>>>> be8c1917406bd634db102535208f4031940d1526
     }
 }
 
@@ -44,6 +51,23 @@
 .img-track-player {
     width: 100px;
     height: 100px;
+}
+#playlist-show {
+
+    .bi-chevron-compact-up {
+        display: inline;
+    }
+    .bi-chevron-compact-down {
+        display: none;
+    }
+    &.expanded {
+        .bi-chevron-compact-up {
+            display: none;
+        }
+        .bi-chevron-compact-down {
+            display: inline;
+        }
+    }
 }
 
 // titre et area player:
