@@ -1,8 +1,8 @@
 <div>
     {{-- Mobile only --}}
     <div class="d-block d-lg-none card-track bg-transparent position-relative" >
-        <div class="w-75">
-            <div class="position-relative" style="width: fit-content">
+        <div class="row">
+            <div class="col-8 position-relative" style="width: fit-content">
                 <img src="{{ url('storage/'.$track->picture) }}" class="card-img-top rounded border border-dark border-2" alt="..." style="background: {{ $track->getHexaColor() }};"/>
                 <div class="position-absolute top-0 start-0 text-white pe-1">
                 {{ $track->year }}
@@ -22,6 +22,7 @@
                     </a>
                 </div>
             </div>
+            <div class="col-4">actions</div>
         </div>
 
         <div class="py-2 w-100">

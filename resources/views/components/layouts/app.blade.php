@@ -34,7 +34,7 @@
                     <div class="main-of-page pr-3">{{ $slot }}</div>
                     {{-- Player --}}
                     <div class="footer-wrapper position-fixed col-lg-9 col-xl-10 bottom-0 pr-1">
-                        <div class="player-section position-relative mx-2 mx-lg-0">
+                        <div class="player-section position-relative mx-0 mx-lg-0 ps-0 ps-lg-3">
                         @persist('player')
                         <livewire:player.commands />
                         @endpersist
