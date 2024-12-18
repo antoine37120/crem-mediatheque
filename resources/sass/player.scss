@@ -23,6 +23,11 @@
     @media (min-width: 992px) {
         width: 96%;
     }
+
+    .playlist-table-wrapper {
+        overflow-y: auto;
+        max-height: calc(100vh - 150px);
+    }
 }
 
 .player-section {
