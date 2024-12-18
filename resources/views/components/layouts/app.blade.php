@@ -31,9 +31,9 @@
                 <div class="primary-section col-12 col-lg-9 col-xl-10 ox-auto pb-1">
                     <header class="py-4 px-1 text-white">{{ $title ?? 'Page Title' }}</header>
                     {{-- Main --}}
-                    <div class="main-of-page pr-3">{{ $slot }}</div>
+                    <div class="main-of-page pe-3">{{ $slot }}</div>
                     {{-- Player --}}
-                    <div class="footer-wrapper position-fixed col-lg-9 col-xl-10 bottom-0 pr-1">
+                    <div class="footer-wrapper position-fixed col-lg-9 col-xl-10 bottom-0 pe-3 pe-lg-0">
                         <div class="player-section position-relative mx-2 mx-lg-0">
                         @persist('player')
                         <livewire:player.commands />

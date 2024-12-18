@@ -26,7 +26,10 @@
 
     .playlist-table-wrapper {
         overflow-y: auto;
-        max-height: calc(100vh - 150px);
+        max-height: calc(100vh - 330px);
+        @media (min-width: 992px) {
+            max-height: calc(100vh - 200px);
+        }
     }
 }
 
@@ -48,8 +51,18 @@
 }
 
 .img-track-player {
-    width: 100px;
-    height: 100px;
+    width: 50px;
+    height: 50px;
+
+    .card-img-top  {
+        min-width: 50px;
+    }
+    
+    @media (min-width: 992px) {
+        width: 100px;
+        height: 100px;
+        min-width: 100px;
+    }
 }
 #playlist-show {
 
@@ -88,7 +101,7 @@
 .gallery-container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 1fr auto;
     gap: 1rem;
     margin: 1rem;
   }
@@ -103,8 +116,8 @@
     grid-row: span 1;
     @media (min-width: 992px) {
         padding-left: 0.5rem;
-        }
     }
+}
 
 
     .item2 {

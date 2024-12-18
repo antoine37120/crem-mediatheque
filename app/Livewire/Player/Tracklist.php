@@ -78,7 +78,7 @@ class Tracklist extends Component
         Log::debug($id) ;
         $audioItems = AudioItemPlaylist::where('playlist_id', $id)->get();
         foreach($audioItems as $item){
-            $this->updateTrackList($item->audio_item->id) ;
+            $this->updateTrackList($item->audio_item_id) ;
         } 
     }
 

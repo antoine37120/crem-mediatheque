@@ -120,10 +120,16 @@ let currentTrack = 0;
 console.log(window) ;
 window.initPlayer = function() {
     console.log('initPlayer') ;
+    let width = document.querySelector('body').offsetWidth ;
+    let player_height = 20 ;
+    console.log(width) ;
+    if (width >= 992) {
+        player_height = 70 ;
+    }
     window.wavesurfer = WaveSurfer.create(
         {
             "container": "#player-progress-bar",
-            "height": 70,
+            "height": player_height,
             "width": "100%",
             "splitChannels": false,
             "normalize": false,
