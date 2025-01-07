@@ -61,6 +61,14 @@ img.rounded {
     min-width: 100px;
     max-width: 150px;
     border: 2px solid black !important;
+    // @media (max-width: 991px) {
+    //     width: 75px;
+    //     height: 75px;
+    // }
+    // @media (min-width: 992px) {
+    //     min-width: 100px;
+    //     max-width: 150px;
+    // }
 }
 
 .page-title {

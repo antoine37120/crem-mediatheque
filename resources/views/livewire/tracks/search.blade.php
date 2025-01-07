@@ -1,39 +1,38 @@
 <div>
-    {{-- In work, do what you enjoy. --}}
-    <div class="row g-5 mx-0 mt-1 mb-5">
+    <div class="row g-5 mx-0 mt-1 mb-4">
         {{-- my-3 --}}
-        <form wire:submit="playSearch">
+        <form wire:submit="playSearch" class="mt-0">
             <input type="hidden" name="q" value="{{ $search }}">
-        <div class="row g-5">
-            <div class="col-sm-4 px-5">
-                <select class="form-select" name="year" wire:model.live="query_year">
-                            <option value="">Année</option>
-                    @foreach($years as $year)
-                        <option value="{{ $year->id }}" {{ old('year') == $year->id ? 'selected' : '' }}>{{ $year->translate(App::getLocale(), true)->name }}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="col-sm-4 px-5">
-                <select class="form-select" name="geoArea" wire:model.live="query_geoArea">
-                            <option value="">Zone géographique</option>
-                    @foreach($geoAreas as $geoArea)
-                        <option value="{{ $geoArea->id }}" {{ old('geoArea') == $geoArea->id ? 'selected' : '' }}>{{ $geoArea->translate(App::getLocale(), true)->name }}</option>
-                        
-                        @foreach($geoArea->childs as $geoAreaChild)
-                            <option value="{{ $geoAreaChild->id }}" {{ old('geoArea') == $geoAreaChild->id ? 'selected' : '' }}>&nbsp;&nbsp;{{ $geoAreaChild->translate(App::getLocale(), true)->name }}</option>
+            <div class="d-flex flex-column flex-md-row g-5">
+                <div class="col-8 col-sm-6 col-md-4 col-xl-3 m-auto px-md-5 py-2 py-md-0">
+                    <select class="form-select" name="year" wire:model.live="query_year">
+                                <option value="">Année</option>
+                        @foreach($years as $year)
+                            <option value="{{ $year->id }}" {{ old('year') == $year->id ? 'selected' : '' }}>{{ $year->translate(App::getLocale(), true)->name }}</option>
                         @endforeach
-                    @endforeach
-                </select>
+                    </select>
+                </div>
+                <div class="col-8 col-sm-6 col-md-4 col-xl-3 m-auto px-md-5 py-2 py-md-0">
+                    <select class="form-select" name="geoArea" wire:model.live="query_geoArea">
+                                <option value="">Zone</option>
+                        @foreach($geoAreas as $geoArea)
+                            <option value="{{ $geoArea->id }}" {{ old('geoArea') == $geoArea->id ? 'selected' : '' }}>{{ $geoArea->translate(App::getLocale(), true)->name }}</option>
+
+                            @foreach($geoArea->childs as $geoAreaChild)
+                                <option value="{{ $geoAreaChild->id }}" {{ old('geoArea') == $geoAreaChild->id ? 'selected' : '' }}>&nbsp;&nbsp;{{ $geoAreaChild->translate(App::getLocale(), true)->name }}</option>
+                            @endforeach
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-8 col-sm-6 col-md-4 col-xl-3 m-auto px-md-5 py-2 py-md-0">
+                    <select class="form-select" name="duration" wire:model.live="query_duration">
+                                <option value="">Durée</option>
+                        @foreach($durations as $duration)
+                            <option value="{{ $duration->id }}" {{ old('duration') == $duration->id ? 'selected' : '' }}>{{ $duration->translate(App::getLocale(), true)->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
             </div>
-            <div class="col-sm-4 px-5">
-                <select class="form-select" name="duration" wire:model.live="query_duration">
-                            <option value="">Durée</option>
-                    @foreach($durations as $duration)
-                        <option value="{{ $duration->id }}" {{ old('duration') == $duration->id ? 'selected' : '' }}>{{ $duration->translate(App::getLocale(), true)->name }}</option>
-                    @endforeach
-                </select>
-            </div>
-        </div>
         </form>
     </div>
     <div class="row align-items-start g-5 mx-0">
@@ -50,8 +49,8 @@
                         <p>{{ $search }}</p>
                     </div>
                 </div>
-            @else 
-            <div class="px-1 pe-4 mb-5">
+            @else
+            <div class="px-1 pe-4 mb-4 text-center">
                 <livewire:tracks.search-actions wire:key="audio-search-actions" />
             </div>
             @endif
@@ -64,7 +63,7 @@
 
     @foreach ($tracks as $track)
         <div class="col-sm-6 col-lg-4 col-xxl-3 px-5" id="audio-{{ $track->id }}-searchrch-wrap">
-           <livewire:tracks.teaser :track="$track" wire:key="audio-search-{{ $track->id }}" />
+            <livewire:tracks.teaser :track="$track" wire:key="audio-search-{{ $track->id }}" />
         </div>
     @endforeach
     </div>
