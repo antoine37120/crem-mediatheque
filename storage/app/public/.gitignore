@@ -1,2 +1,5 @@
-*
+/*
+!/logos
+!/logos/*
+!/logos/**
 !.gitignore
