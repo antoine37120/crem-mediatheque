@@ -2,7 +2,7 @@ import './bootstrap';
 import 'bootstrap';
 import '@popperjs/core';
 import sort from '@alpinejs/sort'
- 
+
 window.Alpine.plugin(sort)
 import WaveSurfer from 'wavesurfer.js'
 window.track_to_play = false;
@@ -14,11 +14,11 @@ window.Livewire.hook('morph.added',  ({ el }) => {
             window.track_to_play = frameElement;
         }
     }
-}) 
+})
 window.Livewire.hook('morph.removed', ({ el, component }) => {
-    
+
     if (el.hasAttribute('data-track-id') ) {
-        
+
         isFirstItem = false ;
         if (window.getCurrentTrackIndex() == null) {
             console.log(window.getCurrentTrackIndex()) ;
@@ -26,7 +26,7 @@ window.Livewire.hook('morph.removed', ({ el, component }) => {
             window.wavesurfer.stop();
             window.wavesurfer.empty();
             window.wavesurfer.destroy();
-            window.initPlayer() ;   
+            window.initPlayer() ;
             /*window.wavesurfer.load('')
             .catch((err) => {
               console.log('force init player');
@@ -63,9 +63,9 @@ let isFirstItem = true ;
 
 // listening if changes in playlist on add or remove itiem
 /*window.Livewire.on('playlist-items-list-refresh', () => {
-    
-    
-    
+
+
+
 });
 // listening if curent track played is deleted
 window.Livewire.on('playlist-plaiyed-item-deleted', () => {
@@ -73,7 +73,7 @@ window.Livewire.on('playlist-plaiyed-item-deleted', () => {
 });*/
 // add event on links of playlist and curent track. Called after all playlist changes.
 window.loadLinksList = function() {
-    
+
     console.log('loadLinksList') ;
     links = document.querySelectorAll('tbody#playlist tr');
     console.log(links) ;
@@ -83,7 +83,7 @@ window.loadLinksList = function() {
             console.log('Launched click on link') ;
             e.preventDefault();
             let trackId = link.getAttribute('data-track-id');
-            console.log(trackId) ;  
+            console.log(trackId) ;
             window.setCurrentSong(trackId, true); //  launch play
         });
     });
@@ -98,9 +98,9 @@ window.loadLinksList = function() {
         } else {
             window.setCurrentSong(trackId, false);
         }
-        
+
     }
-    //window.refreshLinks();  
+    //window.refreshLinks();
 }
 // Inti playlist and player with track
 window.initWithTrack = function(id, force_play = false) {
@@ -111,7 +111,7 @@ window.initWithTrack = function(id, force_play = false) {
         let trackId = links[index].getAttribute('data-track-id');
         if (trackId == id) {
             window.setCurrentSong(trackId, force_play);
-        }   
+        }
     });
 }
 window.wavesurfer = null ;
@@ -165,7 +165,7 @@ window.initPlayer = function() {
 
     })
 
-    
+
     let playPause = document.querySelector('#playPause');
     playPause.addEventListener('click', function() {
         console.log('click play/pause') ;
@@ -181,7 +181,7 @@ window.initPlayer = function() {
     window.wavesurfer.on('stop', function() {
         document.querySelector('#play').style.display = '';
         document.querySelector('#pause').style.display = 'none';
-        
+
         document.getElementById("player-progress-time-update").innerText = '';
         document.getElementById("player-progress-duration").innerText = '';
     });
@@ -194,7 +194,7 @@ window.initPlayer = function() {
         console.log('ready') ;
         //window.wavesurfer.play();
     });
-    
+
     window.wavesurfer.on('error', function(e) {
         console.warn(e);
     });
@@ -214,12 +214,12 @@ window.initPlayer = function() {
             //load the firs track from playlist
             window.setCurrentSong(links[0].getAttribute('data-track-id'), false);
         }
-        
+
     });
     window.wavesurfer.on('destroy', function() {
         document.querySelector('#play').style.display = '';
         document.querySelector('#pause').style.display = 'none';
-        
+
         document.getElementById("player-progress-time-update").innerText = '';
         document.getElementById("player-progress-duration").innerText = '';
     });
@@ -268,12 +268,12 @@ window.setCurrentSong = function(trackId, play = false) {
     //let trackId = links[currentTrack].getAttribute('data-track-id');
     if (play) {
         console.log('play') ;
-        
+
         window.wavesurfer.load(trackUrl).finally(() => {
             console.log('track loading completed launch play');
             window.wavesurfer.play();
           });
-        
+
     } else {
         window.wavesurfer.load(trackUrl).finally(() => {
             console.log('track loading completed but not play');
@@ -281,25 +281,25 @@ window.setCurrentSong = function(trackId, play = false) {
             document.getElementById("player-progress-time-update").innerText = '00:00';
           });
     }
-    let duration  = links[currentTrack].querySelector(".time").textContent; 
+    let duration  = links[currentTrack].querySelector(".time").textContent;
     console.log(duration) ;
     if (duration !='') {
         document.getElementById("player-progress-duration").innerText = duration;
     }
-    
+
     window.Livewire.dispatch('play-track-to-playlist',  { id: trackId });
 };
 
 
         // Play on audio load
-        
+
 
        /* window.addTrackToList = function(track) {
             let node = document.getElementById("playlist-clone-item").querySelector("a");
-            
-            console.log(node) 
-            let a = node.cloneNode(true);  
-            
+
+            console.log(node)
+            let a = node.cloneNode(true);
+
             console.log('hahahahah') ;
             a.href = track.fileUrl;
             console.log(a) ;
@@ -307,7 +307,7 @@ window.setCurrentSong = function(trackId, play = false) {
             a.querySelector(".zone").textContent = track.zone;
             a.querySelector(".year").textContent = track.year;
             a.querySelector(".time").textContent = track.time;
-            a.querySelector(".actions").textContent = track.actions;    
+            a.querySelector(".actions").textContent = track.actions;
 
             document.getElementById("playlist").appendChild(a);
             links = document.querySelectorAll('#playlist a');

@@ -57,7 +57,7 @@
     .card-img-top  {
         min-width: 50px;
     }
-    
+
     @media (min-width: 992px) {
         width: 100px;
         height: 100px;
@@ -67,7 +67,7 @@
 #playlist-show {
     border-radius: 8px;
     height: 6px;
-    
+
     @media (min-width: 992px) {
         border-radius: 0;
     }
@@ -102,9 +102,9 @@
 //  }
 @media (max-width: 991px) {
     .footer-wrapper {
-    //   left: 2%;
+      left: 0%;
     //   width: 100%;
-      width: 97%;
+      width: 100%;
     }
   }
 

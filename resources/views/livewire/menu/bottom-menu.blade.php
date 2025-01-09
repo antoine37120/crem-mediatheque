@@ -35,24 +35,85 @@
                     </svg>
                 </a>
             </div>
+
             <div class="col w-20 d-flex justify-content-center pt-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="50"  fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 18 18">
-                    <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
-                    </svg>
-                {{-- <div class="" id="three-dots-menu"></div> --}}
-                {{-- <div class="dropdown">
-                    <div class="dropbtn icons btn-right showLeft" onclick="showDropdown()" id="three-dots-menu"></div> --}}
-                    {{-- <ul class="dropbtn icons btn-right showLeft" onclick="showDropdown()">
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                    </ul> --}}
-                    {{-- <div id="myDropdown" class="dropdown-content">
-                        <a href="#home">Home</a>
-                        <a href="#about">About</a>
-                        <a href="#contact">Contact</a>
-                    </div> --}}
-                {{-- </div> --}}
+
+
+
+
+                        <div
+                            x-data="{
+                                open: false,
+                                toggle() {
+                                    if (this.open) {
+                                        return this.close()
+                                    }
+
+                                    this.$refs.button.focus()
+                                    {{-- remplacer button par menu ? --}}
+
+                                    this.open = true
+                                },
+                                close(focusAfter) {
+                                    if (! this.open) return
+
+                                    this.open = false
+
+                                    focusAfter && focusAfter.focus()
+                                }
+                            }"
+                            x-on:keydown.escape.prevent.stop="close($refs.button)"
+                                {{-- remplacer keydown par touch ? et button par menu ? --}}
+                            x-on:focusin.window="! $refs.panel.contains($event.target) && close()"
+                            x-id="['dropdown-button']"
+                                {{-- remplacer par dropdown-menu ? --}}
+                            class="relative"
+                        >
+                            <!-- Button -->
+                            <button
+                                x-ref="button"
+                                x-on:click="toggle()"
+                                :aria-expanded="open"
+                                :aria-controls="$id('dropdown-button')"
+                                type="button"
+                                class="dropup dropleft relative flex items-center whitespace-nowrap justify-center gap-2 py-2 rounded-lg shadow-sm bg-white hover:bg-gray-50 text-gray-800 border border-gray-200 hover:border-gray-200 px-4"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" width="50"  fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 18 18">
+                                    <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
+                                </svg>
+                            </button>
+
+                            <!-- Panel -->
+                            <div
+                                x-ref="panel"
+                                x-show="open"
+                                x-transition.origin.bottom.right
+                                x-on:click.outside="close($refs.button)"
+                                {{-- remplacer click par touch pour mobile ? button par menu ? --}}
+                                :id="$id('dropdown-button')"
+                                x-cloak
+                                class="position-absolute bottom-100 end-0 vw-100 p-2 rounded-lg shadow-sm mt-2 z-10 origin-bottom-right bg-white p-1.5 outline-none border border-gray-200"
+                             >
+                                <ul class="list-unstyled fs-5 d-grid gap-3 my-4 ms-3 text-center">
+                                    <li><a href="{{route('home')}}" class="text-black text-decoration-none" wire:navigate>{{ __('menu.home') }}</a></li>
+                                    <li><a href="{{route('tracks')}}" class="text-black text-decoration-none" wire:navigate>Tracks</a></li>
+                                    <li><a href="{{route('playlists')}}" class="text-black text-decoration-none" wire:navigate>Playlists</a></li>
+                                    <li><a href="{{route('podcasts')}}" class="text-black text-decoration-none" wire:navigate>Podcasts</a></li>
+                                    <li>langue
+                                        <ul>
+                                            <li><a href="#new" class="px-2 lg:py-1.5 py-2 w-full flex items-center rounded-md transition-colors text-left text-gray-800 hover:bg-gray-50 focus-visible:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
+                                                Français
+                                            </a></li>
+                                            <li><a href="#edit" class="px-2 lg:py-1.5 py-2 w-full flex items-center rounded-md transition-colors text-left text-gray-800 hover:bg-gray-50 focus-visible:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
+                                                English
+                                            </a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="{{route('cmsPage', ['cmsPage' => 'about']) }}" class="text-black text-decoration-none" wire:navigate>A propos</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
             </div>
 
         </div>

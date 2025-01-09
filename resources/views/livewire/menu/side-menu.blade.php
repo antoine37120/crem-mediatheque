@@ -1,6 +1,15 @@
 <div>
     <div class="p-2">
-        <h1 class="text-center my-4">Logo</h1>
+        <div class="text-center my-4">
+            <div class="h-20" style="max-width: 200px">
+                <div>
+                    <img src="/storage/logos/logo-musicoologieVOK.jpg" alt="" class="py-3 mw-100"></img>
+                </div>
+                {{-- <div style="max-width: 150px">
+                    <svg xmlns="/storage/app/public/logos/logo-musicoologieVOK.svg" height="20vh" class="" viewBox="0 0 100 100"></svg>
+                </div> --}}
+            </div>
+        </div>
         <hr class="border-top border-dark my-3"/>
         <div id="global-search-form" class="">
             <form  wire:submit="searchLauch">

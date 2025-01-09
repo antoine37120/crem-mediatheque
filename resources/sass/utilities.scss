@@ -71,11 +71,6 @@ img.rounded {
     // }
 }
 
-.page-title {
-    @media (max-width: 992px) {
-        margin-top: 50px;
-    }
-}
 
 .playlist-title ~ p, .podcast-title ~ p {
     overflow: hidden;
@@ -109,3 +104,15 @@ img.rounded {
 .logo-ministere {
     margin-left: -12px;
 }
+
+
+// three dots bottom mobile menu
+
+#three-dots-menu {
+    width: 30px;
+    // height: 30px;
+    background-image: radial-gradient(circle, black 3px, transparent 4px);
+    background-size: 100% 33.33%;
+}
+
+
