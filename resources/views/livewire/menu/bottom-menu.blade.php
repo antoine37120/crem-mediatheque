@@ -2,7 +2,7 @@
 <div>
     <div class="row p-2 flex-nowrap bg-white">
         {{-- <div class="col-4">"{{ $menuItem }}" </div> --}}
-        <div class="row ps-4">
+        <div class="row ps-4 flex-nowrap">
             <div class="col w-20 text-center d-flex flex-column">
                 <a href="{{route('home')}}" class="text-black text-decoration-none" wire:navigate>
                     <div>Home</div>
@@ -81,8 +81,9 @@
                                 :aria-expanded="open"
                                 :aria-controls="$id('dropdown-button')"
                                 type="button"
-                                class="dropup dropleft relative flex items-center whitespace-nowrap justify-center gap-2 py-2 rounded-lg shadow-sm bg-white hover:bg-gray-50 text-gray-800 border border-gray-200 hover:border-gray-200 px-4"
+                                class="dropup dropleft relative flex items-center whitespace-nowrap justify-center gap-2 pb-2 rounded-lg bg-white hover:bg-gray-50 text-gray-800 border-0 hover:border-gray-200 px-4"
                             >
+                            {{-- shadow-sm border-gray-200 --}}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="50"  fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 18 18">
                                     <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
                                 </svg>
@@ -97,36 +98,40 @@
                                 {{-- remplacer click par touch pour mobile ? button par menu ? --}}
                                 :id="$id('dropdown-button')"
                                 x-cloak
-                                class="position-absolute bottom-100 end-0 vw-100 p-2 rounded-lg shadow-sm mt-2 z-10 origin-bottom-right bg-white p-1.5 outline-none border border-gray-200"
+                                class="position-absolute bottom-0 end-0 vw-100 py-2 rounded-lg shadow-sm z-10 origin-bottom-right bg-white p-1.5 outline-none border border-gray-200"
                              >
-                                <ul class="list-unstyled fs-5 d-grid gap-3 my-4 ms-3 text-center">
-                                    <li>
-                                        <img src="/storage/icons/Home.png" alt="" class="" style="width: 28px; height: 28px"></img>
-                                        <a href="{{route('home')}}" class="text-black text-decoration-none" wire:navigate>{{ __('menu.home') }}</a></li>
-                                    <li>
-                                        <img src="/storage/icons/Tracks.png" alt="" class="" style="width: 28px; height: 28px"></img>
-                                        <a href="{{route('tracks')}}" class="text-black text-decoration-none" wire:navigate>Tracks</a></li>
-                                    <li>
-                                        <img src="/storage/icons/Playlist.png" alt="" class="" style="width: 28px; height: 28px"></img>
-                                        <a href="{{route('playlists')}}" class="text-black text-decoration-none" wire:navigate>Playlists</a></li>
-                                    <li>
-                                        <img src="/storage/icons/podcast.png" alt="" class="" style="width: 28px; height: 28px"></img>
-                                        <a href="{{route('podcasts')}}" class="text-black text-decoration-none" wire:navigate>Podcasts</a>
-                                    </li>
-                                    <li>Langue
-                                        <ul>
-                                            <li><a href="#new" class="text-black text-decoration-none px-2 lg:py-1.5 py-2 w-full flex items-center rounded-md transition-colors text-left text-gray-800 hover:bg-gray-50 focus-visible:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
-                                                Français
-                                            </a></li>
-                                            <li><a href="#edit" class="text-black text-decoration-none px-2 lg:py-1.5 py-2 w-full flex items-center rounded-md transition-colors text-left text-gray-800 hover:bg-gray-50 focus-visible:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
-                                                English
-                                            </a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <img src="/storage/icons/About.png" alt="" class="" style="width: 28px; height: 28px"></img>
-                                        <a href="{{route('cmsPage', ['cmsPage' => 'about']) }}" class="text-black text-decoration-none" wire:navigate>A propos</a></li>
-                                </ul>
+                             {{-- bottom-100  --}}
+                                <div class="w-25 m-auto">
+                                    <ul class="list-unstyled text-nowrap fs-5 d-grid gap-3 my-4 ms-3">
+                                        {{-- text-center --}}
+                                        <li>
+                                            <img src="/storage/icons/Home.png" alt="" class="" style="width: 28px; height: 28px"></img>
+                                            <a href="{{route('home')}}" class="text-black text-decoration-none" wire:navigate>{{ __('menu.home') }}</a></li>
+                                        <li>
+                                            <img src="/storage/icons/Tracks.png" alt="" class="" style="width: 28px; height: 28px"></img>
+                                            <a href="{{route('tracks')}}" class="text-black text-decoration-none" wire:navigate>Tracks</a></li>
+                                        <li>
+                                            <img src="/storage/icons/Playlist.png" alt="" class="" style="width: 28px; height: 28px"></img>
+                                            <a href="{{route('playlists')}}" class="text-black text-decoration-none" wire:navigate>Playlists</a></li>
+                                        <li>
+                                            <img src="/storage/icons/podcast.png" alt="" class="" style="width: 28px; height: 28px"></img>
+                                            <a href="{{route('podcasts')}}" class="text-black text-decoration-none" wire:navigate>Podcasts</a>
+                                        </li>
+                                        <li>Langue
+                                            <ul>
+                                                <li><a href="#new" class="text-black text-decoration-none px-2 lg:py-1.5 py-2 w-full flex items-center rounded-md transition-colors text-left text-gray-800 hover:bg-gray-50 focus-visible:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
+                                                    Français
+                                                </a></li>
+                                                <li><a href="#edit" class="text-black text-decoration-none px-2 lg:py-1.5 py-2 w-full flex items-center rounded-md transition-colors text-left text-gray-800 hover:bg-gray-50 focus-visible:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
+                                                    English
+                                                </a></li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <img src="/storage/icons/About.png" alt="" class="" style="width: 28px; height: 28px"></img>
+                                            <a href="{{route('cmsPage', ['cmsPage' => 'about']) }}" class="text-black text-decoration-none" wire:navigate>A propos</a></li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
 
