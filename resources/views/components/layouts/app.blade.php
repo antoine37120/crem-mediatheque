@@ -29,12 +29,12 @@
                         {{ $title ?? 'Page Title' }}
                     </header>
                     {{-- mobile --}}
-                    <div class="d-flex flex-row justify-content-between d-lg-none py-4 px-1 text-white" id="header-mobile">
+                    <div class="d-flex flex-row justify-content-between d-lg-none py-4 px-1 text-white" id="header-mobile" style="height: 200px">
                         <div class="py-3 max-h-fit" id="page-title-mobile">
                             {{ $title ?? 'Page Title' }}
                         </div>
-                        <div class="max-h-fit" id="logo-mobile">
-                            <img src="/storage/logos/logo-musicoologieVOK.jpg" alt="" class="h-50 py-3 w-30"></img>
+                        <div class="max-h-fit d-flex justify-content-end" id="logo-mobile">
+                            <img src="/storage/logos/logo-musicoologieVOK.jpg" alt="" class="h-100 px-4 py-3 w-30"></img>
                         </div>
                     </div>
 

@@ -6,33 +6,38 @@
             <div class="col w-20 text-center d-flex flex-column">
                 <a href="{{route('home')}}" class="text-black text-decoration-none" wire:navigate>
                     <div>Home</div>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-house d-inline" viewBox="0 0 16 16">
+                    <img src="/storage/icons/Home.png" alt="" class="" style="width: 28px; height: 28px"></img>
+                    {{-- py-3 mw-100 --}}
+                    {{-- <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-house d-inline" viewBox="0 0 16 16">
                         <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z"/>
-                    </svg>
+                    </svg> --}}
                 </a>
             </div>
             <div class="col w-20 text-center d-flex flex-column">
-                <a href="{{route('home')}}" class="text-black text-decoration-none" wire:navigate>
+                <a href="{{route('tracks')}}" class="text-black text-decoration-none" wire:navigate>
                     <div>Tracks</div>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-house d-inline" viewBox="0 0 16 16">
+                    <img src="/storage/icons/Tracks.png" alt="" class="" style="width: 28px; height: 28px"></img>
+                    {{-- <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-house d-inline" viewBox="0 0 16 16">
                         <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z"/>
-                    </svg>
+                    </svg> --}}
                 </a>
             </div>
             <div class="col w-20 text-center d-flex flex-column">
-                <a href="{{route('home')}}" class="text-black text-decoration-none" wire:navigate>
+                <a href="{{route('playlists')}}" class="text-black text-decoration-none" wire:navigate>
                     <div>Playlists</div>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-house d-inline" viewBox="0 0 16 16">
+                    <img src="/storage/icons/Playlist.png" alt="" style="width: 28px; height: 28px"></img>
+                    {{-- <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-house d-inline" viewBox="0 0 16 16">
                         <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z"/>
-                    </svg>
+                    </svg> --}}
                 </a>
             </div>
             <div class="col w-20 text-center d-flex flex-column">
-                <a href="{{route('home')}}" class="text-black text-decoration-none" wire:navigate>
+                <a href="{{route('podcasts')}}" class="text-black text-decoration-none" wire:navigate>
                     <div>Podcasts</div>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-house d-inline" viewBox="0 0 16 16">
+                    <img src="/storage/icons/podcast.png" alt="" class="" style="width: 28px; height: 28px"></img>
+                    {{-- <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-house d-inline" viewBox="0 0 16 16">
                         <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z"/>
-                    </svg>
+                    </svg> --}}
                 </a>
             </div>
 
@@ -95,21 +100,32 @@
                                 class="position-absolute bottom-100 end-0 vw-100 p-2 rounded-lg shadow-sm mt-2 z-10 origin-bottom-right bg-white p-1.5 outline-none border border-gray-200"
                              >
                                 <ul class="list-unstyled fs-5 d-grid gap-3 my-4 ms-3 text-center">
-                                    <li><a href="{{route('home')}}" class="text-black text-decoration-none" wire:navigate>{{ __('menu.home') }}</a></li>
-                                    <li><a href="{{route('tracks')}}" class="text-black text-decoration-none" wire:navigate>Tracks</a></li>
-                                    <li><a href="{{route('playlists')}}" class="text-black text-decoration-none" wire:navigate>Playlists</a></li>
-                                    <li><a href="{{route('podcasts')}}" class="text-black text-decoration-none" wire:navigate>Podcasts</a></li>
-                                    <li>langue
+                                    <li>
+                                        <img src="/storage/icons/Home.png" alt="" class="" style="width: 28px; height: 28px"></img>
+                                        <a href="{{route('home')}}" class="text-black text-decoration-none" wire:navigate>{{ __('menu.home') }}</a></li>
+                                    <li>
+                                        <img src="/storage/icons/Tracks.png" alt="" class="" style="width: 28px; height: 28px"></img>
+                                        <a href="{{route('tracks')}}" class="text-black text-decoration-none" wire:navigate>Tracks</a></li>
+                                    <li>
+                                        <img src="/storage/icons/Playlist.png" alt="" class="" style="width: 28px; height: 28px"></img>
+                                        <a href="{{route('playlists')}}" class="text-black text-decoration-none" wire:navigate>Playlists</a></li>
+                                    <li>
+                                        <img src="/storage/icons/podcast.png" alt="" class="" style="width: 28px; height: 28px"></img>
+                                        <a href="{{route('podcasts')}}" class="text-black text-decoration-none" wire:navigate>Podcasts</a>
+                                    </li>
+                                    <li>Langue
                                         <ul>
-                                            <li><a href="#new" class="px-2 lg:py-1.5 py-2 w-full flex items-center rounded-md transition-colors text-left text-gray-800 hover:bg-gray-50 focus-visible:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
+                                            <li><a href="#new" class="text-black text-decoration-none px-2 lg:py-1.5 py-2 w-full flex items-center rounded-md transition-colors text-left text-gray-800 hover:bg-gray-50 focus-visible:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
                                                 Français
                                             </a></li>
-                                            <li><a href="#edit" class="px-2 lg:py-1.5 py-2 w-full flex items-center rounded-md transition-colors text-left text-gray-800 hover:bg-gray-50 focus-visible:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
+                                            <li><a href="#edit" class="text-black text-decoration-none px-2 lg:py-1.5 py-2 w-full flex items-center rounded-md transition-colors text-left text-gray-800 hover:bg-gray-50 focus-visible:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
                                                 English
                                             </a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="{{route('cmsPage', ['cmsPage' => 'about']) }}" class="text-black text-decoration-none" wire:navigate>A propos</a></li>
+                                    <li>
+                                        <img src="/storage/icons/About.png" alt="" class="" style="width: 28px; height: 28px"></img>
+                                        <a href="{{route('cmsPage', ['cmsPage' => 'about']) }}" class="text-black text-decoration-none" wire:navigate>A propos</a></li>
                                 </ul>
                             </div>
                         </div>

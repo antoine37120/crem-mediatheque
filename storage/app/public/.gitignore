@@ -2,4 +2,6 @@
 !/logos
 !/logos/*
 !/logos/**
+!/icons
+!/icons/*
 !.gitignore
