@@ -46,9 +46,14 @@ h5 {
     font-size: 1rem;
 }
 
+#header-mobile {
+    transition: 0.5s;
+}
+
 .main-of-page {
     @media(max-width: 991px) {
         padding-bottom: 50px;
+        margin-top: 200px;
     }
 }
 
@@ -92,10 +97,10 @@ img.rounded {
     }
 }
 
-.top-menu > div > button {
-    background-color: #e5e1e0;
-    border: 3px solid !important;
-}
+// .top-menu > div > button {
+//     background-color: #e5e1e0;
+//     border: 3px solid !important;
+// }
 
 .primary-section {
     height: calc(100vh - 140px);

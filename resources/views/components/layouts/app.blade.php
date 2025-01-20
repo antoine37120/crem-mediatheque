@@ -24,20 +24,21 @@
                     <livewire:menu.side-menu />
                 </div>
                 <div class="primary-section col-12 col-lg-9 col-xl-10 ox-auto pb-1">
+
                     {{-- desktop --}}
                     <header class="d-none d-lg-block py-4 px-1 text-white">
                         {{ $title ?? 'Page Title' }}
                     </header>
+
                     {{-- mobile --}}
-                    <div class="d-flex flex-row justify-content-between d-lg-none py-4 px-1 text-white" id="header-mobile" style="height: 200px">
+                    <header id="header-mobile" class="position-fixed w-100 top-0 d-flex flex-row justify-content-between d-lg-none py-4 px-1 text-white" style="height: 200px; z-index: 999">
                         <div class="py-3 max-h-fit" id="page-title-mobile">
                             {{ $title ?? 'Page Title' }}
                         </div>
-                        <div class="max-h-fit d-flex justify-content-end" id="logo-mobile">
+                        <div class="max-h-fit d-flex" id="logo-mobile">
                             <img src="/storage/logos/logo-musicoologieVOK.jpg" alt="" class="h-100 px-4 py-3 w-30"></img>
                         </div>
-                    </div>
-
+                    </header>
 
                     {{-- Main --}}
                     <div class="main-of-page pe-3">{{ $slot }}</div>
@@ -62,8 +63,29 @@
                 </div>
             </div> --}}
 
-
-
         </div>
+        {{-- <script type="text/javascript">
+
+            // VERSION 3
+            $(function(){
+                var lastScrollTop = 0, delta = 15;
+                $(window).scroll(function(event){
+                var st = $(this).scrollTop();
+
+                if(Math.abs(lastScrollTop - st) <= delta)
+                    return;
+            if ((st > lastScrollTop) && (lastScrollTop>0)) {
+                // downscroll code
+                $("header").css("top","-80px");
+
+            } else {
+                // upscroll code
+                $("header").css("top","0px");
+            }
+                lastScrollTop = st;
+                });
+            });
+        </script> --}}
+
     </body>
 </html>
