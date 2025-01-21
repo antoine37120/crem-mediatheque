@@ -31,7 +31,7 @@
                     </header>
 
                     {{-- mobile --}}
-                    <header id="header-mobile" class="position-fixed w-100 top-0 d-flex flex-row justify-content-between d-lg-none py-4 px-1 text-white" style="height: 200px; z-index: 999">
+                    <header id="header-mobile" class="w-100 d-flex flex-row justify-content-between d-lg-none py-4 px-1 text-white" style="height: 200px; z-index: 999">
                         <div class="py-3 max-h-fit" id="page-title-mobile">
                             {{ $title ?? 'Page Title' }}
                         </div>

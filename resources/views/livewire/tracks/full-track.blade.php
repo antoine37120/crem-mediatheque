@@ -16,9 +16,10 @@
                 </div>
             </div>
             <div class="col-10 mt-1 mb-4">
-                <h5 class="fw-bold">{{ $track->geographicalArea->translate(App::getLocale(), true)->name }}</h5>
-                <h5 class="fw-bold">{{ $track->interpreters }}</h5>
-                <h5 class="fw-bold">{{ $track->collector }}</h5>
+                <h5>Zone : <span class="fw-bold"> {{ $track->geographicalArea->translate(App::getLocale(), true)->name }} </span></h5>
+                <h5>Interprête(s) : <span class="fw-bold"> {{ $track->interpreters }} </span></h5>
+                <h5>Collecteur : <span class="fw-bold"> {{ $track->collector }} </span></h5>
+                <h5>Année : <span class="fw-bold"> {{ $track->year }} </span></h5>
             </div>
             <div class="col-2">
                 <livewire:tracks.actions :track="$track"  wire:key="actions-{{ $track->id }}"/>
@@ -48,9 +49,10 @@
                     </div>
             </div>
             <div class="col-10 px-5">
-                <h5 class="fw-bold">{{ $track->geographicalArea->translate(App::getLocale(), true)->name }}</h5>
-                <h5 class="fw-bold">{{ $track->interpreters }}</h5>
-                <h5 class="fw-bold">{{ $track->collector }}</h5>
+                <h5>Zone : <span class="fw-bold"> {{ $track->geographicalArea->translate(App::getLocale(), true)->name }}</span></h5>
+                <h5>Interprête(s) : <span class="fw-bold"> {{ $track->interpreters }} </span></h5>
+                <h5>Collecteur : <span class="fw-bold"> {{ $track->collector }} </span></h5>
+                <h5>Année : <span class="fw-bold"> {{ $track->year }} </span></h5>
                 <div class="">{!! $track->translate(App::getLocale(), true)->description !!}</div>
                 <p><a href="{{ $track->link }}" target="_blank"class="btn btn-primary">See on archive</a></p>
             </div>
