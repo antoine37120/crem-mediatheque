@@ -68,7 +68,10 @@
 .track-title {
     width: auto;
     @media (min-width: 992px) {
-        width: 18rem;
+        min-width: 18rem;
+        .col-10 {
+            flex: 1;
+        }
     }
 }
 
