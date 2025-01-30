@@ -101,35 +101,48 @@
                                 class="position-absolute bottom-0 end-0 vw-100 py-2 rounded-lg shadow-sm z-10 origin-bottom-right bg-white p-1.5 outline-none border border-gray-200"
                              >
                              {{-- bottom-100  --}}
-                                <div class="w-25 m-auto">
-                                    <ul class="list-unstyled text-nowrap fs-5 d-grid gap-3 my-4 ms-3">
-                                        {{-- text-center --}}
+                                <div class="m-auto">
+                                    <ul class="list-unstyled text-nowrap fs-5 d-grid gap-0 my-4 ms-3 text-center">
                                         <li>
-                                            <img src="/storage/icons/Home.png" alt="" class="" style="width: 28px; height: 28px"></img>
-                                            <a href="{{route('home')}}" class="text-black text-decoration-none" wire:navigate>{{ __('menu.home') }}</a></li>
-                                        <li>
-                                            <img src="/storage/icons/Tracks.png" alt="" class="" style="width: 28px; height: 28px"></img>
-                                            <a href="{{route('tracks')}}" class="text-black text-decoration-none" wire:navigate>Tracks</a></li>
-                                        <li>
-                                            <img src="/storage/icons/Playlist.png" alt="" class="" style="width: 28px; height: 28px"></img>
-                                            <a href="{{route('playlists')}}" class="text-black text-decoration-none" wire:navigate>Playlists</a></li>
-                                        <li>
-                                            <img src="/storage/icons/podcast.png" alt="" class="" style="width: 28px; height: 28px"></img>
-                                            <a href="{{route('podcasts')}}" class="text-black text-decoration-none" wire:navigate>Podcasts</a>
-                                        </li>
-                                        <li>Langue
-                                            <ul>
-                                                <li><a href="#new" class="text-black text-decoration-none px-2 lg:py-1.5 py-2 w-full flex items-center rounded-md transition-colors text-left text-gray-800 hover:bg-gray-50 focus-visible:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
-                                                    Français
-                                                </a></li>
-                                                <li><a href="#edit" class="text-black text-decoration-none px-2 lg:py-1.5 py-2 w-full flex items-center rounded-md transition-colors text-left text-gray-800 hover:bg-gray-50 focus-visible:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
-                                                    English
-                                                </a></li>
-                                            </ul>
+                                            <a href="{{route('home')}}" class="text-black text-decoration-none d-block border border-bottom border-light" wire:navigate>
+                                                <img src="/storage/icons/Home.png" alt="" class="" style="width: 28px; height: 28px"></img>
+                                                <span>Accueil</span>
+                                            </a>
                                         </li>
                                         <li>
-                                            <img src="/storage/icons/About.png" alt="" class="" style="width: 28px; height: 28px"></img>
-                                            <a href="{{route('cmsPage', ['cmsPage' => 'about']) }}" class="text-black text-decoration-none" wire:navigate>A propos</a></li>
+                                            <a href="{{route('tracks')}}" class="text-black text-decoration-none d-block" wire:navigate>
+                                                <img src="/storage/icons/Tracks.png" alt="" class="" style="width: 28px; height: 28px"></img>
+                                                <span>Tracks</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{route('playlists')}}" class="text-black text-decoration-none d-block" wire:navigate>
+                                                <img src="/storage/icons/Playlist.png" alt="" class="" style="width: 28px; height: 28px"></img>
+                                                <span>Playlists</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{route('podcasts')}}" class="text-black text-decoration-none d-block" wire:navigate>
+                                                <img src="/storage/icons/podcast.png" alt="" class="" style="width: 28px; height: 28px"></img>
+                                                <span>Podcasts</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{route('cmsPage', ['cmsPage' => 'about']) }}" class="text-black text-decoration-none d-block" wire:navigate>
+                                                <img src="/storage/icons/About.png" alt="" class="" style="width: 28px; height: 28px"></img>
+                                                <span>A propos</span>
+                                            </a>
+                                        </li>
+                                        <li>Langue</li>
+                                        <li>
+                                            <a href="#new" class="text-black text-decoration-none px-2 lg:py-1.5 py-2 w-full flex items-center rounded-md transition-colors text-left text-gray-800 hover:bg-gray-50 focus-visible:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
+                                                <span>Français</span>
+                                            </a>
+                                        </li>
+                                        <li><a href="#edit" class="text-black text-decoration-none px-2 lg:py-1.5 py-2 w-full flex items-center rounded-md transition-colors text-left text-gray-800 hover:bg-gray-50 focus-visible:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
+                                                <span>English</span>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
