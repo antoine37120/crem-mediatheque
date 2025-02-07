@@ -59,6 +59,7 @@ class AudioItemPlaylistsRelationManager extends RelationManager
             ])
             ->headerActions([
                 Tables\Actions\CreateAction::make()
+                ->label('Ajouter un item audio')
                 ->mutateFormDataUsing(function (array $data): array {
                     Log::info(print_r($data, true));
              
@@ -66,6 +67,7 @@ class AudioItemPlaylistsRelationManager extends RelationManager
                 }),
                 ImportAction::make()
                 ->importer(AudioItemImporter::class)
+                ->label('Importer des items audio')
 				->chunkSize(5)
                 ->options(['playlistId' => $this->getOwnerRecord()->getKey()])
             ])
