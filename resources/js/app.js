@@ -1,7 +1,10 @@
 import './bootstrap';
 import 'bootstrap';
 import '@popperjs/core';
-import sort from '@alpinejs/sort'
+import sort from '@alpinejs/sort';
+import Swal from 'sweetalert2';
+window.Swal = Swal ;
+console.log(window) ;
 
 window.Alpine.plugin(sort)
 import WaveSurfer from 'wavesurfer.js'
@@ -34,6 +37,31 @@ window.Livewire.hook('morph.removed', ({ el, component }) => {
         }
     }
 });
+
+window.noticeUser = function (message='Track added to playlist', color="") {
+    window.Swal.fire({
+        //title: 'Yeah',
+        toast: true,
+        text: message,
+        timer: 3000,
+        showConfirmButton: false,   
+        showDenyButton: false,
+        position: 'top-end',
+        timerProgressBar: true,
+        animation: false,
+        padding: '3px',
+        background: 'rgba(255, 255, 255, 0.5)',
+        customClass: {
+            timerProgressBar: 'c_'+color,
+          }
+        })
+}
+
+window.Livewire.on('add_notice_user', (event) => {
+    // Set window value to current track to play.
+    window.noticeUser(event.text, event.color) ;
+});
+
 
 window.catchOrdering = function() {
     console.log('catchOrdering') ;

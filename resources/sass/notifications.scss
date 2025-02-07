@@ -1,0 +1,57 @@
+div:where(.swal2-container) .swal2-timer-progress-bar-container {
+    position: absolute;
+    right: 0;
+    top: 0;
+    left: 0;
+    grid-column: auto !important;
+    overflow: hidden;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+body div:where(.swal2-container) div:where(.swal2-timer-progress-bar) {
+    width: 100%;
+    height: 2px;
+    background: rgb(35, 1, 255);
+}
+
+body div:where(.swal2-container) div:where(.swal2-timer-progress-bar.c_eb5d0b) {
+background: #eb5d0b;
+}
+body div:where(.swal2-container) div:where(.swal2-timer-progress-bar.c_f7df1a) {
+background: #f7df1a;
+}
+body div:where(.swal2-container) div:where(.swal2-timer-progress-bar.c_96b522) {
+background: #96b522;
+}
+body div:where(.swal2-container) div:where(.swal2-timer-progress-bar.c_546d94) {
+background: #546d94;
+}
+body div:where(.swal2-container) div:where(.swal2-timer-progress-bar.c_681416) {
+background: #681416;
+}
+body div:where(.swal2-container) div:where(.swal2-timer-progress-bar.c_f9ad1a) {
+background: #f9ad1a;
+}
+body div:where(.swal2-container) div:where(.swal2-timer-progress-bar.c_036a31) {
+background: #036a31;
+}
+body div:where(.swal2-container) div:where(.swal2-timer-progress-bar.c_39287c) {
+background: #39287c;
+}
+
+
+body div:where(.swal2-container) div:where(.swal2-timer-progress-bar.c_playlist) {
+    background: rgb(84,109,148);
+}
+body div:where(.swal2-container) div:where(.swal2-timer-progress-bar.c_podcast) {
+    background: rgb(3,106,49);
+}
+body div:where(.swal2-container) div:where(.swal2-timer-progress-bar.c_searh) {
+    background: rgb(235,93,11);
+}
+
+
+

@@ -3,8 +3,7 @@
     <div class="row">
     {{-- page d'une playlist avec ses morceaux --}}
         <div class="col-1">
-            {{-- <div class="w-100">
-            </div> --}}
+
         </div>
         <div class="col-10">
             <div class="row align-items-start">
@@ -21,7 +20,7 @@
 
             {{-- teaser de chaque morceau de la playlist, avec description complète --}}
             @foreach ($playlist->audio_items() as $relation_playlist)
-                <livewire:tracks.teaser-playlist :track="$relation_playlist->audio_item" wire:key="audio-{{ $relation_playlist->audio_item->id }}" />
+                <livewire:tracks.teaser-playlist :track="$relation_playlist->audio_item" wire:key="full-playlist-teaser-audio-{{ $relation_playlist->audio_item->id }}" />
             @endforeach
 
         </div>
