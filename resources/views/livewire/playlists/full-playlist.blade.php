@@ -14,8 +14,10 @@
                         {{-- ajouter fonction de traduction --}}
                         <p>{!! $playlist->translate(App::getLocale(), true)->description !!}</p>
 
-                        <livewire:playlists.full-actions :playlist="$playlist" wire:key="playlist-full-actions-{{ $playlist->id }}" />
                     </div>
+            </div>
+            <div class="row align-items-end">
+                <livewire:playlists.full-actions :playlist="$playlist" wire:key="playlist-full-actions-{{ $playlist->id }}" />
             </div>
 
             {{-- teaser de chaque morceau de la playlist, avec description complète --}}
