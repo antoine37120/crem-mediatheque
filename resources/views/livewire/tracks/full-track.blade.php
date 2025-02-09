@@ -58,4 +58,6 @@
             </div>
         </div>
     </div>
+
+    <livewire:tracks.section-playlists :track="$track" key="full-track-section-playlist-{{$track->id}}" />
 </div>
