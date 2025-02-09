@@ -4,8 +4,11 @@
     @foreach ($podcasts as $podcast)
     <div class="container my-4">
         <div class="row align-items-start my-2 g-5">
-            <div class="col-2">
-                <img src="{{ url('storage/'.$podcast->picture) }}" class="card-img-top rounded border border-dark" alt="..."/>
+            <div class="col-2 position-relative p-0" style="width: fit-content">
+                <img src="{{ url('storage/'.$podcast->picture) }}" class="card-img-top rounded border border-dark" alt="..."/>                    
+                <div class="card-playlist-actions position-absolute top-0 end-0 p-1">
+                    <livewire:playlists.list-self-actions :playlist="$podcast" wire:key="podcast-list-self-actions-{{ $podcast->id }}" />
+                </div>
             </div>
             <div class="d-none d-md-block col-md-1">
             </div>
