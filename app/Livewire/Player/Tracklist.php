@@ -6,6 +6,7 @@ use Livewire\Component;
 use Livewire\Attributes\Session;
 use App\Models\AudioItem;
 use App\Models\AudioItemPlaylist;
+use App\Models\Playlist;
 use Livewire\Attributes\On; 
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Arr;
@@ -56,9 +57,12 @@ class Tracklist extends Component
     public function updateTrackListWithSearch()
     {
         $audioItems = $this->track_nav_data ;
+        $i = 0 ;
         foreach($audioItems as $item){
             $this->updateTrackList($item) ;
+            $i++;
         } 
+        $this->notice_add_search($i);
     }
 
     #[On('add-search-to-playlist-random')] 
@@ -66,10 +70,19 @@ class Tracklist extends Component
     {
         
         $audioItems = Arr::shuffle($this->track_nav_data) ;
+        $i = 0;
         foreach($audioItems as $item){
             $this->updateTrackList($item) ;
+            $i++;
         } 
+        $this->notice_add_search($i);
         
+    }
+
+    public function notice_add_search($count) {
+        $notuice_text = $count.' audio items added to playlist';
+        $notice_color = 'search' ;
+        $this->dispatch('add_notice_user', text: $notuice_text, color: $notice_color);
     }
 
     #[On('add-playlist-to-playlist')] 
@@ -77,9 +90,12 @@ class Tracklist extends Component
     {
         Log::debug($id) ;
         $audioItems = AudioItemPlaylist::where('playlist_id', $id)->get();
+        $i = 0;
         foreach($audioItems as $item){
             $this->updateTrackList($item->audio_item_id) ;
+            $i++;
         } 
+        $this->notice_add_playlist($id, $i);
     }
 
     #[On('add-playlist-to-playlist-random')] 
@@ -87,10 +103,27 @@ class Tracklist extends Component
     {
         Log::debug($id) ;
         $audioItems = AudioItemPlaylist::where('playlist_id', $id)->inRandomOrder()->get();
+        $i = 0;
         foreach($audioItems as $item){
             $this->updateTrackList($item->audio_item->id) ;
+            $i++;
         } 
+
+        $this->notice_add_playlist($id, $i);
         
+    }
+
+    
+    public function notice_add_playlist($id, $count) {
+        
+        $playlist = Playlist::find($id) ;
+
+        $notice_color = 'playlist' ;
+        if($playlist->type->name == 'Podcast') {
+            $notice_color = 'podcast' ;
+        }
+        $notuice_text = $playlist->translate(app()->getLocale(), true)->name .' added to th playlist ('.$count.' items)' ;
+        $this->dispatch('add_notice_user', text: $notuice_text, color: $notice_color);
     }
     /**
      * Triggered when a track is added to the playlist.
@@ -108,6 +141,10 @@ class Tracklist extends Component
             $this->items_ids [] = $id ;
             $this->playlist_items() ;
         } 
+        $track = AudioItem::find($id);
+        $notuice_text = $track->translate(app()->getLocale(), true)->name ." added to playlist";
+        $notice_color = str_replace('#', '', $track->getHexaColor()) ;
+        $this->dispatch('add_notice_user', text: $notuice_text, color: $notice_color);
         
     }
     /**

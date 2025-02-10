@@ -15,9 +15,12 @@
                             <p>{!! $podcast->translate(App::getLocale(), true)->description !!}</p>
 
                             
-                            <livewire:playlists.full-actions :playlist="$podcast" wire:key="playlist-full-actions-{{ $podcast->id }}" />
+                            
                     </div>
 
+            </div>
+            <div class="row align-items-end">
+                <livewire:playlists.full-actions :playlist="$podcast" wire:key="playlist-full-actions-{{ $podcast->id }}" />
             </div>
             {{-- teaser de chaque morceau de la playlist, avec description complète --}}
             <div class="container my-4">

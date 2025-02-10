@@ -121,7 +121,7 @@ img.rounded {
 }
 
 // Add & Play buttons
-#action-buttons button:hover:after {
+.action-buttons button:hover:after {
         content: attr(aria-label);
         position: absolute;
         top: -2.4em;

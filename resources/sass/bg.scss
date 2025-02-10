@@ -11,12 +11,28 @@ body {
             background: rgb(104,20,22);
             background: linear-gradient(180deg, rgba(104,20,22,1) 0%, rgba(255,255,255,1) 35%);
         }
+        .tracks-full-actions button {
+            background: rgb(104,20,22);
+            &.btn:hover {
+                color: var(--bs-btn-hover-color);
+                background-color: var(--bs-btn-hover-bg);
+                border-color: var(--bs-btn-hover-border-color);
+            }
+        }
     }
     &.playlists,
     &.playlist {
         .primary-section {
             background: rgb(84,109,148);
             background: linear-gradient(180deg, rgba(84,109,148,1) 0%, rgba(255,255,255,1) 35%);
+        }
+        .playlist-full-actions button {
+            background: rgb(84,109,148);
+            &.btn:hover {
+                color: var(--bs-btn-hover-color);
+                background-color: var(--bs-btn-hover-bg);
+                border-color: var(--bs-btn-hover-border-color);
+            }
         }
     }
     &.podcasts,
@@ -25,13 +41,21 @@ body {
             background: rgb(3,106,49);
             background: linear-gradient(180deg, rgba(3,106,49,1) 0%, rgba(255,255,255,1) 35%);
         }
+        .playlist-full-actions button {
+            background: rgb(3,106,49);
+            &.btn:hover {
+                color: var(--bs-btn-hover-color);
+                background-color: var(--bs-btn-hover-bg);
+                border-color: var(--bs-btn-hover-border-color);
+            }
+        }
     }
-    &.search {
+    /*&.search {
         .primary-section {
             background: rgb(235,93,11);
             background: linear-gradient(180deg, rgba(235,93,11,1) 0%, rgba(255,255,255,1) 25%);
         }
-    }
+    }*/
     &.cmsPage {
         .primary-section {
             background: rgb(150,181,34);
@@ -39,6 +63,7 @@ body {
         }
     }
 }
+
 
 .bg-red {
     background: #cd1420;

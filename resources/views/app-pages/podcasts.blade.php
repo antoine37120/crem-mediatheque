@@ -1,4 +1,7 @@
 <x-layouts.app>
+    <x-slot:meta_title>
+        Podcasts
+    </x-slot>
     <x-slot:title>
         <h1 class="page-title px-4">Podcasts</h1>
     </x-slot>

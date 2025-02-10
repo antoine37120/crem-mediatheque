@@ -27,6 +27,7 @@
     .playlist-table-wrapper {
         overflow-y: auto;
         max-height: calc(100vh - 330px);
+        background-color: #fff;
         @media (min-width: 992px) {
             max-height: calc(100vh - 200px);
         }
@@ -41,6 +42,10 @@
     width: 100%;
     @media (min-width: 992px) {
         width: 96%;
+    }
+
+    #player-repeat.enabled svg {
+        fill: green;
     }
 }
 

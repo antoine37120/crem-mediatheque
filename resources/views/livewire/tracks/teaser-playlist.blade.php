@@ -15,7 +15,7 @@
                     </div>
                     <div class="card-track-actions position-absolute top-0 end-0 p-1">
                         {{-- p-1 p-md-2 --}}
-                        <livewire:tracks.actions :track="$track"  wire:key="actions-{{ $track->id }}"/>
+                        <livewire:tracks.actions :track="$track"  wire:key="teaser-playist-audio-actions-{{ $track->id }}"/>
                     </div>
                 </div>
             </div>

@@ -1,5 +1,5 @@
 <div>
-    <div class="d-flex column-gap-2 justify-content-end">
+    <div class="playlist-full-actions d-flex column-gap-2 justify-content-end action-buttons">
         <div x-data="trackinfos_playlist_{{ $playlist->id }}">
             <button x-on:click="addtolist" type="button" class="btn btn-lg btn-light rounded-circle p-0 d-flex align-items-center justify-content-center bg-red border border-dark border-2 text-white">
                 <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" fill="currentColor" class="bi bi-play-fill" viewBox="0 0 16 16">
