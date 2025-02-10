@@ -15,8 +15,12 @@
         <div class="container-fluid">
 
             <div class="row vh-100">
-                <div id="side-menu" class="d-none d-lg-block col-lg-3 col-xl-2 ox-auto h-100 bg-white border-dark border-end">
-                    <livewire:menu.side-menu />
+                <div id="side-menu" class="d-none d-lg-block col-lg-3 col-xl-2 h-100 bg-white border-dark border-end p-0">
+                        @persist('side_menu')
+                    <div class="overflow-y-scroll vh-100" wire:scroll>
+                        <livewire:menu.side-menu />
+                    </div>
+                        @endpersist
                 </div>
                 <div class="primary-section col-12 col-lg-9 col-xl-10 ox-auto pb-1">
 
