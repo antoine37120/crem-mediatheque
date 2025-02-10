@@ -42,6 +42,10 @@
     @media (min-width: 992px) {
         width: 96%;
     }
+
+    #player-repeat.enabled svg {
+        fill: green;
+    }
 }
 
 .player-mobile {

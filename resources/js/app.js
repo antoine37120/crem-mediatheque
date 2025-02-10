@@ -71,7 +71,7 @@ window.catchOrdering = function() {
     Array.prototype.forEach.call(links, function(link, index) {
 
         let trackId = link.getAttribute('data-track-id');
-        link.querySelector(".num").textContent = index + 1;
+        link.querySelector(".num").innerText = index + 1;
         news_ids.push(trackId) ;
     });
     window.Livewire.dispatch('reordering-playlist',  { ids: news_ids });
@@ -100,6 +100,8 @@ window.Livewire.on('playlist-plaiyed-item-deleted', () => {
     window.wavesurfer.stop();
 });*/
 // add event on links of playlist and curent track. Called after all playlist changes.
+
+
 window.loadLinksList = function() {
 
     console.log('loadLinksList') ;
@@ -200,6 +202,34 @@ window.initPlayer = function() {
         window.wavesurfer.playPause();
     });
 
+    
+
+    let btnRandom = document.querySelector('#player-btnrandom');
+    btnRandom.addEventListener('click', function() {
+        links = document.querySelectorAll('#playlist tr');
+        let ul = document.querySelector("#playlist"); // get the list
+        let news_ids = [] ;
+        for (var i = ul.children.length; i >= 0; i--) {
+            ul.appendChild(ul.children[Math.random() * i | 0]);
+        }
+        links = document.querySelectorAll('#playlist tr');
+        Array.prototype.forEach.call(links, function(link, index) {
+            link.querySelector(".num").innerText = index + 1;
+            news_ids.push(link.getAttribute('data-track-id')) ;
+        });
+        console.log(news_ids) ;
+
+        window.Livewire.dispatch('reordering-playlist',  { ids: news_ids });
+        
+        window.loadLinksList() ;
+    });
+
+
+    //Enable or deable repeat mode
+    let btnRepeat = document.querySelector('#player-repeat');
+    btnRepeat.addEventListener('click', function() {
+        document.querySelector('#player-repeat').classList.toggle('enabled') ;
+    });
 
     
     // Go to the next track
@@ -275,7 +305,11 @@ window.initPlayer = function() {
             window.setCurrentSong(links[next].getAttribute('data-track-id'), true);
         } else {
             //load the firs track from playlist
-            window.setCurrentSong(links[0].getAttribute('data-track-id'), false);
+            let launch_play = false ;
+            if (document.querySelector('#player-repeat').classList.contains('enabled')) {
+                launch_play = true;
+            }
+            window.setCurrentSong(links[0].getAttribute('data-track-id'), launch_play);
         }
 
     });

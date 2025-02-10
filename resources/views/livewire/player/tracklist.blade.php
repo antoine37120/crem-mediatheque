@@ -25,6 +25,7 @@
                     </tr>
                 </thead>
                 <tbody id="playlist" x-sort="window.catchOrdering()">
+                    <div>
                 @php 
                     $i = 1 ;
                 @endphp
@@ -36,7 +37,8 @@
                         $i++ ;
                     @endphp
                 @endforeach 
-                <tbody>
+</div>
+                </tbody>
             </table>
         </div>
     </div>
