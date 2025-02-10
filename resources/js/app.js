@@ -200,6 +200,41 @@ window.initPlayer = function() {
         window.wavesurfer.playPause();
     });
 
+
+    
+    // Go to the next track
+    let playNext = document.querySelector('#player-forward');
+    playNext.addEventListener('click', function() {
+        if(links.length > 0) {
+            currentTrack = window.getCurrentTrackIndex() ;
+            links = document.querySelectorAll('#playlist tr');
+            let current =window.getCurrentTrackIndex() ;
+            if(current + 1 < links.length) {
+                let next = current + 1 ;
+                window.setCurrentSong(links[next].getAttribute('data-track-id'), true);
+            } else {
+                //load the firs track from playlist
+                window.setCurrentSong(links[0].getAttribute('data-track-id'), true);
+            }
+        }
+    });
+    // Go to the prev track
+    let playPrev = document.querySelector('#player-rewind');
+    playPrev.addEventListener('click', function() {
+        if(links.length > 0) {
+            currentTrack = window.getCurrentTrackIndex() ;
+            links = document.querySelectorAll('#playlist tr');
+            let current =window.getCurrentTrackIndex() ;
+            if(current - 1 < 0) {
+                let prev = links.length - 1 ;
+                window.setCurrentSong(links[prev].getAttribute('data-track-id'), true);
+            } else {
+                let prev = current - 1 ;
+                window.setCurrentSong(links[prev].getAttribute('data-track-id'), true);
+            }
+        }
+    });
+
     // Toggle play/pause text
     window.wavesurfer.on('play', function() {
         document.querySelector('#play').style.display = 'none';
