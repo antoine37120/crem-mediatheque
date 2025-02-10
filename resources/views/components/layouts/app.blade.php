@@ -36,9 +36,18 @@
                             {{ $title ?? 'Page Title' }}
                         </div>
                         <div class="max-h-fit d-flex" id="logo-mobile">
-                            <img src="/storage/logos/logo-musicoologieVOK.jpg" alt="" class="h-100 px-4 py-3 w-30"></img>
+                            <img src="/storage/logos/logo-musicoologieVOK.jpg" alt="" class="h-100 px-4 py-3 ml-auto w-30"></img>
                         </div>
                     </header>
+
+                    {{-- <header id="header-mobile" class="w-100 d-flex flex-row justify-content-between d-lg-none py-4 px-1 text-white" style="height: 200px; z-index: 999">
+                        <div class="max-h-fit d-flex" id="logo-mobile">
+                            <img src="/storage/logos/logo-musicoologieVOK.jpg" alt="" class="h-100 px-4 py-3 w-30"></img>
+                        </div>
+                        <div class="py-3 max-h-fit" id="page-title-mobile">
+                            {{ $title ?? 'Page Title' }}
+                        </div>
+                    </header> --}}
 
                     {{-- Main --}}
                     <div class="main-of-page pe-3">{{ $slot }}</div>

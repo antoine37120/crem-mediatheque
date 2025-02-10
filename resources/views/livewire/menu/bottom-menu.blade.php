@@ -104,42 +104,41 @@
                                 <div class="m-auto">
                                     <ul class="list-unstyled text-nowrap fs-5 d-grid gap-0 my-4 ms-3 text-center">
                                         <li>
-                                            <a href="{{route('home')}}" class="text-black text-decoration-none d-block border border-bottom border-light" wire:navigate>
+                                            <a href="{{route('home')}}" class="text-black text-decoration-none d-block pb-1 border-bottom" wire:navigate>
                                                 <img src="/storage/icons/Home.png" alt="" class="" style="width: 28px; height: 28px"></img>
                                                 <span>Accueil</span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="{{route('tracks')}}" class="text-black text-decoration-none d-block" wire:navigate>
+                                            <a href="{{route('tracks')}}" class="text-black text-decoration-none d-block pb-1 border-bottom" wire:navigate>
                                                 <img src="/storage/icons/Tracks.png" alt="" class="" style="width: 28px; height: 28px"></img>
                                                 <span>Tracks</span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="{{route('playlists')}}" class="text-black text-decoration-none d-block" wire:navigate>
+                                            <a href="{{route('playlists')}}" class="text-black text-decoration-none d-block pb-1 border-bottom" wire:navigate>
                                                 <img src="/storage/icons/Playlist.png" alt="" class="" style="width: 28px; height: 28px"></img>
                                                 <span>Playlists</span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="{{route('podcasts')}}" class="text-black text-decoration-none d-block" wire:navigate>
+                                            <a href="{{route('podcasts')}}" class="text-black text-decoration-none d-block pb-1 border-bottom" wire:navigate>
                                                 <img src="/storage/icons/podcast.png" alt="" class="" style="width: 28px; height: 28px"></img>
                                                 <span>Podcasts</span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="{{route('cmsPage', ['cmsPage' => 'about']) }}" class="text-black text-decoration-none d-block" wire:navigate>
+                                            <a href="{{route('cmsPage', ['cmsPage' => 'about']) }}" class="text-black text-decoration-none d-block pb-1 border-bottom" wire:navigate>
                                                 <img src="/storage/icons/About.png" alt="" class="" style="width: 28px; height: 28px"></img>
                                                 <span>A propos</span>
                                             </a>
                                         </li>
-                                        <li>Langue</li>
                                         <li>
-                                            <a href="#new" class="text-black text-decoration-none px-2 lg:py-1.5 py-2 w-full flex items-center rounded-md transition-colors text-left text-gray-800 hover:bg-gray-50 focus-visible:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
+                                            <a href="#new" class="text-black text-decoration-none lg:py-1.5 w-full d-block pb-1 border-bottom items-center rounded-md transition-colors text-left text-gray-800 hover:bg-gray-50 focus-visible:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
                                                 <span>Français</span>
                                             </a>
                                         </li>
-                                        <li><a href="#edit" class="text-black text-decoration-none px-2 lg:py-1.5 py-2 w-full flex items-center rounded-md transition-colors text-left text-gray-800 hover:bg-gray-50 focus-visible:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
+                                        <li><a href="#edit" class="text-black text-decoration-none lg:py-1.5 w-full d-block pb-1 border-bottom items-center rounded-md transition-colors text-left text-gray-800 hover:bg-gray-50 focus-visible:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
                                                 <span>English</span>
                                             </a>
                                         </li>
