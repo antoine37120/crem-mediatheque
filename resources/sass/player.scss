@@ -27,6 +27,7 @@
     .playlist-table-wrapper {
         overflow-y: auto;
         max-height: calc(100vh - 330px);
+        background-color: #fff;
         @media (min-width: 992px) {
             max-height: calc(100vh - 200px);
         }
