@@ -5,10 +5,10 @@
             <div class="col-8 position-relative p-0" style="width: fit-content">
                 <img src="{{ url('storage/'.$track->picture) }}" class="card-img-top rounded border border-dark border-2" alt="..." style="background: {{ $track->getHexaColor() }};" width="150" height="150"/>
                 <div class="position-absolute top-0 start-0 text-white ps-1">
-                {{ $track->year }}
+                    {{ $track->year }}
                 </div>
                 <div class="position-absolute bottom-0 end-0 text-white pe-1">
-                {{ $track->durationFormated() }}
+                    {{ $track->durationFormated() }}
                 </div>
                 <div class="card-track-actions position-absolute top-0 end-0 p-1">
                     <livewire:tracks.actions :track="$track"  wire:key="actions-{{ $track->id }}"/>

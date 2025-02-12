@@ -48,22 +48,20 @@
                         <p>{{ $search }}</p>
                     </div>
                 </div>
-            @else
-            <div class="px-1 pe-4 mb-4 text-center">
-                <livewire:tracks.search-actions wire:key="audio-search-actions" />
-            </div>
-            @endif
-
+                @else
+                <div class="px-1 pe-4 mb-4 text-center">
+                    <livewire:tracks.search-actions wire:key="audio-search-actions" />
+                </div>
+                @endif
             </div>
         </div>
     </div>
 
     <div class="row align-items-start g-5 mx-0">
-
-    @foreach ($tracks as $track)
-        <div class="col-sm-6 col-lg-4 col-xxl-3 px-5" id="audio-{{ $track->id }}-searchrch-wrap">
-            <livewire:tracks.teaser :track="$track" wire:key="audio-search-{{ $track->id }}" />
-        </div>
-    @endforeach
+        @foreach ($tracks as $track)
+            <div class="col-sm-6 col-lg-4 col-xxl-3 px-5" id="audio-{{ $track->id }}-searchrch-wrap">
+                <livewire:tracks.teaser :track="$track" wire:key="audio-search-{{ $track->id }}" />
+            </div>
+        @endforeach
     </div>
 </div>

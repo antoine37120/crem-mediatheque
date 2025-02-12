@@ -2,17 +2,15 @@
         {{-- page liste des playlists --}}
         @foreach ($playlists as $playlist)
         <div class="container my-4">
-            <div class="row align-items-start my-2 g-5">
-                <div class="col-2 position-relative p-0" style="width: fit-content">
+            <div class="row align-items-start my-2 gy-5">
+                <div class="col-2 position-relative p-0 ps-2" style="width: fit-content">
                     <img src="{{ url('storage/'.$playlist->picture) }}" class="card-img-top rounded border border-dark" alt="..."/>
-                    
+
                     <div class="card-playlist-actions position-absolute top-0 end-0 p-1">
                         <livewire:playlists.list-self-actions :playlist="$playlist" wire:key="playlist-list-self-actions-{{ $playlist->id }}" />
                     </div>
                 </div>
-                <div class="d-none d-md-block col-md-1">
-                </div>
-                <div class="col-12 col-md-9">
+                <div class="col-10 col-md-9 offset-md-1">
                     <h5 class="card-title"><a  href="{{route('playlist', ['playlist' => $playlist->id])}}" class="text-black text-decoration-none fw-bold" wire:navigate>{{ Illuminate\Support\Str::limit($playlist->translate(App::getLocale(), true)->name, 45, '...') }}</a></h5>
                     <p>{!! $playlist->translate(App::getLocale(), true)->description !!}</p>
                 </div>

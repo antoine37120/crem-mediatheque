@@ -7,11 +7,11 @@
                 </div>
                 <div class="position-absolute top-0 start-0 text-white ps-1">
                     {{-- p-1 p-md-2 fs-5 --}}
-                {{ $track->year }}
+                    {{ $track->year }}
                 </div>
                 <div class="position-absolute bottom-0 end-0 text-white pe-1">
                     {{-- p-1 p-md-2 fs-5 --}}
-                {{ $track->durationFormated() }}
+                    {{ $track->durationFormated() }}
                 </div>
                 <div class="card-track-actions position-absolute top-0 end-0 p-1">
                     {{-- p-1 p-md-2 --}}
@@ -20,16 +20,13 @@
             </div>
         </div>
         <div class="col-10 ps-5 ps-md-4 ps-lg-3 ps-xl-0">
-
             <h5 class="card-title"><a  href="{{route('track', ['audioItem' => $track->id])}}" class="text-black text-decoration-none fw-bold" wire:navigate>{{ Illuminate\Support\Str::limit($track->translate(App::getLocale())->name, 45, '...') }}</a></h5>
             <h5 class="fw-bold">{{ $track->geographicalArea->translate(App::getLocale())->name }}</h5>
             <h5 class="fw-bold">{{ $track->interpreters }}</h5>
             <h5 class="fw-bold">{{ $track->collector }}</h5>
             <div class="">{!! $track->translate(App::getLocale())->description !!}</div>
             <p><a href="{{ $track->link }}" target="_blank"class="btn btn-primary">See on archive</a></p>
-
         </div>
     </div>
-
 </div>
 
