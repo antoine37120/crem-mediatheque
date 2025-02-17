@@ -50,6 +50,13 @@ h5 {
     transition: 0.5s;
 }
 
+#logo-mobile {
+    height: 75%;
+    @media(min-width: 576px) {
+        height: 100%;
+    }
+}
+
 .main-of-page {
     @media(max-width: 991px) {
         padding-bottom: 50px;

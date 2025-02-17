@@ -3,7 +3,7 @@
         <div class="row g-5 mx-0 mt-1 mb-4">
             <input type="hidden" name="q" value="{{ $search }}">
             <div class="col-10 offset-1 d-flex flex-column flex-md-row g-5">
-                <div class="col-8 col-sm-6 col-md-4 m-auto pe-md-5 py-2 py-md-0">
+                <div class="col-10 col-sm-8 col-md-3 m-auto pe-md-5 py-2 py-md-0">
                     <select class="form-select" name="year" wire:model.live="query_year">
                                 <option value="">Année</option>
                         @foreach($years as $year)
@@ -11,7 +11,7 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="col-8 col-sm-6 col-md-4 m-auto px-md-4 py-2 py-md-0">
+                <div class="col-10 col-sm-8 col-md-6 m-auto px-md-4 py-2 py-md-0">
                     <select class="form-select" name="geoArea" wire:model.live="query_geoArea">
                                 <option value="">Zone</option>
                         @foreach($geoAreas as $geoArea)
@@ -23,7 +23,7 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="col-8 col-sm-6 col-md-4 m-auto ps-md-5 py-2 py-md-0">
+                <div class="col-10 col-sm-8 col-md-3 m-auto ps-md-5 py-2 py-md-0">
                     <select class="form-select" name="duration" wire:model.live="query_duration">
                                 <option value="">Durée</option>
                         @foreach($durations as $duration)

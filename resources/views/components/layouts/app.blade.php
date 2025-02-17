@@ -3,12 +3,8 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
         <title>{{ $meta_title ?? 'Page Title' }}</title>
-
-
         @vite(['resources/sass/app.scss', 'resources/js/app.js'])
-
     </head>
 
     <body class="{{ str_replace('.', ' ', request()->route()->getName()) }}">
@@ -25,28 +21,31 @@
                 <div class="primary-section col-12 col-lg-9 col-xl-10 ox-auto pb-1">
 
                     {{-- desktop --}}
-                    <header class="d-none d-lg-block py-4 px-1 text-white">
+                    {{-- <header class="d-none d-lg-block py-4 px-1 text-white">
                         {{ $title ?? 'Page Title' }}
-                    </header>
+                    </header> --}}
 
                     {{-- mobile --}}
-                    <header id="header-mobile" class="w-100 d-flex flex-row justify-content-between d-lg-none py-4 px-1 text-white" style="height: 200px; z-index: 999">
+                    {{-- <header id="header-mobile" class="w-100 d-flex flex-row justify-content-between d-lg-none py-4 px-1 text-white" style="height: 200px; z-index: 999">
                         <div class="py-3 max-h-fit" id="page-title-mobile">
                             {{ $meta_title ?? 'Page Title' }}
                         </div>
-                        <div class="max-h-fit d-flex" id="logo-mobile">
-                            <img src="/storage/logos/logo-musicoologieVOK.jpg" alt="" class="h-100 px-4 py-3 ml-auto w-30"></img>
+                        <div class="max-h-fit d-flex justify-content-end" id="logo-mobile">
+                            <img src="/storage/logos/logo-musicoologieVOK.jpg" alt="" class="px-4 py-3 ml-auto w-30"></img>
                         </div>
-                    </header>
+                    </header> --}}
 
-                    {{-- <header id="header-mobile" class="w-100 d-flex flex-row justify-content-between d-lg-none py-4 px-1 text-white" style="height: 200px; z-index: 999">
-                        <div class="max-h-fit d-flex" id="logo-mobile">
-                            <img src="/storage/logos/logo-musicoologieVOK.jpg" alt="" class="h-100 px-4 py-3 w-30"></img>
-                        </div>
+                    {{-- UN SEUL HEADER DESKTOP + MOBILE / ON JOUR SUR LES CLASSES --}}
+                    <header id="header-mobile" class="w-100 d-flex d-lg-block flex-row justify-content-between py-4 px-1 text-white" style="height: 200px; z-index: 999">
                         <div class="py-3 max-h-fit" id="page-title-mobile">
                             {{ $title ?? 'Page Title' }}
                         </div>
-                    </header> --}}
+                        <div class="max-h-fit d-flex d-lg-none justify-content-end" id="logo-mobile">
+                            <img src="/storage/logos/logo-musicoologieVOK.jpg" alt="" class="px-4 py-3 ml-auto w-30"></img>
+                        </div>
+                    </header>
+
+
 
                     {{-- Main --}}
                     <div class="main-of-page pe-3">{{ $slot }}</div>
@@ -76,7 +75,7 @@
                 toast: true,
                 text: 'Track added to playlist',
                 timer: 500,
-                showConfirmButton: false,   
+                showConfirmButton: false,
                 showDenyButton: false,
                 position: 'top-end',
                 timerProgressBar: true,
@@ -86,10 +85,10 @@
                 })
              });*/
             if(true) {
-               
+
             }
-            
+
             </script>
-            
+
     </body>
 </html>
