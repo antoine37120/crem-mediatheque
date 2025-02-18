@@ -1,9 +1,9 @@
 <x-layouts.app>
     <x-slot:meta_title>
-        Playlists
+    {{ __('pages.playlists.meta.title') }}
     </x-slot>
     <x-slot:title>
-        <h1 class="page-title px-4">Playlists</h1>
+        <h1 class="page-title px-4">{{ __('pages.playlists.title') }}</h1>
     </x-slot>
 
     <livewire:playlists.list-self />
