@@ -10,4 +10,8 @@ return [
         'label' => 'Search',
         'btn' => 'Launch search',
     ],
+    'localization' => [
+        'en' => 'English',
+        'fr' => 'Français',
+    ]
 ];
