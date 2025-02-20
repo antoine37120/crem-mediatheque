@@ -1,10 +1,18 @@
-import './bootstrap';
-import 'bootstrap';
+
+//import 'bootstrap';
+//import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import { Tooltip, Toast, Popover } from 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import '@popperjs/core';
 import sort from '@alpinejs/sort';
 import Swal from 'sweetalert2';
 window.Swal = Swal ;
 console.log(window) ;
+
+import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.min.js';
+var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+  return new bootstrap.Tooltip(tooltipTriggerEl)
+})
 
 window.Alpine.plugin(sort)
 import WaveSurfer from 'wavesurfer.js'

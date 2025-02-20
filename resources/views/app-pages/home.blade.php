@@ -1,9 +1,9 @@
 <x-layouts.app>
     <x-slot:meta_title>
-        Home
+    {{ __('pages.home.meta.title') }}
     </x-slot>
     <x-slot:title>
-        <h1 class="page-title px-4 pb-5" >Home</h1>
+        <h1 class="page-title px-4 pb-5" >{{ __('pages.home.title') }}</h1>
     </x-slot>
 
     <livewire:tracks.list-home />

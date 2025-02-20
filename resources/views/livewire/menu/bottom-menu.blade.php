@@ -5,47 +5,30 @@
         <div class="row ps-4 flex-nowrap">
             <div class="col w-20 text-center d-flex flex-column">
                 <a href="{{route('home')}}" class="text-black text-decoration-none" wire:navigate>
-                    <div>Home</div>
-                    <img src="/storage/icons/Home.png" alt="" class="" style="width: 28px; height: 28px"></img>
-                    {{-- py-3 mw-100 --}}
-                    {{-- <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-house d-inline" viewBox="0 0 16 16">
-                        <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z"/>
-                    </svg> --}}
+                    <div>{{ __('menu.home') }}</div>
+                    <img src="/storage/icons/Home.png" alt="" class="" style="width: 28px; height: 28px" />
                 </a>
             </div>
             <div class="col w-20 text-center d-flex flex-column">
                 <a href="{{route('tracks')}}" class="text-black text-decoration-none" wire:navigate>
-                    <div>Tracks</div>
-                    <img src="/storage/icons/Tracks.png" alt="" class="" style="width: 28px; height: 28px"></img>
-                    {{-- <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-house d-inline" viewBox="0 0 16 16">
-                        <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z"/>
-                    </svg> --}}
+                    <div>{{ __('menu.tracks') }}</div>
+                    <img src="/storage/icons/Tracks.png" alt="" class="" style="width: 28px; height: 28px" />
                 </a>
             </div>
             <div class="col w-20 text-center d-flex flex-column">
                 <a href="{{route('playlists')}}" class="text-black text-decoration-none" wire:navigate>
-                    <div>Playlists</div>
-                    <img src="/storage/icons/Playlist.png" alt="" style="width: 28px; height: 28px"></img>
-                    {{-- <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-house d-inline" viewBox="0 0 16 16">
-                        <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z"/>
-                    </svg> --}}
+                    <div>{{ __('menu.playlists') }}</div>
+                    <img src="/storage/icons/Playlist.png" alt="" style="width: 28px; height: 28px" />
                 </a>
             </div>
             <div class="col w-20 text-center d-flex flex-column">
                 <a href="{{route('podcasts')}}" class="text-black text-decoration-none" wire:navigate>
-                    <div>Podcasts</div>
-                    <img src="/storage/icons/podcast.png" alt="" class="" style="width: 28px; height: 28px"></img>
-                    {{-- <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-house d-inline" viewBox="0 0 16 16">
-                        <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z"/>
-                    </svg> --}}
+                    <div>{{ __('menu.podcasts') }}</div>
+                    <img src="/storage/icons/podcast.png" alt="" class="" style="width: 28px; height: 28px" />
                 </a>
             </div>
 
             <div class="col w-20 d-flex justify-content-center pt-2">
-
-
-
-
                         <div
                             x-data="{
                                 open: false,
@@ -106,40 +89,40 @@
                                         <li>
                                             <a href="{{route('home')}}" class="text-black text-decoration-none d-block pb-1 border-bottom" wire:navigate>
                                                 <img src="/storage/icons/Home.png" alt="" class="" style="width: 28px; height: 28px"></img>
-                                                <span>Accueil</span>
+                                                <span>{{ __('menu.home') }}</span>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="{{route('tracks')}}" class="text-black text-decoration-none d-block pb-1 border-bottom" wire:navigate>
                                                 <img src="/storage/icons/Tracks.png" alt="" class="" style="width: 28px; height: 28px"></img>
-                                                <span>Tracks</span>
+                                                <span>{{ __('menu.tracks') }}</span>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="{{route('playlists')}}" class="text-black text-decoration-none d-block pb-1 border-bottom" wire:navigate>
                                                 <img src="/storage/icons/Playlist.png" alt="" class="" style="width: 28px; height: 28px"></img>
-                                                <span>Playlists</span>
+                                                <span>{{ __('menu.playlists') }}</span>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="{{route('podcasts')}}" class="text-black text-decoration-none d-block pb-1 border-bottom" wire:navigate>
                                                 <img src="/storage/icons/podcast.png" alt="" class="" style="width: 28px; height: 28px"></img>
-                                                <span>Podcasts</span>
+                                                <span>{{ __('menu.podcasts') }}</span>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="{{route('cmsPage', ['cmsPage' => 'about']) }}" class="text-black text-decoration-none d-block pb-1 border-bottom" wire:navigate>
                                                 <img src="/storage/icons/About.png" alt="" class="" style="width: 28px; height: 28px"></img>
-                                                <span>A propos</span>
+                                                <span>{{ __('menu.about') }}</span>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="#new" class="text-black text-decoration-none lg:py-1.5 w-full d-block pb-1 border-bottom items-center rounded-md transition-colors text-left text-gray-800 hover:bg-gray-50 focus-visible:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
-                                                <span>Français</span>
+                                                <span>{{ __('menu.localization.fr') }}</span>
                                             </a>
                                         </li>
                                         <li><a href="#edit" class="text-black text-decoration-none lg:py-1.5 w-full d-block pb-1 border-bottom items-center rounded-md transition-colors text-left text-gray-800 hover:bg-gray-50 focus-visible:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
-                                                <span>English</span>
+                                                <span>{{ __('menu.localization.en') }}</span>
                                             </a>
                                         </li>
                                     </ul>

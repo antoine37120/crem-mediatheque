@@ -20,21 +20,6 @@
                 </div>
                 <div class="primary-section col-12 col-lg-9 col-xl-10 ox-auto pb-1">
 
-                    {{-- desktop --}}
-                    {{-- <header class="d-none d-lg-block py-4 px-1 text-white">
-                        {{ $title ?? 'Page Title' }}
-                    </header> --}}
-
-                    {{-- mobile --}}
-                    {{-- <header id="header-mobile" class="w-100 d-flex flex-row justify-content-between d-lg-none py-4 px-1 text-white" style="height: 200px; z-index: 999">
-                        <div class="py-3 max-h-fit" id="page-title-mobile">
-                            {{ $meta_title ?? 'Page Title' }}
-                        </div>
-                        <div class="max-h-fit d-flex justify-content-end" id="logo-mobile">
-                            <img src="/storage/logos/logo-musicoologieVOK.jpg" alt="" class="px-4 py-3 ml-auto w-30"></img>
-                        </div>
-                    </header> --}}
-
                     {{-- UN SEUL HEADER DESKTOP + MOBILE / ON JOUR SUR LES CLASSES --}}
                     <header id="header-mobile" class="w-100 d-flex d-lg-block flex-row justify-content-between py-4 px-1 text-white" style="height: 200px; z-index: 999">
                         <div class="py-3 max-h-fit" id="page-title-mobile">
@@ -44,8 +29,6 @@
                             <img src="/storage/logos/logo-musicoologieVOK.jpg" alt="" class="px-4 py-3 ml-auto w-30"></img>
                         </div>
                     </header>
-
-
 
                     {{-- Main --}}
                     <div class="main-of-page pe-3">{{ $slot }}</div>
@@ -65,30 +48,5 @@
                 </div>
             </div>
         </div>
-
-         <script type="text/javascript">
-             /*document.addEventListener('livewire:initialized', () => {
-                console.log(Notification)
-                console.log(window)
-                window.Swal.fire({
-                //title: 'Yeah',
-                toast: true,
-                text: 'Track added to playlist',
-                timer: 500,
-                showConfirmButton: false,
-                showDenyButton: false,
-                position: 'top-end',
-                timerProgressBar: true,
-                animation: false,
-                padding: '3px',
-                background: 'rgba(255, 255, 255, 0.5)',
-                })
-             });*/
-            if(true) {
-
-            }
-
-            </script>
-
     </body>
 </html>
