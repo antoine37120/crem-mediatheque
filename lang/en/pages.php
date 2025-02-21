@@ -2,7 +2,8 @@
 
 return [
     'home' => [
-        'title' => 'Home',
+        'title' => 'Ehtnomusicoology.org',
+        'baseline' => 'The jukebox from the archives of the CNRS ethnomusicology research center',
         'meta' => [
             'title' => 'Home',
         ]
