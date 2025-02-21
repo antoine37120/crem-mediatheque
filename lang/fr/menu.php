@@ -11,6 +11,7 @@ return [
         'btn' => 'Lancer la recherche',
     ],
     'localization' => [
+        'title' => 'Langue',
         'en' => 'English',
         'fr' => 'Français',
     ]
