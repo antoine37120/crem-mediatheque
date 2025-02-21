@@ -1,6 +1,5 @@
 <?php
 
 return [
-    'welcome' => 'Un titre traduit',
-    'welcome_g' => 'Un titre traduit g',
+    'meta_title_prefix' => 'Ehtnomusicoology.org',
 ];
