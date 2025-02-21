@@ -51,10 +51,12 @@ h5 {
 }
 
 #logo-mobile {
-    height: 75%;
-    @media(min-width: 576px) {
-        height: 100%;
+    img {
+        height: 80px;
     }
+    /*@media(min-width: 576px) {
+        height: 100%;
+    }*/
 }
 
 .main-of-page {

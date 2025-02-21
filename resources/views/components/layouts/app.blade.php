@@ -21,12 +21,12 @@
                 <div class="primary-section col-12 col-lg-9 col-xl-10 ox-auto pb-1">
 
                     {{-- UN SEUL HEADER DESKTOP + MOBILE / ON JOUR SUR LES CLASSES --}}
-                    <header id="header-mobile" class="w-100 d-flex d-lg-block flex-row justify-content-between py-4 px-1 text-white" style="height: 200px; z-index: 999">
+                    <header id="header-mobile" class="w-100 d-flex d-lg-block flex-row justify-content-between py-4 px-1 text-white">
                         <div class="py-3 max-h-fit" id="page-title-mobile">
                             {{ $title ?? 'Page Title' }}
                         </div>
                         <div class="max-h-fit d-flex d-lg-none justify-content-end" id="logo-mobile">
-                            <img src="/storage/logos/logo-musicoologieVOK.jpg" alt="" class="px-4 py-3 ml-auto w-30"></img>
+                            <img src="/storage/logos/logo-musicoologieVOK.jpg" alt="" class="px-4  ml-auto"></img>
                         </div>
                     </header>
 
