@@ -74,10 +74,10 @@ img.rounded {
     min-width: 100px;
     max-width: 150px;
     border: 2px solid black !important;
-    // @media (max-width: 991px) {
-    //     width: 75px;
-    //     height: 75px;
-    // }
+    @media (max-width: 1199px) {
+        max-width: 100px;
+        height: 100px;
+    }
     // @media (min-width: 992px) {
     //     min-width: 100px;
     //     max-width: 150px;
@@ -93,6 +93,13 @@ img.rounded {
 
 .card-track > .position-relative, .card-track-col {
     width: fit-content;
+}
+
+.home-teaser-text {
+    @media (max-width: 991px) {
+        max-width: 100px;
+    }
+
 }
 
 #global-search-form {

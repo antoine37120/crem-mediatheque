@@ -6,7 +6,7 @@
                 <livewire:playlists.list-self-actions :playlist="$playlist" wire:key="playlist-teaser-actions-{{ $playlist->id }}" />
             </div>
         </div>
-        <div class="py-2 w-75">
+        <div class="py-2 w-75 home-teaser-text">
             <h5 class="playlist-title"><a  href="{{route('playlist', ['playlist' => $playlist->id])}}" class="text-black text-decoration-none fw-bold" wire:navigate>{{ Illuminate\Support\Str::limit($playlist->translate(App::getLocale(), true)->name, 45, '...') }}</a></h5>
             <p class="fs-6 overflow-hidden text-truncate text-nowrap">
                 {!! $playlist->translate(App::getLocale(), true)->description !!}
