@@ -1,8 +1,10 @@
 <div>
     <div class="card-track bg-transparent position-relative" >
-        <div class="row justify-content-between flex-nowrap mx-0">
+        <div class="justify-content-between flex-nowrap mx-0">
             {{-- w-75 --}}
-            <div class="col-8 position-relative p-0" style="width: fit-content">
+            {{-- row --}}
+            <div class="position-relative p-0" style="width: fit-content">
+                {{-- col-8  --}}
                 <img src="{{ url('storage/'.$track->picture) }}" class="card-img-top rounded border border-dark border-2" alt="..." style="background: {{ $track->getHexaColor() }};" width="150" height="150"/>
                 <div class="position-absolute top-0 start-0 text-white ps-1">
                     {{ $track->year }}

@@ -95,6 +95,10 @@ img.rounded {
     width: fit-content;
 }
 
+.card-track.position-relative {
+    width: fit-content;
+}
+
 .home-teaser-text {
     @media (max-width: 991px) {
         max-width: 100px;
