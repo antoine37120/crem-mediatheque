@@ -9,7 +9,7 @@ body {
     &.tracks {
         .primary-section {
             background: rgb(104,20,22);
-            background: linear-gradient(180deg, rgba(104,20,22,1) 0%, rgba(255,255,255,1) 55%);
+            background: linear-gradient(180deg, rgba(104,20,22,1) 0%, rgba(255,255,255,1) 75%);
         }
         .tracks-full-actions button {
             background: rgb(104,20,22);
@@ -24,7 +24,7 @@ body {
     &.playlist {
         .primary-section {
             background: rgb(84,109,148);
-            background: linear-gradient(180deg, rgba(84,109,148,1) 0%, rgba(255,255,255,1) 55%);
+            background: linear-gradient(180deg, rgba(84,109,148,1) 0%, rgba(255,255,255,1) 75%);
         }
         .playlist-full-actions button {
             background: rgb(84,109,148);
@@ -39,7 +39,7 @@ body {
     &.podcast {
         .primary-section {
             background: rgb(3,106,49);
-            background: linear-gradient(180deg, rgba(3,106,49,1) 0%, rgba(255,255,255,1) 55%);
+            background: linear-gradient(180deg, rgba(3,106,49,1) 0%, rgba(255,255,255,1) 75%);
         }
         .playlist-full-actions button {
             background: rgb(3,106,49);
@@ -78,7 +78,7 @@ body {
 }
 .form-select *{
     background-color: #FDF1E8;
-    
+
     font-weight: normal;
 }
 

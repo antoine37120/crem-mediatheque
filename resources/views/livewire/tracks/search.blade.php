@@ -2,7 +2,7 @@
     <form wire:submit="playSearch" class="mt-0">
         <div class="row g-5 mx-0 mt-1 mb-4">
             <input type="hidden" name="q" value="{{ $search }}">
-            <div class="col-10 offset-1 d-flex flex-column flex-md-row g-5">
+            <div class="col-10 offset-1 d-flex flex-column flex-md-row mt-2 mt-md-auto g-5">
                 <div class="col-10 col-sm-8 col-md-3 m-auto pe-md-5 py-2 py-md-0">
                     <select class="form-select" name="year" wire:model.live="query_year">
                                 <option value="">Année</option>
@@ -59,7 +59,7 @@
 
     <div class="row align-items-start g-5 mx-0">
         @foreach ($tracks as $track)
-            <div class="col-sm-6 col-lg-4 col-xxl-3 px-5" id="audio-{{ $track->id }}-searchrch-wrap">
+            <div class="col-12 col-lg-4 col-xxl-3 px-2 px-lg-5" id="audio-{{ $track->id }}-searchrch-wrap">
                 <livewire:tracks.teaser :track="$track" wire:key="audio-search-{{ $track->id }}" />
             </div>
         @endforeach

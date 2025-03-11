@@ -59,6 +59,16 @@ h5 {
     }*/
 }
 
+.page-title h4 {
+    @media (max-width: 767px) {
+        font-size: 14px;
+    }
+}
+
+// .page-title a {
+//     font-size: x-large;
+// }
+
 .main-of-page {
     @media(max-width: 991px) {
         padding-bottom: 50px;
@@ -97,13 +107,34 @@ img.rounded {
 
 .card-track.position-relative {
     width: fit-content;
+    @media (max-width: 991px) {
+        width: 100% !important;
+        // a, p {
+        //     font-size: 12px !important;
+        // }
+    }
 }
 
 .home-teaser-text {
     @media (max-width: 991px) {
         max-width: 100px;
+        a, p {
+            font-size: 12px !important;
+        }
     }
+}
 
+.home-teaser-text.mobile-tracks {
+    @media (max-width: 991px) {
+        flex-grow: 2;
+        // width: 100%;
+        max-width: 100%;
+    }
+}
+
+.mobile-tracks .action-buttons {
+    flex-direction: column;
+    justify-content: space-between !important;
 }
 
 #global-search-form {
