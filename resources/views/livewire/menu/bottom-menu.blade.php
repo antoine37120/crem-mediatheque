@@ -85,7 +85,18 @@
                              >
                              {{-- bottom-100  --}}
                                 <div class="m-auto">
-                                    <ul class="list-unstyled text-nowrap fs-5 d-grid gap-0 my-4 ms-3 text-center">
+                                    <ul class="list-unstyled text-nowrap fs-5 d-grid gap-0 mb-4 text-center">
+                                        <li>
+                                            <div class="text-black text-decoration-none d-block pb-1 border-bottom border-black-40 mb-3"
+                                                x-ref="close-menu"
+                                                x-on:click="close()">
+                                                <a href="">
+                                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-door-exit"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M13 12v.01" /><path d="M3 21h18" /><path d="M5 21v-16a2 2 0 0 1 2 -2h7.5m2.5 10.5v7.5" /><path d="M14 7h7m-3 -3l3 3l-3 3" />
+                                                    </svg>
+                                                </a>
+                                            </div>
+
+                                        </li>
                                         <li>
                                             <a href="{{route('home')}}" class="text-black text-decoration-none d-block pb-1 border-bottom border-black-40" wire:navigate>
                                                 <img src="/storage/icons/Home.png" alt="" class="" style="width: 28px; height: 28px"></img>
