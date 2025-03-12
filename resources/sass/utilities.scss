@@ -94,7 +94,6 @@ img.rounded {
     // }
 }
 
-
 .playlist-title ~ p, .podcast-title ~ p {
     overflow: hidden;
     text-overflow: ellipsis " [..]";
@@ -218,3 +217,18 @@ img.rounded {
 }
 
 
+// .playlists-list-self .row .col-10 {
+//     margin-left: 0;
+// }
+
+.playlists-list-self .row:first-child {
+    @media (max-width: 991px) {
+        margin-left: 0;
+    }
+}
+
+.playlists-list-self .row div ~ div {
+    @media (min-width: 992px) {
+        margin-left: 0;
+    }
+}
