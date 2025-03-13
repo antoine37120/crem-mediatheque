@@ -81,17 +81,13 @@ img.rounded {
 }
 
 .card-img-top {
-    min-width: 100px;
-    max-width: 150px;
+    width: 150px;
+    height: 150px;
     border: 2px solid black !important;
-    @media (max-width: 1199px) {
+    @media (max-width: 991px) {
         max-width: 100px;
         height: 100px;
     }
-    // @media (min-width: 992px) {
-    //     min-width: 100px;
-    //     max-width: 150px;
-    // }
 }
 
 .playlist-title ~ p, .podcast-title ~ p {
@@ -217,17 +213,44 @@ img.rounded {
 }
 
 
-// .playlists-list-self .row .col-10 {
-//     margin-left: 0;
-// }
+.playlists-list-self {
+    width: 100%;
+}
 
-.playlists-list-self .row:first-child {
+.playlists-list-self .row .col-2 {
     @media (max-width: 991px) {
         margin-left: 0;
+    }
+    @media (min-width: 992px) {
+        width: fit-content;
     }
 }
 
 .playlists-list-self .row div ~ div {
+    padding-right: 10%;
+    @media (min-width: 992px) {
+        margin-left: 0rem;
+    }
+    // @media (min-width: 1200px) {
+    //     margin-left: 0;
+    // }
+}
+
+.podcasts-list-self {
+    width: 100%;
+}
+
+.podcasts-list-self .row .col-2 {
+    @media (max-width: 991px) {
+        margin-left: 0;
+    }
+    @media (min-width: 992px) {
+        width: fit-content;
+    }
+}
+
+.podcasts-list-self .row div ~ div {
+    padding-right: 10%;
     @media (min-width: 992px) {
         margin-left: 0;
     }
