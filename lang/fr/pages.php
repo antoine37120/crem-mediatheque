@@ -2,7 +2,8 @@
 
 return [
     'home' => [
-        'title' => 'Accueil',
+        'title' => 'Ehtnomusicoology.org',
+        'baseline' => 'Le jukebox des archives du centre de recherche en ethnomusicologie du CNRS',
         'meta' => [
             'title' => 'Accueil',
         ]
