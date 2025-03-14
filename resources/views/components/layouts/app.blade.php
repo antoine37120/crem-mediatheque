@@ -20,7 +20,6 @@
                 </div>
                 <div class="primary-section col-12 col-lg-9 col-xl-10 ox-auto pb-1">
 
-                    {{-- UN SEUL HEADER DESKTOP + MOBILE / ON JOUR SUR LES CLASSES --}}
                     <header id="header-mobile" class="w-100 d-flex d-lg-block flex-row justify-content-between py-4 px-1 text-white">
                         <div class="py-3 max-h-fit" id="page-title-mobile">
                             {{ $title ?? 'Page Title' }}

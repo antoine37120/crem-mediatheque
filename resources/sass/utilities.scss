@@ -102,17 +102,13 @@ img.rounded {
 
 .card-track.position-relative {
     width: fit-content;
-    @media (max-width: 991px) {
-        width: 100% !important;
-        // a, p {
-        //     font-size: 12px !important;
-        // }
-    }
 }
 
 .home-teaser-text {
+    max-width: 150px;
     @media (max-width: 991px) {
         max-width: 100px;
+        width: fit-content;
         a, p {
             font-size: 12px !important;
         }
@@ -122,8 +118,14 @@ img.rounded {
 .home-teaser-text.mobile-tracks {
     @media (max-width: 991px) {
         flex-grow: 2;
-        // width: 100%;
-        max-width: 100%;
+    }
+}
+
+.home-tracks .card-track-actions, .home-playlists .card-playlist-actions, .home-podcasts .card-playlist-actions {
+    top: 25%;
+    @media (min-width: 992px) {
+        top: 0;
+        right: 0;
     }
 }
 
@@ -141,11 +143,6 @@ img.rounded {
         border-left: none;
     }
 }
-
-// .top-menu > div > button {
-//     background-color: #e5e1e0;
-//     border: 3px solid !important;
-// }
 
 
 // item de menu actif
@@ -207,7 +204,6 @@ img.rounded {
 
 #three-dots-menu {
     width: 30px;
-    // height: 30px;
     background-image: radial-gradient(circle, black 3px, transparent 4px);
     background-size: 100% 33.33%;
 }
@@ -231,9 +227,6 @@ img.rounded {
     @media (min-width: 992px) {
         margin-left: 0rem;
     }
-    // @media (min-width: 1200px) {
-    //     margin-left: 0;
-    // }
 }
 
 .podcasts-list-self {
