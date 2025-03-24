@@ -57,9 +57,10 @@
         </div>
     </div>
 
-    <div class="row align-items-start g-5 mx-0">
+    <div class="row align-items-start g-5 mt-auto mx-0 tracks-list-self">
         @foreach ($tracks as $track)
-            <div class="col-12 col-lg-4 col-xxl-3 px-2 px-lg-5" id="audio-{{ $track->id }}-searchrch-wrap">
+            {{-- <div class="col-12 col-lg-4 col-xxl-3 px-2 px-lg-5" id="audio-{{ $track->id }}-searchrch-wrap"> --}}
+            <div class="col-3 ps-5 me-5 me-sm-3 me-lg-0" id="audio-{{ $track->id }}-searchrch-wrap">
                 <livewire:tracks.teaser :track="$track" wire:key="audio-search-{{ $track->id }}" />
             </div>
         @endforeach

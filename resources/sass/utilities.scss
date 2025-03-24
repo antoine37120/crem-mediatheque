@@ -121,7 +121,7 @@ img.rounded {
     }
 }
 
-.home-tracks .card-track-actions, .home-playlists .card-playlist-actions, .home-podcasts .card-playlist-actions {
+.home-tracks .card-track-actions, .tracks-list-self .card-track-actions, .home-playlists .card-playlist-actions, .home-podcasts .card-playlist-actions, .tracks-list-self .card-track-actions, .home-playlists .card-playlist-actions {
     top: 25%;
     @media (min-width: 992px) {
         top: 0;
