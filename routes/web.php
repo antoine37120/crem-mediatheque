@@ -13,7 +13,7 @@ Route::localized(function () {
     Route::get('/', function () {
         return view('app-pages.home', []);
     })->name('home');
-    
+
 
     Route::get('/tracks', function () {
         return view('app-pages.search-tracks', ['search' => '']);

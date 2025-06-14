@@ -25,7 +25,7 @@ class AudioItem extends Model implements TranslatableContract
 
     public $translatedAttributes = ['name', 'description'];
 
-    
+
     protected $casts = [
         'published' => 'boolean',
     ];
@@ -52,8 +52,12 @@ class AudioItem extends Model implements TranslatableContract
         "color"
     ];
 
-
-
+     /*
+        function is_publiched
+     */
+    public function is_published() {
+        return $this->published ;
+    }
 
     /**
      * Get random color for entity.
