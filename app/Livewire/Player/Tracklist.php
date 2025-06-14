@@ -47,10 +47,7 @@ class Tracklist extends Component
     #[On('play-track-to-playlist')]
     public function updateTrackPlay($id)
     {
-        Log::debug('Trigger play') ;
-        Log::debug($id) ;
         $this->item_play = $id ;
-
     }
 
     #[On('add-search-to-playlist')]
@@ -68,7 +65,6 @@ class Tracklist extends Component
     #[On('add-search-to-playlist-random')]
     public function updateTrackListWithSearchRandom()
     {
-
         $audioItems = Arr::shuffle($this->track_nav_data) ;
         $i = 0;
         foreach($audioItems as $item){
@@ -76,13 +72,12 @@ class Tracklist extends Component
             $i++;
         }
         $this->notice_add_search($i);
-
     }
 
     public function notice_add_search($count) {
-        $notuice_text = $count.' audio items added to playlist';
+        $notice_text = __('notifications.add_to_search', ['count' => $count]);
         $notice_color = 'search' ;
-        $this->dispatch('add_notice_user', text: $notuice_text, color: $notice_color);
+        $this->dispatch('add_notice_user', text: $notice_text, color: $notice_color);
     }
 
     #[On('add-playlist-to-playlist')]
@@ -135,8 +130,8 @@ class Tracklist extends Component
         if($playlist->type->name == 'Podcast') {
             $notice_color = 'podcast' ;
         }
-        $notuice_text = $playlist->translate(app()->getLocale(), true)->name .' added to th playlist ('.$count.' items)' ;
-        $this->dispatch('add_notice_user', text: $notuice_text, color: $notice_color);
+        $notice_text = __('notifications.add_playlist', ['count' => $count, 'playlist' => $playlist->translate(app()->getLocale(), true)->name]);
+        $this->dispatch('add_notice_user', text: $notice_text, color: $notice_color);
     }
 
     public function notice_exist_playlist($id) {
@@ -147,7 +142,7 @@ class Tracklist extends Component
         if($playlist->type->name == 'Podcast') {
             $notice_color = 'podcast' ;
         }
-        $notice_text = 'No new item can be added on playlist for '.$playlist->translate(app()->getLocale(), true)->name ;
+        $notice_text = __('notifications.exist_on_playlist', ['playlist' => $playlist->translate(app()->getLocale(), true)->name]);
         $this->dispatch('add_notice_user', text: $notice_text, color: $notice_color);
     }
     /**
@@ -167,9 +162,9 @@ class Tracklist extends Component
             $this->playlist_items() ;
         }
         $track = AudioItem::find($id);
-        $notuice_text = $track->translate(app()->getLocale(), true)->name ." added to playlist";
+        $notice_text = __('notifications.add_track_to_playlist', ['track' => $track->translate(app()->getLocale(), true)->name]);
         $notice_color = str_replace('#', '', $track->getHexaColor()) ;
-        $this->dispatch('add_notice_user', text: $notuice_text, color: $notice_color);
+        $this->dispatch('add_notice_user', text: $notice_text, color: $notice_color);
 
     }
     /**
