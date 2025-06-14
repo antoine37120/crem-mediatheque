@@ -16,27 +16,27 @@
             <table class="table table-sm mb-0" x-show="expanded">
                 <thead>
                     <tr>
-                        <th scope="col" class="bg-light">#</th>
                         <th scope="col" class="bg-light">Titre</th>
-                        <th scope="col" class="bg-light">Zone géographique</th>
                         <th scope="col" class="bg-light">Année</th>
-                        <th scope="col" class="bg-light">Durée</th>
+                        {{-- <th scope="col" class="bg-light">#</th>
+                        <th scope="col" class="bg-light">Zone géographique</th>
+                        <th scope="col" class="bg-light">Durée</th> --}}
                         <th scope="col" class="bg-light"></th>
                     </tr>
                 </thead>
                 <tbody id="playlist" x-sort="window.catchOrdering()">
                     <div>
-                @php 
+                @php
                     $i = 1 ;
                 @endphp
                 @foreach($playlist_items as $track)
-                    
+
                     <livewire:player.track-list-item :track="$track" :it="$i" :selected="$item_play" key="player-track-list-item-{{ $track->id }}" />
 
-                    @php 
+                    @php
                         $i++ ;
                     @endphp
-                @endforeach 
+                @endforeach
 </div>
                 </tbody>
             </table>
