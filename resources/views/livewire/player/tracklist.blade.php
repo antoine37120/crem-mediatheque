@@ -12,21 +12,20 @@
             </svg>
 
         </div>
-        <div class="playlist-table-wrapper">
-            <table class="table table-sm mb-0" x-show="expanded">
-                <thead>
-                    <tr>
-                        <th scope="col" class="bg-light">Titre</th>
-                        <th scope="col" class="bg-light">Année</th>
-                        {{-- <th scope="col" class="bg-light">#</th>
-                        <th scope="col" class="bg-light">Zone géographique</th>
-                        <th scope="col" class="bg-light">Durée</th> --}}
-                        <th scope="col" class="bg-light"></th>
-                    </tr>
-                </thead>
-                <tbody id="playlist" x-sort="window.catchOrdering()">
-                    <div>
-                @php
+        <div class="playlist-grid-wrapper" x-show="expanded">
+            <!-- En-tête de la grille -->
+            <div class="container">
+                <div class="row bg-light py-2 border-bottom fw-bold">
+                    <div class="col-9 col-md-10 ps-1">Titre</div>
+                    <div class="col-1 col-md-1">Année</div>
+                    <div class="col-2 col-md-1 text-end"></div>
+                </div>
+            </div>
+
+            <!-- Liste des pistes -->
+            <div id="playlist">
+<div x-sort="window.catchOrdering()" class="container">
+            @php
                     $i = 1 ;
                 @endphp
                 @foreach($playlist_items as $track)
@@ -38,11 +37,11 @@
                     @endphp
                 @endforeach
 </div>
-                </tbody>
-            </table>
+            </div>
         </div>
     </div>
 </div>
+
 
 
 @script

@@ -7,7 +7,7 @@
 
 }
 #playlist {
-    td.actions {
+    div.actions {
         span {
             cursor: grab;
         }
@@ -24,7 +24,7 @@
         width: 96%;
     }
 
-    .playlist-table-wrapper {
+    .playlist-grid-wrapper {
         overflow-y: auto;
         max-height: calc(100vh - 330px);
         background-color: #fff;

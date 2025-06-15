@@ -52,7 +52,7 @@ window.noticeUser = function (message='Track added to playlist', color="") {
         toast: true,
         text: message,
         timer: 3000,
-        showConfirmButton: false,   
+        showConfirmButton: false,
         showDenyButton: false,
         position: 'top-end',
         timerProgressBar: true,
@@ -73,13 +73,13 @@ window.Livewire.on('add_notice_user', (event) => {
 
 window.catchOrdering = function() {
     console.log('catchOrdering') ;
-    links = document.querySelectorAll('tbody#playlist tr');
+    links = document.querySelectorAll('div#playlist .row');
     let news_ids = [] ;
     let i = 1 ;
     Array.prototype.forEach.call(links, function(link, index) {
 
         let trackId = link.getAttribute('data-track-id');
-        link.querySelector(".num").innerText = index + 1;
+        //link.querySelector(".num").innerText = index + 1;
         news_ids.push(trackId) ;
     });
     window.Livewire.dispatch('reordering-playlist',  { ids: news_ids });
@@ -113,7 +113,7 @@ window.Livewire.on('playlist-plaiyed-item-deleted', () => {
 window.loadLinksList = function() {
 
     console.log('loadLinksList') ;
-    links = document.querySelectorAll('tbody#playlist tr');
+    links = document.querySelectorAll('#playlist .row');
     console.log(links) ;
     Array.prototype.forEach.call(links, function(link, index) {
         link.removeEventListener('click', null);
@@ -144,7 +144,7 @@ window.loadLinksList = function() {
 window.initWithTrack = function(id, force_play = false) {
     isFirstItem = false ;
     console.log('initWithTrack') ;
-    links = document.querySelectorAll('#playlist tr');
+    links = document.querySelectorAll('#playlist .row');
     Array.prototype.forEach.call(links, function(link, index) {
         let trackId = links[index].getAttribute('data-track-id');
         if (trackId == id) {
@@ -210,25 +210,25 @@ window.initPlayer = function() {
         window.wavesurfer.playPause();
     });
 
-    
+
 
     let btnRandom = document.querySelector('#player-btnrandom');
     btnRandom.addEventListener('click', function() {
-        links = document.querySelectorAll('#playlist tr');
+        links = document.querySelectorAll('#playlist .row');
         let ul = document.querySelector("#playlist"); // get the list
         let news_ids = [] ;
         for (var i = ul.children.length; i >= 0; i--) {
             ul.appendChild(ul.children[Math.random() * i | 0]);
         }
-        links = document.querySelectorAll('#playlist tr');
+        links = document.querySelectorAll('#playlist .row');
         Array.prototype.forEach.call(links, function(link, index) {
-            link.querySelector(".num").innerText = index + 1;
+            //link.querySelector(".num").innerText = index + 1;
             news_ids.push(link.getAttribute('data-track-id')) ;
         });
         console.log(news_ids) ;
 
         window.Livewire.dispatch('reordering-playlist',  { ids: news_ids });
-        
+
         window.loadLinksList() ;
     });
 
@@ -239,13 +239,13 @@ window.initPlayer = function() {
         document.querySelector('#player-repeat').classList.toggle('enabled') ;
     });
 
-    
+
     // Go to the next track
     let playNext = document.querySelector('#player-forward');
     playNext.addEventListener('click', function() {
         if(links.length > 0) {
             currentTrack = window.getCurrentTrackIndex() ;
-            links = document.querySelectorAll('#playlist tr');
+            links = document.querySelectorAll('#playlist .row');
             let current =window.getCurrentTrackIndex() ;
             if(current + 1 < links.length) {
                 let next = current + 1 ;
@@ -261,7 +261,7 @@ window.initPlayer = function() {
     playPrev.addEventListener('click', function() {
         if(links.length > 0) {
             currentTrack = window.getCurrentTrackIndex() ;
-            links = document.querySelectorAll('#playlist tr');
+            links = document.querySelectorAll('#playlist .row');
             let current =window.getCurrentTrackIndex() ;
             if(current - 1 < 0) {
                 let prev = links.length - 1 ;
@@ -306,7 +306,7 @@ window.initPlayer = function() {
     // Go to the next track on finish
     window.wavesurfer.on('finish', function() {
         currentTrack = window.getCurrentTrackIndex() ;
-        links = document.querySelectorAll('#playlist tr');
+        links = document.querySelectorAll('#playlist .row');
         let current =window.getCurrentTrackIndex() ;
         if(current + 1 < links.length) {
             let next = current + 1 ;
@@ -335,12 +335,12 @@ window.initPlayer = function() {
 }*/
 
 window.getCurrentTrackIndex = function() {
-    const currentTrackNode = document.querySelector('#playlist tr.table-active');
+    const currentTrackNode = document.querySelector('#playlist div.bg-light');
     return currentTrackNode ? Array.from(currentTrackNode.parentNode.children).indexOf(currentTrackNode) : null;
 }
 
 window.getTrackIndex = function(trackId) {
-    const currentTrackNode = document.querySelector('#playlist tr[data-track-id="' + trackId + '"]');
+    const currentTrackNode = document.querySelector('#playlist div[data-track-id="' + trackId + '"]');
     return currentTrackNode ? Array.from(currentTrackNode.parentNode.children).indexOf(currentTrackNode) : null;
 }
 
@@ -348,7 +348,7 @@ window.getTrackIndex = function(trackId) {
 // Load a track by index and highlight the corresponding link
 window.setCurrentSong = function(trackId, play = false) {
     trackId = Number(trackId) ;
-    links = document.querySelectorAll('#playlist tr');
+    links = document.querySelectorAll('#playlist .row');
     currentTrack = window.getCurrentTrackIndex() ;
     console.log('currentTrack') ;
     console.log(currentTrack) ;
@@ -364,11 +364,11 @@ window.setCurrentSong = function(trackId, play = false) {
                 return ;
             }
         }
-        links[currentTrack].classList.remove('table-active');
+        links[currentTrack].classList.remove('bg-light');
     }
     currentTrack = window.getTrackIndex(trackId) ;
     console.log(currentTrack) ;
-    links[currentTrack].classList.add('table-active');
+    links[currentTrack].classList.add('bg-light');
     let trackUrl = links[currentTrack].getAttribute('data-track-url');
     //let trackId = links[currentTrack].getAttribute('data-track-id');
     if (play) {
