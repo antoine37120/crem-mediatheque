@@ -14,7 +14,7 @@
         </div>
         <div class="playlist-grid-wrapper" x-show="expanded">
             <!-- En-tête de la grille -->
-            <div class="container">
+            <div class="container-fluid">
                 <div class="row bg-light py-2 border-bottom fw-bold">
                     <div class="col-9 col-md-10 ps-1">Titre</div>
                     <div class="col-1 col-md-1">Année</div>
@@ -24,7 +24,7 @@
 
             <!-- Liste des pistes -->
             <div id="playlist">
-<div x-sort="window.catchOrdering()" class="container">
+<div x-sort="window.catchOrdering()" class="container-fluid">
             @php
                     $i = 1 ;
                 @endphp

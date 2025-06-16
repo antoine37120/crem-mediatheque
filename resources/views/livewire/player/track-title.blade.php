@@ -18,7 +18,7 @@
                         x-ref="text"
                         :class="{ 'auto-scroll': needsScroll }"
                         title="{{ $track->translate(App::getLocale(), true)->name }}">
-                        {{ $track->translate(App::getLocale(), true)->name }}
+                        <div data-text="{{ $track->translate(App::getLocale(), true)->name }}"><span x-ref="textBlock" >{{ $track->translate(App::getLocale(), true)->name }}</span></div>
                     </h5>
                 </div>
                 <h5 class="fs-6 mb-0 text-wrap text-truncate">{{ $track->interpreters }}</h5>
@@ -41,6 +41,7 @@
 
                 // Re-vérifier lors du redimensionnement de la fenêtre
                 window.addEventListener('resize', () => {
+                    console.log('resize') ;
                     this.measureText();
                 });
 
@@ -55,17 +56,41 @@
             measureText() {
                 const container = this.$refs.container;
                 const text = this.$refs.text;
-
+                const textBlock = this.$refs.textBlock;
+                console.log(container) ;
                 if (container && text) {
                     // Retirer temporairement l'animation pour mesurer correctement
-                    text.classList.remove('auto-scroll');
+                    //text.classList.remove('auto-scroll');
 
                     // Forcer le recalcul des dimensions
                     const containerWidth = container.clientWidth;
-                    const textWidth = text.scrollWidth;
+                    const textWidth = textBlock.offsetWidth ;
+                    console.log(containerWidth);
+                    console.log(textWidth);
 
                     // Activer le défilement si le texte dépasse + marge de sécurité
-                    this.needsScroll = textWidth > (containerWidth + 10);
+                    const newNeedsScroll = textWidth > (containerWidth + 10);
+
+
+                    console.log(this.needsScroll);
+                    console.log(newNeedsScroll);
+
+                    if (this.needsScroll !== newNeedsScroll) {
+                        this.needsScroll = newNeedsScroll;
+                        console.log('needsScroll updated to:', this.needsScroll);
+
+                        // Forcer Alpine à détecter le changement
+                        this.$nextTick(() => {
+                            // Re-appliquer la classe si nécessaire
+                            console.log('hohohoh');
+                            if (this.needsScroll) {
+                                text.classList.add('auto-scroll');
+                            } else {
+                                text.classList.remove('auto-scroll');
+                            }
+                        });
+                    }
+
                 }
             }
         }

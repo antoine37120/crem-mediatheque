@@ -25,7 +25,7 @@
     }
 
     .playlist-grid-wrapper {
-        /*overflow-y: auto;*/
+        overflow-y: auto;
         max-height: calc(100vh - 330px);
         background-color: #fff;
         @media (min-width: 992px) {
@@ -79,36 +79,50 @@
         }
     }
 
-    // Animation de défilement simple avec CSS uniquement
-    .scrolling-text-container {
+    /* Texte défilant */
+    .scrolling-text {
         overflow: hidden;
         white-space: nowrap;
         position: relative;
         max-width: 100%;
+        height: 24px;
     }
 
-    .scrolling-text {
+    .scrolling-text.auto-scroll div {
+        position: absolute;
+        min-width: 100%; /* au minimum la largeur du conteneur */
+    }
+
+    .scrolling-text.auto-scroll div span,
+    .scrolling-text.auto-scroll div:after {
+        position: relative;
         display: inline-block;
-
-        &.auto-scroll {
-            animation: scroll-text 10s linear infinite;
-            animation-delay: 1s; // Délai avant le premier défilement
-        }
+        white-space: nowrap;
+        top:0;
     }
 
-    @keyframes scroll-text {
-        0% {
-            transform: translateX(0);
-        }
-        15% {
-            transform: translateX(0); // Pause au début
-        }
-        85% {
-            transform: translateX(-100%); // Défilement
-        }
-        100% {
-            transform: translateX(-100%); // Pause à la fin
-        }
+    .scrolling-text.auto-scroll div span {
+        animation: defilement 10s infinite linear;
+    }
+
+    .scrolling-text div:after {
+    }
+    .scrolling-text.auto-scroll div:after {
+        position: absolute;
+        top:0; left:0;
+        content:attr(data-text);
+        animation: defilement2 10s infinite linear;
+    }
+
+    @keyframes defilement {
+        25% { left: 0; }
+        100% { left: -120%; }
+    }
+
+    @keyframes defilement2 {
+        0% { left: 120%; }
+        25% { left: 120%; }
+        100% { left: 0%; }
     }
 }
 
