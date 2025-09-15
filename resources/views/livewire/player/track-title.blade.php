@@ -2,7 +2,7 @@
     @if ($track == 'none')
 
     @else
-        <div class="track-title row py-2 align-items-center mh-100"
+        <div class="track-title row py-2 align-items-center mh-100 ms-0"
              x-data="textScrollChecker()"
              x-init="checkTextOverflow()"
              wire:key="track-title-{{ $track->id }}">

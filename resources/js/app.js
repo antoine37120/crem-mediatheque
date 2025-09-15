@@ -18,11 +18,14 @@ window.Alpine.plugin(sort)
 import WaveSurfer from 'wavesurfer.js'
 window.track_to_play = false;
 window.Livewire.hook('morph.added',  ({ el }) => {
+
     if (el.hasAttribute('data-track-id') ) {
+        /*console.log('Ajout détecté.')
+        console.log(el.getAttribute('data-track-id'))*/
         window.loadLinksList() ;
         if(window.track_to_play) {
             window.initWithTrack(window.track_to_play, true) ;
-            window.track_to_play = frameElement;
+            window.track_to_play = false;
         }
     }
 })
@@ -32,8 +35,8 @@ window.Livewire.hook('morph.removed', ({ el, component }) => {
 
         isFirstItem = false ;
         if (window.getCurrentTrackIndex() == null) {
-            console.log(window.getCurrentTrackIndex()) ;
-            console.log('Stop playing') ;
+            /*console.log(window.getCurrentTrackIndex()) ;
+            console.log('Stop playing') ;*/
             window.wavesurfer.stop();
             window.wavesurfer.empty();
             window.wavesurfer.destroy();
@@ -88,6 +91,7 @@ window.catchOrdering = function() {
 
 window.Livewire.on('launch_play', (event) => {
     // Set window value to current track to play.
+    //console.log('launch_play detected') ;
     window.track_to_play = event.trackToPlay ;
 });
 
@@ -148,6 +152,7 @@ window.initWithTrack = function(id, force_play = false) {
     Array.prototype.forEach.call(links, function(link, index) {
         let trackId = links[index].getAttribute('data-track-id');
         if (trackId == id) {
+            console.log('initWithTrack set curent : '+trackId) ;
             window.setCurrentSong(trackId, force_play);
         }
     });
@@ -335,8 +340,23 @@ window.initPlayer = function() {
 }*/
 
 window.getCurrentTrackIndex = function() {
-    const currentTrackNode = document.querySelector('#playlist div.bg-light');
-    return currentTrackNode ? Array.from(currentTrackNode.parentNode.children).indexOf(currentTrackNode) : null;
+    // D'abord, chercher un élément avec la classe 'load-to-player'
+    /*const priorityTrackNode = document.querySelector('#playlist div.load-to-player');
+    if (priorityTrackNode) {
+        return Array.from(priorityTrackNode.parentNode.children).indexOf(priorityTrackNode);
+    }*/
+
+    const currentTrackNodes = document.querySelectorAll('#playlist div.load-to-player');
+
+    if (currentTrackNodes.length === 0) {
+        return null;
+    }
+
+    // Prendre le dernier élément du tableau
+    const lastTrackNode = currentTrackNodes[currentTrackNodes.length - 1];
+    return Array.from(lastTrackNode.parentNode.children).indexOf(lastTrackNode);
+
+
 }
 
 window.getTrackIndex = function(trackId) {
@@ -348,12 +368,20 @@ window.getTrackIndex = function(trackId) {
 // Load a track by index and highlight the corresponding link
 window.setCurrentSong = function(trackId, play = false) {
     trackId = Number(trackId) ;
-    links = document.querySelectorAll('#playlist .row');
-    currentTrack = window.getCurrentTrackIndex() ;
-    console.log('currentTrack') ;
+    let links = document.querySelectorAll('#playlist .row');
+    let currentTrack = window.getCurrentTrackIndex() ;
+    /*console.log('currentTrack') ;
     console.log(currentTrack) ;
     console.log(links) ;
+    console.log('play') ;
+    console.log(play) ;
+    console.log('newtrack id') ;
+    console.log(trackId) ;*/
     if(currentTrack != null) {
+        /*console.log(Number(links[currentTrack].getAttribute('data-track-id')) );
+        console.log('curent track id') ;
+        console.log(Number(links[currentTrack].getAttribute('data-track-id')) );*/
+
         // just play if the same title loded an curently selected
         if (Number(links[currentTrack].getAttribute('data-track-id')) == trackId) {
             if ((play == true) && (window.wavesurfer.isPlaying())) {
@@ -365,10 +393,13 @@ window.setCurrentSong = function(trackId, play = false) {
             }
         }
         links[currentTrack].classList.remove('bg-light');
+        links[currentTrack].classList.remove('load-to-player');
     }
     currentTrack = window.getTrackIndex(trackId) ;
+    console.log('new currentTrack') ;
     console.log(currentTrack) ;
     links[currentTrack].classList.add('bg-light');
+    links[currentTrack].classList.add('load-to-player');
     let trackUrl = links[currentTrack].getAttribute('data-track-url');
     //let trackId = links[currentTrack].getAttribute('data-track-id');
     if (play) {
