@@ -76,6 +76,7 @@ class AudioItemImporter extends Importer
             ImportColumn::make('link')
                 ->guess(['link','LIEN'])
                 ->example('https://archives.crem-cnrs.fr/archives/items/CNRSMH_I_2020_023_001_34/')
+                ->requiredMapping()
                 ->rules(['max:255']),
         ];
     }
@@ -93,17 +94,17 @@ class AudioItemImporter extends Importer
 
 
         return $AudioItem;
-        
-        
-        
+
+
+
 
         //return new AudioItem();
     }
 
-    
+
     protected function beforeSave(): void
     {
-        //get file infos 
+        //get file infos
         // To get basic audio information
         /*$audio = new Mp3Info('./audio.mp3');
         echo 'Audio duration: '.floor($audio->duration / 60).' min '.floor($audio->duration % 60).' sec'.PHP_EOL;
@@ -121,8 +122,8 @@ class AudioItemImporter extends Importer
         Log::info($files) ;
 
         if(sizeof($files) == 1) {
-            $fileName = basename($files[0]);  
-            
+            $fileName = basename($files[0]);
+
             $newFileName = Str::ascii($fileName) ;
 
             Storage::move('import/'.$fileName, 'audio-item-sound/'.$newFileName);
@@ -146,7 +147,7 @@ class AudioItemImporter extends Importer
 
     protected function afterSave(): void
     {
-        
+
         //Log::info(print_r($this->record->toArray(), true));
         /*$this->record->setTranslation('name', 'fr', $this->data['name']);
         $this->record->setTranslation('name', 'fr', 'hhhhhhhhhhhhhh');
@@ -161,7 +162,7 @@ class AudioItemImporter extends Importer
         $this->record->setTranslation('description', 'en', $this->data['description_en']);
         $this->record->save() ;*/
 
-        
+
         $AudioItemTranslation = AudioItemTranslation::firstOrNew([ 'audio_item_id' => $this->record->id, 'locale' => 'fr', ]);
         $AudioItemTranslation->audio_item_id = $this->record->id;
         $AudioItemTranslation->locale = 'fr';
@@ -200,7 +201,7 @@ class AudioItemImporter extends Importer
                 //->save(storage_path() . '/laravel_screenshot_browsershot.png');
                 //->bodyHtml() ;
                 ->evaluate("window.pngData");
-        
+
         //Log::info(print_r($dataImage, true));
         //Log::info(print_r(url('wave-picture', [$this->record->id, $this->record->file]), true));
         //Log::info(print_r(env('CUSTOM_NpmBinaryPath', false), true));
