@@ -33,7 +33,7 @@ class AudioItemImporter extends Importer
                 ->rules(['max:255']),
             ImportColumn::make('name')
                 ->guess(['name','TITRE ALTERNATIF'])
-                ->fillRecordUsing(function (AudioItem $record, string $state): void {
+                ->fillRecordUsing(function (AudioItem $record, string|null $state): void {
                     // set it after save
                 })
                 ->example('Un nom en français')
