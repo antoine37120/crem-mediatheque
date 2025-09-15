@@ -32,7 +32,7 @@ class AudioItemResource extends Resource
     protected static ?string $model = AudioItem::class;
 
     protected static ?string $navigationLabel = 'Items audio';
-    
+
     protected static ?int $navigationSort = 1;
 
     protected static ?string $navigationIcon = 'heroicon-o-musical-note';
@@ -80,7 +80,7 @@ class AudioItemResource extends Resource
                 Forms\Components\TextInput::make('original_name'),
                 Forms\Components\TextInput::make('link'),
                 Forms\Components\TextInput::make('duration')
-                    ->required()
+                    //->required()
                     ->numeric(),
                 Forms\Components\TextInput::make('year')
                     ->numeric(),
@@ -92,6 +92,7 @@ class AudioItemResource extends Resource
                     GeographicalArea::listsTranslations('name')->get()->pluck('name', 'id')
                 ),
                 Forms\Components\FileUpload::make('file')
+                    ->directory('audio-item-image')
                     ->preserveFilenames(),
                 Forms\Components\Textarea::make('interpreters'),
                     //->columnSpanFull(),
@@ -101,8 +102,8 @@ class AudioItemResource extends Resource
                 Forms\Components\FileUpload::make('picture')
                 ->disk('public')
                 ->preserveFilenames()
-                ->directory('audio-item-image')
-                ->required(),
+                ->directory('audio-item-image'),
+                //->required(),
                 /*Forms\Components\Select::make('color')
                 ->options($options_colors)
                 ->native(false)
@@ -116,11 +117,11 @@ class AudioItemResource extends Resource
 
     public static function table(Table $table): Table
     {
-        
+
 
         return $table
             ->columns([
-                Tables\Columns\ColorColumn::make('color') 
+                Tables\Columns\ColorColumn::make('color')
                 ->state(function (AudioItem $record): string {
                     $conf_colors = config('custom.items_colors');
                     if($record->color != null){
@@ -128,12 +129,12 @@ class AudioItemResource extends Resource
                         $record->save() ;
                         return $conf_colors[$record->color] ;
                     } else {
-                        
+
                         $record->getHexaColor();
                         $record->save() ;
                         return $conf_colors[$record->color] ;
                     }
-                    
+
                 }),
                 Tables\Columns\ImageColumn::make('picture')->label('Wave')
                 //->disk('public')
@@ -227,8 +228,8 @@ class AudioItemResource extends Resource
         ];
     }
 
-    
-    
+
+
     public static function getGloballySearchableAttributes(): array
     {
         return ['translations.name', 'translations.description'];
