@@ -92,7 +92,7 @@ class AudioItemResource extends Resource
                     GeographicalArea::listsTranslations('name')->get()->pluck('name', 'id')
                 ),
                 Forms\Components\FileUpload::make('file')
-                    ->directory('audio-item-image')
+                    ->directory('audio-item-sound')
                     ->preserveFilenames(),
                 Forms\Components\Textarea::make('interpreters'),
                     //->columnSpanFull(),

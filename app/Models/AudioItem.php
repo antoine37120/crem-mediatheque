@@ -94,7 +94,7 @@ class AudioItem extends Model implements TranslatableContract
             return ;
         }
 
-        $sys_path = Storage::path('audio-item-sound/'.$this->file);
+        $sys_path = Storage::path('/'.$this->file);
         $audio = new Mp3Info($sys_path);
         $this->duration = round($audio->duration, 0) ;
         $this->save() ;
