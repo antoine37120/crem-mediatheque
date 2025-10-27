@@ -41,14 +41,17 @@ class AudioItemResource extends Resource
 
     public static function form(Form $form): Form
     {
+        return $form->schema(self::getAudioItemForm());
+    }
+    public static function getAudioItemForm(): array
+    {
         $conf_colors = config('custom.items_colors');
         /*$options_colors = [];
         foreach($conf_colors as $key => $color ) {
             $options_colors[$color] = $color ;
         }*/
 
-        return $form
-            ->schema([
+        return [
                 TranslatableTabs::make()->columnSpan(2)
                 ->localeTabSchema(fn (TranslatableTab $tab) => [
                     Forms\Components\TextInput::make($tab->makeName('name'))
@@ -112,7 +115,7 @@ class AudioItemResource extends Resource
                 ColorPicker::make('color')
                 ->colors($conf_colors)
                 ->storeAsKey(),
-            ]);
+            ];
     }
 
     public static function table(Table $table): Table

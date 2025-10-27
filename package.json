@@ -20,6 +20,7 @@
     },
     "dependencies": {
         "@alpinejs/sort": "^3.14.3",
+        "@melloware/coloris": "^0.25.0",
         "bootstrap-icons": "^1.11.3",
         "puppeteer": "^23.5.2",
         "sweetalert2": "^11.15.10",
