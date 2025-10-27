@@ -34,7 +34,7 @@ class Tracklist extends Component
         Log::debug('Trigger play') ;
         Log::debug($ids) ;
         $this->items_ids = $ids;
-        $this->playlist_items() ;
+        $this->playlist_items(true) ;
 
     }
     /**

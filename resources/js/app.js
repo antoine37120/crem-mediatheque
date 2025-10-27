@@ -220,21 +220,44 @@ window.initPlayer = function() {
     let btnRandom = document.querySelector('#player-btnrandom');
     btnRandom.addEventListener('click', function() {
         links = document.querySelectorAll('#playlist .row');
-        let ul = document.querySelector("#playlist"); // get the list
+        let container = document.querySelector("#playlist > div"); // get the container div with x-sort
         let news_ids = [] ;
-        for (var i = ul.children.length; i >= 0; i--) {
-            ul.appendChild(ul.children[Math.random() * i | 0]);
+
+        // Récupérer l'index de la piste en cours de lecture
+        currentTrack = window.getCurrentTrackIndex();
+
+        // Créer un tableau des éléments pour éviter les problèmes de manipulation du DOM en direct
+        let elementsArray = Array.from(container.children);
+
+        let currentElement = null;
+
+        // Si une piste est en cours de lecture, la retirer temporairement du tableau
+        if (currentTrack !== null) {
+            currentElement = elementsArray[currentTrack];
+            elementsArray.splice(currentTrack, 1);
         }
-        links = document.querySelectorAll('#playlist .row');
-        Array.prototype.forEach.call(links, function(link, index) {
-            //link.querySelector(".num").innerText = index + 1;
-            news_ids.push(link.getAttribute('data-track-id')) ;
+
+        // Mélanger le reste du tableau avec l'algorithme de Fisher-Yates
+        for (let i = elementsArray.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [elementsArray[i], elementsArray[j]] = [elementsArray[j], elementsArray[i]];
+        }
+
+        // Si une piste était en cours de lecture, la remettre au début
+        if (currentElement !== null) {
+            elementsArray.unshift(currentElement);
+        }
+
+        // Construire le tableau des IDs dans le nouvel ordre
+        elementsArray.forEach((element) => {
+            news_ids.push(element.getAttribute('data-track-id'));
         });
-        console.log(news_ids) ;
 
-        window.Livewire.dispatch('reordering-playlist',  { ids: news_ids });
+        console.log(news_ids);
 
-        window.loadLinksList() ;
+        window.Livewire.dispatch('reordering-playlist', { ids: news_ids });
+
+        window.loadLinksList();
     });
 
 
