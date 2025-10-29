@@ -1,16 +1,16 @@
 <div>
-    <div class="p-2 pt-0">
+    <div class="p-2 pt-1 pb-0">
         <div class="text-center my-0">
             <div class="h-20 d-inline-block" style="max-width: 100px">
                 <div class="" x-on:click.prevent="window.Livewire.navigate('{{route('home')}}')" role="button">
-                    <img src="/storage/logos/logo-musicoologieVOK.jpg" alt="" class="pt-3 mw-100"></img>
+                    <img src="/storage/logos/logo-musicoologieVOK.jpg" alt="" class="pt-1 mw-100"></img>
                 </div>
             </div>
         </div>
-        <hr class="border-top border-dark my-3"/>
+        <hr class="border-top border-dark my-2 mb-3"/>
         <div id="global-search-form" class="">
             <form  wire:submit="searchLauch">
-            <div class="input-group border border-dark rounded-pill mt-4 mb-4">
+            <div class="input-group border border-dark rounded-pill mt-2 mb-2">
                 <input type="hidden" name="year" wire:model.live="query_year">
                 <input type="hidden" name="geoArea" wire:model.live="query_geoArea">
                 <input type="hidden" name="duration" wire:model.live="query_duration">
@@ -27,12 +27,12 @@
             </div>
             </form>
         </div>
-        <ul class="list-unstyled fs-5 d-grid gap-3 my-4 ms-3">
-            <li><a href="{{route('home')}}" class="text-black text-decoration-none" wire:navigate>{{ __('menu.home') }}</a></li>
-            <li><a href="{{route('tracks')}}" class="text-black text-decoration-none" wire:navigate>{{ __('menu.tracks') }}</a></li>
-            <li><a href="{{route('playlists')}}" class="text-black text-decoration-none" wire:navigate>{{ __('menu.playlists') }}</a></li>
-            <li><a href="{{route('podcasts')}}" class="text-black text-decoration-none" wire:navigate>{{ __('menu.podcasts') }}</a></li>
-            <li><a href="{{route('cmsPage', ['cmsPage' => 'about']) }}" class="text-black text-decoration-none" wire:navigate>{{ __('menu.about') }}</a></li>
+        <ul class="list-unstyled fs-5 d-grid gap-3 my-3 ms-3">
+            <li><a href="{{route('home')}}" class="text-black text-decoration-none {{ request()->routeIs('/') ? 'fw-bold' : '' }}" wire:navigate>{{ __('menu.home') }}</a></li>
+            <li><a href="{{route('tracks')}}" class="text-black text-decoration-none {{ request()->is('tracks*') ? 'fw-bold' : '' }}" wire:navigate>{{ __('menu.tracks') }}</a></li>
+            <li><a href="{{route('playlists')}}" class="text-black text-decoration-none {{ request()->is('playlists*')  ? 'fw-bold' : '' }}" wire:navigate>{{ __('menu.playlists') }}</a></li>
+            <li><a href="{{route('podcasts')}}" class="text-black text-decoration-none {{ request()->is('podcasts*') ? 'fw-bold' : '' }}" wire:navigate>{{ __('menu.podcasts') }}</a></li>
+            <li><a href="{{route('cmsPage', ['cmsPage' => 'about']) }}" class="text-black text-decoration-none {{ request()->routeIs('page/about') && request()->route('cmsPage')->slug === 'about' ? 'fw-bold' : '' }}" wire:navigate>{{ __('menu.about') }}</a></li>
         </ul>
     </div>
 

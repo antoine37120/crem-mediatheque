@@ -19,19 +19,19 @@ Route::localized(function () {
         return view('app-pages.search-tracks', ['search' => '']);
     })->name('tracks');
 
-    Route::get('track/{audioItem:id}/{playlist:id?}', [TrackController::class, 'show'])->name('track');
+    Route::get('tracks/{audioItem:id}/{playlist:id?}', [TrackController::class, 'show'])->name('track');
 
     Route::get('/playlists', function () {
         return view('app-pages.playlists', []);
     })->name('playlists');
 
-    Route::get('playlist/{playlist:id}', [PlaylistController::class, 'show'])->name('playlist');
+    Route::get('playlists/{playlist:id}', [PlaylistController::class, 'show'])->name('playlist');
 
     Route::get('/podcasts', function () {
         return view('app-pages.podcasts', []);
     })->name('podcasts');
 
-    Route::get('podcast/{podcast:id}', [PodcastController::class, 'show'])->name('podcast');
+    Route::get('podcasts/{podcast:id}', [PodcastController::class, 'show'])->name('podcast');
 
     Route::get('page/{cmsPage:slug}', [AppPageController::class, 'show'])->name('cmsPage');
 });
