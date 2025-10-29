@@ -7,7 +7,7 @@
                             (navigator.msMaxTouchPoints > 0);
     }
 }">
-    <h2 class="px-4 pb-0 fw-bold"><a href="{{route('tracks')}}" class="text-black text-decoration-none" wire:navigate>Tracks</a></h2>
+    <h2 class="px-4 pb-0 fw-bold"><a href="{{route('tracks')}}" class="text-black text-decoration-none" wire:navigate>{{ __('pages.tracks.home-section-title') }}</a></h2>
     <div class="row align-items-start g-2 mb-4 home-tracks m-0"
          :class="{ 'flex-nowrap is-scroll-x': isTouchDevice }"
          x-bind:style="isTouchDevice ? 'overflow-x: auto;' : ''">

@@ -10,9 +10,10 @@ return [
     ],
     'tracks' => [
         'title_prefix' => 'Search for',
-        'title' => 'Items',
+        'title' => 'Tracks',
+        'home-section-title' => 'Random tracks',
         'meta' => [
-            'title' => 'Items',
+            'title' => 'Tracks',
             'title_prefix' => 'Search for',
         ]],
     'playlists' => [

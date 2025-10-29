@@ -2,7 +2,7 @@
 
 return [
     'home' => 'Home',
-    'tracks' => 'Items',
+    'tracks' => 'Tracks',
     'Playlists' => 'playlists',
     'podcasts' => 'Podcasts',
     'about' => 'About',

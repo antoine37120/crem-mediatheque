@@ -8,7 +8,7 @@
     }
 }">
     <h2 class="px-4 pb-0 fw-bold">
-        <a href="{{route('playlists')}}" class="text-black text-decoration-none" wire:navigate>Playlists</a>
+        <a href="{{route('playlists')}}" class="text-black text-decoration-none" wire:navigate>{{ __('pages.playlists.title') }}</a>
     </h2>
     <div class="row align-items-start g-2 mb-4 home-playlists m-0"
          :class="{ 'flex-nowrap is-scroll-x': isTouchDevice }"

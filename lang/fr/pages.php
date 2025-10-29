@@ -10,9 +10,10 @@ return [
     ],
     'tracks' => [
         'title_prefix' => 'Recherche de',
-        'title' => 'Items',
+        'title' => 'Pistes',
+        'home-section-title' => 'Pistes au hasard',
         'meta' => [
-            'title' => 'Items',
+            'title' => 'Pistes',
             'title_prefix' => 'Recherche de',
         ]
     ],

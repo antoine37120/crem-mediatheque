@@ -2,7 +2,7 @@
 
 return [
     'home' => 'Accueil',
-    'tracks' => 'Items',
+    'tracks' => 'Pistes',
     'playlists' => 'Playlists',
     'podcasts' => 'Podcasts',
     'about' => 'À propos',
