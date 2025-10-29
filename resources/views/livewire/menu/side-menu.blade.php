@@ -2,7 +2,7 @@
     <div class="p-2 pt-0">
         <div class="text-center my-0">
             <div class="h-20 d-inline-block" style="max-width: 100px">
-                <div class="">
+                <div class="" x-on:click.prevent="window.Livewire.navigate('{{route('home')}}')" role="button">
                     <img src="/storage/logos/logo-musicoologieVOK.jpg" alt="" class="pt-3 mw-100"></img>
                 </div>
             </div>
