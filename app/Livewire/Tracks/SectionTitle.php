@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Tracks;
 
+use App\Models\Playlist;
 use Livewire\Component;
 use App\Models\AudioItem;
 use App\Models\AudioItemPlaylist;
@@ -11,17 +12,18 @@ use Illuminate\Support\Facades\DB;
 class SectionTitle extends Component
 {
     public $track;
-    
-    #[Session(key: 'track_nav_mode')] 
+    public $playlist_id;
+
+    #[Session(key: 'track_nav_mode')]
     public $track_nav_mode = '';
-    
-    #[Session(key: 'track_nav_data')] 
+
+    #[Session(key: 'track_nav_data')]
     public $track_nav_data = [];
 
     public $prev_id ;
     public $next_id ;
 
-    public function mount(AudioItem $track)
+    public function mount(AudioItem $track, $playlist_id=null)
     {
         $this->track = $track;
 
@@ -31,16 +33,19 @@ class SectionTitle extends Component
             $track->only('name', 'description', 'picture'),
         );
 
-        
+
         if(!in_array($this->track->id, $this->track_nav_data)) {
+            if($playlist_id > 0) {
+                $playlist = AudioItemPlaylist::where('playlist_id', $playlist_id)->first();
+            } else  {
+                $playlist = AudioItemPlaylist::where('audio_item_id', $this->track->id)->first() ;
+            }
 
-            $playlist = AudioItemPlaylist::where('audio_item_id', $this->track->id)->first() ;
 
-            
             $this->track_nav_data = DB::table('audio_item_playlists')
                 ->join('audio_items', 'audio_item_playlists.audio_item_id', 'audio_items.id')
                 ->where('audio_items.published', 1)
-                ->where('audio_item_playlists.playlist_id', $playlist->id)
+                ->where('audio_item_playlists.playlist_id', $playlist->playlist_id)
                 ->orderBy('audio_item_playlists.sort', 'asc')
                 ->pluck('audio_item_id')->toArray();
         }

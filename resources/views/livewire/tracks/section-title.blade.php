@@ -5,7 +5,7 @@
                 <div class="d-flex align-items-stretch gap-1">
                     <div class="col-6 px-0 text-right">
                         @if ($prev_id != null)
-                            <a href="{{route('track', ['audioItem' => $prev_id])}}"
+                            <a href="{{route('track', ['audioItem' => $prev_id, 'playlist' => $playlist_id])}}"
                                wire:navigate
                                class="d-inline-block text-white text-decoration-none align-top p-0 bg-white"
                                style="--bs-bg-opacity: .1;"
@@ -17,7 +17,7 @@
                     </div>
                     <div class="col-6 px-0 text-left">
                         @if ($next_id != null)
-                            <a href="{{route('track', ['audioItem' => $next_id])}}"
+                            <a href="{{route('track', ['audioItem' => $next_id, 'playlist' => $playlist_id])}}"
                                wire:navigate
                                class="d-inline-block text-white text-decoration-none align-top p-0 bg-white"
                                style="--bs-bg-opacity: .1;"

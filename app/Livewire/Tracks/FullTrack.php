@@ -4,19 +4,27 @@ namespace App\Livewire\Tracks;
 
 use Livewire\Component;
 use App\Models\AudioItem;
+use App\Models\Playlist;
 use Illuminate\Support\Facades\Log;
 
 class FullTrack extends Component
 {
     public $track;
+    public $playlist = null;
+    public $playlist_type = '';
 
-    public function mount(AudioItem $track)
+    public function mount(AudioItem $track, $playlist_id=null)
     {
+        ds($playlist_id);
         $this->track = $track;
- 
-        $this->fill( 
-            $track->only('name', 'description', 'picture'), 
-        ); 
+        $this->playlist = Playlist::find($playlist_id);
+        if($this->playlist) {
+            $this->playlist_type = $this->playlist->type->name;
+        }
+
+        $this->fill(
+            $track->only('name', 'description', 'picture'),
+        );
     }
     public function render()
     {

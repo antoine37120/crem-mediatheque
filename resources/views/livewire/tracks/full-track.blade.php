@@ -18,16 +18,29 @@
             <div class="col-12 col-lg-9 mt-0 mb-4">
                 <div class="row m-0">
                     <div class="col-6">
-                        <h5>Zone : <span class="fw-bold"> {{ $track->geographicalArea->translate(App::getLocale(), true)->name }} </span></h5>
-                        <h5>Interprête(s) : <span class="fw-bold"> {{ $track->interpreters }} </span></h5>
-                        <h5>Collecteur : <span class="fw-bold"> {{ $track->collector }} </span></h5>
-                        <h5 class="d-lg-none">Année : <span class="fw-bold"> {{ $track->year }} </span></h5>
+                        eeeee {{ $playlist_type }}
+                        @if($playlist_type != 'Podcast')
+                            <h5>Zone : <span class="fw-bold"> {{ $track->geographicalArea->translate(App::getLocale(), true)->name }} </span></h5>
+                            @if(!empty($track->interpreters))
+                                <h5>Interprête(s) : <span class="fw-bold"> {{ $track->interpreters }} </span></h5>
+                            @endif
+                            @if(!empty($track->interpreters))
+                                <h5>Collecteur : <span class="fw-bold"> {{ $track->collector }} </span></h5>
+                            @endif
+                        @endif
+                        @if(!empty($track->year))
+                            <h5 class="d-lg-none">Année : <span class="fw-bold"> {{ $track->year }} </span></h5>
+                        @endif
                         <h5 class="d-lg-none">Durée : <span class="fw-bold"> {{ $track->durationFormated() }} </span></h5>
-                        <div class="p-1 d-lg-none"><a href="{{ $track->link }}" target="_blank"class="btn btn-light rounded-5 p-1 px-2">See on archive</a></div>
+                        @if(!empty($track->link))
+                            <div class="p-1 d-lg-none"><a href="{{ $track->link }}" target="_blank"class="btn btn-light rounded-5 p-1 px-2">See on archive</a></div>
+                        @endif
                     </div>
                     <div class="col-6 justify-content-end">
                         <div class="d-flex justify-content-end">
-                            <div class="p-1 d-none d-lg-block"><a href="{{ $track->link }}" target="_blank"class="btn btn-light rounded-5 p-1 px-2">See on archive</a></div>
+                            @if(!empty($track->link))
+                                <div class="p-1 d-lg-none"><a href="{{ $track->link }}" target="_blank"class="btn btn-light rounded-5 p-1 px-2">See on archive</a></div>
+                            @endif
                             <livewire:tracks.full-actions :track="$track"  wire:key="actions-{{ $track->id }}"/>
                         </div>
                     </div>
@@ -38,12 +51,13 @@
             </div>
         </div>
     </div>
-
-    <div class="row m-0 mt-2">
-        <div class="col-12 offset-lg-1 col-lg-11">
-            <livewire:tracks.section-playlists :track="$track" key="full-track-section-playlist-{{$track->id}}" />
+    @if($playlist_type != 'Podcast')
+        <div class="row m-0 mt-2">
+            <div class="col-12 offset-lg-1 col-lg-11">
+                <livewire:tracks.section-playlists :track="$track" key="full-track-section-playlist-{{$track->id}}" />
+            </div>
         </div>
-    </div>
+    @endif
 </div>
     {{-- desktop only
     <div class="d-none container mt-5">

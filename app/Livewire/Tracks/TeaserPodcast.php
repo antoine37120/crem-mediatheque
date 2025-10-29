@@ -8,10 +8,12 @@ use App\Models\AudioItem;
 class TeaserPodcast extends Component
 {
     public $track;
+    public $podcast_id;
 
-    public function mount(AudioItem $track)
+    public function mount(AudioItem $track, $podcast)
     {
         $this->track = $track;
+        $this->podcast_id = $podcast;
 
         $this->fill(
             $track->only('name', 'description', 'picture'),

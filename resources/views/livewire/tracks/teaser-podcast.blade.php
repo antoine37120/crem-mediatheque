@@ -17,7 +17,7 @@
             </div>
         </div>
         <div class="col-6 col-lg-9 col-xxl-10 pb-2 pt-lg-2 ps-2 pe-0">
-            <h5 class="card-title"><a  href="{{route('track', ['audioItem' => $track->id])}}" class="text-black text-decoration-none fw-bold" wire:navigate>{{ Illuminate\Support\Str::limit($track->translate(App::getLocale())->name, 45, '...') }}</a></h5>
+            <h5 class="card-title"><a  href="{{route('track', ['audioItem' => $track->id, 'playlist' => $podcast_id])}}" class="text-black text-decoration-none fw-bold" wire:navigate>{{ Illuminate\Support\Str::limit($track->translate(App::getLocale())->name, 45, '...') }}</a></h5>
             <div>{!! $track->translate(App::getLocale(), true)->description !!}</div>
         </div>
         <div class="col-3 d-block d-lg-none text-right ps-0 pe-0">
