@@ -5,14 +5,15 @@
         <div class="track-title row py-2 align-items-center mh-100 ms-0"
              x-data="textScrollChecker()"
              x-init="checkTextOverflow()"
-             wire:key="track-title-{{ $track->id }}"
-             href="{{route('track', ['audioItem' => $track->id])}}" role="button"
-             wire:navigate>
+             wire:key="track-title-{{ $track->id }}">
             <div class="col-3 me-auto img-track-player">
                 <img src="{{ url('storage/'.$track->picture) }}"
                      class="card-img-top border rounded mw-100 mh-100"
                      alt="..."
-                     style="background: {{ $track->getHexaColor() }};"/>
+                     style="background: {{ $track->getHexaColor() }};"
+                     href="{{route('track', ['audioItem' => $track->id])}}" role="button"
+                     wire:navigate
+                />
             </div>
             <div class="col-10 col-lg-6">
                 <div class="scrolling-text-container" x-ref="container">
@@ -20,7 +21,12 @@
                         x-ref="text"
                         :class="{ 'auto-scroll': needsScroll }"
                         title="{{ $track->translate(App::getLocale(), true)->name }}">
-                        <div data-text="{{ $track->translate(App::getLocale(), true)->name }}"><span x-ref="textBlock" >{{ $track->translate(App::getLocale(), true)->name }}</span></div>
+                        <div data-text="{{ $track->translate(App::getLocale(), true)->name }}">
+                            <span x-ref="textBlock"
+                                  href="{{route('track', ['audioItem' => $track->id])}}" role="button"
+                                  wire:navigate
+                            >{{ $track->translate(App::getLocale(), true)->name }}</span>
+                        </div>
                     </h5>
                 </div>
                 <h5 class="fs-6 mb-0 text-wrap text-truncate">{{ $track->interpreters }}</h5>
