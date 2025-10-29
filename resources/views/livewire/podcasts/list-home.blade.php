@@ -1,11 +1,22 @@
-<div>
-    <h2 class="px-4 pb-4 fw-bold"><a href="{{route('podcasts')}}" class="text-black text-decoration-none" wire:navigate>Podcasts</a></h2>
-    <div class="row flex-nowrap align-items-start g-5 pb-5 home-podcasts">
-    @foreach ($podcasts as $podcast)
-        <div class="col-3 ps-5 me-5 me-sm-3 me-lg-0">
-            {{-- col-sm-6 col-lg-4 col-xxl-3 --}}
-        <livewire:podcasts.teaser :podcast="$podcast" />
-        </div>
-    @endforeach
+<div x-data="{
+    isTouchDevice: false,
+    init() {
+        // Détection des écrans tactiles
+        this.isTouchDevice = ('ontouchstart' in window) ||
+                            (navigator.maxTouchPoints > 0) ||
+                            (navigator.msMaxTouchPoints > 0);
+    }
+}">
+    <h2 class="px-4 pb-0 fw-bold"><a href="{{route('podcasts')}}" class="text-black text-decoration-none" wire:navigate>Podcasts</a></h2>
+    <div class="row align-items-start g-2 mb-4 home-podcasts m-0"
+         :class="{ 'flex-nowrap is-scroll-x': isTouchDevice }"
+         x-bind:style="isTouchDevice ? 'overflow-x: auto;' : ''">
+        @foreach ($podcasts as $podcast)
+            <div class="ps-1"
+                 :class="isTouchDevice ? 'col-3' : 'col-md-4 col-xl-3'"
+                 x-bind:style="isTouchDevice ? 'min-width: 250px;' : ''">
+                <livewire:podcasts.teaser-home :podcast="$podcast" wire:key="podcast-{{ $podcast->id }}" />
+            </div>
+        @endforeach
     </div>
 </div>

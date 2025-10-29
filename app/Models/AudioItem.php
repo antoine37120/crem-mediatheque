@@ -157,7 +157,8 @@ class AudioItem extends Model implements TranslatableContract
     public function itemBefore($playlist_id = null) {
         // ajout ID playslist en paramètre, si difft de 0, supprimer ligne suivante
         if ($playlist_id == null) {
-            $itemplaylist = $this->playlists()->first() ;
+            $itemplaylist = $this->playlists()
+                ->where('published', 1)->first() ;
             $playlist_id = $itemplaylist->playlist_id ;
         }
         //Log::debug($itemplaylist) ;
@@ -168,6 +169,9 @@ class AudioItem extends Model implements TranslatableContract
         $prev = AudioItemPlaylist::where('playlist_id', $playlist_id)
         ->where('sort', '<=', $itemplaylist->sort)
         ->where('audio_item_id', '!=', $itemplaylist->audio_item_id)
+            ->whereHas('audio_item', function($query) {
+                $query->where('published', 1);
+            })
         ->orderBy('sort', 'desc')
         ->orderBy('audio_item_id', 'desc')
         ->first() ;
@@ -183,7 +187,8 @@ class AudioItem extends Model implements TranslatableContract
      * @return \App\Models\AudioItemPlaylist|null
      */
     public function itemAfter() {
-        $itemplaylist = $this->playlists()->first() ;
+        $itemplaylist = $this->playlists()
+            ->where('published', 1)->first() ;
         if ($itemplaylist->sort==null)
         {
             $itemplaylist->sort=0;
@@ -191,6 +196,9 @@ class AudioItem extends Model implements TranslatableContract
         $next = AudioItemPlaylist::where('playlist_id', $itemplaylist->playlist_id)
         ->where('sort', '>=', $itemplaylist->sort)
         ->where('audio_item_id', '!=', $itemplaylist->audio_item_id)
+            ->whereHas('audio_item', function($query) {
+                $query->where('published', 1);
+            })
         ->orderBy('sort', 'asc')
         ->orderBy('audio_item_id', 'asc')
         ->first() ;

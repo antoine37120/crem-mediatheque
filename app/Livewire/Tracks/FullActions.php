@@ -5,23 +5,20 @@ namespace App\Livewire\Tracks;
 use Livewire\Component;
 use App\Models\AudioItem;
 
-class Teaser extends Component
+class FullActions extends Component
 {
     public $track;
-    public $displayMode = false;
 
-    public function mount(AudioItem $track, $displayMode = false)
+    public function mount(AudioItem $track)
     {
         $this->track = $track;
-        $this->displayMode = $displayMode;
 
         $this->fill(
             $track->only('name', 'description', 'picture'),
         );
     }
-
     public function render()
     {
-        return view('livewire.tracks.teaser');
+        return view('livewire.tracks.full-actions');
     }
 }

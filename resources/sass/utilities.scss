@@ -42,8 +42,18 @@
     overflow-x: auto;
 }
 
+.max-w-img-card-list {
+    max-width: 30vw;
+    @media(min-width: 768px) {
+        max-width: 210px;
+    }
+}
+
 h5 {
     font-size: 1rem;
+}
+.all-p-no-mb p {
+    margin-bottom: 0;
 }
 
 #header-mobile {
@@ -51,8 +61,10 @@ h5 {
 }
 
 #logo-mobile {
+    text-align: right;
     img {
-        height: 80px;
+        max-width: 80px;
+        height: auto;
     }
     /*@media(min-width: 576px) {
         height: 100%;
@@ -81,12 +93,12 @@ img.rounded {
 }
 
 .card-img-top {
-    width: 150px;
-    height: 150px;
+    /*width: 150px;*/
+    height: auto;
     border: 2px solid black !important;
     @media (max-width: 991px) {
-        max-width: 100px;
-        height: 100px;
+        /*max-width: 100px;*/
+        height: auto;
     }
 }
 
@@ -101,13 +113,13 @@ img.rounded {
 }
 
 .card-track.position-relative {
-    width: fit-content;
+    /*width: fit-content;*/
 }
 
 .home-teaser-text {
-    max-width: 150px;
+    /*max-width: 150px;*/
     @media (max-width: 991px) {
-        max-width: 100px;
+        /*max-width: 100px;*/
         width: fit-content;
         a, p {
             font-size: 12px !important;
@@ -156,7 +168,12 @@ img.rounded {
 }
 
 .primary-section {
-    height: calc(100vh - 140px);
+    padding:0;
+    padding-bottom: 180px;
+    @media (min-width: 992px) {
+        padding-bottom: 140px;
+        /*height: calc(100vh - 140px);*/
+    }
 }
 
 .logo-ministere {
@@ -208,7 +225,7 @@ img.rounded {
     background-size: 100% 33.33%;
 }
 
-
+/*
 .playlists-list-self {
     width: 100%;
 }
@@ -247,4 +264,22 @@ img.rounded {
     @media (min-width: 992px) {
         margin-left: 0;
     }
+}
+*/
+
+/* Honrozontal scroll */
+.is-scroll-x {
+    overflow-x: scroll;
+    scroll-behavior: smooth;
+}
+
+/* iOS devices */
+@supports (-webkit-overflow-scrolling: touch) {
+    .is-scroll-x {
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+.has-no-scrollbar {
+    scrollbar-width: none;
 }

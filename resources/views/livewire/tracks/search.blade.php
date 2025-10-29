@@ -34,33 +34,35 @@
             </div>
         </div>
     </form>
-    <div class="row align-items-start">
-        <div class="col-10 offset-1">
-            <div wire:loading>
-                <div class="">Searching</div>
-            </div>
-            <div wire:loading.remove>
+    <div>
+        <div class="row align-items-start m-0">
+            <div class="col-10 offset-1">
+                <div wire:loading>
+                    <div class="">Searching</div>
+                </div>
+                <div wire:loading.remove>
 
-            @if(sizeof($tracks) == 0)
-                <div class="px-1">
-                    <div class="alert alert-light border-0" role="alert">
-                        <h4 class="alert-heading">Aucun resultat</h4>
-                        <p>{{ $search }}</p>
+                @if(sizeof($tracks) == 0)
+                    <div class="px-1">
+                        <div class="alert alert-light border-0" role="alert">
+                            <h4 class="alert-heading">Aucun resultat</h4>
+                            <p>{{ $search }}</p>
+                        </div>
                     </div>
+                    @else
+                    <div class="px-1 pe-4 mb-4 text-center">
+                        <livewire:tracks.search-actions wire:key="audio-search-actions" />
+                    </div>
+                    @endif
                 </div>
-                @else
-                <div class="px-1 pe-4 mb-4 text-center">
-                    <livewire:tracks.search-actions wire:key="audio-search-actions" />
-                </div>
-                @endif
             </div>
         </div>
     </div>
 
-    <div class="row align-items-start g-5 mt-auto mx-0 tracks-list-self">
+    <div class="row align-items-start g-2 g-md-5 mt-auto mx-0 tracks-list-self">
         @foreach ($tracks as $track)
             {{-- <div class="col-12 col-lg-4 col-xxl-3 px-2 px-lg-5" id="audio-{{ $track->id }}-searchrch-wrap"> --}}
-            <div class="col-12 col-md-4 col-lg-3 ps-5 " id="audio-{{ $track->id }}-searchrch-wrap">
+            <div class="col-12 col-md-6 col-lg-4 col-xl-3 ps-2 pe-2 mt-2 mt-md-4" id="audio-{{ $track->id }}-searchrch-wrap">
                 <livewire:tracks.teaser :track="$track" wire:key="audio-search-{{ $track->id }}" />
             </div>
         @endforeach

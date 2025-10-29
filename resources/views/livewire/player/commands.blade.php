@@ -1,6 +1,6 @@
 <div class="position-relative">
     <div class="tracklist mb-lg-0">
-        <div class="col-12 px-0">
+        <div class="w-100 px-0">
             <livewire:player.tracklist />
         </div>
     </div>

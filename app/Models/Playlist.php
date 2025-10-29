@@ -18,7 +18,7 @@ class Playlist extends Model implements TranslatableContract
     use Translatable;
 
     public $translatedAttributes = ['name', 'description'];
-    
+
     protected $casts = [
         'published' => 'boolean',
     ];
@@ -71,7 +71,7 @@ class Playlist extends Model implements TranslatableContract
         ->get();
     }
 
-   
+
 
     /**
      * Return the playlist before the current playlist in ID order
@@ -79,6 +79,7 @@ class Playlist extends Model implements TranslatableContract
     public function playlistBefore() {
         $prev = Playlist::query()->where('id', '<', $this->id)
         ->where('type_id', $this->type_id)
+            ->where('published', 1)
         ->orderBy('id', 'desc')->get()
         ->first() ;
         return $prev ;
@@ -90,6 +91,7 @@ class Playlist extends Model implements TranslatableContract
     public function playlistAfter() {
         $next = Playlist::query()->where('id', '>', $this->id)
         ->where('type_id', $this->type_id)
+            ->where('published', 1)
         ->orderBy('id', 'asc')->get()
         ->first() ;
         return $next ;
@@ -101,6 +103,7 @@ class Playlist extends Model implements TranslatableContract
     public function podcastBefore() {
         $prev = Playlist::query()->where('id', '<', $this->id)
         ->where('type_id', $this->type_id)
+            ->where('published', 1)
         ->orderBy('id', 'desc')->get()
         ->first() ;
         return $prev ;
@@ -112,6 +115,7 @@ class Playlist extends Model implements TranslatableContract
     public function podcastAfter() {
         $next = Playlist::query()->where('id', '>', $this->id)
         ->where('type_id', $this->type_id)
+            ->where('published', 1)
         ->orderBy('id', 'asc')->get()
         ->first() ;
         return $next ;

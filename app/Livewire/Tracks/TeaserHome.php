@@ -5,7 +5,7 @@ namespace App\Livewire\Tracks;
 use Livewire\Component;
 use App\Models\AudioItem;
 
-class Teaser extends Component
+class TeaserHome extends Component
 {
     public $track;
     public $displayMode = false;
@@ -22,6 +22,6 @@ class Teaser extends Component
 
     public function render()
     {
-        return view('livewire.tracks.teaser');
+        return view('livewire.tracks.teaser-home');
     }
 }
