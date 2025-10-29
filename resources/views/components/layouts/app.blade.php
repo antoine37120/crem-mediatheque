@@ -29,7 +29,7 @@
                         </div>
                     </header>
                     {{-- Main --}}
-                    <div class="main-of-page p-2">{{ $slot }}</div>
+                    <div class="main-of-page p-4">{{ $slot }}</div>
                     {{-- Player --}}
                     <div class="footer-wrapper position-fixed col-12 col-lg-9 col-xxl-10 bottom-0 end-0 p-0">
                         <div class="player-section position-relative mx-0">
