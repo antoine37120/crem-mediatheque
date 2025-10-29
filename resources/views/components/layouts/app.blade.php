@@ -13,7 +13,7 @@
             <div class="row m-0 justify-content-end">
                 <div id="side-menu" class="d-none d-lg-block col-lg-3 col-xxl-2 vh-100 bg-white p-0 position-fixed top-0 start-0">
 
-                    <div class="overflow-y-scroll vh-100 border-dark border-end" wire:scroll>
+                    <div class="overflow-y-auto vh-100 border-dark border-end" wire:scroll>
                         <livewire:menu.side-menu />
                     </div>
 
