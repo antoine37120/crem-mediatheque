@@ -6,7 +6,10 @@
                 <div class="col-3 position-relative p-0 ps-0 mt-0 m-0">
                     {{-- style="width: fit-content" --}}
                     <div class="position-relative p-0 col-11 col-md-9 max-w-img-card-list">
-                        <img src="{{ url('storage/'.$playlist->picture) }}" class="card-img-top rounded border border-dark border-2" alt="..."/>
+                        <img src="{{ url('storage/'.$playlist->picture) }}" class="card-img-top rounded border border-dark border-2" alt="..."
+                             href="{{route('playlist', ['playlist' => $playlist->id])}}" role="button"
+                             wire:navigate
+                        />
                         <div class="card-playlist-actions position-absolute top-0 end-0 p-1 d-none d-md-block">
                             <livewire:playlists.list-self-actions :playlist="$playlist" wire:key="playlist-list-self-actions-{{ $playlist->id }}" />
                         </div>

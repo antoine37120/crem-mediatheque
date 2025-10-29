@@ -1,9 +1,13 @@
 <div>
-    <div class="card-track bg-transparent position-relative row m-0" >
+    <div class="card-track bg-transparent position-relative row m-0">
         {{-- flex-row flex-lg-column --}}
         <div class="col-3 col-lg-3 col-xxl-2 justify-content-between flex-shrink-1 flex-nowrap mx-0 ps-0 ps-lg-0 pe-0 pb-4">
             <div class="position-relative p-0 col-11 col-lg-9 max-w-img-card-list" style="">
-                <img src="{{ url('storage/'.$track->picture) }}" class="card-img-top rounded border border-dark border-2" alt="..." style="background: {{ $track->getHexaColor() }};" width="150" height="150"/>
+                <img src="{{ url('storage/'.$track->picture) }}" class="card-img-top rounded border border-dark border-2" alt="..." style="background: {{ $track->getHexaColor() }};"
+                     width="150" height="150"
+                     href="{{route('track', ['audioItem' => $track->id])}}" role="button"
+                     wire:navigate
+                />
                 <div class="position-absolute top-0 start-0 text-white ps-1">
                     {{ $track->year }}
                 </div>

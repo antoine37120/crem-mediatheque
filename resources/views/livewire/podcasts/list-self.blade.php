@@ -6,7 +6,10 @@
         <div class="row flex-nowrap align-items-start m-0 my-0 gy-5">
             <div class="col-3 position-relative p-0 ps-0 mt-0 m-0">
                 <div class="position-relative p-0 col-11 col-md-9 max-w-img-card-list">
-                    <img src="{{ url('storage/'.$podcast->picture) }}" class="card-img-top rounded border border-dark border-2" alt="..."/>
+                    <img src="{{ url('storage/'.$podcast->picture) }}" class="card-img-top rounded border border-dark border-2" alt="..."
+                         href="{{route('podcast', ['podcast' => $podcast->id])}}" role="button"
+                         wire:navigate
+                    />
                     <div class="card-playlist-actions position-absolute top-0 end-0 p-1 d-none d-md-block">
                         <livewire:playlists.list-self-actions :playlist="$podcast" wire:key="podcast-list-self-actions-{{ $podcast->id }}" />
                     </div>

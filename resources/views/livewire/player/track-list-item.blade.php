@@ -9,7 +9,9 @@
     <!-- Titre -->
     <div class="col-9 col-md-10">
         <div class="text-truncate" title="{{ $track->translate(App::getLocale(), true)->name }}">
+            <a  href="{{route('track', ['audioItem' => $track->id])}}" class="text-black text-decoration-none fw-bold" wire:navigate>
             {{ $track->translate(App::getLocale(), true)->name }}
+            </a>
         </div>
     </div>
 

@@ -5,7 +5,9 @@
         <div class="track-title row py-2 align-items-center mh-100 ms-0"
              x-data="textScrollChecker()"
              x-init="checkTextOverflow()"
-             wire:key="track-title-{{ $track->id }}">
+             wire:key="track-title-{{ $track->id }}"
+             href="{{route('track', ['audioItem' => $track->id])}}" role="button"
+             wire:navigate>
             <div class="col-3 me-auto img-track-player">
                 <img src="{{ url('storage/'.$track->picture) }}"
                      class="card-img-top border rounded mw-100 mh-100"
