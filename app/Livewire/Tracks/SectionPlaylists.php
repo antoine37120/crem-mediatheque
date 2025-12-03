@@ -25,7 +25,7 @@ class SectionPlaylists extends Component
         $ai_playlists = AudioItemPlaylist::where('audio_item_id', $this->track->id)->get();
         foreach($ai_playlists as $ai_playlist) {
             $playlist = $ai_playlist->playlist ;
-            if($playlist->published) {
+            if($playlist !== null && $playlist->published) {
                 if($playlist->type->name == 'Podcast' ) {
                     $this->podcasts[] = $playlist ;
                 } else {
