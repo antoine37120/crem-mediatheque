@@ -15,7 +15,7 @@ class FullTrack extends Component
 
     public function mount(AudioItem $track, $playlist_id=null)
     {
-        ds($playlist_id);
+        
         $this->track = $track;
         $this->playlist = Playlist::find($playlist_id);
         if($this->playlist) {

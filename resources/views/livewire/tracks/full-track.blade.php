@@ -18,7 +18,7 @@
             <div class="col-12 col-lg-9 mt-0 mb-4">
                 <div class="row m-0">
                     <div class="col-6">
-                        eeeee {{ $playlist_type }}
+
                         @if($playlist_type != 'Podcast')
                             <h5>Zone : <span class="fw-bold"> {{ $track->geographicalArea->translate(App::getLocale(), true)->name }} </span></h5>
                             @if(!empty($track->interpreters))
