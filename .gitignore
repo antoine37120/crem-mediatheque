@@ -1,6 +1,7 @@
 /.phpunit.cache
 /node_modules
 /public/build
+/public/custom-assets
 /public/hot
 /public/.well-known
 public/storage
@@ -20,3 +21,4 @@ yarn-error.log
 /.vscode
 !storage/app/public/logos/**
 "laradumps.yaml" 
+task.md

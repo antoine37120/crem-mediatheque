@@ -5,6 +5,19 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{{ __('front.meta_title_prefix') }} - {{ $meta_title ?? 'Page Title' }}</title>
         @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+        @php
+            $customCssPath = public_path('custom-assets/styes.css');
+            if (file_exists($customCssPath)) {
+                $css = file_get_contents($customCssPath);
+                // Compression simple et sûre
+                $css = str_replace(["\r\n", "\r", "\n", "\t"], '', $css); // Supprimer retours à la ligne et tabs
+                $css = preg_replace('/\s{2,}/', ' ', $css); // Remplacer espaces multiples par un seul
+                $css = trim($css);
+            }
+        @endphp
+        @if(file_exists($customCssPath))
+            <style>{!! $css !!}</style>
+        @endif
     </head>
 
     <body class="{{ str_replace('.', ' ', request()->route()->getName()) }}">
