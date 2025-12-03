@@ -24,7 +24,7 @@
                             @if(!empty($track->interpreters))
                                 <h5>Interprête(s) : <span class="fw-bold"> {{ $track->interpreters }} </span></h5>
                             @endif
-                            @if(!empty($track->interpreters))
+                            @if(!empty($track->collector))
                                 <h5>Collecteur : <span class="fw-bold"> {{ $track->collector }} </span></h5>
                             @endif
                         @endif
@@ -39,7 +39,7 @@
                     <div class="col-6 justify-content-end">
                         <div class="d-flex justify-content-end">
                             @if(!empty($track->link))
-                                <div class="p-1 d-lg-none"><a href="{{ $track->link }}" target="_blank"class="btn btn-light rounded-5 p-1 px-2">See on archive</a></div>
+                                <div class="p-1 d-none d-lg-block"><a href="{{ $track->link }}" target="_blank"class="btn btn-light rounded-5 p-1 px-2">See on archive</a></div>
                             @endif
                             <livewire:tracks.full-actions :track="$track"  wire:key="actions-{{ $track->id }}"/>
                         </div>
