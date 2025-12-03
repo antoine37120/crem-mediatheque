@@ -13,11 +13,11 @@
             </div>
             <div class="py-2">
                 {{-- w-75 --}}
-                <h5 class="playlist-title m-0">
+                <h5 class="m-0">
                     <a  href="{{route('playlist', ['playlist' => $playlist->id])}}" class="text-black text-decoration-none fw-bold" wire:navigate>
                         {{ Illuminate\Support\Str::limit($playlist->translate(App::getLocale(), true)->name, 45, '...') }}</a></h5>
-                <p class="fs-6 overflow-hidden text-truncate text-nowrap w-100">
-                    {{ strip_tags($playlist->translate(App::getLocale(), true)->description) }}
+                <p class="fs-6">
+                    {!! $playlist->translate(App::getLocale(), true)->description !!}
                 </p>
             </div>
         </div>
