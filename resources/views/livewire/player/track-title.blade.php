@@ -6,7 +6,7 @@
              x-data="textScrollChecker()"
              x-init="checkTextOverflow()"
              wire:key="track-title-{{ $track->id }}">
-            <div class="col-3 me-auto img-track-player">
+            <div class="col-4 col-xxl-2 img-track-player">
                 <img src="{{ url('storage/'.$track->picture) }}"
                      class="card-img-top border rounded mw-100 mh-100"
                      alt="..."
@@ -15,7 +15,7 @@
                      wire:navigate
                 />
             </div>
-            <div class="col-10 col-lg-6">
+            <div class="col-8 col-xxl-10">
                 <div class="scrolling-text-container" x-ref="container">
                     <h5 class="fw-bold fs-6 mb-0 scrolling-text"
                         x-ref="text"

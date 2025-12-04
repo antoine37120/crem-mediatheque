@@ -3,9 +3,8 @@
     max-height: 200px;
 }
 
-#player-progress-bar {
+#player-progress-bar {}
 
-}
 #playlist {
     div.actions {
         span {
@@ -20,6 +19,7 @@
     position: absolute;
     bottom: 100%;
     width: 100%;
+
     @media (min-width: 992px) {
         /*width: 96%;*/
     }
@@ -28,6 +28,7 @@
         overflow-y: auto;
         max-height: calc(100vh - 330px);
         background-color: #fff;
+
         @media (min-width: 992px) {
             max-height: calc(100vh - 200px);
         }
@@ -40,6 +41,7 @@
 
 .player {
     width: 100%;
+
     @media (min-width: 992px) {
         /*width: 96%;*/
     }
@@ -55,11 +57,11 @@
     }
 }
 
-.img-track-player {
+.img-track-player img {
     width: 50px;
     height: 50px;
 
-    .card-img-top  {
+    .card-img-top {
         min-width: 50px;
     }
 
@@ -72,8 +74,10 @@
 
 .track-title {
     width: auto;
+
     @media (min-width: 992px) {
         min-width: 18rem;
+
         .col-10 {
             flex: 1;
         }
@@ -90,7 +94,8 @@
 
     .scrolling-text.auto-scroll div {
         position: absolute;
-        min-width: 100%; /* au minimum la largeur du conteneur */
+        min-width: 100%;
+        /* au minimum la largeur du conteneur */
     }
 
     .scrolling-text.auto-scroll div span,
@@ -98,31 +103,45 @@
         position: relative;
         display: inline-block;
         white-space: nowrap;
-        top:0;
+        top: 0;
     }
 
     .scrolling-text.auto-scroll div span {
         animation: defilement 10s infinite linear;
     }
 
-    .scrolling-text div:after {
-    }
+    .scrolling-text div:after {}
+
     .scrolling-text.auto-scroll div:after {
         position: absolute;
-        top:0; left:0;
-        content:attr(data-text);
+        top: 0;
+        left: 0;
+        content: attr(data-text);
         animation: defilement2 10s infinite linear;
     }
 
     @keyframes defilement {
-        25% { left: 0; }
-        100% { left: -120%; }
+        25% {
+            left: 0;
+        }
+
+        100% {
+            left: -120%;
+        }
     }
 
     @keyframes defilement2 {
-        0% { left: 120%; }
-        25% { left: 120%; }
-        100% { left: 0%; }
+        0% {
+            left: 120%;
+        }
+
+        25% {
+            left: 120%;
+        }
+
+        100% {
+            left: 0%;
+        }
     }
 }
 
@@ -133,12 +152,15 @@
     @media (min-width: 992px) {
         border-radius: 0;
     }
+
     .bi-chevron-compact-up {
         display: inline;
     }
+
     .bi-chevron-compact-down {
         display: none;
     }
+
     svg {
         /*position: absolute;
         left: 50%;
@@ -146,10 +168,12 @@
         background: silver;
         border-radius: 14px 14px;
     }
+
     &.expanded {
         .bi-chevron-compact-up {
             display: none;
         }
+
         .bi-chevron-compact-down {
             display: inline;
         }
@@ -179,15 +203,17 @@
     //gap: 1rem;
     margin: 1rem;
 }
+
 .gallery-item,
 .gallery-item-inner {
     text-align: center;
-    align-self:center
+    align-self: center
 }
 
 .item1 {
     grid-column: span 3;
     grid-row: span 1;
+
     @media (min-width: 992px) {
         /*padding-left: 0.5rem;*/
     }
@@ -197,6 +223,7 @@
     grid-column: span 1;
     grid-row: span 1;
 }
+
 .item3 {
     grid-column: span 4;
     grid-row: span 1;
@@ -208,10 +235,12 @@
         grid-column: span 2;
         grid-row: span 2;
     }
+
     .item2 {
         grid-column: span 2;
         grid-row: span 1;
     }
+
     .item3 {
         grid-column: span 2;
         grid-row: span 1;
