@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'meta_title_prefix' => 'Ehtomusicoology.org',
+    'meta_title_prefix' => 'CREM jukebox',
 ];
