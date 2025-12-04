@@ -2,8 +2,8 @@
 <div>
     <div class="rp-2 bg-white">
         {{-- <div class="col-4">"{{ $menuItem }}" </div> --}}
-        <div class="row">
-            <div class="col text-center">
+        <div class="row m-0">
+            <div class="col text-center ps-3">
                 <a href="{{route('home')}}" class="text-black text-decoration-none" wire:navigate>
                     <div>{{ __('menu.home') }}</div>
                     <img src="/storage/icons/Home.png" alt="" class="" style="width: 28px; height: 28px" />
