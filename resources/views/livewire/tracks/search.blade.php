@@ -2,8 +2,18 @@
     <form wire:submit="playSearch" class="mt-0">
         <div class="row g-5 mx-0 mt-1 mb-4">
             <input type="hidden" name="q" value="{{ $search }}">
-            <div class="col-10 offset-1 d-flex flex-column flex-md-row mt-2 mt-md-auto g-5">
-                <div class="col-10 col-sm-8 col-md-3 m-auto pe-md-5 py-2 py-md-0">
+            <div class="col-10 offset-1 d-flex flex-column d-lg-none mt-2 mt-md-auto g-5">
+                <div class="col-10 col-sm-8 col-md-12 m-auto py-2">
+                    <div class="input-group form-text-group">
+                        <input type="text" class="form-control form-text-input" name="q" wire:model.live="search" placeholder="Rechercher...">
+                        <span class="input-group-text" ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                    </svg></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-10 offset-1 d-flex flex-column flex-md-row mt-0 mt-md-2mt-lg-auto g-5">
+                <div class="col-10 col-sm-8 col-md-3 m-auto pe-md-1 pe-lg-5 py-2 py-md-0">
                     <select class="form-select" name="year" wire:model.live="query_year">
                                 <option value="">Année</option>
                         @foreach($years as $year)
@@ -23,7 +33,7 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="col-10 col-sm-8 col-md-3 m-auto ps-md-5 py-2 py-md-0">
+                <div class="col-10 col-sm-8 col-md-3 m-auto ps-md-1 ps-lg-5 py-2 py-md-0">
                     <select class="form-select" name="duration" wire:model.live="query_duration">
                                 <option value="">Durée</option>
                         @foreach($durations as $duration)

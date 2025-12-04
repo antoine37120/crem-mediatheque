@@ -169,6 +169,26 @@ body {
     padding-left: 18px;
 }
 
+
+.form-text-group {
+    background-color: #FCE3D4;
+    border: 2px solid #000;
+    border-radius: 18px;
+    font-weight: bold;
+
+    input {
+        background-color: #FCE3D4;
+        border-top-left-radius: 18px;
+        border-bottom-left-radius: 18px;
+    }
+
+    .input-group-text {
+        background-color: #FCE3D4;
+        border-top-right-radius: 18px;
+        border-bottom-right-radius: 18px;
+    }
+}
+
 .form-select * {
     background-color: #FDF1E8;
 
