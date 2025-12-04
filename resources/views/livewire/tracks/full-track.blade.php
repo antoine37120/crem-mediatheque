@@ -15,9 +15,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-lg-9 mt-0 mb-4">
+            <div class="col-12 col-lg-9 mt-0 mb-4v ps-0 pe-0 ps-lg-2 pe-lg-2">
                 <div class="row m-0">
-                    <div class="col-6">
+                    <div class="col-8 col-lg-6">
 
                         @if($playlist_type != 'Podcast')
                             <h5>Zone : <span class="fw-bold"> {{ $track->geographicalArea->translate(App::getLocale(), true)->name }} </span></h5>
@@ -33,13 +33,17 @@
                         @endif
                         <h5 class="d-lg-none">Durée : <span class="fw-bold"> {{ $track->durationFormated() }} </span></h5>
                         @if(!empty($track->link))
-                            <div class="p-1 d-lg-none"><a href="{{ $track->link }}" target="_blank"class="btn btn-light rounded-5 p-1 px-2">See on archive</a></div>
+                            <div class="p-1 d-lg-none"><a href="{{ $track->link }}" target="_blank"class="btn btn-light icon-link rounded-5 border border-dark border-2 p-1 px-2"><svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244"></path>
+</svg> {{ __('front.btn_see_on_archive') }}</a></div>
                         @endif
                     </div>
-                    <div class="col-6 justify-content-end">
+                    <div class="col-4 col-lg-6 justify-content-end">
                         <div class="d-flex justify-content-end">
                             @if(!empty($track->link))
-                                <div class="p-1 d-none d-lg-block"><a href="{{ $track->link }}" target="_blank"class="btn btn-light rounded-5 p-1 px-2">See on archive</a></div>
+                                <div class="p-1 d-none d-lg-block"><a href="{{ $track->link }}" target="_blank"class="btn btn-light icon-link rounded-5 border border-dark border-2 p-1 px-2"><svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244"></path>
+</svg> {{ __('front.btn_see_on_archive') }}</a></div>
                             @endif
                             <livewire:tracks.full-actions :track="$track"  wire:key="actions-{{ $track->id }}"/>
                         </div>
