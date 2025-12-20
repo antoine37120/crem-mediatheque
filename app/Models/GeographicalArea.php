@@ -14,9 +14,13 @@ use SolutionForest\FilamentTree\Concern\ModelTree;
 class GeographicalArea extends Model implements TranslatableContract
 {
     use HasFactory;
-    use Translatable;
-    
     use ModelTree;
+    use Translatable;
+
+    public function translations(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(GeographicalAreaTranslation::class);
+    }
 
     public $useTranslationFallback = true;
     public $translatedAttributes = ['name'];

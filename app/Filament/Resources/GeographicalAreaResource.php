@@ -68,15 +68,9 @@ class GeographicalAreaResource extends Resource
             ])
             ->columns([
                 Tables\Columns\TextColumn::make('region_code'),
-                Tables\Columns\TextColumn::make('translations.name')->toggleable(isToggledHiddenByDefault: true)
-                ->searchable(),
-                Tables\Columns\TextColumn::make('translation.name')->label('Name'),
-                Tables\Columns\TextColumn::make('geographical_area_continent.translation.name')->label('Continent'),
-                 
-                /*Tables\Columns\TextColumn::make('locales')
-                    ->state(function (GeographicalArea $record): array {
-                        return $record->locales();
-                    })*/
+                Tables\Columns\TextColumn::make('translations.name')
+                    ->label('Name')
+                    ->searchable(),
             ])
             ->filters([
                 //

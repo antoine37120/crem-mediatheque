@@ -18,6 +18,8 @@ class GeographicalAreaTranslation extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'name'
+        'name',
+        'locale',
+        'geographical_area_id'
     ];
 }
