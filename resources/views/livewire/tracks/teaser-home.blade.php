@@ -22,8 +22,8 @@
         </div>
         <div class="col-12 pb-2 pt-md-2 ps-2 pe-0">
             {{-- w-100 ms-2 ms-lg-0 --}}
-            <h5 class="card-title"><a href="{{route('track', ['audioItem' => $track->id])}}" class="text-black text-decoration-none fw-bold" wire:navigate>{{ Illuminate\Support\Str::limit($track->translate(App::getLocale(), true)->name, 50, '...') }}</a></h5>
-            <p class="fs-6 m-0">{{ $track->geographicalArea->translate(App::getLocale(), true)->name }}</p>
+            <h5 class="card-title"><a href="{{route('track', ['audioItem' => $track->id])}}" class="text-black text-decoration-none fw-bold" wire:navigate>{{ Illuminate\Support\Str::limit($track->translate(App::getLocale(), true)?->name, 50, '...') }}</a></h5>
+            <p class="fs-6 m-0">{{ $track->geographicalArea?->translate(App::getLocale(), true)?->name }}</p>
         </div>
     </div>
 </div>

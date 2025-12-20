@@ -11,10 +11,8 @@ class FullPodcast extends Component
 {
     public $podcast;
     
-    #[Session(key: 'track_nav_mode')] 
     public $track_nav_mode = '';
     
-    #[Session(key: 'track_nav_data')] 
     public $track_nav_data = [];
 
     public function mount(Playlist $podcast)
@@ -33,6 +31,8 @@ class FullPodcast extends Component
                     ->where('playlist_id', $this->podcast->id)
                     ->orderBy('sort', 'asc')
                     ->pluck('audio_item_id')->toArray();
+        
+        $this->dispatch('update-nav-data', mode: $this->track_nav_mode, data: $this->track_nav_data);
     }
     public function render()
     {

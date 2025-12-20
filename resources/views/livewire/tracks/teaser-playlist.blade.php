@@ -21,8 +21,8 @@
             </div>
         </div>
         <div class="col-6 col-lg-9 col-xxl-10 pb-2 pt-lg-2 ps-2 pe-0">
-            <h5 class="card-title"><a  href="{{route('track', ['audioItem' => $track->id])}}" class="text-black text-decoration-none fw-bold" wire:navigate>{{ Illuminate\Support\Str::limit($track->translate(App::getLocale())->name, 45, '...') }}</a></h5>
-            <h5 class="fs-6">{{ $track->geographicalArea->translate(App::getLocale())->name }}</h5>
+            <h5 class="card-title"><a  href="{{route('track', ['audioItem' => $track->id])}}" class="text-black text-decoration-none fw-bold" wire:navigate>{{ Illuminate\Support\Str::limit($track->translate(App::getLocale(), true)?->name, 45, '...') }}</a></h5>
+            <h5 class="fs-6">{{ $track->geographicalArea?->translate(App::getLocale(), true)?->name }}</h5>
             @if(! empty(    $track->interpreters) && ! empty($track->collector))
                 <h5>Interprête / Collecteur : {{ $track->interpreters }} / {{ $track->collector }}</h5>
             @elseif(! empty($track->interpreters))
@@ -30,7 +30,7 @@
             @elseif(! empty($track->collector))
                 <h5>Collecteur : {{ $track->collector }}</h5>
             @endif
-            <div>{!! $track->translate(App::getLocale(), true)->description !!}</div>
+            <div>{!! $track->translate(App::getLocale(), true)?->description !!}</div>
         </div>
         <div class="col-3 d-block d-lg-none text-right ps-0 pe-0">
             <livewire:tracks.actions :track="$track"  wire:key="teaser-playist-audio-actions-mobile-{{ $track->id }}"/>

@@ -14,14 +14,20 @@ use Filament\Notifications\Notification;
 
 class Tracklist extends Component
 {
-    #[Session(key: 'playlist_items_ids')]
     public $items_ids = [];
 
-    #[Session(key: 'playlist_play_id')]
     public $item_play = 'none';
 
-    #[Session(key: 'track_nav_data')]
+    public $track_nav_mode = '';
+
     public $track_nav_data = [];
+
+    #[On('update-nav-data')]
+    public function updateNavData($mode, $data)
+    {
+        $this->track_nav_mode = $mode;
+        $this->track_nav_data = $data;
+    }
 
     public $playlist_items = [] ;
 

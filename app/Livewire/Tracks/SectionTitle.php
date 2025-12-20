@@ -14,10 +14,8 @@ class SectionTitle extends Component
     public $track;
     public $playlist_id;
 
-    #[Session(key: 'track_nav_mode')]
     public $track_nav_mode = '';
 
-    #[Session(key: 'track_nav_data')]
     public $track_nav_data = [];
 
     public $prev_id ;

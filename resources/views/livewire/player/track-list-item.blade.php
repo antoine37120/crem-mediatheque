@@ -2,7 +2,6 @@
      x-sort:item
      data-track-url="{{ url('storage/'.$track->file) }}"
      data-track-id="{{ $track->id }}"
-     x-on:click="$wire.selected='{{ $track->id }}'"
      style="cursor: pointer;"
      >
 

@@ -36,11 +36,8 @@ class Search extends Component
     public $years = [];
     public $durations = [];
 
-    
-    #[Session(key: 'track_nav_mode')] 
     public $track_nav_mode = '';
     
-    #[Session(key: 'track_nav_data')] 
     public $track_nav_data = [];
 
     public function loadSelectOtpions() {
@@ -129,6 +126,7 @@ class Search extends Component
             $this->track_nav_data[] = $track->audio_item ;
         }
 
+        $this->dispatch('update-nav-data', mode: $this->track_nav_mode, data: $this->track_nav_data);
     }
 
     public function updated($name, $value) 

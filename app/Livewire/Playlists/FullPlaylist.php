@@ -13,10 +13,8 @@ class FullPlaylist extends Component
 {
     public $playlist;
     
-    #[Session(key: 'track_nav_mode')] 
     public $track_nav_mode = '';
     
-    #[Session(key: 'track_nav_data')] 
     public $track_nav_data = [];
 
     public function mount(Playlist $playlist)
@@ -36,10 +34,7 @@ class FullPlaylist extends Component
                     ->orderBy('sort', 'asc')
                     ->pluck('audio_item_id')->toArray();
 
-        /*Log::info('$this->track_nav_mode') ;
-        Log::info($this->track_nav_mode) ;
-        Log::info('$this->track_nav_data') ;
-        Log::info($this->track_nav_data) ;*/
+        $this->dispatch('update-nav-data', mode: $this->track_nav_mode, data: $this->track_nav_data);
     }
     public function render()
     {

@@ -25,10 +25,10 @@
                     <select class="form-select" name="geoArea" wire:model.live="query_geoArea">
                                 <option value="">Zone</option>
                         @foreach($geoAreas as $geoArea)
-                            <option value="{{ $geoArea->id }}" {{ old('geoArea') == $geoArea->id ? 'selected' : '' }}>{{ $geoArea->translate(App::getLocale(), true)->name }}</option>
+                            <option value="{{ $geoArea->id }}" {{ old('geoArea') == $geoArea->id ? 'selected' : '' }}>{{ $geoArea->name }}</option>
 
                             @foreach($geoArea->childs as $geoAreaChild)
-                                <option value="{{ $geoAreaChild->id }}" {{ old('geoArea') == $geoAreaChild->id ? 'selected' : '' }}>&nbsp;&nbsp;{{ $geoAreaChild->translate(App::getLocale(), true)->name }}</option>
+                                <option value="{{ $geoAreaChild->id }}" {{ old('geoArea') == $geoAreaChild->id ? 'selected' : '' }}>&nbsp;&nbsp;{{ $geoAreaChild->name }}</option>
                             @endforeach
                         @endforeach
                     </select>

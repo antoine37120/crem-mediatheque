@@ -11,7 +11,6 @@ class TrackListItem extends Component
 {
     public $track;
     public $it;
-    #[Session(key: 'playlist_play_id')] 
     public $selected = 'none';
 
     public function mount(AudioItem $track, $it, $selected)
@@ -23,6 +22,12 @@ class TrackListItem extends Component
         $this->fill( 
             $track->only('name', 'description', 'picture'), 
         ); 
+    }
+
+    #[On('play-track-to-playlist')]
+    public function updateTrackPlay($id)
+    {
+        $this->selected = $id;
     }
     
     
