@@ -130,8 +130,16 @@
                                         <span class=" w-full d-block pb-1 border-bottom border-black-40 items-center rounded-md text-black-50">{{ __('menu.localization.title') }}</span>
                                         </li>
                                         @foreach(config('translatable.locales') as $locale)
+                                        @php
+                                            $countryCode = match($locale) {
+                                                'en' => 'gb',
+                                                'fr' => 'fr',
+                                                default => $locale,
+                                            };
+                                        @endphp
                                         <li>
                                             <a href="{{ Route::localizedUrl($locale) }}" class="text-black text-decoration-none lg:py-1.5 w-full d-block pb-1 border-bottom border-black-40 items-center rounded-md transition-colors text-left text-gray-800 hover:bg-gray-50 focus-visible:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed" wire:navigate>
+                                                <x-dynamic-component :component="'flag-country-' . $countryCode" style="width: 24px; height: 24px;" class="me-2 rounded-circle shadow-sm d-inline-block" />
                                                 <span>{{ __('menu.localization.' . $locale) }}</span>
                                             </a>
                                         </li>

@@ -17,6 +17,7 @@
         "laravel/framework": "^11.9",
         "laravel/scout": "^10.11",
         "laravel/tinker": "^2.9",
+        "outhebox/blade-flags": "^1.5",
         "solution-forest/filament-tree": "^2.1",
         "tomatophp/filament-translations": "^1.0",
         "wapmorgan/mp3info": "^0.1.0"

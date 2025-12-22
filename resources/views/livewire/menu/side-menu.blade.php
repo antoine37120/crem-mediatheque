@@ -34,6 +34,23 @@
             <li><a href="{{route('podcasts')}}" class="text-black text-decoration-none {{ request()->is('podcasts*') ? 'fw-bold' : '' }}" wire:navigate>{{ __('menu.podcasts') }}</a></li>
             <li><a href="{{route('cmsPage', ['cmsPage' => 'about']) }}" class="text-black text-decoration-none {{ request()->routeIs('page/about') && request()->route('cmsPage')->slug === 'about' ? 'fw-bold' : '' }}" wire:navigate>{{ __('menu.about') }}</a></li>
         </ul>
+        <div class="d-flex justify-content-center gap-3 mt-3">
+            @foreach(config('translatable.locales') as $locale)
+                @php
+                    $countryCode = match($locale) {
+                        'en' => 'gb',
+                        'fr' => 'fr',
+                        default => $locale,
+                    };
+                @endphp
+                <a href="{{ Route::localizedUrl($locale) }}"
+                   class="d-block transition-all duration-200 {{ app()->getLocale() === $locale ? 'opacity-100 scale-110' : 'opacity-50 hover:opacity-100 grayscale hover:grayscale-0' }}"
+                   wire:navigate
+                   title="{{ __('menu.localization.' . $locale) }}">
+                    <x-dynamic-component :component="'flag-country-' . $countryCode" style="width: 24px; height: 24px;" class="rounded-circle shadow-sm" />
+                </a>
+            @endforeach
+        </div>
     </div>
 
     <livewire:menu.logos-partners />
