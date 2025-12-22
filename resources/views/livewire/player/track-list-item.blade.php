@@ -6,7 +6,7 @@
      >
 
     <!-- Titre -->
-    <div class="col-9 col-md-10">
+    <div class="col-8 col-md-10">
         <div class="text-truncate" title="{{ $track->translate(App::getLocale(), true)->name }}">
             <a x-on:click.prevent="window.Livewire.navigate('{{route('track', ['audioItem' => $track->id])}}')" class="text-black text-decoration-none fw-bold">
             {{ $track->translate(App::getLocale(), true)->name }}
@@ -21,7 +21,7 @@
     <div class="time d-none">{{ $track->durationFormated() }}</div>
 
     <!-- Actions -->
-    <div class="col-2 col-md-1 text-end">
+    <div class="col-3 col-md-1 text-end">
         <div class="d-flex justify-content-end align-items-center">
             <button class="btn p-1" wire:click.stop="$dispatch('delete-to-playlist', { id: {{ $track->id }} })">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
