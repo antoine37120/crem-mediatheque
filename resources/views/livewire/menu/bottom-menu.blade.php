@@ -2,7 +2,7 @@
 <div>
     <div class="rp-2 bg-white">
         {{-- <div class="col-4">"{{ $menuItem }}" </div> --}}
-        <div class="row m-0">
+        <div class="d-flex m-0">
             <div class="col text-center ps-3">
                 <a href="{{route('home')}}" class="text-black text-decoration-none" wire:navigate>
                     <div>{{ __('menu.home') }}</div>
@@ -129,15 +129,13 @@
                                         <li>
                                         <span class=" w-full d-block pb-1 border-bottom border-black-40 items-center rounded-md text-black-50">{{ __('menu.localization.title') }}</span>
                                         </li>
+                                        @foreach(config('translatable.locales') as $locale)
                                         <li>
-                                            <a href="#new" class="text-black text-decoration-none lg:py-1.5 w-full d-block pb-1 border-bottom border-black-40 items-center rounded-md transition-colors text-left text-gray-800 hover:bg-gray-50 focus-visible:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed" wire:navigate>
-                                                <span>{{ __('menu.localization.fr') }}</span>
+                                            <a href="{{ Route::localizedUrl($locale) }}" class="text-black text-decoration-none lg:py-1.5 w-full d-block pb-1 border-bottom border-black-40 items-center rounded-md transition-colors text-left text-gray-800 hover:bg-gray-50 focus-visible:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed" wire:navigate>
+                                                <span>{{ __('menu.localization.' . $locale) }}</span>
                                             </a>
                                         </li>
-                                        <li><a href="#edit" class="text-black text-decoration-none lg:py-1.5 w-full d-block pb-1 border-bottom border-black-40 items-center rounded-md transition-colors text-left text-gray-800 hover:bg-gray-50 focus-visible:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed" wire:navigate>
-                                                <span>{{ __('menu.localization.en') }}</span>
-                                            </a>
-                                        </li>
+                                        @endforeach
                                     </ul>
                                 </div>
                             </div>
