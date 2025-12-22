@@ -50,7 +50,7 @@ class CremAdminPanelProvider extends PanelProvider
                 FilamentAstrotomicTranslatablePlugin::make(),
                 FilamentEditProfilePlugin::make()
                     ->shouldRegisterNavigation(false),
-                \TomatoPHP\FilamentTranslations\FilamentTranslationsPlugin::make()
+                //\TomatoPHP\FilamentTranslations\FilamentTranslationsPlugin::make()
             ]
             )
             ->middleware([
