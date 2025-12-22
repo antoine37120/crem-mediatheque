@@ -42,7 +42,18 @@
                         </div>
                     </header>
                     {{-- Main --}}
-                    <div class="main-of-page p-4">{{ $slot }}</div>
+                    <div class="main-of-page p-4">
+                        {{ $slot }}
+                        
+                        @php
+                            $footerMentions = \App\Models\GlobalSetting::where('key', 'footer_mentions')->first();
+                        @endphp
+                        @if($footerMentions && $footerMentions->value)
+                            <div class="text-center small py-3 mt-4 opacity-75" style="margin-bottom: 100px;">
+                                {!! $footerMentions->value !!}
+                            </div>
+                        @endif
+                    </div>
                     {{-- Player --}}
                     <div class="footer-wrapper position-fixed col-12 col-lg-9 col-xxl-10 bottom-0 end-0 p-0">
                         <div class="player-section position-relative mx-0">
