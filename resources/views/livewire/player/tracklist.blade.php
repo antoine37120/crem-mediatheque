@@ -24,7 +24,7 @@
 
             <!-- Liste des pistes -->
             <div id="playlist">
-<div x-sort="window.catchOrdering()" class="container-fluid">
+<div x-sort="window.catchOrdering()" x-sort:config="{  handle: '.sort-handler' }" class="container-fluid">
             @php
                     $i = 1 ;
                 @endphp
