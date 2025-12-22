@@ -12,7 +12,7 @@
                 <livewire:player.track-title :id="$item_play"  key="player-track-title"/>
             </div>
 
-            <div class="gallery-item item2">
+            <div class="gallery-item item2" wire:ignore>
                 <div class="row justify-content-center m-0">
                     <div class="col-auto col-xl-auto">
                         <div class="row align-items-center justify-content-center flex-nowrap">

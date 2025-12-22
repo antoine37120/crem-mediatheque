@@ -163,15 +163,17 @@ class Tracklist extends Component
     public function updateTrackList($id)
     {
         Log::debug($id) ;
+        $track = AudioItem::find($id);
         if (!in_array($id, $this->items_ids)) {
             $this->items_ids [] = $id ;
             $this->playlist_items() ;
+            $notice_text = __('notifications.add_track_to_playlist', ['track' => $track->translate(app()->getLocale(), true)->name]);
+        } else {
+            $notice_text = __('notifications.already_on_playlist', ['track' => $track->translate(app()->getLocale(), true)->name]);
         }
-        $track = AudioItem::find($id);
-        $notice_text = __('notifications.add_track_to_playlist', ['track' => $track->translate(app()->getLocale(), true)->name]);
+        
         $notice_color = str_replace('#', '', $track->getHexaColor()) ;
         $this->dispatch('add_notice_user', text: $notice_text, color: $notice_color);
-
     }
     /**
      * Triggered when a track is deleted from the playlist.
