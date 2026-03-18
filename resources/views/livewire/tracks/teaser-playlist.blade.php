@@ -24,9 +24,9 @@
             <h5 class="card-title"><a  href="{{route('track', ['audioItem' => $track->id])}}" class="text-black text-decoration-none fw-bold" wire:navigate>{{ Illuminate\Support\Str::limit($track->translate(App::getLocale(), true)?->name, 45, '...') }}</a></h5>
             <h5 class="fs-6">{{ $track->geographicalArea?->translate(App::getLocale(), true)?->name }}</h5>
             @if(! empty(    $track->interpreters) && ! empty($track->collector))
-                <h5>Interprête / Collecteur : {{ $track->interpreters }} / {{ $track->collector }}</h5>
+                <h5>Interprète(s) : {{ $track->interpreters }} | Collecteur(s) : {{ $track->collector }}</h5>
             @elseif(! empty($track->interpreters))
-                <h5>Interprête : {{ $track->interpreters }}</h5>
+                <h5>Interprète : {{ $track->interpreters }}</h5>
             @elseif(! empty($track->collector))
                 <h5>Collecteur : {{ $track->collector }}</h5>
             @endif
