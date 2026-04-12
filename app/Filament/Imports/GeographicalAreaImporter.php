@@ -3,6 +3,7 @@
 namespace App\Filament\Imports;
 
 use App\Models\GeographicalArea;
+use Carbon\CarbonInterface;
 use Filament\Actions\Imports\ImportColumn;
 use Filament\Actions\Imports\Importer;
 use Filament\Actions\Imports\Models\Import;
@@ -40,11 +41,16 @@ class GeographicalAreaImporter extends Importer
         return new GeographicalArea();
     }
 
-        
+
     protected function afterSave(): void
     {
         $this->record->name = $this->data['name'] ;
         $this->record->save() ;
+    }
+
+    public function getJobRetryUntil(): ?CarbonInterface
+    {
+        return null;
     }
 
     public static function getCompletedNotificationBody(Import $import): string

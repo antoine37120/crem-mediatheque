@@ -2,12 +2,15 @@
 
 namespace App\Filament\Imports;
 
+use App\Models\GeographicalArea;
 use App\Models\AudioItem;
 use App\Models\AudioItemTranslation;
 use App\Models\AudioItemPlaylist;
+use Filament\Actions\Imports\Exceptions\RowImportFailedException;
 use Filament\Actions\Imports\ImportColumn;
 use Filament\Actions\Imports\Importer;
 use Filament\Actions\Imports\Models\Import;
+use Filament\Notifications\Notification;
 use wapmorgan\Mp3Info\Mp3Info;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -15,6 +18,7 @@ use App\Http\Controllers\BrowsershotController;
 use Spatie\Browsershot\Browsershot;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
+use Carbon\CarbonInterface;
 
 $storagePath = storage_path("app/public/session");
 
@@ -22,13 +26,30 @@ class AudioItemImporter extends Importer
 {
     protected static ?string $model = AudioItem::class;
 
-    public $order = 1 ;
+    public ?string $mp3FileToMove = null;
+
+    public ?string $mp3Error = null;
+
+    public static function getOptionsFormComponents(): array
+    {
+        return [
+            \Filament\Forms\Components\Toggle::make('create_missing_areas')
+                ->label('Creer automatiquement les aires geographiques manquantes')
+                ->helperText('Si active, les aires geographiques du CSV qui n\'existent pas seront creees automatiquement avec le code comme nom francais.')
+                ->default(false),
+        ];
+    }
 
     public static function getColumns(): array
     {
         return [
             ImportColumn::make('original_name')
                 ->guess(['original_name','TITRE ORIGINAL'])
+                ->fillRecordUsing(function (AudioItem $record, string|null $state): void {
+                    if (!empty($state) || !$record->exists) {
+                        $record->original_name = $state;
+                    }
+                })
                 ->example('Nom original archive')
                 ->rules(['max:255']),
             ImportColumn::make('name')
@@ -59,17 +80,35 @@ class AudioItemImporter extends Importer
                 ->example('Description in english') ,
             ImportColumn::make('year')
                 ->guess(['year','ANNÉE D\'ENREGISTREMENT'])
+                ->fillRecordUsing(function (AudioItem $record, string|null $state): void {
+                    if (!empty($state) || !$record->exists) {
+                        $record->year = $state;
+                    }
+                })
                 ->example(1953)
                 ->requiredMapping(),
             ImportColumn::make('geographicalArea')
-                ->guess(['geographicalArea','AIRE GEO'])
+                ->guess(['geographicalArea','AIRE GEO', 'geographical_area'])
+                ->fillRecordUsing(function (AudioItem $record, string|null $state): void {
+                    // Resolution manuelle dans beforeSave
+                })
                 ->example('af_occidentale')
-                ->relationship(resolveUsing: 'region_code'),
+                ->rules(['nullable']),
             ImportColumn::make('interpreters')
                 ->guess(['interpreters','INTERPRETE'])
+                ->fillRecordUsing(function (AudioItem $record, string|null $state): void {
+                    if (!empty($state) || !$record->exists) {
+                        $record->interpreters = $state;
+                    }
+                })
                 ->example('Nurlanbek Nishanov'),
             ImportColumn::make('collector')
                 ->guess(['collector','COLLECTEUR'])
+                ->fillRecordUsing(function (AudioItem $record, string|null $state): void {
+                    if (!empty($state) || !$record->exists) {
+                        $record->collector = $state;
+                    }
+                })
                 ->example('During, Jean')
                 ->requiredMapping()
                 ->rules(['required', 'max:255']),
@@ -78,6 +117,37 @@ class AudioItemImporter extends Importer
                 ->example('https://archives.crem-cnrs.fr/archives/items/CNRSMH_I_2020_023_001_34/')
                 ->requiredMapping()
                 ->rules(['max:255']),
+        ];
+
+        // Colonnes du CSV ignorees (non presentes dans le modele AudioItem) :
+        // 'pays', 'remarque', 'autorisation pour items en acces restreint'
+    }
+
+    public function getValidationMessages(): array
+    {
+        return [
+            'collector.required' => 'Le champ "collector" (collecteur) est obligatoire. Verifiez que chaque ligne du CSV a un collecteur renseigne.',
+            'collector.max' => 'Le nom du collecteur ne doit pas depasser 255 caracteres.',
+            'original_name.max' => 'Le nom original ne doit pas depasser 255 caracteres.',
+            'name.max' => 'Le titre alternatif ne doit pas depasser 255 caracteres.',
+            'name_en.max' => 'Le titre anglais ne doit pas depasser 255 caracteres.',
+            'link.max' => 'Le lien ne doit pas depasser 255 caracteres.',
+        ];
+    }
+
+    public function getValidationAttributes(): array
+    {
+        return [
+            'original_name' => 'nom original',
+            'name' => 'titre alternatif',
+            'name_en' => 'titre anglais',
+            'description' => 'description',
+            'description_en' => 'description anglaise',
+            'year' => 'annee',
+            'geographicalArea' => 'aire geographique',
+            'interpreters' => 'interpretes',
+            'collector' => 'collecteur',
+            'link' => 'lien',
         ];
     }
 
@@ -104,127 +174,195 @@ class AudioItemImporter extends Importer
 
     protected function beforeSave(): void
     {
-        //get file infos
-        // To get basic audio information
-        /*$audio = new Mp3Info('./audio.mp3');
-        echo 'Audio duration: '.floor($audio->duration / 60).' min '.floor($audio->duration % 60).' sec'.PHP_EOL;
-        $this->record->duration = $audio->duration
-        */
-        $link_eploded = explode('/', rtrim($this->record->link, "/")) ;
-        //Log::info(print_r($link_eploded, true));
-        $size = sizeof($link_eploded) ;
-        $cote = $link_eploded[$size - 1]  ;
-        $fileName = $cote.'.mp3' ;
-
-        $storagePath = storage_path("app/public/import");
-        // Find files that end with ".tmp"
-        $files = File::glob("$storagePath/*".$cote."*.mp3");
-        Log::info($files) ;
-
-        if(sizeof($files) == 1) {
-            $fileName = basename($files[0]);
-
-            $newFileName = Str::ascii($fileName) ;
-
-            Storage::move('import/'.$fileName, 'audio-item-sound/'.$newFileName);
-            $path = 'audio-item-sound/'.$newFileName;
-            $sys_path = Storage::path('audio-item-sound/'.$newFileName);
-            $this->record->file = $path ;
-            //duration
-            $audio = new Mp3Info($sys_path);
-            $this->record->duration = $audio->duration ;
-        } else {
-            $this->record->file = null ;
-            $this->record->duration = 0 ;
+        // Resolution manuelle de l'aire geographique
+        if (!empty($this->data['geographicalArea'])) {
+            $geoArea = GeographicalArea::where('region_code', $this->data['geographicalArea'])->first();
+            if ($geoArea) {
+                $this->record->geographical_area_id = $geoArea->id;
+            } elseif (!empty($this->options['create_missing_areas'])) {
+                // Creer l'aire geographique automatiquement
+                $geoArea = new GeographicalArea();
+                $geoArea->region_code = $this->data['geographicalArea'];
+                $geoArea->save();
+                // Creer la traduction FR avec le region_code comme nom
+                $geoArea->translateOrNew('fr')->name = $this->data['geographicalArea'];
+                $geoArea->save();
+                $this->record->geographical_area_id = $geoArea->id;
+                Log::info("Aire geographique creee automatiquement : {$this->data['geographicalArea']} (id: {$geoArea->id})");
+            } else {
+                $availableCodes = GeographicalArea::pluck('region_code')->implode(', ');
+                throw new RowImportFailedException(
+                    "Aire geographique inconnue : \"{$this->data['geographicalArea']}\". "
+                    . "Les codes valides sont : {$availableCodes}. "
+                    . "Cochez l'option \"Creer les aires manquantes\" pour les creer automatiquement."
+                );
+            }
         }
 
-        $this->record->cote = $link_eploded[$size - 1] ;
+        $this->mp3FileToMove = null;
+        $this->mp3Error = null;
 
-        //Log::info(print_r($path, true));
-        //Log::info(print_r($this->record->toArray(), true));
-        // Runs before the CSV data for a row is validated.
+        $link_eploded = explode('/', rtrim($this->record->link, "/")) ;
+        $size = sizeof($link_eploded) ;
+        $cote = $link_eploded[$size - 1]  ;
+
+        $storagePath = storage_path("app/public/import");
+        $files = File::glob("$storagePath/*".$cote."*.mp3");
+
+        // Si l'item existe deja avec un fichier, ne pas ecraser par null
+        $isUpdate = $this->record->exists;
+
+        if(sizeof($files) == 1) {
+            $this->mp3FileToMove = $files[0];
+            $fileName = basename($this->mp3FileToMove);
+            $newFileName = Str::ascii($fileName);
+            $path = 'audio-item-sound/'.$newFileName;
+            $this->record->file = $path;
+
+            // duration (simulation du chemin pour Mp3Info)
+            $sys_path = $this->mp3FileToMove;
+            $audio = new Mp3Info($sys_path);
+            $this->record->duration = $audio->duration;
+
+            // Generate picture and other related data if file changed
+            // We can't call generatePicture() here because record is not yet saved
+            // but we can set up for afterSave
+        } elseif (sizeof($files) == 0) {
+            if ($isUpdate && !empty($this->record->getOriginal('file'))) {
+                // Item existant avec fichier : garder le fichier actuel et ses donnees liees
+                $this->mp3Error = null; // Pas d'erreur, c'est normal
+                // S'assurer que duration et file ne sont pas touches s'ils ont ete modifies par accident
+                $this->record->file = $this->record->getOriginal('file');
+                $this->record->duration = $this->record->getOriginal('duration');
+                $this->record->picture = $this->record->getOriginal('picture');
+            } else {
+                // Nouvel item sans fichier
+                $this->mp3Error = "Aucun fichier MP3 trouve dans le dossier import pour la cote {$cote}. Fichiers recherches : *{$cote}*.mp3";
+                $this->record->file = null;
+                $this->record->duration = 0;
+                $this->record->picture = null;
+            }
+        } else {
+            if ($isUpdate && !empty($this->record->getOriginal('file'))) {
+                // Plusieurs fichiers trouves mais on a deja un fichier : on garde l'existant avec un warning
+                $this->mp3Error = "Plusieurs fichiers MP3 trouves pour la cote {$cote} : " . implode(', ', array_map('basename', $files)) . ". Le fichier existant est conserve.";
+                Log::warning($this->mp3Error);
+                $this->record->file = $this->record->getOriginal('file');
+                $this->record->duration = $this->record->getOriginal('duration');
+                $this->record->picture = $this->record->getOriginal('picture');
+            } else {
+                $this->mp3Error = "Plusieurs fichiers MP3 trouves pour la cote {$cote} : " . implode(', ', array_map('basename', $files)) . ". Veuillez n'en garder qu'un.";
+                $this->record->file = null;
+                $this->record->duration = 0;
+                $this->record->picture = null;
+            }
+        }
+
+        $this->record->cote = $cote;
     }
 
     protected function afterSave(): void
     {
+        try {
+            if ($this->import->playlist_id === null && isset($this->options['playlistId'])) {
+                $this->import->playlist_id = $this->options['playlistId'];
+                $this->import->save();
+            }
 
-        //Log::info(print_r($this->record->toArray(), true));
-        /*$this->record->setTranslation('name', 'fr', $this->data['name']);
-        $this->record->setTranslation('name', 'fr', 'hhhhhhhhhhhhhh');
-        $this->record->setTranslation('name', 'en', $this->data['name_en']);
+            // Traduction FR
+            $AudioItemTranslation = AudioItemTranslation::firstOrNew([
+                'audio_item_id' => $this->record->id,
+                'locale' => 'fr',
+            ]);
+            $AudioItemTranslation->audio_item_id = $this->record->id;
+            $AudioItemTranslation->locale = 'fr';
+            // Ne pas ecraser par une valeur vide si la traduction existe deja
+            if (!empty($this->data['name']) || !$AudioItemTranslation->exists) {
+                $AudioItemTranslation->name = $this->data['name'];
+            }
+            if (!empty($this->data['description']) || !$AudioItemTranslation->exists) {
+                $AudioItemTranslation->description = $this->data['description'];
+            }
+            $AudioItemTranslation->save();
 
-        $translations = ['en' => $this->data['name_en'] , 'fr' => $this->data['name']];
-        $audioItem = AudioItem::find($this->record->id) ;
-        $audioItem->name = $translations;
-        $audioItem->save() ;
+            // Traduction EN
+            $AudioItemTranslationEn = AudioItemTranslation::firstOrNew([
+                'audio_item_id' => $this->record->id,
+                'locale' => 'en',
+            ]);
+            $AudioItemTranslationEn->audio_item_id = $this->record->id;
+            $AudioItemTranslationEn->locale = 'en';
+            if (!empty($this->data['name_en']) || !$AudioItemTranslationEn->exists) {
+                $AudioItemTranslationEn->name = $this->data['name_en'];
+            }
+            if (!empty($this->data['description_en']) || !$AudioItemTranslationEn->exists) {
+                $AudioItemTranslationEn->description = $this->data['description_en'];
+            }
+            $AudioItemTranslationEn->save();
 
-        $this->record->setTranslation('description', 'fr', $this->data['description']);
-        $this->record->setTranslation('description', 'en', $this->data['description_en']);
-        $this->record->save() ;*/
-
-
-        $AudioItemTranslation = AudioItemTranslation::firstOrNew([ 'audio_item_id' => $this->record->id, 'locale' => 'fr', ]);
-        $AudioItemTranslation->audio_item_id = $this->record->id;
-        $AudioItemTranslation->locale = 'fr';
-        $AudioItemTranslation->name = $this->data['name'];
-        $AudioItemTranslation->description = $this->data['description'];
-        $AudioItemTranslation->save() ;
-
-        $AudioItemTranslationEn = AudioItemTranslation::firstOrNew([ 'audio_item_id' => $this->record->id, 'locale' => 'en', ]);
-        $AudioItemTranslationEn->audio_item_id = $this->record->id;
-        $AudioItemTranslationEn->locale = 'en';
-        $AudioItemTranslationEn->name = $this->data['name_en'];
-        $AudioItemTranslationEn->description = $this->data['description_en'];
-        $AudioItemTranslationEn->save() ;
-
-
-        //$this->record->playlists()->syncWithoutDetaching([$this->options['playlistId']]);
-        $AudioItemPlaylist = AudioItemPlaylist::firstOrNew([
-                 // Update existing records, matching them by `$this->data['column_name']`
-                'sort' => $this->order,
+            $AudioItemPlaylist = AudioItemPlaylist::firstOrNew([
                 'audio_item_id' => $this->record->id,
                 'playlist_id' => $this->options['playlistId'],
-        ]);
-        $AudioItemPlaylist->save() ;
+            ]);
 
-        //app(BrowsershotController::class)->show($this->record->id, $this->record->cote.'.mp3');
+            if (!$AudioItemPlaylist->exists) {
+                // Nouvelle relation : attribuer le prochain ordre
+                $maxSort = AudioItemPlaylist::where('playlist_id', $this->options['playlistId'])
+                    ->max('sort') ?? 0;
+                $AudioItemPlaylist->sort = $maxSort + 1;
+            }
+            // Si la relation existe deja, on ne touche PAS au sort
 
-        /*Log::info(print_r($this->record->cote.' _____ Launche img genaration _____', true));
-        Log::info(print_r($this->record->cote.'.mp3', true));
-        $dataImage = Browsershot::url(url('wave-picture', [$this->record->id, $this->record->cote.'.mp3']))
-                ->noSandbox()
-                ->setNodeBinary(env('CUSTOM_NodeBinaryPath', false))
-                ->setNpmBinary(env('CUSTOM_NpmBinaryPath', false))
-                ->setOption('landscape', true)
-                ->windowSize(600, 600)
-                ->waitUntilNetworkIdle()
-                //->save(storage_path() . '/laravel_screenshot_browsershot.png');
-                //->bodyHtml() ;
-                ->evaluate("window.pngData");
+            $AudioItemPlaylist->save();
 
-        //Log::info(print_r($dataImage, true));
-        //Log::info(print_r(url('wave-picture', [$this->record->id, $this->record->file]), true));
-        //Log::info(print_r(env('CUSTOM_NpmBinaryPath', false), true));
-        $data = str_replace(' ','+',$dataImage);
-        list($type, $data) = explode(';', $data);
-        list(, $data)      = explode(',', $data);
-        $decodedData = base64_decode($data);
-        $pathFile = 'audio-item/'.$this->record->cote.'.png' ;
-        Storage::put($pathFile, $decodedData);
-        $this->record->picture = $pathFile;
-        $this->record->save() ;*/
-        $this->record->generatePicture() ;
+            if ($this->mp3FileToMove) {
+                Storage::move('import/' . basename($this->mp3FileToMove), 'audio-item-sound/' . Str::ascii(basename($this->mp3FileToMove)));
+                $this->record->generatePicture();
+            }
 
+            if ($this->mp3Error) {
+                Log::warning($this->mp3Error);
+
+                Notification::make()
+                    ->title('Item importe sans fichier audio')
+                    ->body($this->mp3Error)
+                    ->warning()
+                    ->send();
+            }
+        } catch (\Throwable $e) {
+            throw new RowImportFailedException($e->getMessage());
+        }
+    }
+
+    public function getJobRetryUntil(): ?CarbonInterface
+    {
+        return null;
     }
 
     public static function getCompletedNotificationBody(Import $import): string
     {
-        $body = 'Your audio item import has completed and ' . number_format($import->successful_rows) . ' ' . str('row')->plural($import->successful_rows) . ' imported.';
+        $body = 'Import termine : ' . number_format($import->successful_rows) . '/' . number_format($import->total_rows) . ' items importes.';
 
         if ($failedRowsCount = $import->getFailedRowsCount()) {
-            $body .= ' ' . number_format($failedRowsCount) . ' ' . str('row')->plural($failedRowsCount) . ' failed to import.';
+            $body .= "\n" . number_format($failedRowsCount) . ' items en echec :';
+            $failedRows = $import->failedRows()->limit(5)->get();
+
+            foreach ($failedRows as $failedRow) {
+                $name = $failedRow->data['original_name'] ?? $failedRow->data['name'] ?? 'Inconnu';
+                $error = $failedRow->validation_error ?? 'Erreur inconnue';
+                $body .= "\n- \"{$name}\" : {$error}";
+            }
+
+            if ($failedRowsCount > 5) {
+                $body .= "\net " . ($failedRowsCount - 5) . " autres...";
+            }
         }
 
-        return $body;
+        if (isset($import->options['playlistId'])) {
+            $playlistUrl = route('filament.admin.resources.playlists.edit', $import->options['playlistId']);
+            $body .= "\n\n" . $playlistUrl;
+        }
+
+        return (string) Str::limit($body, 500);
     }
 }

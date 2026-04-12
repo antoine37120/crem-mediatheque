@@ -147,9 +147,11 @@ class AudioItemResource extends Resource
                 ->sortable()
                 ->searchable(),
                 Tables\Columns\TextColumn::make('translations.name')
+                    ->wrap()
                 ->toggleable(isToggledHiddenByDefault: true)
                 ->searchable(),
-                Tables\Columns\TextColumn::make('original_name')->label('Original Name'),
+                Tables\Columns\TextColumn::make('original_name')->label('Original Name')
+                    ->wrap(),
                 Tables\Columns\TextColumn::make('duration')
                     ->numeric()
                     ->sortable(),
@@ -160,9 +162,11 @@ class AudioItemResource extends Resource
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('file')
+                    ->wrap()
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 Tables\Columns\TextColumn::make('collector')
+                    ->wrap()
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 ToggleColumn::make('published'),

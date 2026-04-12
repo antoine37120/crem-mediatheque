@@ -23,7 +23,7 @@ class GeographicalAreaResource extends Resource
     use ResourceTranslatable;
 
     protected static ?string $model = GeographicalArea::class;
-    
+
     protected static ?int $navigationSort = 3;
 
     protected static ?string $navigationLabel = 'Aires géographiques';
@@ -39,7 +39,7 @@ class GeographicalAreaResource extends Resource
                 Forms\Components\TextInput::make('region_code')
                     ->required()
                     ->maxLength(255),
-                
+
 
                 TranslatableTabs::make()->columnSpan(2)
                     ->localeTabSchema(fn (TranslatableTab $tab) => [
@@ -55,7 +55,7 @@ class GeographicalAreaResource extends Resource
                                 }
                             }),*/,
                     ]),
-                
+
             ]);
     }
 
@@ -65,6 +65,7 @@ class GeographicalAreaResource extends Resource
             ->headerActions([
                 ImportAction::make()
                     ->importer(GeographicalAreaImporter::class)
+                    ->job(\App\Jobs\ImportCsv::class)
             ])
             ->columns([
                 Tables\Columns\TextColumn::make('region_code'),
@@ -103,7 +104,7 @@ class GeographicalAreaResource extends Resource
         ];
     }
 
-    
+
     public static function getGlobalSearchResultTitle(\Illuminate\Database\Eloquent\Model $record): \Illuminate\Contracts\Support\Htmlable | string
     {
         return $record->name;

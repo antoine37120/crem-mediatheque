@@ -65,14 +65,17 @@ class AudioItemPlaylistsRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make('audio_item.cote')->label('Cote')
                 ->sortable(),
                 Tables\Columns\TextColumn::make('audio_item.original_name')->label('Original name')
+                    ->wrap()
                 ->sortable(),
                 Tables\Columns\TextColumn::make('audio_item.name')->label('Name')
+                    ->wrap()
                 ->toggleable(isToggledHiddenByDefault: true)
                 ->sortable(),
                 Tables\Columns\TextColumn::make('sort')
                 ->sortable(),
 
-                Tables\Columns\ToggleColumn::make('audio_item.published'),
+                Tables\Columns\ToggleColumn::make('audio_item.published')
+                ->label('Published'),
             ])
             ->defaultSort('sort')
             ->defaultPaginationPageOption(25)
@@ -89,6 +92,7 @@ class AudioItemPlaylistsRelationManager extends RelationManager
                 }),
                 ImportAction::make()
                 ->importer(AudioItemImporter::class)
+                ->job(\App\Jobs\ImportCsv::class)
                 ->label('Importer des items audio')
 				->chunkSize(5)
                 ->options(['playlistId' => $this->getOwnerRecord()->getKey()])

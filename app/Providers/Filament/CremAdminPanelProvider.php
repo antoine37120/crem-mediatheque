@@ -63,7 +63,7 @@ class CremAdminPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
-            ]) 
+            ])
             ->userMenuItems([
                 'profile' => MenuItem::make()
                     ->label(fn() => auth()->user()->name)
@@ -77,6 +77,7 @@ class CremAdminPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])
+            ->databaseNotifications()
             ->viteTheme('resources/css/filament/crem-admin/theme.css');
     }
 }
