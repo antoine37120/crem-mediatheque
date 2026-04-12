@@ -41,7 +41,6 @@ class ImportResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            ->poll('5s')
             ->columns([
                 TextColumn::make('file_name')
                     ->label('Fichier')
