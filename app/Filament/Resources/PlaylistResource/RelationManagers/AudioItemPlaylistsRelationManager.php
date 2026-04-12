@@ -62,6 +62,24 @@ class AudioItemPlaylistsRelationManager extends RelationManager
             ->recordTitleAttribute('name')
             ->reorderable('sort')
             ->columns([
+                Tables\Columns\ColorColumn::make('color')
+                    ->state(function ($record): string {
+                        $conf_colors = config('custom.items_colors');
+                        if($record->audio_item->color != null){
+                            $record->audio_item->getHexaColor();
+                            $record->audio_item->save() ;
+                            return $conf_colors[$record->audio_item->color] ;
+                        } else {
+
+                            $record->audio_item->getHexaColor();
+                            $record->audio_item->save() ;
+                            return $conf_colors[$record->audio_item->color] ;
+                        }
+
+                    }),
+                Tables\Columns\ImageColumn::make('audio_item.picture')->label('Wave')
+                    //->disk('public')
+                    ->extraImgAttributes(['style' => 'background:black;']),
                 Tables\Columns\TextColumn::make('audio_item.cote')->label('Cote')
                 ->sortable(),
                 Tables\Columns\TextColumn::make('audio_item.original_name')->label('Original name')
