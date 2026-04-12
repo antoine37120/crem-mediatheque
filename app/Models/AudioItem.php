@@ -25,6 +25,13 @@ class AudioItem extends Model implements TranslatableContract
 
     public $translatedAttributes = ['name', 'description'];
 
+    protected static function booted(): void
+    {
+        static::deleting(function (AudioItem $audioItem) {
+            $audioItem->playlists()->delete();
+        });
+    }
+
 
     protected $casts = [
         'published' => 'boolean',
@@ -101,53 +108,40 @@ class AudioItem extends Model implements TranslatableContract
     }
 
     public function generatePicture() {
-        if($this->file == null) {
-            Notification::make()
-            ->title('No audio file found')
-            ->warning()
-            ->send();
+        try {
+            if($this->file == null) {
+                return ;
+            }
+            $pathMP3 = Storage::path($this->file);
+            $pathMP3 = str_replace('\\', '/', $pathMP3);
+            $pathIMG = Storage::path('audio-item-image/');
+            $args = [
+                'width=600',
+                'height=600',
+                'wave_color=#ffffff',
+                'back_color=transparent',
+                'wavedir='.$pathIMG,
+                'nocache=true',
+                'mode=file'
+            ];
+            $justwave = new JustWave('ARGV', $args);
+            $log = $justwave->create($pathMP3);
+            if (!$log || $log->status === 'err') {
+                Log::error("Erreur JustWave pour l'item {$this->id} ({$this->cote}) : " . ($log->message ?? 'Inconnue'));
+                return;
+            }
 
-            return ;
-        }
-        $pathMP3 = Storage::path($this->file);
-        $pathMP3 = str_replace('\\', '/', $pathMP3);
-        $pathIMG = Storage::path('audio-item-image/');
-        $args = [
-            'width=600',
-            'height=600',
-            'wave_color=#ffffff',
-            'back_color=transparent',
-            'wavedir='.$pathIMG,
-            'nocache=true',
-            'mode=file'
-        ];
-        $justwave = new JustWave('ARGV', $args);
-        $log = $justwave->create($pathMP3);
-        if (!$log || $log->status === 'err') {
-            Log::error("Erreur JustWave pour l'item {$this->id} ({$this->cote}) : " . ($log->message ?? 'Inconnue'));
-            Notification::make()
-                ->title('Erreur lors de la génération de l\'image')
-                ->body($log->message ?? 'Erreur inconnue lors de la génération de la waveform.')
-                ->danger()
-                ->send();
+            $pathFile = 'audio-item-image/'.$this->cote.'.png' ;
+            Storage::move('audio-item-image/'.$log->key.'.png', $pathFile );
+            Storage::delete('audio-item-image/'.$log->key.'_bg.png');
+
+            $this->picture = $pathFile;
+            $this->setRandomColor() ;
+            $this->save() ;
+        } catch (\Throwable $e) {
+            Log::error("Erreur generation waveform pour item {$this->id} : " . $e->getMessage());
             return;
         }
-
-        $pathFile = 'audio-item-image/'.$this->cote.'.png' ;
-        Storage::move('audio-item-image/'.$log->key.'.png', $pathFile );
-        Storage::delete('audio-item-image/'.$log->key.'_bg.png');
-
-        $this->picture = $pathFile;
-        $this->setRandomColor() ;
-        $this->save() ;
-
-
-        Notification::make()
-        ->title('Picture generated')
-        ->success()
-        ->send();
-
-        return ;
     }
 
     /**

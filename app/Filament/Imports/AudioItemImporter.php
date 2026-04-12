@@ -20,8 +20,6 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use Carbon\CarbonInterface;
 
-$storagePath = storage_path("app/public/session");
-
 class AudioItemImporter extends Importer
 {
     protected static ?string $model = AudioItem::class;
@@ -29,6 +27,8 @@ class AudioItemImporter extends Importer
     public ?string $mp3FileToMove = null;
 
     public ?string $mp3Error = null;
+
+    public array $filesToDelete = [];
 
     public static function getOptionsFormComponents(): array
     {
@@ -202,6 +202,16 @@ class AudioItemImporter extends Importer
         $this->mp3FileToMove = null;
         $this->mp3Error = null;
 
+        // Ne pas chercher de fichier si le lien est vide (pas de cote exploitable)
+        if (empty($this->record->link)) {
+            $this->mp3Error = "Pas de lien renseigne, impossible de rechercher le fichier audio associe.";
+            $this->record->cote = null;
+            $this->record->file = null;
+            $this->record->duration = 0;
+            $this->record->picture = null;
+            return;
+        }
+
         $link_eploded = explode('/', rtrim($this->record->link, "/")) ;
         $size = sizeof($link_eploded) ;
         $cote = $link_eploded[$size - 1]  ;
@@ -263,13 +273,18 @@ class AudioItemImporter extends Importer
 
     protected function afterSave(): void
     {
+        // 1. Sauvegarder playlist_id sur l'import (non critique)
         try {
             if ($this->import->playlist_id === null && isset($this->options['playlistId'])) {
                 $this->import->playlist_id = $this->options['playlistId'];
                 $this->import->save();
             }
+        } catch (\Throwable $e) {
+            Log::warning("Impossible de sauvegarder playlist_id sur l'import : " . $e->getMessage());
+        }
 
-            // Traduction FR
+        // 2. Traduction FR (critique)
+        try {
             $AudioItemTranslation = AudioItemTranslation::firstOrNew([
                 'audio_item_id' => $this->record->id,
                 'locale' => 'fr',
@@ -284,8 +299,13 @@ class AudioItemImporter extends Importer
                 $AudioItemTranslation->description = $this->data['description'];
             }
             $AudioItemTranslation->save();
+        } catch (\Throwable $e) {
+            Log::error("Erreur traduction FR pour item {$this->record->id} : " . $e->getMessage());
+            throw new RowImportFailedException("Erreur lors de la sauvegarde de la traduction francaise : " . $e->getMessage());
+        }
 
-            // Traduction EN
+        // 3. Traduction EN (non critique : ne pas faire echouer l'item si la trad EN echoue)
+        try {
             $AudioItemTranslationEn = AudioItemTranslation::firstOrNew([
                 'audio_item_id' => $this->record->id,
                 'locale' => 'en',
@@ -299,38 +319,70 @@ class AudioItemImporter extends Importer
                 $AudioItemTranslationEn->description = $this->data['description_en'];
             }
             $AudioItemTranslationEn->save();
+        } catch (\Throwable $e) {
+            Log::warning("Erreur traduction EN pour item {$this->record->id} (non bloquant) : " . $e->getMessage());
+        }
 
+        // 4. Relation playlist (critique)
+        try {
             $AudioItemPlaylist = AudioItemPlaylist::firstOrNew([
                 'audio_item_id' => $this->record->id,
                 'playlist_id' => $this->options['playlistId'],
             ]);
 
             if (!$AudioItemPlaylist->exists) {
-                // Nouvelle relation : attribuer le prochain ordre
                 $maxSort = AudioItemPlaylist::where('playlist_id', $this->options['playlistId'])
                     ->max('sort') ?? 0;
                 $AudioItemPlaylist->sort = $maxSort + 1;
             }
-            // Si la relation existe deja, on ne touche PAS au sort
 
             $AudioItemPlaylist->save();
-
-            if ($this->mp3FileToMove) {
-                Storage::move('import/' . basename($this->mp3FileToMove), 'audio-item-sound/' . Str::ascii(basename($this->mp3FileToMove)));
-                $this->record->generatePicture();
-            }
-
-            if ($this->mp3Error) {
-                Log::warning($this->mp3Error);
-
-                Notification::make()
-                    ->title('Item importe sans fichier audio')
-                    ->body($this->mp3Error)
-                    ->warning()
-                    ->send();
-            }
         } catch (\Throwable $e) {
-            throw new RowImportFailedException($e->getMessage());
+            Log::error("Erreur relation playlist pour item {$this->record->id} : " . $e->getMessage());
+            throw new RowImportFailedException("Erreur lors de l'association a la playlist : " . $e->getMessage());
+        }
+
+        // 5. Copie du fichier MP3 (critique) + enregistrement pour suppression en fin d'import
+        if ($this->mp3FileToMove) {
+            $source = 'import/' . basename($this->mp3FileToMove);
+            $dest = 'audio-item-sound/' . Str::ascii(basename($this->mp3FileToMove));
+            try {
+                Storage::copy($source, $dest);
+            } catch (\Throwable $e) {
+                Log::error("Erreur copie MP3 pour item {$this->record->id} : " . $e->getMessage());
+                throw new RowImportFailedException("Erreur lors de la copie du fichier MP3 : " . $e->getMessage());
+            }
+            $this->filesToDelete[] = $source;
+        }
+
+        // 6. Generation waveform (NON critique : ne jamais faire echouer l'item)
+        if ($this->mp3FileToMove) {
+            try {
+                $this->record->generatePicture();
+            } catch (\Throwable $e) {
+                Log::error("Erreur generation waveform pour item {$this->record->id} (non bloquant) : " . $e->getMessage());
+            }
+        }
+
+        // 7. Log des warnings MP3 (non critique)
+        if ($this->mp3Error) {
+            Log::warning($this->mp3Error);
+
+            try {
+                $name = $this->data['original_name'] ?? $this->data['name'] ?? "Item #{$this->record->id}";
+                \App\Models\ImportWarning::create([
+                    'import_id' => $this->import->id,
+                    'message' => "{$name} : {$this->mp3Error}",
+                ]);
+            } catch (\Throwable $e) {
+                Log::warning("Impossible d'enregistrer le warning d'import : " . $e->getMessage());
+            }
+
+            Notification::make()
+                ->title('Item importe sans fichier audio')
+                ->body($this->mp3Error)
+                ->warning()
+                ->send();
         }
     }
 
@@ -359,10 +411,26 @@ class AudioItemImporter extends Importer
         }
 
         if (isset($import->options['playlistId'])) {
-            $playlistUrl = route('filament.admin.resources.playlists.edit', $import->options['playlistId']);
-            $body .= "\n\n" . $playlistUrl;
+            $playlistUrl = route('filament.crem-admin.resources.playlists.edit', $import->options['playlistId']);
+            $body .= "\n\nVoir la playlist : " . $playlistUrl;
         }
 
-        return (string) Str::limit($body, 500);
+        if ($failedRowsCount ?? 0) {
+            $downloadUrl = route('crem-admin.imports.failed-rows.download', ['import' => $import], absolute: false);
+            $body .= "\nTelecharger le CSV des erreurs : " . url($downloadUrl);
+        }
+
+        $warnings = \App\Models\ImportWarning::where('import_id', $import->id)->get();
+        if ($warnings->isNotEmpty()) {
+            $body .= "\n\nAvertissements :";
+            foreach ($warnings->take(10) as $warning) {
+                $body .= "\n- {$warning->message}";
+            }
+            if ($warnings->count() > 10) {
+                $body .= "\net " . ($warnings->count() - 10) . " autres...";
+            }
+        }
+
+        return (string) Str::limit($body, 2000);
     }
 }

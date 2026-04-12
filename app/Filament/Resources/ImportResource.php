@@ -16,6 +16,7 @@ use Filament\Tables\Actions\Action;
 use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Imports\AudioItemImporter;
+use App\Models\ImportWarning;
 use Illuminate\Support\HtmlString;
 
 class ImportResource extends Resource
@@ -104,6 +105,15 @@ class ImportResource extends Resource
                     ->modalSubmitAction(false)
                     ->visible(fn (Import $record): bool => $record->failedRows()->exists())
                     ->modalContent(fn (Import $record) => view('filament.resources.import.errors', ['import' => $record])),
+                Action::make('view_warnings')
+                    ->label('Voir les avertissements')
+                    ->icon('heroicon-o-information-circle')
+                    ->color('warning')
+                    ->slideOver()
+                    ->modalHeading('Avertissements d\'importation')
+                    ->modalSubmitAction(false)
+                    ->visible(fn (Import $record): bool => ImportWarning::where('import_id', $record->id)->exists())
+                    ->modalContent(fn (Import $record) => view('filament.resources.import.warnings', ['warnings' => ImportWarning::where('import_id', $record->id)->get()])),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

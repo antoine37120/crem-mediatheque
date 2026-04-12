@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//mnt/c/laragon/www/**)",
+      "Bash(php -l routes/web.php)",
+      "Bash(php -l app/Filament/Imports/AudioItemImporter.php)",
+      "Bash(php -l app/Jobs/ImportCsv.php)",
+      "Bash(php -l app/Models/AudioItem.php)",
+      "Bash(php -l app/Filament/Resources/ImportResource.php)",
+      "Bash(php artisan:*)",
+      "Bash(php -l app/Models/ImportWarning.php)",
+      "Bash(php -l app/Models/ImportFileToDelete.php)"
+    ]
+  }
+}
