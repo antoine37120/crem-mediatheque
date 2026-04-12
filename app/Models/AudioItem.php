@@ -123,6 +123,15 @@ class AudioItem extends Model implements TranslatableContract
         ];
         $justwave = new JustWave('ARGV', $args);
         $log = $justwave->create($pathMP3);
+        if (!$log || $log->status === 'err') {
+            Log::error("Erreur JustWave pour l'item {$this->id} ({$this->cote}) : " . ($log->message ?? 'Inconnue'));
+            Notification::make()
+                ->title('Erreur lors de la génération de l\'image')
+                ->body($log->message ?? 'Erreur inconnue lors de la génération de la waveform.')
+                ->danger()
+                ->send();
+            return;
+        }
 
         $pathFile = 'audio-item-image/'.$this->cote.'.png' ;
         Storage::move('audio-item-image/'.$log->key.'.png', $pathFile );
@@ -156,10 +165,20 @@ class AudioItem extends Model implements TranslatableContract
      */
     public function itemBefore($playlist_id = null) {
         // ajout ID playslist en paramètre, si difft de 0, supprimer ligne suivante
-        if ($playlist_id == null) {
+        if (!$playlist_id) {
             $itemplaylist = $this->playlists()
                 ->where('published', 1)->first() ;
+            if (!$itemplaylist) {
+                return null;
+            }
             $playlist_id = $itemplaylist->playlist_id ;
+        } else {
+            $itemplaylist = $this->playlists()
+                ->where('playlist_id', $playlist_id)
+                ->first();
+            if (!$itemplaylist) {
+                return null;
+            }
         }
         //Log::debug($itemplaylist) ;
         if ($itemplaylist->sort==null)
@@ -189,6 +208,9 @@ class AudioItem extends Model implements TranslatableContract
     public function itemAfter() {
         $itemplaylist = $this->playlists()
             ->where('published', 1)->first() ;
+        if (!$itemplaylist) {
+            return null;
+        }
         if ($itemplaylist->sort==null)
         {
             $itemplaylist->sort=0;
