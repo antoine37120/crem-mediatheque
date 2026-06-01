@@ -22,3 +22,10 @@ yarn-error.log
 !storage/app/public/logos/**
 "laradumps.yaml" 
 task.md
+
+# Analyse intermédiaire (documentation)
+user-docs-analysis/
+# Fichiers temporaires
+issue.md
+amour_edit_17032026-vs.csv
+task.md

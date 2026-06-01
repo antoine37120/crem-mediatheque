@@ -24,6 +24,7 @@
     "require-dev": {
         "fakerphp/faker": "^1.23",
         "laradumps/laradumps": "4.0",
+        "laramint/laravel-brain": "^2.3",
         "laravel/pint": "^1.13",
         "laravel/sail": "^1.26",
         "laravel/telescope": "^5.1",
