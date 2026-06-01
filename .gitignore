@@ -29,3 +29,8 @@ user-docs-analysis/
 issue.md
 amour_edit_17032026-vs.csv
 task.md
+
+# Zensical build output
+site/
+.venv/
+zenv/

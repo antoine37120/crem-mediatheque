@@ -1,0 +1,60 @@
+[project]
+site_name = "CREM Médiathèque"
+site_url = "https://antoine37120.github.io/crem-mediatheque/"
+site_description = "Documentation utilisateur de l'application de médiathèque audio du CREM"
+docs_dir = "user-docs"
+site_dir = "site"
+use_directory_urls = true
+repo_url = "https://github.com/antoine37120/crem-mediatheque"
+repo_name = "antoine37120/crem-mediatheque"
+edit_uri = "edit/main/user-docs/"
+copyright = "CC BY-NC 4.0 CREM — Centre de Recherche en Ethnomusicologie"
+nav = [
+    { "Accueil" = "index.md" },
+    { "Tutoriels" = [
+        "tutorials/premiers-pas-admin.md",
+        "tutorials/ajouter-item-audio.md",
+        "tutorials/importer-csv.md",
+        "tutorials/creer-playlist.md",
+        "tutorials/gerer-pages-cms.md"
+    ]},
+    { "Guides pratiques" = [
+        "guides/aires-geographiques.md",
+        "guides/publication.md",
+        "guides/recherche.md",
+        "guides/utilisateurs.md",
+        "guides/waveforms.md"
+    ]},
+    { "Explications" = [
+        "explications/architecture.md",
+        "explications/multilingue.md",
+        "explications/workflow-import.md",
+        "explications/playlists-vs-podcasts.md"
+    ]},
+    { "Références" = [
+        "references/champs-audio-item.md",
+        "references/colonnes-csv-import.md",
+        "references/config-custom.md",
+        "references/commandes-artisan.md"
+    ]}
+]
+
+[project.theme]
+variant = "modern"
+language = "fr"
+logo = "assets/logo-crem.png"
+favicon = "assets/logo-crem.png"
+features = [
+    "navigation.instant",
+    "navigation.tabs",
+    "navigation.path",
+    "navigation.top",
+    "navigation.footer",
+    "search.highlight",
+    "content.action.edit"
+]
+
+[project.theme.palette]
+scheme = "default"
+primary = "amber"
+accent = "amber"

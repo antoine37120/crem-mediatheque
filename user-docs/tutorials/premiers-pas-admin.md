@@ -96,5 +96,5 @@ Pour quitter le panneau d'administration :
 ## Pour aller plus loin
 
 - [Ajouter un item audio](./ajouter-item-audio.md) — Créez votre premier enregistrement audio dans la médiathèque.
-- [Guide des items audio](../guides/items-audio.md) — Comprendre la structure des données audio.
-- [Explication des champs](../explications/champs-audio.md) — Détail complet des métadonnées d'un item audio.
+- [Référence des champs AudioItem](../references/champs-audio-item.md) — Détail complet des métadonnées d'un item audio.
+- [Workflow d'import](../explications/workflow-import.md) — Comprendre le pipeline complet d'import CSV.
