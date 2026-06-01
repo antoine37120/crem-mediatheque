@@ -62,7 +62,10 @@ Accéder à `/crem-admin` dans votre navigateur.
 
 ## Documentation utilisateur
 
-La documentation complète se trouve dans le dossier [`user-docs/`](user-docs/index.md) :
+La documentation complète est publiée en ligne :
+**[https://antoine37120.github.io/crem-mediatheque/](https://antoine37120.github.io/crem-mediatheque/)**
+
+Le dossier source est [`user-docs/`](user-docs/index.md) à la racine du projet :
 
 | Section | Contenu |
 |---------|---------|
