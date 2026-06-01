@@ -1,110 +1,76 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# CREM — Médiathèque audio
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Application de gestion et de diffusion du fonds d'archives sonores du [Centre de Recherche en Ethnomusicologie](https://crem-cnrs.fr/) (CNRS / Université Paris Nanterre).
 
+**Stack :** Laravel 11 · Filament 3 · Livewire · Alpine.js · TailwindCSS · MySQL
 
+## Fonctionnalités
 
-## Install
-Before install, need to create `.env` file and customize it with you local envionement configuration
+- **Catalogage audio** — fiches multilingues (français/anglais) avec fichiers MP3, waveforms, métadonnées
+- **Import CSV** — import en masse avec détection automatique des MP3, génération de waveforms, association aux playlists
+- **Playlists et podcasts** — organisation thématique avec réordonnancement par glisser-déposer
+- **Aires géographiques** — arbre hiérarchique à 2 niveaux
+- **Site public** — lecteur audio (wavesurfer.js), recherche, pages CMS personnalisables
+- **Administration** — panel Filament à `/crem-admin`
 
-Add encryption key : `php artisan key:generate`
+## Prérequis
 
-### Install dependencies
-```composer install```
+- PHP ^8.2
+- MySQL
+- Composer
+- Node.js + npm (pour les assets et la génération de waveforms)
 
-### Migrate database and data
-```php artisan migrate --seed```
+## Installation
 
-### Add admin user
-```php artisan make:filament-user```
+```bash
+# 1. Cloner le dépôt
+git clone https://github.com/antoine37120/crem-mediatheque.git
+cd crem-mediatheque
 
-Open /crem-admin in your web browser and sign in to see admin panels
+# 2. Configurer l'environnement
+cp .env.example .env
+# Éditer .env avec vos paramètres de base de données
 
-## Install Node dependencies
-```npm install```
-```npm run build```
+# 3. Installer les dépendances PHP
+composer install
 
-## Run scheduler
-```php artisan queue:work database```
+# 4. Générer la clé d'application
+php artisan key:generate
 
-## Run cheduler with CPanel (needed for audio item import)
+# 5. Migrer la base de données
+php artisan migrate --seed
 
-https://stackoverflow.com/questions/68718174/creating-cron-job-on-cpanel-for-task-scheduling-in-laravel
+# 6. Créer un utilisateur admin
+php artisan make:filament-user
+# Notez l'email et le mot de passe
 
-## Dependencies documentation
-### with Laravel
-- eightynine/filament-excel-import : https://github.com/eighty9nine/filament-excel-import
-- filament/filament : https://github.com/filamentphp/filament
-- filament/spatie-laravel-translatable-plugin : ["^3.2",](https://github.com/filamentphp/spatie-laravel-translatable-plugin)
-- joaopaulolndev/filament-edit-profile : https://github.com/joaopaulolndev/filament-edit-profile
-- tomatophp/filament-translations : https://github.com/tomatophp/filament-translations
-- livewire/livewire : https://github.com/livewire/livewire
+# 7. Installer les dépendances frontend
+npm install
+npm run build
 
-### For assets
-- bootstrap 5 : https://getbootstrap.com/
+# 8. Lancer le worker de queue (nécessaire pour l'import CSV)
+php artisan queue:work database
+```
 
-## About Laravel
+Accéder à `/crem-admin` dans votre navigateur.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Import de données
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+1. Placer les fichiers MP3 dans `storage/app/public/import/`
+2. Préparer un fichier CSV (voir [référence des colonnes](user-docs/references/colonnes-csv-import.md))
+3. Depuis l'admin : Items audio → bouton d'import
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Documentation utilisateur
 
-## Learning Laravel
+La documentation complète se trouve dans le dossier [`user-docs/`](user-docs/index.md) :
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+| Section | Contenu |
+|---------|---------|
+| [Tutoriels](user-docs/tutorials/premiers-pas-admin.md) | Premiers pas, ajout d'item, import CSV, playlists, pages CMS |
+| [Guides](user-docs/guides/aires-geographiques.md) | Aires géographiques, publication, recherche, utilisateurs, waveforms |
+| [Explications](user-docs/explications/architecture.md) | Architecture, multilingue, workflow d'import, playlists vs podcasts |
+| [Références](user-docs/references/champs-audio-item.md) | Champs, format CSV, configuration, commandes artisan |
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Licence
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-
-
-<!-- no coment -->
+Ce projet est distribué sous licence MIT. Voir le fichier [LICENSE](LICENSE).
