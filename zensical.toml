@@ -8,7 +8,7 @@ use_directory_urls = true
 repo_url = "https://github.com/antoine37120/crem-mediatheque"
 repo_name = "antoine37120/crem-mediatheque"
 edit_uri = "edit/main/user-docs/"
-copyright = "CC BY-NC 4.0 CREM — Centre de Recherche en Ethnomusicologie"
+copyright = "MIT — CREM, Centre de Recherche en Ethnomusicologie (CNRS / Université Paris Nanterre)"
 nav = [
     { "Accueil" = "index.md" },
     { "Tutoriels" = [
@@ -58,3 +58,6 @@ features = [
 scheme = "default"
 primary = "amber"
 accent = "amber"
+
+[project.extra]
+generator = false
