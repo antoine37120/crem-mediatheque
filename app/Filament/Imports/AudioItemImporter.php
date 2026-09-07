@@ -30,16 +30,6 @@ class AudioItemImporter extends Importer
 
     public array $filesToDelete = [];
 
-    public static function getOptionsFormComponents(): array
-    {
-        return [
-            \Filament\Forms\Components\Toggle::make('create_missing_areas')
-                ->label('Creer automatiquement les aires geographiques manquantes')
-                ->helperText('Si active, les aires geographiques du CSV qui n\'existent pas seront creees automatiquement avec le code comme nom francais.')
-                ->default(false),
-        ];
-    }
-
     public static function getColumns(): array
     {
         return [
@@ -175,26 +165,17 @@ class AudioItemImporter extends Importer
     protected function beforeSave(): void
     {
         // Resolution manuelle de l'aire geographique
+        // (une aire inexistante dans le CSV est une erreur : jamais de creation automatique)
         if (!empty($this->data['geographicalArea'])) {
             $geoArea = GeographicalArea::where('region_code', $this->data['geographicalArea'])->first();
             if ($geoArea) {
                 $this->record->geographical_area_id = $geoArea->id;
-            } elseif (!empty($this->options['create_missing_areas'])) {
-                // Creer l'aire geographique automatiquement
-                $geoArea = new GeographicalArea();
-                $geoArea->region_code = $this->data['geographicalArea'];
-                $geoArea->save();
-                // Creer la traduction FR avec le region_code comme nom
-                $geoArea->translateOrNew('fr')->name = $this->data['geographicalArea'];
-                $geoArea->save();
-                $this->record->geographical_area_id = $geoArea->id;
-                Log::info("Aire geographique creee automatiquement : {$this->data['geographicalArea']} (id: {$geoArea->id})");
             } else {
                 $availableCodes = GeographicalArea::pluck('region_code')->implode(', ');
                 throw new RowImportFailedException(
                     "Aire geographique inconnue : \"{$this->data['geographicalArea']}\". "
                     . "Les codes valides sont : {$availableCodes}. "
-                    . "Cochez l'option \"Creer les aires manquantes\" pour les creer automatiquement."
+                    . "Creer ou renommer l'aire dans l'admin avant de relancer l'import."
                 );
             }
         }

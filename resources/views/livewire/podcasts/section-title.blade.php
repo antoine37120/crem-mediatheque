@@ -37,7 +37,7 @@
                     </div>
                     <div class="col-12 col-lg-10 col-xl-11">
                         <h2 class="mb-0 mb-lg-2">{{ $podcast->translate(App::getLocale(), true)->name }}</h2>
-                        <div class="d-none d-lg-block all-p-no-mb fw-light">{!! $podcast->translate(App::getLocale(), true)->description !!}</div>
+                        <div class="d-none d-lg-block all-p-no-mb fw-light">{!! \App\Support\RichText::render($podcast->translate(App::getLocale(), true)->description) !!}</div>
                     </div>
                 </div>
             </div>

@@ -16,7 +16,7 @@
                 </div>
                 <div class="col-12 d-lg-none my-4">
                     {{-- ajouter fonction de traduction --}}
-                    <div>{!! $playlist->translate(App::getLocale(), true)->description !!}</div>
+                    <div>{!! \App\Support\RichText::render($playlist->translate(App::getLocale(), true)->description) !!}</div>
                 </div>
             </div>
 

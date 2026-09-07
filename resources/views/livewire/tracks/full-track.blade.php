@@ -49,18 +49,16 @@
                         </div>
                     </div>
                     <div class="col-12 col-md-12 col-lg-12 mt-1 mb-4">
-                        {!! $track->translate(App::getLocale(), true)->description !!}
+                        {!! \App\Support\RichText::render($track->translate(App::getLocale(), true)->description) !!}
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    @if($playlist_type != 'Podcast')
-        <div class="row m-0 mt-2">
-            <div class="col-12 offset-lg-1 col-lg-11">
-                <livewire:tracks.section-playlists :track="$track" key="full-track-section-playlist-{{$track->id}}" />
-            </div>
+    <div class="row m-0 mt-2">
+        <div class="col-12 offset-lg-1 col-lg-11">
+            <livewire:tracks.section-playlists :track="$track" key="full-track-section-playlist-{{$track->id}}" />
         </div>
-    @endif
+    </div>
 </div>
 

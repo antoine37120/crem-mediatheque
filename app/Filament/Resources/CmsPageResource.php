@@ -17,6 +17,7 @@ use CactusGalaxy\FilamentAstrotomic\Forms\Components\TranslatableTabs;
 use CactusGalaxy\FilamentAstrotomic\TranslatableTab;
 use Filament\Forms\Set;
 use Illuminate\Support\Str;
+use App\Forms\Components\RichEditor;
 
 class CmsPageResource extends Resource
 {
@@ -52,7 +53,7 @@ class CmsPageResource extends Resource
                                 $set('slug', Str::slug($state));
                             }
                         }),*/,
-                    Forms\Components\RichEditor::make($tab->makeName('content'))
+                    RichEditor::make($tab->makeName('content'))
                     // required only for the main locale
                     ->columnSpanFull()
                     // generate slug for the item based on the main locale

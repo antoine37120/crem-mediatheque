@@ -20,6 +20,7 @@ use Filament\Forms\Components\Toggle;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Filters\Filter;
 use Illuminate\Support\Collection;
+use App\Forms\Components\RichEditor;
 
 class PlaylistResource extends Resource
 {
@@ -50,7 +51,7 @@ class PlaylistResource extends Resource
                                 $set('slug', Str::slug($state));
                             }
                         }),*/,
-                    Forms\Components\RichEditor::make($tab->makeName('description'))
+                    RichEditor::make($tab->makeName('description'))
                     // required only for the main locale
                     ->columnSpanFull()
                     // generate slug for the item based on the main locale

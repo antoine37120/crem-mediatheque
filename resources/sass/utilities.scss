@@ -49,6 +49,18 @@
     }
 }
 
+/* Accueil desktop : 6 vignettes par ligne, taille et gouttiere reduites */
+@media (min-width: 992px) {
+    .home-tracks > div:nth-child(n+7) {
+        display: none;
+    }
+    .home-tracks .max-w-img-card-list,
+    .home-playlists .max-w-img-card-list,
+    .home-podcasts .max-w-img-card-list {
+        max-width: 160px;
+    }
+}
+
 h5 {
     font-size: 1rem;
 }

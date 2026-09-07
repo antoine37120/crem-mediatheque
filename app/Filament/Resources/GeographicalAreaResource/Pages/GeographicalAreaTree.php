@@ -12,6 +12,7 @@ use SolutionForest\FilamentTree\Support\Utils;
 use CactusGalaxy\FilamentAstrotomic\Forms\Components\TranslatableTabs;
 use CactusGalaxy\FilamentAstrotomic\TranslatableTab;
 use Filament\Forms;
+use Filament\Notifications\Notification;
 use Illuminate\Database\Eloquent\Model;
 
 class GeographicalAreaTree extends BasePage
@@ -107,7 +108,24 @@ class GeographicalAreaTree extends BasePage
 
     protected function hasDeleteAction(): bool
     {
-        return false;
+        return true;
+    }
+
+    protected function getDeleteAction(): Actions\DeleteAction
+    {
+        return parent::getDeleteAction()
+            ->before(function (Actions\DeleteAction $action, Model $record): void {
+                $reason = $record->deletionBlockReason();
+                if ($reason !== null) {
+                    Notification::make()
+                        ->title('Suppression impossible')
+                        ->body($reason)
+                        ->danger()
+                        ->send();
+
+                    $action->halt();
+                }
+            });
     }
 
     protected function hasEditAction(): bool

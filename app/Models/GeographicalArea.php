@@ -17,6 +17,33 @@ class GeographicalArea extends Model implements TranslatableContract
     use ModelTree;
     use Translatable;
 
+    protected static function booted(): void
+    {
+        // Garde-fou : jamais de suppression d'une aire encore utilisee.
+        static::deleting(function (self $area): void {
+            if ($reason = $area->deletionBlockReason()) {
+                throw new \RuntimeException($reason);
+            }
+        });
+    }
+
+    /**
+     * Raison bloquant la suppression de l'aire, ou null si supprimable.
+     */
+    public function deletionBlockReason(): ?string
+    {
+        $tracks = AudioItem::where('geographical_area_id', $this->id)->count();
+        if ($tracks > 0) {
+            return "Suppression impossible : {$tracks} piste(s) utilisent encore cette aire. Reaffectez-les d'abord.";
+        }
+
+        if ($this->childs()->exists()) {
+            return "Suppression impossible : cette aire possede des sous-aires. Supprimez-les d'abord.";
+        }
+
+        return null;
+    }
+
     public function translations(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(GeographicalAreaTranslation::class);

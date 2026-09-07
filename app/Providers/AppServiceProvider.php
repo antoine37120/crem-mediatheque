@@ -41,10 +41,10 @@ class AppServiceProvider extends ServiceProvider
                     ->searchable(query: function (Builder $query, string $search) use ($column): Builder {
                         $columnName = Str::after($column->getName(), '.');
                         if ($query->hasNamedScope('whereTranslationLike')) {
-                            // @var Translatable|TranslatableContract $query 
+                            // @var Translatable|TranslatableContract $query
                             return $query->whereTranslationLike($columnName, "%{$search}%");
                         }
-        
+
                         return $query->where($columnName, 'like', "%{$search}%");
                     });
             }

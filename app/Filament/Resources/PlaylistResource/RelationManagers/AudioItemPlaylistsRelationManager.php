@@ -27,6 +27,7 @@ use CactusGalaxy\FilamentAstrotomic\Resources\Pages\Record\EditTranslatable;
 use CactusGalaxy\FilamentAstrotomic\Forms\Components\TranslatableTabs;
 use Illuminate\Support\Str;
 use Filament\Forms\Set;
+use App\Forms\Components\RichEditor;
 class AudioItemPlaylistsRelationManager extends RelationManager
 {
     //use ResourceTranslatable;
@@ -235,7 +236,7 @@ class AudioItemPlaylistsRelationManager extends RelationManager
                         Forms\Components\TextInput::make($tab->makeName('name'))
                             ->required($tab->isMainLocale())
                             ->maxLength(255),
-                        Forms\Components\RichEditor::make($tab->makeName('description'))
+                        RichEditor::make($tab->makeName('description'))
                             ->columnSpanFull(),
                     ]),
                 Forms\Components\Toggle::make('published')

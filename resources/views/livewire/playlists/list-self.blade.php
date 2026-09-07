@@ -17,7 +17,7 @@
                 </div>
                 <div class="col-6 col-md-9 mt-0 px-0">
                     <h5 class="card-title"><a  href="{{route('playlist', ['playlist' => $playlist->id])}}" class="text-black text-decoration-none fw-bold" wire:navigate>{{ Illuminate\Support\Str::limit($playlist->translate(App::getLocale(), true)->name, 45, '...') }}</a></h5>
-                    <p>{!! $playlist->translate(App::getLocale(), true)->description !!}</p>
+                    <p>{!! \App\Support\RichText::render($playlist->translate(App::getLocale(), true)->description) !!}</p>
                 </div>
                 <div class="col-3 d-block d-md-none text-right ps-0 pe-0 m-0">
                     <livewire:playlists.list-self-actions :playlist="$playlist"  wire:key="playlist-list-self-actions-mobile-{{ $playlist->id }}"/>

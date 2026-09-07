@@ -18,7 +18,7 @@
                     <a  href="{{route('podcast', ['podcast' => $podcast->id])}}" class="text-black text-decoration-none fw-bold" wire:navigate>
                         {{ Illuminate\Support\Str::limit($podcast->translate(App::getLocale(), true)->name, 45, '...') }}</a></h5>
                 <p class="fs-6">
-                    {!! $podcast->translate(App::getLocale(), true)->description !!}
+                    {!! \App\Support\RichText::render($podcast->translate(App::getLocale(), true)->description) !!}
                 </p>
             </div>
         </div>

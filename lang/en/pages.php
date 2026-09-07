@@ -18,6 +18,7 @@ return [
         ]],
     'playlists' => [
         'title' => 'Playlists',
+        'home-section-title' => 'Random playlists',
         'meta' => [
             'title' => 'Playlists',
         ]

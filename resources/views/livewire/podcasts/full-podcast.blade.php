@@ -16,7 +16,7 @@
                 </div>
                 <div class="col-12 d-lg-none my-4">
                     {{-- ajouter fonction de traduction --}}
-                    <div>{!! $podcast->translate(App::getLocale(), true)->description !!}</div>
+                    <div>{!! \App\Support\RichText::render($podcast->translate(App::getLocale(), true)->description) !!}</div>
                 </div>
             </div>
 

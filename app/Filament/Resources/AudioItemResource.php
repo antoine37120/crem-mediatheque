@@ -24,6 +24,7 @@ use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Filters\Filter;
 use Illuminate\Support\Collection;
 use Awcodes\Palette\Forms\Components\ColorPicker;
+use App\Forms\Components\RichEditor;
 
 class AudioItemResource extends Resource
 {
@@ -65,7 +66,7 @@ class AudioItemResource extends Resource
                                 $set('slug', Str::slug($state));
                             }
                         }),*/,
-                    Forms\Components\RichEditor::make($tab->makeName('description'))
+                    RichEditor::make($tab->makeName('description'))
                     // required only for the main locale
                     ->columnSpanFull()
                     // generate slug for the item based on the main locale
@@ -147,11 +148,12 @@ class AudioItemResource extends Resource
                 ->sortable()
                 ->searchable(),
                 Tables\Columns\TextColumn::make('translations.name')
+                    ->label('Titre')
                     ->wrap()
-                ->toggleable(isToggledHiddenByDefault: true)
                 ->searchable(),
                 Tables\Columns\TextColumn::make('original_name')->label('Original Name')
-                    ->wrap(),
+                    ->wrap()
+                ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('duration')
                     ->numeric()
                     ->sortable(),

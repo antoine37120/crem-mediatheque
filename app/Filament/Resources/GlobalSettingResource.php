@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use CactusGalaxy\FilamentAstrotomic\Resources\Concerns\ResourceTranslatable;
 use CactusGalaxy\FilamentAstrotomic\Forms\Components\TranslatableTabs;
 use CactusGalaxy\FilamentAstrotomic\TranslatableTab;
+use App\Forms\Components\RichEditor;
 
 class GlobalSettingResource extends Resource
 {
@@ -35,7 +36,7 @@ class GlobalSettingResource extends Resource
                     ->columnSpanFull(),
                 TranslatableTabs::make()->columnSpanFull()
                     ->localeTabSchema(fn (TranslatableTab $tab) => [
-                        Forms\Components\RichEditor::make($tab->makeName('value'))
+                        RichEditor::make($tab->makeName('value'))
                             ->label('Contenu')
                             ->required($tab->isMainLocale()),
                     ]),

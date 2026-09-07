@@ -1,0 +1,12 @@
+
+   PASS  Tests\Unit\RichTextTest
+  ✓ snippet replaces tags by spaces
+  ✓ snippet decodes entities and collapses whitespace
+  ✓ snippet handles null and empty
+  ✓ render moves figcaption to alt and removes caption
+  ✓ render keeps html without figures untouched
+  ✓ render preserves existing alt
+
+  Tests:    6 passed (11 assertions)
+  Duration: 0.30s
+

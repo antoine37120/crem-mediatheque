@@ -30,7 +30,7 @@
             @elseif(! empty($track->collector))
                 <h5>Collecteur : {{ $track->collector }}</h5>
             @endif
-            <div>{!! $track->translate(App::getLocale(), true)?->description !!}</div>
+            <div>{!! \App\Support\RichText::render($track->translate(App::getLocale(), true)?->description) !!}</div>
         </div>
         <div class="col-3 d-block d-lg-none text-right ps-0 pe-0">
             <livewire:tracks.actions :track="$track"  wire:key="teaser-playist-audio-actions-mobile-{{ $track->id }}"/>

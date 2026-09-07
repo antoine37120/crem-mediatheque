@@ -34,7 +34,7 @@
                 <div class="primary-section col-12 col-lg-9 col-xxl-10">
 
                     <header id="header-mobile" class="row py-4 text-white m-0 pb-4">
-                        <div class="col-9 col-lg-12 py-0 px-lg-2 h5" id="page-title-mobile">
+                        <div class="col-9 col-lg-12 py-0 ps-2 px-lg-2 h5" id="page-title-mobile">
                             {{ $title ?? 'Page Title' }}
                         </div>
                         <div class="col-3 d-lg-none" id="logo-mobile">
@@ -49,8 +49,8 @@
                             $footerMentions = \App\Models\GlobalSetting::where('key', 'footer_mentions')->first();
                         @endphp
                         @if($footerMentions && $footerMentions->value)
-                            <div class="text-center small py-3 mt-4 opacity-75" style="margin-bottom: 100px;">
-                                {!! $footerMentions->value !!}
+                            <div class="text-center small py-3 mt-4 opacity-75">
+                                {!! \App\Support\RichText::render($footerMentions->value) !!}
                             </div>
                         @endif
                     </div>

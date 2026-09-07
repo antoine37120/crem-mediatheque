@@ -19,6 +19,7 @@ return [
     ],
     'playlists' => [
         'title' => 'Playlists',
+        'home-section-title' => 'Playlists au hasard',
         'meta' => [
             'title' => 'Playlists',
         ]
