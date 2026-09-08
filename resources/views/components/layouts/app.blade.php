@@ -6,7 +6,7 @@
         <title>{{ __('front.meta_title_prefix') }} - {{ $meta_title ?? 'Page Title' }}</title>
         @vite(['resources/sass/app.scss', 'resources/js/app.js'])
         @php
-            $customCssPath = public_path('custom-assets/styes.css');
+            $customCssPath = public_path('custom-assets/styles.css');
             if (file_exists($customCssPath)) {
                 $css = file_get_contents($customCssPath);
                 // Compression simple et sûre
@@ -44,7 +44,7 @@
                     {{-- Main --}}
                     <div class="main-of-page p-4">
                         {{ $slot }}
-                        
+
                         @php
                             $footerMentions = \App\Models\GlobalSetting::where('key', 'footer_mentions')->first();
                         @endphp
