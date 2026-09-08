@@ -1,6 +1,6 @@
 # CREM — Médiathèque audio
 
-Application de gestion et de diffusion du fonds d'archives sonores du [Centre de Recherche en Ethnomusicologie](https://crem-cnrs.fr/) (CNRS / Université Paris Nanterre).
+Application de gestion et de diffusion du fonds d'archives sonores du [Centre de Recherche en Ethnomusicologie](https://lesc-cnrs.fr/fr/laboratoire/lesc-crem) (CNRS / Université Paris Nanterre).
 
 **Stack :** Laravel 11 · Filament 3 · Livewire · Alpine.js · TailwindCSS · MySQL
 
