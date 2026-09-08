@@ -1,0 +1,105 @@
+/* Entêtes de pages — fusion de public/custom-assets/styes.css (design client).
+   Le fichier custom reste vide et sert d'override live chargé après ce bundle. */
+
+:root {
+    font-size: 14px; /* échelle globale : 16px → 14px, tous les rem Bootstrap suivent */
+    --bs-heading-color: black !important;
+}
+
+body {
+    /* La bande de titre s'étend sur 100vw après le texte : on la coupe au bord
+       droit de l'écran sans créer de scrollbar horizontale. */
+    overflow-x: clip;
+}
+
+/* Souligner liens/sections au survol */
+h2 > a:hover {
+    text-decoration: underline !important;
+}
+
+.primary-section {
+    color: black !important;
+}
+
+#header-mobile {
+    align-items: center;
+}
+
+/* Couleur de bande par page (défaut : orange accueil) */
+body {
+    &.home { --title-band-color: #f9ad1a; }
+
+    &.podcasts,
+    &.podcast { --title-band-color: #036a31; }
+
+    &.tracks,
+    &.track { --title-band-color: #681416; }
+
+    &.playlists,
+    &.playlist { --title-band-color: #546d94; }
+
+    &.cmsPage { --title-band-color: #96b522; }
+}
+
+/* Chevrons de navigation dans les titres (hstack : playlists/podcasts, d-flex : pistes) */
+.page-title a svg {
+    stroke: black;
+}
+
+/* Header Desktop */
+@media (min-width: 992px) {
+    /* suppression des marges bootstrap gênantes */
+    #page-title-mobile .page-title {
+        display: inline-block !important;
+        margin: 0 !important;
+        position: relative !important;
+    }
+
+    /* Bande titre : hauteur = 2/3 de la taille de police du titre (em hérité par
+       le pseudo-élément), bord BAS posé sur la BASELINE du texte (bas des lettres
+       « s a r », au-dessus des descendantes « p q »). Interligne Bootstrap = 1.2 :
+       la baseline des polices système est ≈ 1em du haut de ligne (Segoe UI 1.01em,
+       Arial 0.95em) → top: 1em + translateY(-100%). Insensible aux padding-bottom
+       des titres (pb-2 accueil, pb-5 pages CMS). */
+    #page-title-mobile h1.page-title::after,
+    #page-title-mobile .page-title h2::after {
+        content: "";
+        position: absolute;
+        left: 100%;
+        top: 1em;
+        transform: translateY(-100%);
+        margin-left: 20px;
+        width: 100vw;
+        height: calc(2em / 3);
+        background: var(--title-band-color, #f9ad1a); /* couleur par défaut */
+    }
+
+    /* la bande des pages détail (pistes/playlists/podcasts) porte sur le h2 */
+    #page-title-mobile .page-title h2 {
+        position: relative;
+    }
+}
+
+/* Header mobile */
+@media (max-width: 991.98px) {
+    #header-mobile {
+        position: relative;
+    }
+
+    #header-mobile::after {
+        content: "";
+        display: block;
+        width: 100%;
+        height: calc(2em / 3); /* même règle que la bande desktop : 2/3 de la police */
+        background: var(--title-band-color, #f9ad1a); /* couleur par défaut */
+    }
+
+    #header-mobile .pb-5 {
+        padding-bottom: 0 !important;
+    }
+}
+
+/* Titres sections */
+h2.px-4 {
+    padding-left: .25rem !important;
+}

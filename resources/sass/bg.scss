@@ -1,18 +1,6 @@
 body {
-    &.home {
-        .primary-section {
-            background: rgb(57, 40, 124);
-            background: linear-gradient(180deg, rgba(57, 40, 124, 1) 0%, rgba(255, 255, 255, 1) 16%);
-        }
-    }
-
     &.track,
     &.tracks {
-        .primary-section {
-            background: rgb(104, 20, 22);
-            background: linear-gradient(180deg, rgba(104, 20, 22, 1) 0%, rgba(255, 255, 255, 1) 13%);
-        }
-
         .tracks-full-actions button {
             background: rgb(104, 20, 22);
 
@@ -26,11 +14,6 @@ body {
 
     &.playlists,
     &.playlist {
-        .primary-section {
-            background: rgb(84, 109, 148);
-            background: linear-gradient(180deg, rgba(84, 109, 148, 1) 0%, rgba(255, 255, 255, 1) 9%);
-        }
-
         .playlist-full-actions button {
             background: rgb(84, 109, 148);
 
@@ -44,11 +27,6 @@ body {
 
     &.podcasts,
     &.podcast {
-        .primary-section {
-            background: rgb(3, 106, 49);
-            background: linear-gradient(180deg, rgba(3, 106, 49, 1) 0%, rgba(255, 255, 255, 1) 9%);
-        }
-
         .playlist-full-actions button {
             background: rgb(3, 106, 49);
 
@@ -66,12 +44,6 @@ body {
             background: linear-gradient(180deg, rgba(235,93,11,1) 0%, rgba(255,255,255,1) 25%);
         }
     }*/
-    &.cmsPage {
-        .primary-section {
-            background: rgb(150, 181, 34);
-            background: linear-gradient(180deg, rgba(150, 181, 34, 1) 0%, rgba(255, 255, 255, 1) 13%);
-        }
-    }
 }
 
 
@@ -79,20 +51,8 @@ body {
 @media (min-width: 992px) {
 
     body {
-        &.home {
-            .primary-section {
-                background: rgb(57, 40, 124);
-                background: linear-gradient(180deg, rgba(57, 40, 124, 1) 0%, rgba(255, 255, 255, 1) 55%);
-            }
-        }
-
         &.track,
         &.tracks {
-            .primary-section {
-                background: rgb(104, 20, 22);
-                background: linear-gradient(180deg, rgba(104, 20, 22, 1) 0%, rgba(255, 255, 255, 1) 75%);
-            }
-
             .tracks-full-actions button {
                 background: rgb(104, 20, 22);
 
@@ -106,11 +66,6 @@ body {
 
         &.playlists,
         &.playlist {
-            .primary-section {
-                background: rgb(84, 109, 148);
-                background: linear-gradient(180deg, rgba(84, 109, 148, 1) 0%, rgba(255, 255, 255, 1) 75%);
-            }
-
             .playlist-full-actions button {
                 background: rgb(84, 109, 148);
 
@@ -124,11 +79,6 @@ body {
 
         &.podcasts,
         &.podcast {
-            .primary-section {
-                background: rgb(3, 106, 49);
-                background: linear-gradient(180deg, rgba(3, 106, 49, 1) 0%, rgba(255, 255, 255, 1) 75%);
-            }
-
             .playlist-full-actions button {
                 background: rgb(3, 106, 49);
 
@@ -146,13 +96,8 @@ body {
             background: linear-gradient(180deg, rgba(235,93,11,1) 0%, rgba(255,255,255,1) 25%);
         }
     }*/
-        &.cmsPage {
-            .primary-section {
-                background: rgb(150, 181, 34);
-                background: linear-gradient(180deg, rgba(150, 181, 34, 1) 0%, rgba(255, 255, 255, 1) 55%);
-            }
-        }
-    }
+
+}
 
 }
 
