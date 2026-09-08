@@ -18,9 +18,10 @@ npm-debug.log
 yarn-error.log
 /.fleet
 /.idea
+/.tmp
 /.vscode
 !storage/app/public/logos/**
-"laradumps.yaml" 
+"laradumps.yaml"
 task.md
 
 # Analyse intermédiaire (documentation)
